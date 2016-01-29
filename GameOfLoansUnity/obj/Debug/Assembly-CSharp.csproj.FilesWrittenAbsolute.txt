@@ -1,0 +1,17 @@
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/Shane/Desktop/QLPrototype/obj/Debug/Assembly-CSharp.dll
+/Users/Shane/Desktop/QLPrototype/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/UnityEngine.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/UnityEditor.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Mono.Cecil.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Unity.DataContract.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/Shane/Desktop/QLPrototype/Temp/bin/Debug/Mono.Cecil.Mdb.dll
