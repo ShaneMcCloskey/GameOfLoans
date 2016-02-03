@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using System;
 
-public class OppKnocksCard : MonoBehaviour 
+public class OppKnocksCard : IComparable<OppKnocksCard>
 {
 	//public Image pic;
 	public string info;
@@ -14,6 +14,17 @@ public class OppKnocksCard : MonoBehaviour
 		info = newInfo;
 		value = newValue;	
 		category = newCategory;
+	}
+
+	public int CompareTo(OppKnocksCard other)
+	{
+		if(other == null)
+		{
+			return 1;
+		}
+
+		// Return the difference in value.
+		return value - other.value;
 	}
 }
 

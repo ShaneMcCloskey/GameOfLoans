@@ -13,12 +13,11 @@ public class NavigationController : MonoBehaviour
 	public GameObject lipPanel;
 	public GameObject okPanel;
 
-	//public GameController gameControler;
+	public GameController gameControler;
 
 	// Use this for initialization
 	void Start () 
 	{
-		//gameControler = GetComponent<GameController>();
 		/*mainMenuPanel.SetActive (true);
 		statsPanel.SetActive (false);
 		phPanel.SetActive (false);
@@ -68,6 +67,6 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonDrawOppKnocksCard ()
 	{
-		//gameControler.DrawCard();
+		gameControler.DrawCard();
 	}
 }
