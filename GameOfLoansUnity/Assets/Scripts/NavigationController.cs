@@ -12,18 +12,22 @@ public class NavigationController : MonoBehaviour
 	public GameObject phPanel;
 	public GameObject lipPanel;
 	public GameObject okPanel;
+	public GameObject HUDPanel;
 
 	public GameController gameControler;
 
+	private GameObject currentPanel;
+
 	// Use this for initialization
-	void Start () 
+	void Awake() 
 	{
-		/*mainMenuPanel.SetActive (true);
-		statsPanel.SetActive (false);
-		phPanel.SetActive (false);
-		lipPanel.SetActive (false);
-		okPanel.SetActive (false);*/
+		currentPanel = homePanel;
+		homePanel.SetActive (true);
 	}
+
+
+
+
 
 	public void SelectHome()
 	{
