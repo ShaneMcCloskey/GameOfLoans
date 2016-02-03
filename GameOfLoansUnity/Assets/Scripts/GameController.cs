@@ -6,46 +6,64 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour 
 {
 	private Player player;
-	private OppKnocksDeck deck;
+	private OppKnocksDeck oppKnocksDeck;
 
-	private List<OppKnocksCard> cards = new List<OppKnocksCard>();
+	private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
 
+	// HUD text elements
 	public Text okText;
 	public Text incomeText;
 	public Text assetsText;
 	public Text creditText;
+	public Text turnText;
+
+	// Opp knocks card text elements
+	public Text textOppKnocksType;
+	public Text textOppKnocksDesc;
 
 
 	void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
-		deck = gameObject.GetComponent<OppKnocksDeck>();
-		cards = deck.cards;
+		oppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
+		cardsOppKnocks = oppKnocksDeck.cards;
 		incomeText.text = "Income: 0";
 		assetsText.text = "Assets: 0";
 		creditText.text = "Credit: 0";
+		turnText.text = "Turns Left: 40";
 	}
 
-	public void DrawCard ()
+	public void DrawOppKnocksCard ()
 	{
-		if (cards[0].category == 0) // income
-		{ 
-			player.income += cards[0].value;
+		int randNum = Random.Range (0, cardsOppKnocks.Count);   // pick random number
+		Debug.Log (randNum);
+		OppKnocksCard card = cardsOppKnocks[randNum];           // draw card with random number
+		UpdateOppKnocksCardTextAndPlayerStats(card);            // update text and player score
+		player.numTurnsLeft--;
+		turnText.text = "Turns Left: " + player.numTurnsLeft;
+	}
+
+	void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card)
+	{
+		textOppKnocksDesc.text = card.desc;
+
+		if (card.category == 1) 
+		{
+			textOppKnocksType.text = "Income Card";
+			player.income += card.value;
 			incomeText.text = "Income: " + player.income.ToString();
 		} 
-		else if (cards[0].category == 1) // assets
-		{ 
-			player.assets += cards[0].value;
+		else if (card.category == 2) 
+		{
+			textOppKnocksType.text = "Asset Card";
+			player.assets += card.value;
 			assetsText.text = "Assets: " + player.assets.ToString();
 		} 
-		else if (cards[0].category == 2) // credit
+		else 
 		{
-			player.credit += cards[0].value;
+			textOppKnocksType.text = "Credit Card";
+			player.credit += card.value;
 			creditText.text = "Credit: " + player.credit.ToString();
 		}
 	}
-
-
-
-
 }

@@ -58,6 +58,6 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonDrawOppKnocksCard ()
 	{
-		gameControler.DrawCard();
+		gameControler.DrawOppKnocksCard();
 	}
 }

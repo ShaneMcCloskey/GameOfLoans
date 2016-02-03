@@ -5,15 +5,15 @@ using System;
 public class OppKnocksCard : IComparable<OppKnocksCard>
 {
 	//public Image pic;
-	public string info;
+	public string desc;
 	public int value;
 	public int category;
 
-	public OppKnocksCard (string newInfo, int newValue, int newCategory)
+	public OppKnocksCard (string Desc, int Value, int Category)
 	{
-		info = newInfo;
-		value = newValue;	
-		category = newCategory;
+		desc = Desc;
+		value = Value;	
+		category = Category;
 	}
 
 	public int CompareTo(OppKnocksCard other)
