@@ -21,48 +21,67 @@ public class NavigationController : MonoBehaviour
 	// Use this for initialization
 	void Awake() 
 	{
-		currentPanel = homePanel;
-		homePanel.SetActive (true);
-	}
-
-
-
-
-
-	public void SelectHome()
-	{
+		currentPanel = mainMenuPanel;
+		mainMenuPanel.SetActive (true);
+		homePanel.SetActive(false);
 		phPanel.SetActive (false);
 		lipPanel.SetActive (false);
 		okPanel.SetActive (false);
-		homePanel.SetActive (true);
+		HUDPanel.SetActive (false);
 	}
 
-	public void SelectPHPane()
-	{
-		phPanel.SetActive (true);
-		homePanel.SetActive (false);
-	}
-
-	public void SelectLipPanel()
-	{
-		lipPanel.SetActive (true);
-		homePanel.SetActive (false);
-	}
-
-	public void SelectOkPanel()
-	{
-		okPanel.SetActive (true);
-		homePanel.SetActive (false);
-	}
-
+	// main menu buttons
 	public void OnButtonPlay()
 	{
-		mainMenuPanel.SetActive (false);
-		okPanel.SetActive (true);
+		ChangePanel (homePanel);
 	}
 
+	public void OnButtonHowToPlay()
+	{
+	}
+
+	public void OnButtonLeaderboards()
+	{
+	}
+
+	public void OnButtonCredits()
+	{
+	}
+
+	// Home button in all panels
+	public void OnButtonHome()
+	{
+		currentPanel.SetActive (false);
+		homePanel.SetActive (true);
+		currentPanel = homePanel;
+	}
+		
+	// Home buttons
+	public void OnButtonOppKnocks()
+	{
+		currentPanel.SetActive (false);
+		okPanel.SetActive (true);
+		currentPanel = okPanel;
+	}
+
+	public void OnButtonPropertyHunt()
+	{
+	}
+
+	public void OnButtonLoanInProgress()
+	{
+	}
+
+	// Opp knocks buttons
 	public void OnButtonDrawOppKnocksCard ()
 	{
 		gameControler.DrawOppKnocksCard();
+	}
+
+	void ChangePanel(GameObject panelToShow)
+	{
+		currentPanel.SetActive (false);
+		panelToShow.SetActive (true);
+		currentPanel = panelToShow;
 	}
 }

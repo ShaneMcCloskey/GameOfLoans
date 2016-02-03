@@ -7,8 +7,8 @@ public class GameController : MonoBehaviour
 {
 	private Player player;
 	private OppKnocksDeck oppKnocksDeck;
-
 	private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
+	private bool isPickingStats = true;
 
 	// HUD text elements
 	public Text okText;
@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 		incomeText.text = "Income: 0";
 		assetsText.text = "Assets: 0";
 		creditText.text = "Credit: 0";
-		turnText.text = "Turns Left: 40";
+		turnText.text = "Turns Left: 50";
 	}
 
 	public void DrawOppKnocksCard ()
