@@ -8,7 +8,6 @@ public class NavigationController : MonoBehaviour
 
 	public GameObject mainMenuPanel;
 	public GameObject homePanel;
-	public GameObject statsPanel;
 	public GameObject phPanel;
 	public GameObject lipPanel;
 	public GameObject okPanel;
@@ -25,16 +24,8 @@ public class NavigationController : MonoBehaviour
 		okPanel.SetActive (false);*/
 	}
 
-	public void SelectStats()
-	{
-		Debug.Log ("hit");
-		statsPanel.SetActive (true);
-		homePanel.SetActive (false);
-	}
-
 	public void SelectHome()
 	{
-		statsPanel.SetActive (false);
 		phPanel.SetActive (false);
 		lipPanel.SetActive (false);
 		okPanel.SetActive (false);

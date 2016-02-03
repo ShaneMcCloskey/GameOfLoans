@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
 		player = gameObject.GetComponent<Player> ();
 		deck = gameObject.GetComponent<OppKnocksDeck>();
 		cards = deck.cards;
-		okText.text = cards[0].info;
 		incomeText.text = "Income: 0";
 		assetsText.text = "Assets: 0";
 		creditText.text = "Credit: 0";

@@ -8,9 +8,6 @@ public class PropertyDeck : MonoBehaviour
 
 	void Awake()
 	{
-		cards.Add(new PropertyCard("Test 1"));
-		cards.Add(new PropertyCard("Test 2"));
-		cards.Add(new PropertyCard("Test 2"));
-		//cards.Add(
+		cards.Add(new PropertyCard("68689 Highland Ct", 250000, 5, 3, 3000, 5000, "Single Family Home", 2, 32));
 	}
 }
