@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HighScoreController : MonoBehaviour {
+public class ScoreText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
