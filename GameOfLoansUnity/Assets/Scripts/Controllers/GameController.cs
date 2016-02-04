@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
+	// private vars
 	private Player player;
 
 	private OppKnocksDeck fullOppKnocksDeck;
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
 
+	// public vars
 	// HUD text elements
 	public Text okText;
 	public Text incomeText;
@@ -25,17 +27,34 @@ public class GameController : MonoBehaviour
 	// Opp knocks card text elements
 	public Text textOppKnocksType;
 	public Text textOppKnocksDesc;
+	// Property hunt text elements
+	public Text leftAddress;
+	public Text leftPrice;
+	public Text leftSqFoot;
+	public Text leftDiff;
+	public Text rightAddress;
+	public Text rightPrice;
+	public Text rightSqFoot;
+	public Text rightDiff;
 
 
 	void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
 		fullOppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
+		fullPropertyDeck = gameObject.GetComponent<PropertyDeck> ();
 		cardsOppKnocks = fullOppKnocksDeck.cards;
+		cardsPropertyHunt = fullPropertyDeck.cards;
 		incomeText.text = "Income: 0";
 		assetsText.text = "Assets: 0";
 		creditText.text = "Credit: 0";
 		turnText.text = "Turns Left: 40";
+	}
+
+	public void EnterOppKnocksScreen()
+	{
+		textOppKnocksDesc.text = "Click to draw card";
+		textOppKnocksType.text = "";
 	}
 
 	public void DrawOppKnocksCard ()
@@ -104,14 +123,14 @@ public class GameController : MonoBehaviour
 		cardLeft = cardsPropertyHunt [randLeft];
 		cardRight = cardsPropertyHunt [randRight];
 
-		/*leftAddress.text = cardLeft.address;
+		leftAddress.text = cardLeft.address;
 		leftPrice.text = cardLeft.price.ToString();
 		leftSqFoot.text = cardLeft.sqFoot.ToString();
-		leftDifficulty.text = cardLeft.difficulty.ToString();
+		leftDiff.text = cardLeft.difficulty.ToString();
 		rightAddress.text = cardRight.address;
 		rightPrice.text = cardRight.price.ToString();
 		rightSqFoot.text = cardRight.sqFoot.ToString();
-		rightDifficulty.text = cardRight.difficulty.ToString();*/
+		rightDiff.text = cardRight.difficulty.ToString();
 	}
 
 	public void DrawPropertyCard(string leftOrRight)
