@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
 	private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
 	private List<PropertyCard> cardsPropertyHunt = new List<PropertyCard> ();
 	private bool isPickingStats = true;
+	private PropertyCard cardLeft;
+	private PropertyCard cardRight;
 
 	// Public vars
 	// HUD text elements
@@ -113,8 +115,8 @@ public class GameController : MonoBehaviour
 				randRight--;
 			}
 		}
-		PropertyCard cardLeft = cardsPropertyHunt [randLeft];
-		PropertyCard cardRight = cardsPropertyHunt [randRight];
+		cardLeft = cardsPropertyHunt [randLeft];
+		cardRight = cardsPropertyHunt [randRight];
 
 		leftAddress.text = cardLeft.address;
 		leftPrice.text = cardLeft.price.ToString();
@@ -130,18 +132,13 @@ public class GameController : MonoBehaviour
 	{
 		player.numTurnsLeft--;
 
-		/*int randNum = Random.Range (0, cardsOppKnocks.Count);   // pick random number
-
-		PropertyCard card = cardsPropertyHunt [randNum];
-
-
 		if (leftOrRight == "left") 
 		{
-			leftAddress.text = "test";
+			player.playerCardsProperty.Add (cardLeft);
 		} 
 		else if (leftOrRight == "right") 
 		{
-			rightAddress.text = "test2";
-		}*/
+			player.playerCardsProperty.Add (cardRight);
+		}
 	}
 }
