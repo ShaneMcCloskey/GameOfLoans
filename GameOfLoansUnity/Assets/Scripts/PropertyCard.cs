@@ -7,26 +7,16 @@ public class PropertyCard : IComparable<PropertyCard>
 	//public Image pic;
 	public string address;
 	public int price;
-	public int numBeds;
-	public int numBaths;
 	public int sqFoot;
-	public int sqFootLot;
-	public string type;
 	public int difficulty;
-	public int numRollsToClose;
 
-	public PropertyCard (string Address, int Price, int NumBeds, int NumBaths, int SqFoot, int SqFootLot, string Type, int Difficulty, int NumRollsToClose)
+	public PropertyCard (string Address, int Price, int SqFoot, int Difficulty)
 	{
 		//info = newInfo;
 		address = Address;
 		price = Price;
-		numBeds = NumBeds;
-		numBaths = NumBaths;
 		sqFoot = SqFoot;
-		sqFootLot = SqFootLot;
-		type = Type;
 		difficulty = Difficulty;
-		numRollsToClose = NumRollsToClose;
 	}
 
 	public int CompareTo(PropertyCard other)
