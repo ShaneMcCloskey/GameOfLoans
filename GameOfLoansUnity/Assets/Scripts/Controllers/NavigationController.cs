@@ -34,7 +34,7 @@ public class NavigationController : MonoBehaviour
 		HUDPanel.SetActive (false);
 	}
 
-	// main menu buttons
+	// main menu buttons ----------------------------------
 	public void OnButtonPlay()
 	{
 		ChangePanel (oppKnocksPanel, true);
@@ -55,13 +55,13 @@ public class NavigationController : MonoBehaviour
 		ChangePanel (creditsPanel, false);
 	}
 
-	// Home button in all panels
+	// Home button in all panels -------------------------
 	public void OnButtonHome()
 	{
 		ChangePanel (homePanel, true);
 	}
 		
-	// Home buttons
+	// Home buttons --------------------------------------
 	public void OnButtonOppKnocks()
 	{
 		ChangePanel (oppKnocksPanel, true);
@@ -77,10 +77,16 @@ public class NavigationController : MonoBehaviour
 		ChangePanel (loanInProgressPanel, true);
 	}
 
-	// Opp knocks buttons
+	// Opp knocks buttons -------------------------------
 	public void OnButtonDrawOppKnocksCard ()
 	{
 		gameControler.DrawOppKnocksCard();
+	}
+
+	// Property hunt buttons ----------------------------
+	public void OnButtonPickPropertyCard(string leftOrRight)
+	{
+		gameControler.DrawPropertyCard (leftOrRight);
 	}
 
 	void ChangePanel(GameObject panelToShow, bool showHUD)
