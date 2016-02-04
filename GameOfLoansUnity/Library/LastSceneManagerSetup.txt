@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< Updated upstream
 - path: Assets/_Scenes/MainScene.unity
-=======
-- path: Assets/_Scenes/HighScores.unity
->>>>>>> Stashed changes
   isLoaded: 1
   isActive: 1
