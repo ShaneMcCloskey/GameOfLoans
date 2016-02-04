@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 	private PropertyDeck fullPropertyDeck;
 
 	private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
-	//private List<PropertyCard> cardsPropertyHunt = new List<PropertyCard> ();
+	private List<PropertyCard> cardsPropertyHunt = new List<PropertyCard> ();
 	private bool isPickingStats = true;
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour
 			creditText.text = "Credit: " + player.credit.ToString();
 		}
 	}
-<<<<<<< HEAD
+
 
 	public void EnterPropertyHuntScreen()
 	{
@@ -104,14 +104,14 @@ public class GameController : MonoBehaviour
 		cardLeft = cardsPropertyHunt [randLeft];
 		cardRight = cardsPropertyHunt [randRight];
 
-		leftAddress.text = cardLeft.address;
+		/*leftAddress.text = cardLeft.address;
 		leftPrice.text = cardLeft.price.ToString();
 		leftSqFoot.text = cardLeft.sqFoot.ToString();
 		leftDifficulty.text = cardLeft.difficulty.ToString();
 		rightAddress.text = cardRight.address;
 		rightPrice.text = cardRight.price.ToString();
 		rightSqFoot.text = cardRight.sqFoot.ToString();
-		rightDifficulty.text = cardRight.difficulty.ToString();
+		rightDifficulty.text = cardRight.difficulty.ToString();*/
 	}
 
 	public void DrawPropertyCard(string leftOrRight)
@@ -127,6 +127,5 @@ public class GameController : MonoBehaviour
 			player.playerCardsProperty.Add (cardRight);
 		}
 	}
-=======
->>>>>>> origin/master
+
 }
