@@ -38,6 +38,7 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonPlay()
 	{
 		ChangePanel (oppKnocksPanel, true);
+		gameControler.EnterOppKnocksScreen ();
 	}
 
 	public void OnButtonHowToPlay()
@@ -65,11 +66,13 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonOppKnocks()
 	{
 		ChangePanel (oppKnocksPanel, true);
+		gameControler.EnterOppKnocksScreen ();
 	}
 
 	public void OnButtonPropertyHunt()
 	{
 		ChangePanel (propertyHuntPanel, true);
+		gameControler.EnterPropertyHuntScreen ();
 	}
 
 	public void OnButtonLoanInProgress()

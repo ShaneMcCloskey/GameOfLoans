@@ -46,6 +46,12 @@ public class GameController : MonoBehaviour
 		turnText.text = "Turns Left: 40";
 	}
 
+	public void EnterOppKnocksScreen()
+	{
+		textOppKnocksDesc.text = "Click to draw card";
+		textOppKnocksType.text = "";
+	}
+
 	public void DrawOppKnocksCard ()
 	{
 		player.numTurnsLeft--;
@@ -65,8 +71,6 @@ public class GameController : MonoBehaviour
 		{
 			turnText.text = "Turns Left: " + player.numTurnsLeft;
 		} 
-
-		Debug.Log (player.numTurnsLeft);
 	}
 
 
@@ -94,8 +98,43 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void EnterPropertyHuntScreen()
+	{
+		int randLeft = Random.Range (0, cardsPropertyHunt.Count);
+		int randRight = Random.Range (0, cardsPropertyHunt.Count);
+		if (randLeft == randRight) 
+		{
+			if (randRight < cardsPropertyHunt.Count)
+			{
+				randRight++;
+			} 
+			else
+			{
+				randRight--;
+			}
+		}
+		PropertyCard cardLeft = cardsPropertyHunt [randLeft];
+		PropertyCard cardRight = cardsPropertyHunt [randRight];
+
+		leftAddress.text = cardLeft.address;
+		leftPrice.text = cardLeft.price.ToString();
+		leftSqFoot.text = cardLeft.sqFoot.ToString();
+		leftDifficulty.text = cardLeft.difficulty.ToString();
+		rightAddress.text = cardRight.address;
+		rightPrice.text = cardRight.price.ToString();
+		rightSqFoot.text = cardRight.sqFoot.ToString();
+		rightDifficulty.text = cardRight.difficulty.ToString();
+	}
+
 	public void DrawPropertyCard(string leftOrRight)
 	{
+		player.numTurnsLeft--;
+
+		/*int randNum = Random.Range (0, cardsOppKnocks.Count);   // pick random number
+
+		PropertyCard card = cardsPropertyHunt [randNum];
+
+
 		if (leftOrRight == "left") 
 		{
 			leftAddress.text = "test";
@@ -103,6 +142,6 @@ public class GameController : MonoBehaviour
 		else if (leftOrRight == "right") 
 		{
 			rightAddress.text = "test2";
-		}
+		}*/
 	}
 }
