@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour 
 {
 	public int score = 0;
-	public int numTurnsLeft = 40;
+	public int numTurnsLeft = 50;
 	public float income = 100f;
 	public float assets = 100f;
 	public float credit = 100f;
+
+	public List<OppKnocksCard> playerCardsOppKnocks = new List<OppKnocksCard>();
+	public List<PropertyCard> playerCardsProperty = new List<PropertyCard>();
 }

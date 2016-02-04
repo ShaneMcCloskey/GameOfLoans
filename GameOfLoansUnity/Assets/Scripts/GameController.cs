@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour 
 {
 	private Player player;
-	private OppKnocksDeck oppKnocksDeck;
+
+	private OppKnocksDeck fullOppKnocksDeck;
+	private PropertyDeck fullPropertyDeck;
+
 	private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
+	//private List<PropertyCard> cardsPropertyHunt = new List<PropertyCard> ();
 	private bool isPickingStats = true;
 
 	// HUD text elements
@@ -16,7 +20,6 @@ public class GameController : MonoBehaviour
 	public Text assetsText;
 	public Text creditText;
 	public Text turnText;
-
 	// Opp knocks card text elements
 	public Text textOppKnocksType;
 	public Text textOppKnocksDesc;
@@ -25,22 +28,35 @@ public class GameController : MonoBehaviour
 	void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
-		oppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
-		cardsOppKnocks = oppKnocksDeck.cards;
+		fullOppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
+		cardsOppKnocks = fullOppKnocksDeck.cards;
 		incomeText.text = "Income: 0";
 		assetsText.text = "Assets: 0";
 		creditText.text = "Credit: 0";
-		turnText.text = "Turns Left: 50";
+		turnText.text = "Turns Left: 40";
 	}
 
 	public void DrawOppKnocksCard ()
 	{
+		player.numTurnsLeft--;
+		if (player.numTurnsLeft == 40) // after 10 turns
+		{
+			isPickingStats = false;
+		}
 		int randNum = Random.Range (0, cardsOppKnocks.Count);   // pick random number
-		Debug.Log (randNum);
+ 
 		OppKnocksCard card = cardsOppKnocks[randNum];           // draw card with random number
 		UpdateOppKnocksCardTextAndPlayerStats(card);            // update text and player score
-		player.numTurnsLeft--;
-		turnText.text = "Turns Left: " + player.numTurnsLeft;
+
+		player.playerCardsOppKnocks.Add (card);					// add card to player deck
+		cardsOppKnocks.Remove (card);  							// remove it from overall deck
+
+		if (isPickingStats == false) 
+		{
+			turnText.text = "Turns Left: " + player.numTurnsLeft;
+		} 
+
+		Debug.Log (player.numTurnsLeft);
 	}
 
 	void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card)

@@ -37,7 +37,7 @@ public class NavigationController : MonoBehaviour
 	// main menu buttons
 	public void OnButtonPlay()
 	{
-		ChangePanel (homePanel, true);
+		ChangePanel (oppKnocksPanel, true);
 	}
 
 	public void OnButtonHowToPlay()
