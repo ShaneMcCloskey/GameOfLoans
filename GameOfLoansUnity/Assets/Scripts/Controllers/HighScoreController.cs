@@ -2,6 +2,6 @@
 using System.Collections;
 
 public class HighScoreController : MonoBehaviour {
-	public player;
+	public Player player;
 
 }
