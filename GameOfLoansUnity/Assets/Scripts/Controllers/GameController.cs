@@ -60,24 +60,19 @@ public class GameController : MonoBehaviour
 
 	void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card)
 	{
-		uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player);
-
 		if (card.category == 1) 
 		{
 			player.income += card.value;
 		} 
 		else if (card.category == 2) 
 		{
-			//textOppKnocksType.text = "Asset Card";
 			player.assets += card.value;
-			//assetsText.text = "Assets: " + player.assets.ToString();
 		} 
 		else 
 		{
-			//textOppKnocksType.text = "Credit Card";
 			player.credit += card.value;
-			//creditText.text = "Credit: " + player.credit.ToString();
 		}
+		uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player);
 	}
 
 	// Property hunt functions ------------------------------------------------
@@ -100,20 +95,10 @@ public class GameController : MonoBehaviour
 		cardRight = cardsPropertyHunt [randRight];
 
 		uiController.EnterPropertyHuntScreeUI(cardLeft, cardRight);
-
-		/*leftAddress.text = cardLeft.address;
-		leftPrice.text = cardLeft.price.ToString();
-		leftSqFoot.text = cardLeft.sqFoot.ToString();
-		leftDiff.text = cardLeft.difficulty.ToString();
-		rightAddress.text = cardRight.address;
-		rightPrice.text = cardRight.price.ToString();
-		rightSqFoot.text = cardRight.sqFoot.ToString();
-		rightDiff.text = cardRight.difficulty.ToString();*/
 	}
 
 	public void DrawPropertyCard(string leftOrRight)
 	{
-		Debug.Log(leftOrRight);
 		player.numTurnsLeft--;
 
 		if (leftOrRight == "left") 
@@ -132,5 +117,25 @@ public class GameController : MonoBehaviour
 	public void EnterLoanInProgressScreen()
 	{
 		uiController.EnterLoanInProgressScreenUI(player);
+	}
+
+	public void EnterChangePropertyScreen ()
+	{
+		PropertyCard card1 = player.playerCardsProperty[0];
+		PropertyCard card2 = player.playerCardsProperty[1];
+		PropertyCard card3 = player.playerCardsProperty[2];
+
+		foreach(PropertyCard card in player.playerCardsProperty)
+	        {
+	        	Debug.Log(card.address);
+	        }
+
+		uiController.EnterChangePropertyScreenUI(card1, card2, card3);
+	}
+
+	public void CancelCurrentLoan ()
+	{
+		player.playerCardsProperty.Remove(player.currentProperty);
+		player.currentProperty = player.playerCardsProperty[0];
 	}
 }

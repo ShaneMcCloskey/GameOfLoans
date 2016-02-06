@@ -18,6 +18,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject HUDPanel;
 
 	public GameObject changePropertyButton;
+	public GameObject cancelLoanButton;
 
 	public GameObject propertyCard1;
 	public GameObject propertyCard2;
@@ -89,6 +90,13 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonChangeProperty ()
 	{
 		ChangePanel(currentPropertiesPanel, true, false);
+		gameControler.EnterChangePropertyScreen();
+	}
+
+	public void OnButtonCancelLoan ()
+	{
+		ChangePanel(propertyHuntPanel, true, false);
+		gameControler.CancelCurrentLoan();
 	}
 
 	// Opp knocks buttons ------------------------------------------
@@ -101,13 +109,15 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonPickPropertyCard(string leftOrRight)
 	{
 		gameControler.DrawPropertyCard (leftOrRight);
+		ChangePanel(loanInProgressPanel, true, true);
+		gameControler.EnterLoanInProgressScreen();
 	}
 
 	public void ChangeProperty (int num)
 	{
 	}
 
-	void ChangePanel (GameObject panelToShow, bool showHUD, bool showChangeProperty)
+	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)
 	{
 		if (showHUD)
 		{	
@@ -119,13 +129,15 @@ public class NavigationController : MonoBehaviour
 			HUDPanel.SetActive (false);
 			navPanel.SetActive (false);	
 		}
-		if (showChangeProperty)
+		if (loanInProgresActive)
 		{
 			changePropertyButton.SetActive(true);
+			cancelLoanButton.SetActive(true);
 		}
 		else
 		{
 			changePropertyButton.SetActive(false);
+			cancelLoanButton.SetActive(false);
 		}
 
 		currentPanel.SetActive (false);
