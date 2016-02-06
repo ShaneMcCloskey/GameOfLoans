@@ -9,10 +9,11 @@ public class NavigationController : MonoBehaviour
 	public GameObject howToPlayPanel;
 	public GameObject leaderboardsPanel;
 	public GameObject creditsPanel;
-	public GameObject homePanel;
+	public GameObject navPanel;
 	public GameObject propertyHuntPanel;
 	public GameObject loanInProgressPanel;
 	public GameObject oppKnocksPanel;
+	public GameObject currentPropertiesPanel;
 	public GameObject HUDPanel;
 
 	public GameController gameControler;
@@ -27,7 +28,7 @@ public class NavigationController : MonoBehaviour
 		howToPlayPanel.SetActive (false);
 		leaderboardsPanel.SetActive (false);
 		creditsPanel.SetActive (false);
-		homePanel.SetActive(false);
+		navPanel.SetActive(false);
 		propertyHuntPanel.SetActive (false);
 		loanInProgressPanel.SetActive (false);
 		oppKnocksPanel.SetActive (false);
@@ -55,14 +56,8 @@ public class NavigationController : MonoBehaviour
 	{
 		ChangePanel (creditsPanel, false);
 	}
-
-	// Home button in all panels -------------------------
-	public void OnButtonHome()
-	{
-		ChangePanel (homePanel, true);
-	}
 		
-	// Home buttons --------------------------------------
+	// Nav buttons --------------------------------------
 	public void OnButtonOppKnocks()
 	{
 		ChangePanel (oppKnocksPanel, true);
@@ -72,21 +67,22 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonPropertyHunt()
 	{
 		ChangePanel (propertyHuntPanel, true);
-		gameControler.EnterPropertyHuntScreen ();
+		gameControler.EnterPropertyHuntScreen();
 	}
 
 	public void OnButtonLoanInProgress()
 	{
 		ChangePanel (loanInProgressPanel, true);
+		gameControler.EnterLoanInProgressScreen();
 	}
 
-	// Opp knocks buttons -------------------------------
+	// Opp knocks buttons ------------------------------------------
 	public void OnButtonDrawOppKnocksCard ()
 	{
 		gameControler.DrawOppKnocksCard();
 	}
 
-	// Property hunt buttons ----------------------------
+	// Property hunt buttons ----------------------------------------
 	public void OnButtonPickPropertyCard(string leftOrRight)
 	{
 		gameControler.DrawPropertyCard (leftOrRight);

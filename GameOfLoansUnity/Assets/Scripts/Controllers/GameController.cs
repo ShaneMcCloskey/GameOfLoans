@@ -5,19 +5,17 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
-	// private vars
+	// private vars ---------------------------------------
 	private Player player;
-
 	private OppKnocksDeck fullOppKnocksDeck;
 	private PropertyDeck fullPropertyDeck;
-
 	private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
 	private List<PropertyCard> cardsPropertyHunt = new List<PropertyCard> ();
 	private bool isPickingStats = true;
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
 
-	// public vars
+	// public vars ---------------------------------------
 	// HUD text elements
 	public Text okText;
 	public Text incomeText;
@@ -36,8 +34,14 @@ public class GameController : MonoBehaviour
 	public Text rightPrice;
 	public Text rightSqFoot;
 	public Text rightDiff;
+	// Loan in progress text elements
+	public Text address;
+	public Text price;
+	public Text sqFoot;
+	public Text Diff;
+	public Slider progressBar;
 
-
+	// Game init ------------------------------------
 	void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
@@ -51,6 +55,7 @@ public class GameController : MonoBehaviour
 		turnText.text = "Turns Left: 40";
 	}
 
+	// Opp knocks functions ------------------------------
 	public void EnterOppKnocksScreen()
 	{
 		textOppKnocksDesc.text = "Click to draw card";
@@ -76,8 +81,6 @@ public class GameController : MonoBehaviour
 		{
 			turnText.text = "Turns Left: " + player.numTurnsLeft;
 		} 
-
-		Debug.Log (player.numTurnsLeft);
 	}
 
 	void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card)
@@ -104,7 +107,7 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-
+	// Property hunt functions ------------------------------------------------
 	public void EnterPropertyHuntScreen()
 	{
 		int randLeft = Random.Range (0, cardsPropertyHunt.Count);
@@ -135,16 +138,27 @@ public class GameController : MonoBehaviour
 
 	public void DrawPropertyCard(string leftOrRight)
 	{
+		Debug.Log(leftOrRight);
 		player.numTurnsLeft--;
 
 		if (leftOrRight == "left") 
 		{
 			player.playerCardsProperty.Add (cardLeft);
+			player.currentProperty = cardLeft; 
 		} 
 		else if (leftOrRight == "right") 
 		{
 			player.playerCardsProperty.Add (cardRight);
+			player.currentProperty = cardRight;
 		}
 	}
 
+	// Loan in Progess functions -----------------------------------------------
+	public void EnterLoanInProgressScreen()
+	{
+		address.text = player.currentProperty.address;
+		price.text = player.currentProperty.price.ToString();
+		sqFoot.text = player.currentProperty.sqFoot.ToString();
+		Diff.text = player.currentProperty.difficulty.ToString();
+	}
 }
