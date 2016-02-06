@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
 	// private vars ---------------------------------------
 	private Player player;
+	private UIController uiController;
 	private OppKnocksDeck fullOppKnocksDeck;
 	private PropertyDeck fullPropertyDeck;
 	private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
@@ -16,50 +17,24 @@ public class GameController : MonoBehaviour
 	private PropertyCard cardRight;
 
 	// public vars ---------------------------------------
-	// HUD text elements
-	public Text okText;
-	public Text incomeText;
-	public Text assetsText;
-	public Text creditText;
-	public Text turnText;
-	// Opp knocks card text elements
-	public Text textOppKnocksType;
-	public Text textOppKnocksDesc;
-	// Property hunt text elements
-	public Text leftAddress;
-	public Text leftPrice;
-	public Text leftSqFoot;
-	public Text leftDiff;
-	public Text rightAddress;
-	public Text rightPrice;
-	public Text rightSqFoot;
-	public Text rightDiff;
-	// Loan in progress text elements
-	public Text address;
-	public Text price;
-	public Text sqFoot;
-	public Text Diff;
-	public Slider progressBar;
+
 
 	// Game init ------------------------------------
 	void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
+		uiController = gameObject.GetComponent<UIController>();
 		fullOppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
 		fullPropertyDeck = gameObject.GetComponent<PropertyDeck> ();
 		cardsOppKnocks = fullOppKnocksDeck.cards;
 		cardsPropertyHunt = fullPropertyDeck.cards;
-		incomeText.text = "Income: 0";
-		assetsText.text = "Assets: 0";
-		creditText.text = "Credit: 0";
-		turnText.text = "Turns Left: 40";
+		uiController.AwakeUI();
 	}
 
 	// Opp knocks functions ------------------------------
 	public void EnterOppKnocksScreen()
 	{
-		textOppKnocksDesc.text = "Click to draw card";
-		textOppKnocksType.text = "";
+		uiController.EnterOppKnocksScreenUI();
 	}
 
 	public void DrawOppKnocksCard ()
@@ -79,31 +54,29 @@ public class GameController : MonoBehaviour
 
 		if (isPickingStats == false) 
 		{
-			turnText.text = "Turns Left: " + player.numTurnsLeft;
+			uiController.UpdateTurnsLeft(player);
 		} 
 	}
 
 	void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card)
 	{
-		textOppKnocksDesc.text = card.desc;
+		uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player);
 
 		if (card.category == 1) 
 		{
-			textOppKnocksType.text = "Income Card";
 			player.income += card.value;
-			incomeText.text = "Income: " + player.income.ToString();
 		} 
 		else if (card.category == 2) 
 		{
-			textOppKnocksType.text = "Asset Card";
+			//textOppKnocksType.text = "Asset Card";
 			player.assets += card.value;
-			assetsText.text = "Assets: " + player.assets.ToString();
+			//assetsText.text = "Assets: " + player.assets.ToString();
 		} 
 		else 
 		{
-			textOppKnocksType.text = "Credit Card";
+			//textOppKnocksType.text = "Credit Card";
 			player.credit += card.value;
-			creditText.text = "Credit: " + player.credit.ToString();
+			//creditText.text = "Credit: " + player.credit.ToString();
 		}
 	}
 
@@ -126,14 +99,16 @@ public class GameController : MonoBehaviour
 		cardLeft = cardsPropertyHunt [randLeft];
 		cardRight = cardsPropertyHunt [randRight];
 
-		leftAddress.text = cardLeft.address;
+		uiController.EnterPropertyHuntScreeUI(cardLeft, cardRight);
+
+		/*leftAddress.text = cardLeft.address;
 		leftPrice.text = cardLeft.price.ToString();
 		leftSqFoot.text = cardLeft.sqFoot.ToString();
 		leftDiff.text = cardLeft.difficulty.ToString();
 		rightAddress.text = cardRight.address;
 		rightPrice.text = cardRight.price.ToString();
 		rightSqFoot.text = cardRight.sqFoot.ToString();
-		rightDiff.text = cardRight.difficulty.ToString();
+		rightDiff.text = cardRight.difficulty.ToString();*/
 	}
 
 	public void DrawPropertyCard(string leftOrRight)
@@ -156,9 +131,6 @@ public class GameController : MonoBehaviour
 	// Loan in Progess functions -----------------------------------------------
 	public void EnterLoanInProgressScreen()
 	{
-		address.text = player.currentProperty.address;
-		price.text = player.currentProperty.price.ToString();
-		sqFoot.text = player.currentProperty.sqFoot.ToString();
-		Diff.text = player.currentProperty.difficulty.ToString();
+		uiController.EnterLoanInProgressScreenUI(player);
 	}
 }

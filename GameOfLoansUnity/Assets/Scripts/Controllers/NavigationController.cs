@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class NavigationController : MonoBehaviour 
 {
+	// public vars -----------------------------
 	public GameObject mainMenuPanel;
 	public GameObject howToPlayPanel;
 	public GameObject leaderboardsPanel;
@@ -16,8 +17,15 @@ public class NavigationController : MonoBehaviour
 	public GameObject currentPropertiesPanel;
 	public GameObject HUDPanel;
 
+	public GameObject changePropertyButton;
+
+	public GameObject propertyCard1;
+	public GameObject propertyCard2;
+	public GameObject propertyCard3;
+
 	public GameController gameControler;
 
+	// private vars -------------------------
 	private GameObject currentPanel;
 
 	// Use this for initialization
@@ -33,47 +41,54 @@ public class NavigationController : MonoBehaviour
 		loanInProgressPanel.SetActive (false);
 		oppKnocksPanel.SetActive (false);
 		HUDPanel.SetActive (false);
+		currentPropertiesPanel.SetActive(false);
+		changePropertyButton.SetActive(false);
 	}
 
 	// main menu buttons ----------------------------------
 	public void OnButtonPlay()
 	{
-		ChangePanel (oppKnocksPanel, true);
+		ChangePanel (oppKnocksPanel, true, false);
 		gameControler.EnterOppKnocksScreen ();
 	}
 
 	public void OnButtonHowToPlay()
 	{
-		ChangePanel (howToPlayPanel, false);
+		ChangePanel (howToPlayPanel, false, false);
 	}
 
 	public void OnButtonLeaderboards()
 	{
-		ChangePanel (leaderboardsPanel, false);
+		ChangePanel (leaderboardsPanel, false, false);
 	}
 
 	public void OnButtonCredits()
 	{
-		ChangePanel (creditsPanel, false);
+		ChangePanel (creditsPanel, false, false);
 	}
 		
-	// Nav buttons --------------------------------------
+	// Nav buttons ---------------------------------------------------
 	public void OnButtonOppKnocks()
 	{
-		ChangePanel (oppKnocksPanel, true);
+		ChangePanel (oppKnocksPanel, true, false);
 		gameControler.EnterOppKnocksScreen ();
 	}
 
 	public void OnButtonPropertyHunt()
 	{
-		ChangePanel (propertyHuntPanel, true);
+		ChangePanel (propertyHuntPanel, true, false);
 		gameControler.EnterPropertyHuntScreen();
 	}
 
 	public void OnButtonLoanInProgress()
 	{
-		ChangePanel (loanInProgressPanel, true);
+		ChangePanel (loanInProgressPanel, true, true);
 		gameControler.EnterLoanInProgressScreen();
+	}
+
+	public void OnButtonChangeProperty ()
+	{
+		ChangePanel(currentPropertiesPanel, true, false);
 	}
 
 	// Opp knocks buttons ------------------------------------------
@@ -88,16 +103,31 @@ public class NavigationController : MonoBehaviour
 		gameControler.DrawPropertyCard (leftOrRight);
 	}
 
-	void ChangePanel(GameObject panelToShow, bool showHUD)
+	public void ChangeProperty (int num)
 	{
-		if (showHUD) 
+	}
+
+	void ChangePanel (GameObject panelToShow, bool showHUD, bool showChangeProperty)
+	{
+		if (showHUD)
 		{	
 			HUDPanel.SetActive (true);
+			navPanel.SetActive (true);
 		} 
-		else 
+		else
 		{
-			HUDPanel.SetActive (false);	
+			HUDPanel.SetActive (false);
+			navPanel.SetActive (false);	
 		}
+		if (showChangeProperty)
+		{
+			changePropertyButton.SetActive(true);
+		}
+		else
+		{
+			changePropertyButton.SetActive(false);
+		}
+
 		currentPanel.SetActive (false);
 		panelToShow.SetActive (true);
 		currentPanel = panelToShow;
