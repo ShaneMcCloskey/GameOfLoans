@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime;
 using UnityEngine.UI;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 
 public class HighScoreController : MonoBehaviour {
@@ -22,13 +23,9 @@ public class HighScoreController : MonoBehaviour {
 		GetScores (www);
 	}
 
-	public void GetScores(WWW www)
+	public IEnumerable GetScores(WWW www)
 	{
-		 
-		ArrayOfGameScores data = JsonUtility.FromJson<ArrayOfGameScores> (www.text);
-
-		textbox.text = data.ArrayOfGameScore[0].Name;
-
+		return JsonConvert.DeserializeObject<List<GameScore>>(www.text);
 	}
 		
 
