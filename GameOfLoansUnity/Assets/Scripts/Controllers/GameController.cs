@@ -138,4 +138,24 @@ public class GameController : MonoBehaviour
 		player.playerCardsProperty.Remove(player.currentProperty);
 		player.currentProperty = player.playerCardsProperty[0];
 	}
+
+	/*public void RollDice()
+	{
+		loanClosedText.text = "";
+		int num = Random.Range(1, 7);
+
+		// Display dice roll value
+
+		diceVal.text = "Rolled a " + num.ToString() + "!";
+
+		// Increment slider by value
+
+		progressBar.value = Mathf.MoveTowards(progressBar.value, 100f, num);
+
+		if (progressBar.value == progressBar.maxValue)
+		{
+			progressBar.value = 0;
+			loanClosedText.text = "Loan Closed!";
+		}
+	}*/
 }
