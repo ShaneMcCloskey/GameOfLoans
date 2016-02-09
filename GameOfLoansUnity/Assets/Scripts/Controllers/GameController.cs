@@ -16,11 +16,10 @@ public class GameController : MonoBehaviour
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
 
-	// public vars ---------------------------------------
+    // public vars ---------------------------------------
 
-
-	// Game init ------------------------------------
-	void Awake()
+    // Game init ------------------------------------
+    void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
 		uiController = gameObject.GetComponent<UIController>();
@@ -138,4 +137,11 @@ public class GameController : MonoBehaviour
 		player.playerCardsProperty.Remove(player.currentProperty);
 		player.currentProperty = player.playerCardsProperty[0];
 	}
+
+    public void RollDie()
+    {
+        int num = Random.Range(1, 7);
+        Debug.Log(num);
+        uiController.RollDiceUI(player, num);
+    }
 }

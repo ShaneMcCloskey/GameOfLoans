@@ -117,6 +117,12 @@ public class NavigationController : MonoBehaviour
 	{
 	}
 
+    // Loan in Progress Buttons --------------------------------------
+    public void OnButtonRollDice()
+    {
+        gameControler.RollDie();
+    }
+
 	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)
 	{
 		if (showHUD)
