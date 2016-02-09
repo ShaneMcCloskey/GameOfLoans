@@ -16,7 +16,7 @@ public class HighScoreController : MonoBehaviour {
 	const int Score_LOC = 3;
 	const int LOANS_LOC = 4;
 
-	public string getscores = "http://35.9.22.106/Api/HighScores/GetHighScores?n=4";
+	const string getscores = "http://35.9.22.106/Api/HighScores/GetHighScores?n=250";
 
 	public void Start(){
 		WWW www = new WWW (getscores);
