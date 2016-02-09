@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 
 
 
-public class HighScoreController : MonoBehaviour {
+public class HighScoreController : MonoBehaviour
+{
 	public Player player;
 	public GameObject scoresPanel;
 	const int RANK_LOC = 0;
@@ -17,43 +18,81 @@ public class HighScoreController : MonoBehaviour {
 	const int LOANS_LOC = 4;
 
 	const string getscores = "http://35.9.22.106/Api/HighScores/GetHighScores?n=250";
+	int pageNumber = 0;
+	int scoresPerPage = 25;
+	int maxPageNum =0;
+	int minPageNum = 0;
+	List<GameScore> data;
 
-	public void Start(){
+	public void Start ()
+	{
 		WWW www = new WWW (getscores);
 		StartCoroutine (WaitRequestGet (www));
 	}
 
-	private IEnumerator WaitRequestGet(WWW www){
+	private IEnumerator WaitRequestGet (WWW www) {
 	
 		yield return www;
 		SetScores (www);
 	}
 
-	public void SetScores(WWW www)
-	{
-		List<GameScore> data = JsonConvert.DeserializeObject<List<GameScore>>(www.text);
-		int count = scoresPanel.transform.childCount;
-		for(int i=0;i<25;i++)
-		{
+	public void SetScores (WWW www) {
+		data = JsonConvert.DeserializeObject<List<GameScore>> (www.text);
+		maxPageNum = (int) Mathf.Ceil (data.Count / scoresPerPage);
+		SetUI (data);
+	}
+
+
+	public void SetUI (List<GameScore> dataList) {
+		
+		for (int i = 0; i < 25; i++) {
 			// if not enough data
-			if (i >= data.Count)
-			{
-				break;
+			if (i + (pageNumber * scoresPerPage) >= dataList.Count) {
+				//set the rank
+				scoresPanel.transform.GetChild (i).GetChild (RANK_LOC).GetChild (0).GetComponent<Text> ().text = "";
+				//set the name
+				scoresPanel.transform.GetChild (i).GetChild (NAME_LOC).GetChild (0).GetComponent<Text> ().text = "";
+				//set the team name
+				scoresPanel.transform.GetChild (i).GetChild (TEAM_LOC).GetChild (0).GetComponent<Text> ().text = "";
+				//set Score
+				scoresPanel.transform.GetChild (i).GetChild (Score_LOC).GetChild (0).GetComponent<Text> ().text = "";
+				//set Loans closed
+				scoresPanel.transform.GetChild (i).GetChild (LOANS_LOC).GetChild (0).GetComponent<Text> ().text = "";
 			}
-			//set the rank
-			scoresPanel.transform.GetChild(i).GetChild(RANK_LOC).GetChild(0).GetComponent<Text>().text = (i+1).ToString();
-			//set the name
-			scoresPanel.transform.GetChild(i).GetChild(NAME_LOC).GetChild(0).GetComponent<Text>().text = data[i].Name;
-			//set the team name
-			scoresPanel.transform.GetChild(i).GetChild(TEAM_LOC).GetChild (0).GetComponent<Text>().text = data[i].TeamName;
-			//set Score
-			scoresPanel.transform.GetChild(i).GetChild(Score_LOC).GetChild (0).GetComponent<Text>().text = data[i].Score.ToString();
-			//set Loans closed
-			scoresPanel.transform.GetChild(i).GetChild(LOANS_LOC).GetChild (0).GetComponent<Text>().text = data[i].LoansClosed.ToString();
-			
+			//there is enough data
+			else {
+				//set the rank
+				scoresPanel.transform.GetChild (i).GetChild (RANK_LOC).GetChild (0).GetComponent<Text> ().text = (i + (pageNumber * scoresPerPage) + 1).ToString ();
+				//set the name
+				scoresPanel.transform.GetChild (i).GetChild (NAME_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].Name;
+				//set the team name
+				scoresPanel.transform.GetChild (i).GetChild (TEAM_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].TeamName;
+				//set Score
+				scoresPanel.transform.GetChild (i).GetChild (Score_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].Score.ToString ();
+				//set Loans closed
+				scoresPanel.transform.GetChild (i).GetChild (LOANS_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].LoansClosed.ToString ();
+			}
 		}
 	}
 		
+	public void OnNextClick()
+	{
+		pageNumber += 1;
+		if (pageNumber >= maxPageNum) {
+			pageNumber = maxPageNum;
+		}
+		SetUI (data);
 
+	}
+
+	public void OnPrevClick() {
+
+		pageNumber -= 1;
+		if (pageNumber <= minPageNum) {
+
+			pageNumber = minPageNum;
+		}
+		SetUI (data);
+	}
 
 }
