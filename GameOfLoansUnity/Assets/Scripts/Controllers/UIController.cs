@@ -23,7 +23,7 @@ public class UIController : MonoBehaviour
 	public Text rightPrice;
 	public Text rightSqFoot;
 	public Text rightDiff;
-	// Loan in progress text elements
+    // Loan in progress 
 	public Text currentAddress;
 	public Text currentPrice;
 	public Text currentSqFoot;
@@ -106,7 +106,16 @@ public class UIController : MonoBehaviour
 		currentPrice.text = player.currentProperty.price.ToString();
 		currentSqFoot.text = player.currentProperty.sqFoot.ToString();
 		currentDiff.text = player.currentProperty.difficulty.ToString();
+
+        progressBar.maxValue = player.currentProperty.numToClose;
+        progressBar.value = player.currentProperty.currentProgress;
 	}
+
+    public void RollDiceUI(Player player, int rollNum)
+    {
+        player.currentProperty.currentProgress += rollNum;
+        progressBar.value = player.currentProperty.currentProgress;
+    }
 
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
 	{

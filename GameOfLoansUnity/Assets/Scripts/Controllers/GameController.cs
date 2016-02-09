@@ -16,11 +16,10 @@ public class GameController : MonoBehaviour
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
 
-	// public vars ---------------------------------------
+    // public vars ---------------------------------------
 
-
-	// Game init ------------------------------------
-	void Awake()
+    // Game init ------------------------------------
+    void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
 		uiController = gameObject.GetComponent<UIController>();
@@ -139,23 +138,10 @@ public class GameController : MonoBehaviour
 		player.currentProperty = player.playerCardsProperty[0];
 	}
 
-	/*public void RollDice()
-	{
-		loanClosedText.text = "";
-		int num = Random.Range(1, 7);
-
-		// Display dice roll value
-
-		diceVal.text = "Rolled a " + num.ToString() + "!";
-
-		// Increment slider by value
-
-		progressBar.value = Mathf.MoveTowards(progressBar.value, 100f, num);
-
-		if (progressBar.value == progressBar.maxValue)
-		{
-			progressBar.value = 0;
-			loanClosedText.text = "Loan Closed!";
-		}
-	}*/
+    public void RollDie()
+    {
+        int num = Random.Range(1, 7);
+        Debug.Log(num);
+        uiController.RollDiceUI(player, num);
+    }
 }
