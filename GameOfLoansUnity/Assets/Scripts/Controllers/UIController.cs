@@ -30,18 +30,6 @@ public class UIController : MonoBehaviour
 	public Text currentDiff;
 	public Slider progressBar;
 	// Change propety text elements
-	public Text address1;
-	public Text price1;
-	public Text sqFoot1;
-	public Text diff1;
-	public Text address2;
-	public Text price2;
-	public Text sqFoot2;
-	public Text diff2;
-	public Text address3;
-	public Text price3;
-	public Text sqFoot3;
-	public Text diff3;
 
 	// private vars ----------------------
 
@@ -120,19 +108,5 @@ public class UIController : MonoBehaviour
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
 	{
 		// call func from ui cont
-		address1.text = card1.address;
-		price1.text = card1.price.ToString();
-		sqFoot1.text = card1.sqFoot.ToString();
-		diff1.text = card1.difficulty.ToString();
-
-		address2.text = card2.address;
-		price2.text = card2.price.ToString();
-		sqFoot2.text = card2.sqFoot.ToString();
-		diff2.text = card2.difficulty.ToString();
-
-		address3.text = card3.address;
-		price3.text = card3.price.ToString();
-		sqFoot3.text = card3.sqFoot.ToString();
-		diff3.text = card3.difficulty.ToString();
 	}
 }

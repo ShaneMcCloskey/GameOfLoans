@@ -15,11 +15,13 @@ public class GameController : MonoBehaviour
 	private bool isPickingStats = true;
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
+	//private 
 
-    // public vars ---------------------------------------
 
-    // Game init ------------------------------------
-    void Awake()
+        // public vars ---------------------------------------
+
+        // Game init ------------------------------------
+        void Awake()
 	{
 		player = gameObject.GetComponent<Player> ();
 		uiController = gameObject.GetComponent<UIController>();
@@ -28,6 +30,8 @@ public class GameController : MonoBehaviour
 		cardsOppKnocks = fullOppKnocksDeck.cards;
 		cardsPropertyHunt = fullPropertyDeck.cards;
 		uiController.AwakeUI();
+
+	
 	}
 
 	// Opp knocks functions ------------------------------
@@ -120,24 +124,10 @@ public class GameController : MonoBehaviour
 
 	public void EnterChangePropertyScreen ()
 	{
-
-		//Text tempTextBox = Instantiate(textPrefab, nextPosition, transform.rotation) as Text;
-                 //Parent to the panel
-                  //tempTextBox.transform.SetParent(renderCanvas.transform, false);
-                  //Set the text box's text element font size and style:
-                   //tempTextBox.fontSize = defaultFontSize;
-                   //Set the text box's text element to the current textToDisplay:
-                   //tempTextBox.text = textToDisplay;
-		/*PropertyCard card1 = player.playerCardsProperty[0];
-		PropertyCard card2 = player.playerCardsProperty[1];
-		PropertyCard card3 = player.playerCardsProperty[2];
-
-		foreach(PropertyCard card in player.playerCardsProperty)
-	        {
-	        	Debug.Log(card.address);
-	        }
-
-		uiController.EnterChangePropertyScreenUI(card1, card2, card3);*/
+		// call function on scrollable list
+		GameObject go = GameObject.FindGameObjectWithTag("Finish");
+		ScrollableList other = (ScrollableList) go.GetComponent(typeof(ScrollableList));
+		other.PopulateList(player);
 	}
 
 	public void CancelCurrentLoan ()

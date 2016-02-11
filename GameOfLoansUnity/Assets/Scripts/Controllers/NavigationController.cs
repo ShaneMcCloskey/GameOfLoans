@@ -20,10 +20,6 @@ public class NavigationController : MonoBehaviour
 	public GameObject changePropertyButton;
 	public GameObject cancelLoanButton;
 
-	public GameObject propertyCard1;
-	public GameObject propertyCard2;
-	public GameObject propertyCard3;
-
 	public GameController gameControler;
 
 	// private vars -------------------------
