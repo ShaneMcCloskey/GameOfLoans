@@ -120,7 +120,15 @@ public class GameController : MonoBehaviour
 
 	public void EnterChangePropertyScreen ()
 	{
-		PropertyCard card1 = player.playerCardsProperty[0];
+
+		//Text tempTextBox = Instantiate(textPrefab, nextPosition, transform.rotation) as Text;
+                 //Parent to the panel
+                  //tempTextBox.transform.SetParent(renderCanvas.transform, false);
+                  //Set the text box's text element font size and style:
+                   //tempTextBox.fontSize = defaultFontSize;
+                   //Set the text box's text element to the current textToDisplay:
+                   //tempTextBox.text = textToDisplay;
+		/*PropertyCard card1 = player.playerCardsProperty[0];
 		PropertyCard card2 = player.playerCardsProperty[1];
 		PropertyCard card3 = player.playerCardsProperty[2];
 
@@ -129,7 +137,7 @@ public class GameController : MonoBehaviour
 	        	Debug.Log(card.address);
 	        }
 
-		uiController.EnterChangePropertyScreenUI(card1, card2, card3);
+		uiController.EnterChangePropertyScreenUI(card1, card2, card3);*/
 	}
 
 	public void CancelCurrentLoan ()
@@ -138,10 +146,10 @@ public class GameController : MonoBehaviour
 		player.currentProperty = player.playerCardsProperty[0];
 	}
 
-    public void RollDie()
-    {
-        int num = Random.Range(1, 7);
-        Debug.Log(num);
-        uiController.RollDiceUI(player, num);
-    }
+        public void RollDie()
+        {
+        	int num = Random.Range(1, 7);
+        	Debug.Log(num);
+        	uiController.RollDiceUI(player, num);
+        }
 }
