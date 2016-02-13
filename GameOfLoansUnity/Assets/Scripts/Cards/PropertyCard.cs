@@ -8,19 +8,19 @@ public class PropertyCard : IComparable<PropertyCard>
 	public string address;
 	public int price;
 	public int sqFoot;
-	public int difficulty;
-    public int numToClose;
-    public int currentProgress;
+	public string difficulty;
+        public int numToClose;
+        public int currentProgress;
 
-	public PropertyCard (string Address, int Price, int SqFoot, int Difficulty, int NumToClose, int CurrentProgress)
+	public PropertyCard (string Address, int Price, int SqFoot, string Difficulty, int NumToClose, int CurrentProgress)
 	{
 		//info = newInfo;
 		address = Address;
 		price = Price;
 		sqFoot = SqFoot;
 		difficulty = Difficulty;
-        numToClose = NumToClose;
-        currentProgress = CurrentProgress;
+	        numToClose = NumToClose;
+	        currentProgress = CurrentProgress;
 	}
 
 	public int CompareTo(PropertyCard other)

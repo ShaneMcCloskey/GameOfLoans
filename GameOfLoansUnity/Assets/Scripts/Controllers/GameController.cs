@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 	private bool isPickingStats = true;
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
+	private bool firstEnterIntoChangeProp = false;
 	//private 
 
 
@@ -125,9 +126,14 @@ public class GameController : MonoBehaviour
 	public void EnterChangePropertyScreen ()
 	{
 		// call function on scrollable list
-		GameObject go = GameObject.FindGameObjectWithTag("Finish");
-		ScrollableList other = (ScrollableList) go.GetComponent(typeof(ScrollableList));
-		other.PopulateList(player);
+		GameObject go = GameObject.FindGameObjectWithTag ("ScrollableProperty");
+		ScrollableList other = (ScrollableList)go.GetComponent (typeof(ScrollableList));
+		if (firstEnterIntoChangeProp == false)
+		{
+			other.PopulateList(player);
+			firstEnterIntoChangeProp = true;
+		}
+		// else call function to add to current list
 	}
 
 	public void CancelCurrentLoan ()
