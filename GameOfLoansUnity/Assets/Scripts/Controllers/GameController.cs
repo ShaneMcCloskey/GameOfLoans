@@ -15,7 +15,8 @@ public class GameController : MonoBehaviour
 	private bool isPickingStats = true;
 	private PropertyCard cardLeft;
 	private PropertyCard cardRight;
-	private bool firstEnterIntoChangeProp = false;
+	private bool firstEnterIntoChangeProp = true;
+	private ScrollableList propertyScrollList;
 	//private 
 
 
@@ -31,7 +32,8 @@ public class GameController : MonoBehaviour
 		cardsOppKnocks = fullOppKnocksDeck.cards;
 		cardsPropertyHunt = fullPropertyDeck.cards;
 		uiController.AwakeUI();
-
+		GameObject go = GameObject.FindGameObjectWithTag ("ScrollableProperty");
+		propertyScrollList = (ScrollableList)go.GetComponent (typeof(ScrollableList));
 	
 	}
 
@@ -126,12 +128,15 @@ public class GameController : MonoBehaviour
 	public void EnterChangePropertyScreen ()
 	{
 		// call function on scrollable list
-		GameObject go = GameObject.FindGameObjectWithTag ("ScrollableProperty");
-		ScrollableList other = (ScrollableList)go.GetComponent (typeof(ScrollableList));
-		if (firstEnterIntoChangeProp == false)
+
+		if (firstEnterIntoChangeProp == true)
 		{
-			other.PopulateList(player);
-			firstEnterIntoChangeProp = true;
+			propertyScrollList.PopulateList (player, true);
+			firstEnterIntoChangeProp = false;
+		} 
+		else
+		{
+			propertyScrollList.PopulateList(player, false);
 		}
 		// else call function to add to current list
 	}
