@@ -49,55 +49,70 @@ public class ScrollableList : MonoBehaviour
 			containerRectTransform.offsetMax = new Vector2 (fill, containerRectTransform.offsetMax.y);
 		}
 
-
-			for (int i = 0; i < player.playerCardsProperty.Count - 1; i++)
+		if (first)
+		{
+			Populate(player);
+		} else
+		{
+			foreach (Transform child in transform)
 			{
-				itemList.Clear();
-				for (int k = 0; k < player.playerCardsProperty.Count - 1; k++)
-				{
-					newItem = Instantiate (itemPrefab) as GameObject;
-					itemList.Add(newItem);
-				}
-				itemList[i].name = gameObject.name + " item at (" + i + ")";
-				itemList[i].transform.SetParent (gameObject.transform, false);
-
-				//move and size the new item
-				RectTransform rectTransform = itemList[i].GetComponent<RectTransform> ();
-
-				float x = -containerRectTransform.rect.width / 2 + cardWidth * i;
-				float y = containerRectTransform.rect.height / 2 - cardHeight;
-				rectTransform.offsetMin = new Vector2 (x, y);
-
-				x = rectTransform.offsetMin.x + cardWidth;
-				y = rectTransform.offsetMin.y + cardHeight;
-				rectTransform.offsetMax = new Vector2 (x, y);
-
-				cardText = itemList[i].GetComponentsInChildren<Text> ();
-				string address = player.playerCardsProperty [i].address;
-				int price = player.playerCardsProperty [i].price;
-				int sqFoot = player.playerCardsProperty [i].sqFoot;
-				string diff = player.playerCardsProperty [i].difficulty;
-
-				for (int j = 0; j < cardText.Length; j++)
-				{
-					if (j == 0)
-					{
-						cardText [j].text = address;
-					}
-					if (j == 2)
-					{
-						cardText [j].text = price.ToString ();
-					}
-					if (j == 4)
-					{
-						cardText [j].text = sqFoot.ToString ();
-					}
-					if (j == 6)
-					{
-						cardText [j].text = diff.ToString ();
-					}				
-				}
+			  	Debug.Log(child.name);
+			  	Destroy(child);
 			}
-		
+			Populate(player);
+		}
+	}
+
+	void Populate(Player player)
+	{
+		for (int i = 0; i < player.playerCardsProperty.Count - 1; i++)
+		{
+			for (int k = 0; k < player.playerCardsProperty.Count - 1; k++)
+			{
+				newItem = Instantiate (itemPrefab) as GameObject;
+				itemList.Add (newItem);
+			}
+
+			itemList [i].name = gameObject.name + " item at (" + i + ")";
+			itemList [i].transform.SetParent (gameObject.transform, false);
+
+			       
+			//move and size the new item
+			RectTransform rectTransform = itemList [i].GetComponent<RectTransform> ();
+
+			float x = -containerRectTransform.rect.width / 2 + cardWidth * i;
+			float y = containerRectTransform.rect.height / 2 - cardHeight;
+			rectTransform.offsetMin = new Vector2 (x, y);
+
+			x = rectTransform.offsetMin.x + cardWidth;
+			y = rectTransform.offsetMin.y + cardHeight;
+			rectTransform.offsetMax = new Vector2 (x, y);
+
+			cardText = itemList[i].GetComponentsInChildren<Text> ();
+			string address = player.playerCardsProperty [i].address;
+			int price = player.playerCardsProperty [i].price;
+			int sqFoot = player.playerCardsProperty [i].sqFoot;
+			string diff = player.playerCardsProperty [i].difficulty;
+
+			for (int j = 0; j < cardText.Length; j++)
+			{
+				if (j == 0)
+				{
+					cardText [j].text = address;
+				}
+				if (j == 2)
+				{
+					cardText [j].text = price.ToString ();
+				}
+				if (j == 4)
+				{
+					cardText [j].text = sqFoot.ToString ();
+				}
+				if (j == 6)
+				{
+					cardText [j].text = diff.ToString ();
+				}				
+			}
+		}
 	}
 }
