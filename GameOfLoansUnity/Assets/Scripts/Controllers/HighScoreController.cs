@@ -10,7 +10,14 @@ using Newtonsoft.Json;
 public class HighScoreController : MonoBehaviour
 {
 	public Player player;
+	public GameObject HighScoresPage;
+	public GameObject PlayerInputPage;
 	public GameObject scoresPanel;
+
+	public InputField NameInput;
+	public InputField TeamInput;
+	public InputField ScoreInput;
+	public InputField LoansInput;
 	const int RANK_LOC = 0;
 	const int NAME_LOC = 1;
 	const int TEAM_LOC = 2;
@@ -24,7 +31,8 @@ public class HighScoreController : MonoBehaviour
 	int minPageNum = 0;
 	List<GameScore> data;
 
-	public void Start ()
+	//change to start to get high scores page to work
+	public void GetHighScores()
 	{
 		WWW www = new WWW (getscores);
 		StartCoroutine (WaitRequestGet (www));
@@ -94,5 +102,28 @@ public class HighScoreController : MonoBehaviour
 		}
 		SetUI (data);
 	}
+
+
+	public void AddScore(){
+		if(NameInput.text!="" &&ScoreInput.text!="" && TeamInput.text!="" &&LoansInput.text!="")
+		{
+		WWWForm  form = new WWWForm;
+		public int Id;
+		public int LoansClosed;
+		public string Name;
+		public string TeamName;
+		public int Score;
+			form.AddField("Name",NameInput.text);
+			form.AddField("TeamName",TeamInput.text);
+			form.AddField("LoansClosed",LoansInput.text);
+
+			WaitSendScore(new WWW(
+		}
+	}
+	private IEnumerator WaitSendScore (WWW www) {
+
+		yield return www;
+		GetHighScores ();
+
 
 }
