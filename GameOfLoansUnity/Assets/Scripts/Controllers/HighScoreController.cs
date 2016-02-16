@@ -116,12 +116,21 @@ public class HighScoreController : MonoBehaviour
 			sendingScore.TeamName = TeamInput.text;
 			sendingScore.Score = int.Parse(ScoreInput.text);
 			sendingScore.LoansClosed = int.Parse( LoansInput.text);
+			sendingScore.Id = null;
 
+
+		
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
-			request.Method = "PUSH";
+			request.Method = "POST";
+			request.ContentType = "application/json; charset=utf-8";
 			StreamWriter writer = new StreamWriter( request.GetRequestStream());
-			writer.Write (sendingScore);
+			string sendData = JsonConvert.SerializeObject(sendingScore);
+			writer.Write (sendData);
 			writer.Close ();
+			WebResponse response = request.GetResponse ();
+			StreamReader reader = new StreamReader (response.GetResponseStream ());
+			string readerString = reader.ReadToEnd ();
+			NameInput.text = readerString;
 
 		}
 
