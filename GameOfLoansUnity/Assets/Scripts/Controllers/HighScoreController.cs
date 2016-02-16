@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Runtime;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using System.Net;
+using System.IO;
 
 
 
@@ -24,7 +26,8 @@ public class HighScoreController : MonoBehaviour
 	const int Score_LOC = 3;
 	const int LOANS_LOC = 4;
 
-	const string getscores = "http://35.9.22.106/Api/HighScores/GetHighScores?n=250";
+	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?n=250";
+	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
 	int pageNumber = 0;
 	int scoresPerPage = 25;
 	int maxPageNum =0;
@@ -32,9 +35,9 @@ public class HighScoreController : MonoBehaviour
 	List<GameScore> data;
 
 	//change to start to get high scores page to work
-	public void GetHighScores()
+	public void Start()
 	{
-		WWW www = new WWW (getscores);
+		WWW www = new WWW (getscoresurl);
 		StartCoroutine (WaitRequestGet (www));
 	}
 
@@ -107,23 +110,20 @@ public class HighScoreController : MonoBehaviour
 	public void AddScore(){
 		if(NameInput.text!="" &&ScoreInput.text!="" && TeamInput.text!="" &&LoansInput.text!="")
 		{
-		WWWForm  form = new WWWForm;
-		public int Id;
-		public int LoansClosed;
-		public string Name;
-		public string TeamName;
-		public int Score;
-			form.AddField("Name",NameInput.text);
-			form.AddField("TeamName",TeamInput.text);
-			form.AddField("LoansClosed",LoansInput.text);
+			
+			GameScore sendingScore = new GameScore ();
+			sendingScore.Name = NameInput.text;
+			sendingScore.TeamName = TeamInput.text;
+			sendingScore.Score = int.Parse(ScoreInput.text);
+			sendingScore.LoansClosed = int.Parse( LoansInput.text);
 
-			WaitSendScore(new WWW(
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
+			request.Method = "PUSH";
+			StreamWriter writer = new StreamWriter( request.GetRequestStream());
+			writer.Write (sendingScore);
+			writer.Close ();
+
 		}
+
 	}
-	private IEnumerator WaitSendScore (WWW www) {
-
-		yield return www;
-		GetHighScores ();
-
-
 }
