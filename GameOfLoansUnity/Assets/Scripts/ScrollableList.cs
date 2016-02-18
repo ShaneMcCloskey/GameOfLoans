@@ -52,7 +52,8 @@ public class ScrollableList : MonoBehaviour
 		if (first)
 		{
 			Populate(player);
-		} else
+		} 
+		else
 		{
 			foreach (Transform child in transform)
 			{

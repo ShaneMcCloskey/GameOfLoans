@@ -95,15 +95,19 @@ public class UIController : MonoBehaviour
 		currentSqFoot.text = player.currentProperty.sqFoot.ToString();
 		currentDiff.text = player.currentProperty.difficulty.ToString();
 
-        progressBar.maxValue = player.currentProperty.numToClose;
-        progressBar.value = player.currentProperty.currentProgress;
+        	progressBar.maxValue = player.currentProperty.numToClose;
+        	progressBar.value = player.currentProperty.currentProgress;
 	}
 
-    public void RollDiceUI(Player player, int rollNum)
-    {
-        player.currentProperty.currentProgress += rollNum;
-        progressBar.value = player.currentProperty.currentProgress;
-    }
+        public void RollDiceUI(Player player, int rollNum)
+        {
+        	progressBar.value = player.currentProperty.currentProgress;
+		HUDscoreText.text = "Score: " + player.score.ToString();
+		HUDincomeText.text = "Income: " + player.income.ToString();
+		HUDassetsText.text = "Assets: " + player.assets.ToString();
+		HUDcreditText.text = "Credit: " + player.credit.ToString();
+		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString();
+        }
 
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
 	{

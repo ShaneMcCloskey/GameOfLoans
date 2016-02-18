@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour 
 {
@@ -18,6 +19,8 @@ public class GameController : MonoBehaviour
 	private bool firstEnterIntoChangeProp = true;
 	private ScrollableList propertyScrollList;
 	//private 
+
+	public EventSystem es;
 
 
         // public vars ---------------------------------------
@@ -56,7 +59,7 @@ public class GameController : MonoBehaviour
 		UpdateOppKnocksCardTextAndPlayerStats(card);            // update text and player score
 
 		player.playerCardsOppKnocks.Add (card);					// add card to player deck
-		cardsOppKnocks.Remove (card);  							// remove it from overall deck
+		cardsOppKnocks.Remove (card);  						// remove it from overall deck
 
 		if (isPickingStats == false) 
 		{
@@ -110,12 +113,14 @@ public class GameController : MonoBehaviour
 		if (leftOrRight == "left") 
 		{
 			player.playerCardsProperty.Add (cardLeft);
-			player.currentProperty = cardLeft; 
+			player.currentProperty = cardLeft;
+			cardsPropertyHunt.Remove(cardLeft); 
 		} 
 		else if (leftOrRight == "right") 
 		{
 			player.playerCardsProperty.Add (cardRight);
 			player.currentProperty = cardRight;
+			cardsPropertyHunt.Remove(cardRight);
 		}
 	}
 
@@ -147,10 +152,22 @@ public class GameController : MonoBehaviour
 		player.currentProperty = player.playerCardsProperty[0];
 	}
 
-        public void RollDie()
-        {
-        	int num = Random.Range(1, 7);
-        	Debug.Log(num);
-        	uiController.RollDiceUI(player, num);
+        public void RollDie ()
+	{
+		player.numTurnsLeft--;
+		int num = Random.Range (1, 7);
+		Debug.Log (num);
+		player.currentProperty.currentProgress += num;
+		if (player.currentProperty.currentProgress >= player.currentProperty.numToClose)
+		{
+			player.score += 1000;
+		}
+		uiController.RollDiceUI (player, num);
         }
+
+      
+
+        public void Test ()
+	{
+	}
 }
