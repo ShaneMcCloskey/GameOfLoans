@@ -19,11 +19,15 @@ public class UIController : MonoBehaviour
 	public Text leftPrice;
 	public Text leftSqFoot;
 	public Text leftDiff;
+	public Text centerAddress;
+	public Text centerPrice;
+	public Text centerSqFoot;
+	public Text centerDiff;
 	public Text rightAddress;
 	public Text rightPrice;
 	public Text rightSqFoot;
 	public Text rightDiff;
-    // Loan in progress 
+        // Loan in progress 
 	public Text currentAddress;
 	public Text currentPrice;
 	public Text currentSqFoot;
@@ -74,13 +78,18 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardRight)
+	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
 	{
-		
 		leftAddress.text = cardLeft.address;
 		leftPrice.text = cardLeft.price.ToString();
 		leftSqFoot.text = cardLeft.sqFoot.ToString();
 		leftDiff.text = cardLeft.difficulty.ToString();
+
+		centerAddress.text = cardCenter.address;
+		centerPrice.text = cardCenter.price.ToString();
+		centerSqFoot.text = cardCenter.sqFoot.ToString();
+		centerDiff.text = cardCenter.difficulty.ToString();
+
 		rightAddress.text = cardRight.address;
 		rightPrice.text = cardRight.price.ToString();
 		rightSqFoot.text = cardRight.sqFoot.ToString();
@@ -99,14 +108,18 @@ public class UIController : MonoBehaviour
         	progressBar.value = player.currentProperty.currentProgress;
 	}
 
-        public void RollDiceUI(Player player, int rollNum)
-        {
-        	progressBar.value = player.currentProperty.currentProgress;
-		HUDscoreText.text = "Score: " + player.score.ToString();
-		HUDincomeText.text = "Income: " + player.income.ToString();
-		HUDassetsText.text = "Assets: " + player.assets.ToString();
-		HUDcreditText.text = "Credit: " + player.credit.ToString();
-		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString();
+        public void RollDiceUI (Player player, int rollNum, GameObject PopUpPanel, bool loanComplete)
+	{
+		progressBar.value = player.currentProperty.currentProgress;
+		HUDscoreText.text = "Score: " + player.score.ToString ();
+		HUDincomeText.text = "Income: " + player.income.ToString ();
+		HUDassetsText.text = "Assets: " + player.assets.ToString ();
+		HUDcreditText.text = "Credit: " + player.credit.ToString ();
+		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString ();
+		if (loanComplete)
+		{
+			PopUpPanel.SetActive(true);
+		}
         }
 
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)

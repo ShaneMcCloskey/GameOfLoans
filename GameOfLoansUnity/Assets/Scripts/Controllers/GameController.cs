@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 	private List<PropertyCard> cardsPropertyHunt = new List<PropertyCard> ();
 	private bool isPickingStats = true;
 	private PropertyCard cardLeft;
+	private PropertyCard cardCenter;
 	private PropertyCard cardRight;
 	private bool firstEnterIntoChangeProp = true;
 	private ScrollableList propertyScrollList;
@@ -85,38 +86,59 @@ public class GameController : MonoBehaviour
 	}
 
 	// Property hunt functions ------------------------------------------------
-	public void EnterPropertyHuntScreen()
+	public void EnterPropertyHuntScreen ()
 	{
 		int randLeft = Random.Range (0, cardsPropertyHunt.Count);
+		int randCenter = Random.Range (0, cardsPropertyHunt.Count);
 		int randRight = Random.Range (0, cardsPropertyHunt.Count);
-		if (randLeft == randRight) 
+		if (randLeft == randRight)
 		{
 			if (randRight < cardsPropertyHunt.Count)
 			{
 				randRight++;
-			} 
-			else
+			} else
 			{
 				randRight--;
 			}
 		}
 		cardLeft = cardsPropertyHunt [randLeft];
+		cardCenter = cardsPropertyHunt [randCenter];
 		cardRight = cardsPropertyHunt [randRight];
-
-		uiController.EnterPropertyHuntScreeUI(cardLeft, cardRight);
+		while (cardLeft.difficulty != "Easy")
+		{
+			randLeft = Random.Range (0, cardsPropertyHunt.Count);
+			cardLeft = cardsPropertyHunt [randLeft];
+		}
+		while (cardCenter.difficulty != "Medium")
+		{
+			randCenter = Random.Range (0, cardsPropertyHunt.Count);
+			cardCenter = cardsPropertyHunt [randCenter];
+		}
+		while (cardRight.difficulty != "Hard")
+		{
+			randRight = Random.Range (0, cardsPropertyHunt.Count);
+			cardRight = cardsPropertyHunt [randRight];
+		}
+		uiController.EnterPropertyHuntScreeUI(cardLeft, cardCenter, cardRight);
 	}
 
-	public void DrawPropertyCard(string leftOrRight)
+	public void DrawPropertyCard(string leftRightOrCenter)
 	{
 		player.numTurnsLeft--;
 
-		if (leftOrRight == "left") 
+		if (leftRightOrCenter == "left") 
 		{
 			player.playerCardsProperty.Add (cardLeft);
 			player.currentProperty = cardLeft;
 			cardsPropertyHunt.Remove(cardLeft); 
 		} 
-		else if (leftOrRight == "right") 
+		else if (leftRightOrCenter == "center") 
+		{
+			player.playerCardsProperty.Add (cardCenter);
+			player.currentProperty = cardCenter;
+			cardsPropertyHunt.Remove(cardCenter); 
+		} 
+		else if (leftRightOrCenter == "right") 
 		{
 			player.playerCardsProperty.Add (cardRight);
 			player.currentProperty = cardRight;
@@ -152,7 +174,7 @@ public class GameController : MonoBehaviour
 		player.currentProperty = player.playerCardsProperty[0];
 	}
 
-        public void RollDie ()
+        public void RollDie (GameObject PopUpPanel)
 	{
 		player.numTurnsLeft--;
 		int num = Random.Range (1, 7);
@@ -161,8 +183,12 @@ public class GameController : MonoBehaviour
 		if (player.currentProperty.currentProgress >= player.currentProperty.numToClose)
 		{
 			player.score += 1000;
+			uiController.RollDiceUI (player, num, PopUpPanel, true);
+		} 
+		else
+		{
+			uiController.RollDiceUI (player, num, PopUpPanel, false);
 		}
-		uiController.RollDiceUI (player, num);
         }
 
       
