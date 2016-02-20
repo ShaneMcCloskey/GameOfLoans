@@ -35,8 +35,9 @@ public class HighScoreController : MonoBehaviour
 	List<GameScore> data;
 
 	//change to start to get high scores page to work
-	public void Start()
+	public void HighScores()
 	{
+		HighScoresPage.SetActive (true);
 		WWW www = new WWW (getscoresurl);
 		StartCoroutine (WaitRequestGet (www));
 	}
@@ -130,8 +131,16 @@ public class HighScoreController : MonoBehaviour
 			WebResponse response = request.GetResponse ();
 			StreamReader reader = new StreamReader (response.GetResponseStream ());
 			string readerString = reader.ReadToEnd ();
-			NameInput.text = readerString;
 
+			GameScore returnScore = JsonConvert.DeserializeObject<GameScore> (readerString);
+
+			PlayerInputPage.SetActive (false);
+			HighScores ();
+			int index = 0;
+			foreach (GameScore score in data) {
+				if (score.Id == returnScore.Id) {
+				}
+			}
 		}
 
 	}

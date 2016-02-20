@@ -184,12 +184,21 @@ public class GameController : MonoBehaviour
 		{
 			player.score += 1000;
 			uiController.RollDiceUI (player, num, PopUpPanel, true);
+			player.playerCardsProperty.Remove(player.currentProperty);
+			player.currentProperty = null;
+			Debug.Log(player.playerCardsProperty.Count);
 		} 
 		else
 		{
 			uiController.RollDiceUI (player, num, PopUpPanel, false);
 		}
         }
+
+        public void ProcessOkButton (GameObject popUpPanel, GameObject propHuntPanel)
+	{
+		// call ui function...
+		uiController.ProcessOkButtonUI (popUpPanel, propHuntPanel, player);
+	}
 
       
 

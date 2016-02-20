@@ -121,9 +121,10 @@ public class NavigationController : MonoBehaviour
         	gameControler.RollDie(popUpPanel);
     	}
 
+    	// PopUp ---------------------------------------------------------
     	public void OnPopUpOk ()
 	{
-		popUpPanel.SetActive(false);
+		gameControler.ProcessOkButton(popUpPanel, propertyHuntPanel);
 	}
 
 	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)
