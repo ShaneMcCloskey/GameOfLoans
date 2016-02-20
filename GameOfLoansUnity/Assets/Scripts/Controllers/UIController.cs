@@ -33,9 +33,13 @@ public class UIController : MonoBehaviour
 	public Text currentSqFoot;
 	public Text currentDiff;
 	public Slider progressBar;
+	// Pop up elements
+	public Text popUpText;
+	public Text popUpButtonText;
 	// Change propety text elements
 
 	// private vars ----------------------
+	private bool firstOkComplete = false;
 
 	public void AwakeUI()
 	{
@@ -119,8 +123,44 @@ public class UIController : MonoBehaviour
 		if (loanComplete)
 		{
 			PopUpPanel.SetActive(true);
+			popUpText.text = "Loan Complete!";
+			popUpButtonText.text = "Ok";
 		}
         }
+
+	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject propHuntPanel, Player player)
+	{
+		// fix this and also set last panel to false
+		if (player.playerCardsProperty.Count == 0)
+		{
+			if (firstOkComplete)
+			{
+				popUpText.text = "Go to prop hunt";
+				popUpButtonText.text = "To Prop Hunt";
+				firstOkComplete = false;
+				propHuntPanel.SetActive(true);
+				popUpPanel.SetActive(false);
+			} 
+			firstOkComplete = true;
+		} 
+		else
+		{
+			popUpPanel.SetActive(false);
+		}
+
+
+		/*if (okButtonToggle)
+		{
+			//navController.propertyHuntPanel.SetActive(true);
+
+			okButtonToggle = false;
+		}
+		if (player.playerCardsProperty.Count == 0)
+		{
+			okButtonToggle = true;
+			//navController.propertyHuntPanel.SetActive(true);
+		}*/
+	}
 
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
 	{
