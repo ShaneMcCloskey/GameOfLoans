@@ -178,15 +178,17 @@ public class GameController : MonoBehaviour
 	{
 		player.numTurnsLeft--;
 		int num = Random.Range (1, 7);
-		Debug.Log (num);
 		player.currentProperty.currentProgress += num;
 		if (player.currentProperty.currentProgress >= player.currentProperty.numToClose)
 		{
 			player.score += 1000;
 			uiController.RollDiceUI (player, num, PopUpPanel, true);
-			player.playerCardsProperty.Remove(player.currentProperty);
+			player.playerCardsProperty.Remove (player.currentProperty);
 			player.currentProperty = null;
-			Debug.Log(player.playerCardsProperty.Count);
+			if (player.playerCardsProperty.Count >= 1)
+			{
+				player.currentProperty = player.playerCardsProperty[0];
+			}
 		} 
 		else
 		{
@@ -194,10 +196,10 @@ public class GameController : MonoBehaviour
 		}
         }
 
-        public void ProcessOkButton (GameObject popUpPanel, GameObject propHuntPanel)
+        public void ProcessOkButton (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel)
 	{
 		// call ui function...
-		uiController.ProcessOkButtonUI (popUpPanel, propHuntPanel, player);
+		uiController.ProcessOkButtonUI (popUpPanel, popUpPanelNeedProp, propHuntPanel, player);
 	}
 
       

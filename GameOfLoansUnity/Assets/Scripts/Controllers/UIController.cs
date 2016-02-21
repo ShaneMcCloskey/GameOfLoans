@@ -120,6 +120,62 @@ public class UIController : MonoBehaviour
 		HUDassetsText.text = "Assets: " + player.assets.ToString ();
 		HUDcreditText.text = "Credit: " + player.credit.ToString ();
 		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString ();
+		if ((player.currentProperty.currentProgress >= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 1";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal1Complete = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 2";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal2Complete = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 3";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal3Complete = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 4";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal4Complete = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 5";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal5Complete = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 6";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal6Complete = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 7";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal7Complete = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == false)
+		{
+			PopUpPanel.SetActive(true);
+			popUpText.text = "Subgoal 8";
+			popUpButtonText.text = "Ok";
+			player.currentProperty.subgoal8Complete = true;
+		}
 		if (loanComplete)
 		{
 			PopUpPanel.SetActive(true);
@@ -128,38 +184,29 @@ public class UIController : MonoBehaviour
 		}
         }
 
-	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject propHuntPanel, Player player)
+	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, Player player)
 	{
 		// fix this and also set last panel to false
 		if (player.playerCardsProperty.Count == 0)
 		{
-			if (firstOkComplete)
+			/*if (firstOkComplete)
 			{
-				popUpText.text = "Go to prop hunt";
-				popUpButtonText.text = "To Prop Hunt";
+
 				firstOkComplete = false;
 				propHuntPanel.SetActive(true);
 				popUpPanel.SetActive(false);
 			} 
-			firstOkComplete = true;
+			firstOkComplete = true;*/
+			popUpPanel.SetActive(false);
+			popUpPanelNeedProp.SetActive(true);
 		} 
 		else
 		{
+			// turn on pop up
 			popUpPanel.SetActive(false);
+			EnterLoanInProgressScreenUI(player);
+
 		}
-
-
-		/*if (okButtonToggle)
-		{
-			//navController.propertyHuntPanel.SetActive(true);
-
-			okButtonToggle = false;
-		}
-		if (player.playerCardsProperty.Count == 0)
-		{
-			okButtonToggle = true;
-			//navController.propertyHuntPanel.SetActive(true);
-		}*/
 	}
 
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)

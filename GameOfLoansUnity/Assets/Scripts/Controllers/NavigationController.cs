@@ -17,6 +17,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject currentPropertiesPanel;
 	public GameObject HUDPanel;
 	public GameObject popUpPanel;
+	public GameObject popUpPanelNeedProp;
 
 	public GameObject changePropertyButton;
 	public GameObject cancelLoanButton;
@@ -40,6 +41,7 @@ public class NavigationController : MonoBehaviour
 		oppKnocksPanel.SetActive (false);
 		HUDPanel.SetActive (false);
 		popUpPanel.SetActive(false);
+		popUpPanelNeedProp.SetActive(false);
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
 	}
@@ -76,6 +78,7 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonPropertyHunt()
 	{
 		ChangePanel (propertyHuntPanel, true, false);
+		popUpPanelNeedProp.SetActive(false);
 		gameControler.EnterPropertyHuntScreen();
 	}
 
@@ -124,7 +127,7 @@ public class NavigationController : MonoBehaviour
     	// PopUp ---------------------------------------------------------
     	public void OnPopUpOk ()
 	{
-		gameControler.ProcessOkButton(popUpPanel, propertyHuntPanel);
+		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel);
 	}
 
 	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)

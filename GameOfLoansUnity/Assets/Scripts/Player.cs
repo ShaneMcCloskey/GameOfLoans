@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public float assets = 100f;
 	public float credit = 100f;
 	public PropertyCard currentProperty;
+	public int numPropertiesClosed = 0;
 
 	public List<OppKnocksCard> playerCardsOppKnocks = new List<OppKnocksCard>();
 	public List<PropertyCard> playerCardsProperty = new List<PropertyCard>();
