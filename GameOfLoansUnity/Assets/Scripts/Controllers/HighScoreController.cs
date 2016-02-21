@@ -136,11 +136,6 @@ public class HighScoreController : MonoBehaviour
 
 			PlayerInputPage.SetActive (false);
 			HighScores ();
-			int index = 0;
-			foreach (GameScore score in data) {
-				if (score.Id == returnScore.Id) {
-				}
-			}
 		}
 
 	}
