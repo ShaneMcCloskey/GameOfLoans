@@ -179,21 +179,40 @@ public class GameController : MonoBehaviour
 		player.numTurnsLeft--;
 		int num = Random.Range (1, 7);
 		player.currentProperty.currentProgress += num;
+
+		int randEventNum = Random.Range (0, 100);
+		bool randEventGood = false;
+		bool randEventBad = false;
+
+		if (randEventNum <= 10)
+		{
+			//bad
+			randEventBad = true;
+
+		}
+		if (randEventNum > 10 && randEventNum <= 20)
+		{
+			// good
+			randEventGood = true;
+		}
+
 		if (player.currentProperty.currentProgress >= player.currentProperty.numToClose)
 		{
 			player.score += 1000;
-			uiController.RollDiceUI (player, num, PopUpPanel, true);
+			uiController.RollDiceUI (player, num, PopUpPanel, true, false, false);
 			player.playerCardsProperty.Remove (player.currentProperty);
 			player.currentProperty = null;
 			if (player.playerCardsProperty.Count >= 1)
 			{
-				player.currentProperty = player.playerCardsProperty[0];
+				player.currentProperty = player.playerCardsProperty [0];
 			}
 		} 
 		else
 		{
-			uiController.RollDiceUI (player, num, PopUpPanel, false);
+			uiController.RollDiceUI (player, num, PopUpPanel, false, false, false);
 		}
+
+
         }
 
         public void ProcessOkButton (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel)

@@ -36,10 +36,17 @@ public class UIController : MonoBehaviour
 	// Pop up elements
 	public Text popUpText;
 	public Text popUpButtonText;
+	public Text popUpRandEventText;
 	// Change propety text elements
 
 	// private vars ----------------------
-	private bool firstOkComplete = false;
+	//private bool firstOkComplete = false;
+	private bool randEventGoodOccured = false;
+	private bool randEventBadOccured = false;
+	private bool badDecrease = false;
+	private bool goodIncrease = true;
+
+	private bool subgoalPopUpActive = false;
 
 	public void AwakeUI()
 	{
@@ -112,78 +119,127 @@ public class UIController : MonoBehaviour
         	progressBar.value = player.currentProperty.currentProgress;
 	}
 
-        public void RollDiceUI (Player player, int rollNum, GameObject PopUpPanel, bool loanComplete)
+        public void RollDiceUI (Player player, int rollNum, GameObject popUpPanel, bool loanComplete, bool randEventGood, bool randEventBad)
 	{
+		// need to have the panel in here
 		progressBar.value = player.currentProperty.currentProgress;
 		HUDscoreText.text = "Score: " + player.score.ToString ();
 		HUDincomeText.text = "Income: " + player.income.ToString ();
 		HUDassetsText.text = "Assets: " + player.assets.ToString ();
 		HUDcreditText.text = "Credit: " + player.credit.ToString ();
 		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString ();
+
 		if ((player.currentProperty.currentProgress >= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 1";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal1Complete = true;
+			subgoalPopUpActive = true;
 		}
 		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 2";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal2Complete = true;
+			subgoalPopUpActive = true;
 		}
 		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 3";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal3Complete = true;
+			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
+		else
+		if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 4";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal4Complete = true;
+			subgoalPopUpActive = true;
 		}
 		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 5";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal5Complete = true;
+			subgoalPopUpActive = true;
 		}
 		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 6";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal6Complete = true;
+			subgoalPopUpActive = true;
 		}
 		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 7";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal7Complete = true;
+			subgoalPopUpActive = true;
 		}
 		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == false)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Subgoal 8";
 			popUpButtonText.text = "Ok";
 			player.currentProperty.subgoal8Complete = true;
+			subgoalPopUpActive = true;
 		}
 		if (loanComplete)
 		{
-			PopUpPanel.SetActive(true);
+			popUpPanel.SetActive (true);
 			popUpText.text = "Loan Complete!";
 			popUpButtonText.text = "Ok";
 		}
+
+		if (subgoalPopUpActive == false)
+		{
+			if (randEventGood)
+			{
+				randEventGood = true;
+				PopUpRandEvent (true, false, popUpPanel);
+			}
+			if (randEventBad)
+			{
+				randEventBadOccured = true;
+				PopUpRandEvent (false, true, popUpPanel);
+			}
+		}
+		if (randEventBad)
+		{
+			randEventBadOccured = true;
+		}
+		if (randEventGood)
+		{
+			randEventGoodOccured = true;
+		}
         }
 
+        void PopUpRandEvent(bool randEventGood, bool randEventBad, GameObject popUpPanel)
+        {
+		if (randEventGood)
+		{
+			popUpPanel.SetActive(true);
+			popUpText.text = "Positive Random Event";
+			popUpButtonText.text = "Ok";
+		}
+		if (randEventBad)
+		{
+			popUpPanel.SetActive(true);
+			popUpText.text = "Negative Random Event";
+			popUpButtonText.text = "Ok";
+		}
+        }
+        // still need to pop up subgoal hit after random event ok click if hit subgoal
 	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, Player player)
 	{
 		// fix this and also set last panel to false
@@ -197,16 +253,197 @@ public class UIController : MonoBehaviour
 				popUpPanel.SetActive(false);
 			} 
 			firstOkComplete = true;*/
-			popUpPanel.SetActive(false);
-			popUpPanelNeedProp.SetActive(true);
-		} 
-		else
-		{
-			// turn on pop up
-			popUpPanel.SetActive(false);
-			EnterLoanInProgressScreenUI(player);
-
+			popUpPanel.SetActive (false);
+			popUpPanelNeedProp.SetActive (true);
 		}
+		else if (subgoalPopUpActive == false) // normal rand event
+		{
+			if (randEventGoodOccured)
+			{
+				player.currentProperty.currentProgress += 3;
+				progressBar.value += 3;
+				if ((player.currentProperty.currentProgress >= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == false)
+				{
+					player.currentProperty.subgoal1Complete = true;
+				}
+				else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == false)
+				{
+					player.currentProperty.subgoal2Complete = true;
+				}
+				else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == false)
+				{
+					player.currentProperty.subgoal3Complete = true;
+				}
+				else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
+				{
+					player.currentProperty.subgoal4Complete = true;
+				}
+				else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == false)
+				{
+					player.currentProperty.subgoal5Complete = true;
+				}
+				else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == false)
+				{
+					player.currentProperty.subgoal6Complete = true;
+				}
+				else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == false)
+				{
+					player.currentProperty.subgoal7Complete = true;
+				}
+				else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == false)
+				{
+					player.currentProperty.subgoal8Complete = true;
+				}
+				randEventGoodOccured = false;
+			}
+			else if (randEventBadOccured)
+			{
+				player.currentProperty.currentProgress -= 3;
+				progressBar.value -= 3;
+				if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
+				{
+					player.currentProperty.subgoal1Complete = false;
+				}
+				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == true)
+				{
+					player.currentProperty.subgoal2Complete = false;
+				}
+				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == true)
+				{
+					player.currentProperty.subgoal3Complete = false;
+				}
+				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == true)
+				{
+					player.currentProperty.subgoal4Complete = false;
+				}
+				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == true)
+				{
+					player.currentProperty.subgoal5Complete = false;
+				}
+				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == true)
+				{
+					player.currentProperty.subgoal6Complete = false;
+				}
+				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == true)
+				{
+					player.currentProperty.subgoal7Complete = false;
+				}
+				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == true)
+				{
+					player.currentProperty.subgoal8Complete = false;
+				}
+				randEventBadOccured = false;
+			} 
+			// turn on pop up
+			popUpPanel.SetActive (false);
+			EnterLoanInProgressScreenUI (player);
+		}
+		else // subgoal popup is active
+		{
+			Debug.Log ("in 1");
+			if (randEventGoodOccured)
+			{
+				Debug.Log ("in 2");
+				PopUpRandEvent (true, false, popUpPanel);
+				randEventGoodOccured = false;
+				goodIncrease = true;
+			}
+			else if (randEventBadOccured)
+			{
+				Debug.Log ("in 3");
+				PopUpRandEvent (false, true, popUpPanel);
+				randEventBadOccured = false;
+				badDecrease = true;
+			}
+			else
+			{
+				Debug.Log ("in 4");
+
+				// turn on pop up
+				popUpPanel.SetActive (false);
+				subgoalPopUpActive = false;
+				if (badDecrease)
+				{
+					Debug.Log("in bad");
+					player.currentProperty.currentProgress -= 3;
+					progressBar.value -= 3;
+					if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
+					{
+						player.currentProperty.subgoal1Complete = false;
+					}
+					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == true)
+					{
+						player.currentProperty.subgoal2Complete = false;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == true)
+					{
+						player.currentProperty.subgoal3Complete = false;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == true)
+					{
+						player.currentProperty.subgoal4Complete = false;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == true)
+					{
+						player.currentProperty.subgoal5Complete = false;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == true)
+					{
+						player.currentProperty.subgoal6Complete = false;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == true)
+					{
+						player.currentProperty.subgoal7Complete = false;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == true)
+					{
+						player.currentProperty.subgoal8Complete = false;
+					}
+					badDecrease = false;
+				}
+				if (goodIncrease)
+				{
+					player.currentProperty.currentProgress += 3;
+					progressBar.value += 3;
+					if ((player.currentProperty.currentProgress >= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == false)
+					{
+						player.currentProperty.subgoal1Complete = true;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == false)
+					{
+						player.currentProperty.subgoal2Complete = true;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == false)
+					{
+						player.currentProperty.subgoal3Complete = true;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
+					{
+						player.currentProperty.subgoal4Complete = true;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == false)
+					{
+						player.currentProperty.subgoal5Complete = true;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == false)
+					{
+						player.currentProperty.subgoal6Complete = true;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == false)
+					{
+						player.currentProperty.subgoal7Complete = true;
+					}
+					else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == false)
+					{
+						player.currentProperty.subgoal8Complete = true;
+					}
+					goodIncrease = false;
+				}
+				EnterLoanInProgressScreenUI (player);
+			}
+		}
+
+
 	}
 
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)

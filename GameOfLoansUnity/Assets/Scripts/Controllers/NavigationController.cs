@@ -18,6 +18,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject HUDPanel;
 	public GameObject popUpPanel;
 	public GameObject popUpPanelNeedProp;
+	public GameObject popUpPanelRandEvent;
 
 	public GameObject changePropertyButton;
 	public GameObject cancelLoanButton;
@@ -42,6 +43,7 @@ public class NavigationController : MonoBehaviour
 		HUDPanel.SetActive (false);
 		popUpPanel.SetActive(false);
 		popUpPanelNeedProp.SetActive(false);
+		popUpPanelRandEvent.SetActive(false);
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
 	}
@@ -128,6 +130,11 @@ public class NavigationController : MonoBehaviour
     	public void OnPopUpOk ()
 	{
 		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel);
+	}
+
+	public void OnRandEventPopUpOk ()
+	{
+		popUpPanelRandEvent.SetActive(false);
 	}
 
 	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)
