@@ -199,17 +199,28 @@ public class GameController : MonoBehaviour
 		if (player.currentProperty.currentProgress >= player.currentProperty.numToClose)
 		{
 			player.score += 1000;
-			uiController.RollDiceUI (player, num, PopUpPanel, true, false, false);
+			uiController.RollDiceUI (player, PopUpPanel, true, false, false);
 			player.playerCardsProperty.Remove (player.currentProperty);
 			player.currentProperty = null;
 			if (player.playerCardsProperty.Count >= 1)
 			{
 				player.currentProperty = player.playerCardsProperty [0];
 			}
-		} 
+		}
 		else
-		{
-			uiController.RollDiceUI (player, num, PopUpPanel, false, false, false);
+		{	// CHANGE
+			if (player.currentProperty.currentProgress >= (player.currentProperty.numToClose * .8))
+			{
+				uiController.RollDiceUI (player, PopUpPanel, false, false, randEventBad);
+			}
+			else if (player.currentProperty.currentProgress <= (player.currentProperty.numToClose * .2))
+			{
+				uiController.RollDiceUI (player, PopUpPanel, false, randEventGood, false);
+			}
+			else
+			{
+				uiController.RollDiceUI (player, PopUpPanel, false, randEventGood, randEventBad);
+			}
 		}
 
 
