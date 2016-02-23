@@ -43,9 +43,13 @@ public class HighScoreController : MonoBehaviour
 	}
 
 	private IEnumerator WaitRequestGet (WWW www) {
-	
+	// wait for www object to get its response
 		yield return www;
+		if(!string.IsNullOrEmpty(www.error)){
+		}
+			else{
 		SetScores (www);
+			}
 	}
 
 	public void SetScores (WWW www) {
@@ -119,7 +123,7 @@ public class HighScoreController : MonoBehaviour
 			sendingScore.LoansClosed = int.Parse( LoansInput.text);
 			sendingScore.Id = null;
 
-
+			try{
 		
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
 			request.Method = "POST";
@@ -136,6 +140,10 @@ public class HighScoreController : MonoBehaviour
 
 			PlayerInputPage.SetActive (false);
 			HighScores ();
+			}
+			catch(WebException ex){
+				
+			}
 		}
 
 	}
