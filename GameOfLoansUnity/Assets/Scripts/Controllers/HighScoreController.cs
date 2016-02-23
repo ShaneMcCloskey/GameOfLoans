@@ -15,6 +15,9 @@ public class HighScoreController : MonoBehaviour
 	public GameObject HighScoresPage;
 	public GameObject PlayerInputPage;
 	public GameObject scoresPanel;
+	public GameObject highscoresPopUPPanel;
+	public Text PopUpText;
+	public Button PopUpOkButton;
 
 	public InputField NameInput;
 	public InputField TeamInput;
@@ -30,38 +33,43 @@ public class HighScoreController : MonoBehaviour
 	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
 	int pageNumber = 0;
 	int scoresPerPage = 25;
-	int maxPageNum =0;
+	int maxPageNum = 0;
 	int minPageNum = 0;
 	List<GameScore> data;
 
 	//change to start to get high scores page to work
-	public void HighScores()
+	// get HighScores from api
+	public void HighScores ()
 	{
 		HighScoresPage.SetActive (true);
-		WWW www = new WWW (getscoresurl);
-		StartCoroutine (WaitRequestGet (www));
-	}
+		try{
+		HttpWebRequest request = (HttpWebRequest)WebRequest.Create (getscoresurl);
+		request.Method = "GET";
+		request.Timeout = 100000;
+		WebResponse response = request.GetResponse ();
+		StreamReader reader = new StreamReader (response.GetResponseStream ());
+		string readerString = reader.ReadToEnd ();
+			SetScores (readerString);
 
-	private IEnumerator WaitRequestGet (WWW www) {
-	// wait for www object to get its response
-		yield return www;
-		if(!string.IsNullOrEmpty(www.error)){
 		}
-			else{
-		SetScores (www);
-			}
+		catch(WebException){
+			highscoresPopUPPanel.SetActive (true);
+			PopUpText.text = "High scores could not be loaded at this time.";
+		}
 	}
-
-	public void SetScores (WWW www) {
-		data = JsonConvert.DeserializeObject<List<GameScore>> (www.text);
-		maxPageNum = (int) Mathf.Ceil (data.Count / scoresPerPage);
+	//deserializes json into data and passes list of scores to setUI function
+	public void SetScores (string serializedText)
+	{
+		data = JsonConvert.DeserializeObject<List<GameScore>> (serializedText);
+		maxPageNum = (int)Mathf.Ceil (data.Count / scoresPerPage);
 		SetUI (data);
 	}
 
+	//sets the HighScore page with the appropriate high scores
+	public void SetUI (List<GameScore> dataList)
+	{
 
-	public void SetUI (List<GameScore> dataList) {
-		
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < scoresPerPage; i++) {
 			// if not enough data
 			if (i + (pageNumber * scoresPerPage) >= dataList.Count) {
 				//set the rank
@@ -90,8 +98,8 @@ public class HighScoreController : MonoBehaviour
 			}
 		}
 	}
-		
-	public void OnNextClick()
+
+	public void OnNextClick ()
 	{
 		pageNumber += 1;
 		if (pageNumber >= maxPageNum) {
@@ -101,7 +109,8 @@ public class HighScoreController : MonoBehaviour
 
 	}
 
-	public void OnPrevClick() {
+	public void OnPrevClick ()
+	{
 
 		pageNumber -= 1;
 		if (pageNumber <= minPageNum) {
@@ -112,39 +121,44 @@ public class HighScoreController : MonoBehaviour
 	}
 
 
-	public void AddScore(){
-		if(NameInput.text!="" &&ScoreInput.text!="" && TeamInput.text!="" &&LoansInput.text!="")
-		{
-			
+	public void AddScore ()
+	{
+		if (NameInput.text != "" && ScoreInput.text != "" && TeamInput.text != "" && LoansInput.text != "") {
+
 			GameScore sendingScore = new GameScore ();
 			sendingScore.Name = NameInput.text;
 			sendingScore.TeamName = TeamInput.text;
-			sendingScore.Score = int.Parse(ScoreInput.text);
-			sendingScore.LoansClosed = int.Parse( LoansInput.text);
+			sendingScore.Score = int.Parse (ScoreInput.text);
+			sendingScore.LoansClosed = int.Parse (LoansInput.text);
 			sendingScore.Id = null;
 
-			try{
-		
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
-			request.Method = "POST";
-			request.ContentType = "application/json; charset=utf-8";
-			StreamWriter writer = new StreamWriter( request.GetRequestStream());
-			string sendData = JsonConvert.SerializeObject(sendingScore);
-			writer.Write (sendData);
-			writer.Close ();
-			WebResponse response = request.GetResponse ();
-			StreamReader reader = new StreamReader (response.GetResponseStream ());
-			string readerString = reader.ReadToEnd ();
+			try {
 
-			GameScore returnScore = JsonConvert.DeserializeObject<GameScore> (readerString);
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
+				request.Method = "POST";
+				request.ContentType = "application/json; charset=utf-8";
+				request.Timeout = 100000;
+				StreamWriter writer = new StreamWriter (request.GetRequestStream ());
+				string sendData = JsonConvert.SerializeObject (sendingScore);
+				writer.Write (sendData);
+				writer.Close ();
+				WebResponse response = request.GetResponse ();
+				StreamReader reader = new StreamReader (response.GetResponseStream ());
+				string readerString = reader.ReadToEnd ();
 
-			PlayerInputPage.SetActive (false);
-			HighScores ();
-			}
-			catch(WebException ex){
-				
+				GameScore returnScore = JsonConvert.DeserializeObject<GameScore> (readerString);
+				// change page functionality later
+				PlayerInputPage.SetActive (false);
+				HighScores ();
+			} catch (WebException) {
+				highscoresPopUPPanel.SetActive (true);
+				PopUpText.text = "Your high score could not be added at this time.";
 			}
 		}
 
+	}
+
+	public void ClosePopUp(){
+		highscoresPopUPPanel.SetActive (false);
 	}
 }
