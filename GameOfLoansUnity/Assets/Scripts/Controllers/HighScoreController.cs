@@ -17,12 +17,9 @@ public class HighScoreController : MonoBehaviour
 	public GameObject scoresPanel;
 	public GameObject highscoresPopUPPanel;
 	public Text PopUpText;
-	public Button PopUpOkButton;
 
 	public InputField NameInput;
 	public InputField TeamInput;
-	public InputField ScoreInput;
-	public InputField LoansInput;
 	const int RANK_LOC = 0;
 	const int NAME_LOC = 1;
 	const int TEAM_LOC = 2;
@@ -42,17 +39,16 @@ public class HighScoreController : MonoBehaviour
 	public void HighScores ()
 	{
 		HighScoresPage.SetActive (true);
-		try{
-		HttpWebRequest request = (HttpWebRequest)WebRequest.Create (getscoresurl);
-		request.Method = "GET";
-		request.Timeout = 100000;
-		WebResponse response = request.GetResponse ();
-		StreamReader reader = new StreamReader (response.GetResponseStream ());
-		string readerString = reader.ReadToEnd ();
+		try {
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (getscoresurl);
+			request.Method = "GET";
+			request.Timeout = 100000;
+			WebResponse response = request.GetResponse ();
+			StreamReader reader = new StreamReader (response.GetResponseStream ());
+			string readerString = reader.ReadToEnd ();
 			SetScores (readerString);
 
-		}
-		catch(WebException){
+		} catch (WebException) {
 			highscoresPopUPPanel.SetActive (true);
 			PopUpText.text = "High scores could not be loaded at this time.";
 		}
@@ -123,13 +119,17 @@ public class HighScoreController : MonoBehaviour
 
 	public void AddScore ()
 	{
-		if (NameInput.text != "" && ScoreInput.text != "" && TeamInput.text != "" && LoansInput.text != "") {
+		if (NameInput.text != "" && TeamInput.text != "") {
 
 			GameScore sendingScore = new GameScore ();
 			sendingScore.Name = NameInput.text;
+
 			sendingScore.TeamName = TeamInput.text;
-			sendingScore.Score = int.Parse (ScoreInput.text);
-			sendingScore.LoansClosed = int.Parse (LoansInput.text);
+
+
+			//change this when integrating into main scene
+			//			sendingScore.Score = player.score;
+//				sendingScore.LoansClosed = player.numPropertiesClosed;
 			sendingScore.Id = null;
 
 			try {
@@ -154,11 +154,24 @@ public class HighScoreController : MonoBehaviour
 				highscoresPopUPPanel.SetActive (true);
 				PopUpText.text = "Your high score could not be added at this time.";
 			}
-		}
+		} 
+		else {
+			highscoresPopUPPanel.SetActive (true);
+			if (NameInput.text == "" && TeamInput.text != "") {
+				PopUpText.text = "Please fill in the Name textbox to submit your score.";
+			}
+			if (TeamInput.text == "" && NameInput.text != "") {
+				PopUpText.text = "Please fill in the  Team Name textbox to submit your score.";
+			}
+			if (TeamInput.text == "" && NameInput.text == "") {
+				PopUpText.text = "Please fill in the  Name and Team Name textboxes to submit your score.";
+			}
 
+		}
 	}
 
-	public void ClosePopUp(){
+	public void ClosePopUp ()
+	{
 		highscoresPopUPPanel.SetActive (false);
 	}
 }
