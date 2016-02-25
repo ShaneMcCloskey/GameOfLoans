@@ -129,76 +129,11 @@ public class UIController : MonoBehaviour
 		HUDcreditText.text = "Credit: " + player.credit.ToString ();
 		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString ();
 
-		if ((player.currentProperty.currentProgress >= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == false)
-		{
-			//Debug.Log("1");
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 1";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal1Complete = true;
-			subgoalPopUpActive = true;
-		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == false)
-		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 2";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal2Complete = true;
-			subgoalPopUpActive = true;
-		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == false)
-		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 3";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal3Complete = true;
-			subgoalPopUpActive = true;
-		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
-		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 4";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal4Complete = true;
-			subgoalPopUpActive = true;
-		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == false)
-		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 5";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal5Complete = true;
-			subgoalPopUpActive = true;
-		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == false)
-		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 6";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal6Complete = true;
-			subgoalPopUpActive = true;
-		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == false)
-		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 7";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal7Complete = true;
-			subgoalPopUpActive = true;
-		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == false)
-		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Subgoal 8";
-			popUpButtonText.text = "Ok";
-			player.currentProperty.subgoal8Complete = true;
-			subgoalPopUpActive = true;
-		}
+		CheckSubGoal(player, popUpPanel);
+
 		if (loanComplete)
 		{
-			popUpPanel.SetActive (true);
-			popUpText.text = "Loan Complete!";
-			popUpButtonText.text = "Ok";
+			ShowPopUp("Loan Complete!", popUpPanel);
 		}
 
 		if (subgoalPopUpActive == false)
@@ -224,19 +159,76 @@ public class UIController : MonoBehaviour
 		}
         }
 
+        void CheckSubGoal (Player player, GameObject popUpPanel)
+	{
+		if ((player.currentProperty.currentProgress >= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == false)
+		{
+			//Debug.Log("1");			
+			ShowPopUp("Subgoal 1", popUpPanel);
+			player.currentProperty.subgoal1Complete = true;
+			subgoalPopUpActive = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == false)
+		{
+			ShowPopUp("Subgoal 2", popUpPanel);
+			player.currentProperty.subgoal2Complete = true;
+			subgoalPopUpActive = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == false)
+		{
+			ShowPopUp("Subgoal 3", popUpPanel);
+			player.currentProperty.subgoal3Complete = true;
+			subgoalPopUpActive = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
+		{
+			ShowPopUp("Subgoal 4", popUpPanel);
+			player.currentProperty.subgoal4Complete = true;
+			subgoalPopUpActive = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == false)
+		{
+			ShowPopUp("Subgoal 5", popUpPanel);
+			player.currentProperty.subgoal5Complete = true;
+			subgoalPopUpActive = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == false)
+		{
+			ShowPopUp("Subgoal 6", popUpPanel);
+			player.currentProperty.subgoal6Complete = true;
+			subgoalPopUpActive = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == false)
+		{
+			ShowPopUp("Subgoal 7", popUpPanel);
+			player.currentProperty.subgoal7Complete = true;
+			subgoalPopUpActive = true;
+		}
+		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == false)
+		{
+			ShowPopUp("Subgoal 8", popUpPanel);
+			player.currentProperty.subgoal8Complete = true;
+			subgoalPopUpActive = true;
+		}
+	}
+
+	// add param to check if need to be sent to diff panel
+	void ShowPopUp (string Text, GameObject PopUpPanel)
+	{
+		PopUpPanel.SetActive (true);
+		popUpText.text = Text;
+		popUpButtonText.text = "Ok";
+	}
+
         void PopUpRandEvent(bool randEventGood, bool randEventBad, GameObject popUpPanel)
         {
 		if (randEventGood)
 		{
-			popUpPanel.SetActive(true);
-			popUpText.text = "Positive Random Event";
-			popUpButtonText.text = "Ok";
+			ShowPopUp("Positive Random Event", popUpPanel);
 		}
 		if (randEventBad)
 		{
-			popUpPanel.SetActive(true);
-			popUpText.text = "Negative Random Event";
-			popUpButtonText.text = "Ok";
+			ShowPopUp("Negative Random Event", popUpPanel);
 		}
         }
         // still need to pop up subgoal hit after random event ok click if hit subgoal

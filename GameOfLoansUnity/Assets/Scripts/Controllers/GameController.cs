@@ -96,7 +96,8 @@ public class GameController : MonoBehaviour
 			if (randRight < cardsPropertyHunt.Count)
 			{
 				randRight++;
-			} else
+			} 
+			else
 			{
 				randRight--;
 			}
