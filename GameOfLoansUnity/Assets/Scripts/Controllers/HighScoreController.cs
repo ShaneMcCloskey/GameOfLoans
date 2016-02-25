@@ -17,30 +17,45 @@ public class HighScoreController : MonoBehaviour
 	public GameObject scoresPanel;
 	public GameObject highscoresPopUPPanel;
 	public Text PopUpText;
-
 	public InputField NameInput;
 	public InputField TeamInput;
+	public InputField LoansInput;
+	public InputField ScoreInput;
 	const int RANK_LOC = 0;
 	const int NAME_LOC = 1;
 	const int TEAM_LOC = 2;
 	const int Score_LOC = 3;
 	const int LOANS_LOC = 4;
 
-	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?n=250";
+	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?";
 	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
+	const string getnumscoresurl = "http://35.9.22.106/Api/HighScores/GetNumScores";
 	int pageNumber = 0;
 	int scoresPerPage = 25;
 	int maxPageNum = 0;
 	int minPageNum = 0;
+	int totalScores = 0;
 	List<GameScore> data;
 
 	//change to start to get high scores page to work
 	// get HighScores from api
-	public void HighScores ()
+	public void HighScores (int pageNum)
 	{
-		HighScoresPage.SetActive (true);
+		Debug.Log (pageNumber);
+
 		try {
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (getscoresurl);
+			//get max page number
+			HttpWebRequest requestNum = (HttpWebRequest)WebRequest.Create(getnumscoresurl);
+			requestNum.Method= "GET";
+			requestNum.Timeout =100000;
+			WebResponse numResponse = requestNum.GetResponse();
+			StreamReader numReader = new StreamReader(numResponse.GetResponseStream());
+			string numString = numReader.ReadToEnd();
+			totalScores = JsonConvert.DeserializeObject<int>(numString);
+			maxPageNum = (int) totalScores/scoresPerPage;
+			// get the correct page of  high Scores
+			string geturl = getscoresurl + "start=" + (scoresPerPage * pageNumber).ToString () + "&" + "range=" + scoresPerPage.ToString ();
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (geturl);
 			request.Method = "GET";
 			request.Timeout = 100000;
 			WebResponse response = request.GetResponse ();
@@ -50,14 +65,15 @@ public class HighScoreController : MonoBehaviour
 
 		} catch (WebException) {
 			highscoresPopUPPanel.SetActive (true);
-			PopUpText.text = "High scores could not be loaded at this time.";
+			PopUpText.text = "High scores could not be loaded.";
+			//will need a function to call here.
+
 		}
 	}
 	//deserializes json into data and passes list of scores to setUI function
 	public void SetScores (string serializedText)
 	{
 		data = JsonConvert.DeserializeObject<List<GameScore>> (serializedText);
-		maxPageNum = (int)Mathf.Ceil (data.Count / scoresPerPage);
 		SetUI (data);
 	}
 
@@ -67,7 +83,7 @@ public class HighScoreController : MonoBehaviour
 
 		for (int i = 0; i < scoresPerPage; i++) {
 			// if not enough data
-			if (i + (pageNumber * scoresPerPage) >= dataList.Count) {
+			if (i >= dataList.Count) {
 				//set the rank
 				scoresPanel.transform.GetChild (i).GetChild (RANK_LOC).GetChild (0).GetComponent<Text> ().text = "";
 				//set the name
@@ -82,15 +98,15 @@ public class HighScoreController : MonoBehaviour
 			//there is enough data
 			else {
 				//set the rank
-				scoresPanel.transform.GetChild (i).GetChild (RANK_LOC).GetChild (0).GetComponent<Text> ().text = (i + (pageNumber * scoresPerPage) + 1).ToString ();
+				scoresPanel.transform.GetChild (i).GetChild (RANK_LOC).GetChild (0).GetComponent<Text> ().text = (i + (pageNumber*scoresPerPage) + 1).ToString ();
 				//set the name
-				scoresPanel.transform.GetChild (i).GetChild (NAME_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].Name;
+				scoresPanel.transform.GetChild (i).GetChild (NAME_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].Name;
 				//set the team name
-				scoresPanel.transform.GetChild (i).GetChild (TEAM_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].TeamName;
+				scoresPanel.transform.GetChild (i).GetChild (TEAM_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].TeamName;
 				//set Score
-				scoresPanel.transform.GetChild (i).GetChild (Score_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].Score.ToString ();
+				scoresPanel.transform.GetChild (i).GetChild (Score_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].Score.ToString ();
 				//set Loans closed
-				scoresPanel.transform.GetChild (i).GetChild (LOANS_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i + (pageNumber * scoresPerPage)].LoansClosed.ToString ();
+				scoresPanel.transform.GetChild (i).GetChild (LOANS_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].LoansClosed.ToString ();
 			}
 		}
 	}
@@ -101,8 +117,21 @@ public class HighScoreController : MonoBehaviour
 		if (pageNumber >= maxPageNum) {
 			pageNumber = maxPageNum;
 		}
+		HighScores (pageNumber);
 		SetUI (data);
 
+	}
+	public void OnLastClick()
+	{
+		pageNumber = maxPageNum;
+		HighScores (pageNumber);
+		SetUI (data);
+	}
+	public void OnFirstClick()
+	{
+		pageNumber = 0;
+		HighScores (pageNumber);
+		SetUI (data);
 	}
 
 	public void OnPrevClick ()
@@ -113,6 +142,7 @@ public class HighScoreController : MonoBehaviour
 
 			pageNumber = minPageNum;
 		}
+		HighScores (pageNumber);
 		SetUI (data);
 	}
 
@@ -130,8 +160,10 @@ public class HighScoreController : MonoBehaviour
 			//change this when integrating into main scene
 			//			sendingScore.Score = player.score;
 //				sendingScore.LoansClosed = player.numPropertiesClosed;
+			sendingScore.Score= int.Parse(ScoreInput.text);
+			sendingScore.LoansClosed = int.Parse (LoansInput.text);
 			sendingScore.Id = null;
-
+			AddScoreReturn returnedScore;
 			try {
 
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
@@ -145,11 +177,11 @@ public class HighScoreController : MonoBehaviour
 				WebResponse response = request.GetResponse ();
 				StreamReader reader = new StreamReader (response.GetResponseStream ());
 				string readerString = reader.ReadToEnd ();
-
-				GameScore returnScore = JsonConvert.DeserializeObject<GameScore> (readerString);
+			// what reader string looks like	{"gameScore":{"Id":52,"Name":"TESTADDNew2","TeamName":"TESTADDNew2","Score":1,"LoansClosed":1},"rank":47}
+			returnedScore = JsonConvert.DeserializeObject<AddScoreReturn>(readerString);
+				Debug.Log(returnedScore.rank);
 				// change page functionality later
-				PlayerInputPage.SetActive (false);
-				HighScores ();
+				//HighScores (0);
 			} catch (WebException) {
 				highscoresPopUPPanel.SetActive (true);
 				PopUpText.text = "Your high score could not be added at this time.";

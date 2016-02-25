@@ -19,11 +19,13 @@ public class NavigationController : MonoBehaviour
 	public GameObject popUpPanel;
 	public GameObject popUpPanelNeedProp;
 	public GameObject popUpPanelRandEvent;
+	public GameObject GameOverPanel;
 
 	public GameObject changePropertyButton;
 	public GameObject cancelLoanButton;
 
 	public GameController gameControler;
+	public HighScoreController HighScoreController;
 
 	// private vars -------------------------
 	private GameObject currentPanel;
@@ -63,6 +65,7 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonLeaderboards()
 	{
 		ChangePanel (leaderboardsPanel, false, false);
+		HighScoreController.HighScores (0);
 	}
 
 	public void OnButtonCredits()
