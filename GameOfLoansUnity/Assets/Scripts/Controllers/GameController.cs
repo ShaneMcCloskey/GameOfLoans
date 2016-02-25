@@ -209,7 +209,7 @@ public class GameController : MonoBehaviour
 		}
 		else
 		{	// CHANGE
-			if (player.currentProperty.currentProgress >= (player.currentProperty.numToClose * .8))
+			/*if (player.currentProperty.currentProgress >= (player.currentProperty.numToClose * .8))
 			{
 				uiController.RollDiceUI (player, PopUpPanel, false, false, randEventBad);
 			}
@@ -220,7 +220,8 @@ public class GameController : MonoBehaviour
 			else
 			{
 				uiController.RollDiceUI (player, PopUpPanel, false, randEventGood, randEventBad);
-			}
+			}*/
+			uiController.RollDiceUI(player,PopUpPanel, false, false, false);
 		}
 
 
