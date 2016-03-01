@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Newtonsoft.Json;
 using System.Net;
 using System.IO;
+using UnityEngine.Experimental.Networking;
 
 
 
@@ -37,38 +38,15 @@ public class HighScoreController : MonoBehaviour
 	int totalScores = 0;
 	List<GameScore> data;
 
+
 	//change to start to get high scores page to work
 	// get HighScores from api
 	public void HighScores (int pageNum)
 	{
-		Debug.Log (pageNumber);
+		pageNumber = pageNum;
+		StartCoroutine (WaitRequestGetScoreTotal ());
+		StartCoroutine (WaitRequestGetScores ());
 
-		try {
-			//get max page number
-			HttpWebRequest requestNum = (HttpWebRequest)WebRequest.Create(getnumscoresurl);
-			requestNum.Method= "GET";
-			requestNum.Timeout =100000;
-			WebResponse numResponse = requestNum.GetResponse();
-			StreamReader numReader = new StreamReader(numResponse.GetResponseStream());
-			string numString = numReader.ReadToEnd();
-			totalScores = JsonConvert.DeserializeObject<int>(numString);
-			maxPageNum = (int) totalScores/scoresPerPage;
-			// get the correct page of  high Scores
-			string geturl = getscoresurl + "start=" + (scoresPerPage * pageNumber).ToString () + "&" + "range=" + scoresPerPage.ToString ();
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create (geturl);
-			request.Method = "GET";
-			request.Timeout = 100000;
-			WebResponse response = request.GetResponse ();
-			StreamReader reader = new StreamReader (response.GetResponseStream ());
-			string readerString = reader.ReadToEnd ();
-			SetScores (readerString);
-
-		} catch (WebException) {
-			highscoresPopUPPanel.SetActive (true);
-			PopUpText.text = "High scores could not be loaded.";
-			//will need a function to call here.
-
-		}
 	}
 	//deserializes json into data and passes list of scores to setUI function
 	public void SetScores (string serializedText)
@@ -164,41 +142,41 @@ public class HighScoreController : MonoBehaviour
 			sendingScore.LoansClosed = int.Parse (LoansInput.text);
 			sendingScore.Id = null;
 			AddScoreReturn returnedScore;
-			try {
-
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
-				request.Method = "POST";
-				request.ContentType = "application/json; charset=utf-8";
-				request.Timeout = 100000;
-				StreamWriter writer = new StreamWriter (request.GetRequestStream ());
-				string sendData = JsonConvert.SerializeObject (sendingScore);
-				writer.Write (sendData);
-				writer.Close ();
-				WebResponse response = request.GetResponse ();
-				StreamReader reader = new StreamReader (response.GetResponseStream ());
-				string readerString = reader.ReadToEnd ();
-			// what reader string looks like	{"gameScore":{"Id":52,"Name":"TESTADDNew2","TeamName":"TESTADDNew2","Score":1,"LoansClosed":1},"rank":47}
-			returnedScore = JsonConvert.DeserializeObject<AddScoreReturn>(readerString);
-				Debug.Log(returnedScore.rank);
-				// change page functionality later
-				//HighScores (0);
-			} catch (WebException) {
-				highscoresPopUPPanel.SetActive (true);
-				PopUpText.text = "Your high score could not be added at this time.";
-			}
-		} 
-		else {
-			highscoresPopUPPanel.SetActive (true);
-			if (NameInput.text == "" && TeamInput.text != "") {
-				PopUpText.text = "Please fill in the Name textbox to submit your score.";
-			}
-			if (TeamInput.text == "" && NameInput.text != "") {
-				PopUpText.text = "Please fill in the  Team Name textbox to submit your score.";
-			}
-			if (TeamInput.text == "" && NameInput.text == "") {
-				PopUpText.text = "Please fill in the  Name and Team Name textboxes to submit your score.";
-			}
-
+//			try {
+//
+//				HttpWebRequest request = (HttpWebRequest)WebRequest.Create (sendscoresurl);
+//				request.Method = "POST";
+//				request.ContentType = "application/json; charset=utf-8";
+//				request.Timeout = 100000;
+//				StreamWriter writer = new StreamWriter (request.GetRequestStream ());
+//				string sendData = JsonConvert.SerializeObject (sendingScore);
+//				writer.Write (sendData);
+//				writer.Close ();
+//				WebResponse response = request.GetResponse ();
+//				StreamReader reader = new StreamReader (response.GetResponseStream ());
+//				string readerString = reader.ReadToEnd ();
+//			// what reader string looks like	{"gameScore":{"Id":52,"Name":"TESTADDNew2","TeamName":"TESTADDNew2","Score":1,"LoansClosed":1},"rank":47}
+//			returnedScore = JsonConvert.DeserializeObject<AddScoreReturn>(readerString);
+//				Debug.Log(returnedScore.rank);
+//				// change page functionality later
+//				//HighScores (0);
+//			} catch (WebException) {
+//				highscoresPopUPPanel.SetActive (true);
+//				PopUpText.text = "Your high score could not be added at this time.";
+//			}
+//		} 
+//		else {
+//			highscoresPopUPPanel.SetActive (true);
+//			if (NameInput.text == "" && TeamInput.text != "") {
+//				PopUpText.text = "Please fill in the Name textbox to submit your score.";
+//			}
+//			if (TeamInput.text == "" && NameInput.text != "") {
+//				PopUpText.text = "Please fill in the  Team Name textbox to submit your score.";
+//			}
+//			if (TeamInput.text == "" && NameInput.text == "") {
+//				PopUpText.text = "Please fill in the  Name and Team Name textboxes to submit your score.";
+//			}
+//
 		}
 	}
 
@@ -206,4 +184,39 @@ public class HighScoreController : MonoBehaviour
 	{
 		highscoresPopUPPanel.SetActive (false);
 	}
+	private IEnumerator WaitRequestGetScoreTotal(){
+		using (UnityWebRequest www = UnityWebRequest.Get (getnumscoresurl)) {
+
+			yield return www.Send();
+			if (www.isError) {
+				// error
+			} else {
+				//no error
+				Debug.Log(www.downloadHandler.text);
+				totalScores = JsonConvert.DeserializeObject<int> (www.downloadHandler.text);
+				maxPageNum = (int)totalScores / scoresPerPage;
+
+
+
+			}
+		}
+	}
+	private IEnumerator WaitRequestGetScores(){
+		string geturl = getscoresurl + "start=" + (scoresPerPage * pageNumber).ToString () + "&" + "range=" + scoresPerPage.ToString ();
+		using (UnityWebRequest www = UnityWebRequest.Get (geturl)) {
+
+			yield return www.Send();
+			if (www.isError) {
+				// error
+			} else {
+				//no error
+				Debug.Log(www.downloadHandler.text);
+				SetScores(www.downloadHandler.text);
+
+
+
+			}
+		}
+	}
+			
 }
