@@ -65,7 +65,7 @@ public class UIController : MonoBehaviour
 
 	public void UpdateTurnsLeft (Player player)
 	{
-		HUDturnText.text = "Turns Left: " + player.numTurnsLeft;
+		HUDturnText.text = "Turns Left: " + player.NumTurnsLeft;
 	}
 
 	public void UpdateOppKnocksCardTextAndPlayerStatsUI(OppKnocksCard card, Player player)
@@ -75,17 +75,17 @@ public class UIController : MonoBehaviour
 		if (card.category == 1) 
 		{
 			textOppKnocksType.text = "Income Card";
-			HUDincomeText.text = "Income: " + player.income.ToString();
+			HUDincomeText.text = "Income: " + player.Income.ToString();
 		} 
 		else if (card.category == 2) 
 		{
 			textOppKnocksType.text = "Asset Card";
-			HUDassetsText.text = "Assets: " + player.assets.ToString();
+			HUDassetsText.text = "Assets: " + player.Assets.ToString();
 		} 
 		else 
 		{
 			textOppKnocksType.text = "Credit Card";
-			HUDcreditText.text = "Credit: " + player.credit.ToString();
+			HUDcreditText.text = "Credit: " + player.Credit.ToString();
 		}
 	}
 
@@ -110,24 +110,24 @@ public class UIController : MonoBehaviour
 	// Loan in Progess functions -----------------------------------------------
 	public void EnterLoanInProgressScreenUI(Player player)
 	{
-		currentAddress.text = player.currentProperty.address;
-		currentPrice.text = player.currentProperty.price.ToString();
-		currentSqFoot.text = player.currentProperty.sqFoot.ToString();
-		currentDiff.text = player.currentProperty.difficulty.ToString();
+		currentAddress.text = player.CurrentProperty.address;
+		currentPrice.text = player.CurrentProperty.price.ToString();
+		currentSqFoot.text = player.CurrentProperty.sqFoot.ToString();
+		currentDiff.text = player.CurrentProperty.difficulty.ToString();
 
-        	progressBar.maxValue = player.currentProperty.numToClose;
-        	progressBar.value = player.currentProperty.currentProgress;
+        	progressBar.maxValue = player.CurrentProperty.numToClose;
+        	progressBar.value = player.CurrentProperty.currentProgress;
 	}
 
         public void RollDiceUI (Player player, GameObject popUpPanel, bool loanComplete, bool randEventGood, bool randEventBad)
 	{
 		// need to have the panel in here
-		progressBar.value = player.currentProperty.currentProgress;
-		HUDscoreText.text = "Score: " + player.score.ToString ();
-		HUDincomeText.text = "Income: " + player.income.ToString ();
-		HUDassetsText.text = "Assets: " + player.assets.ToString ();
-		HUDcreditText.text = "Credit: " + player.credit.ToString ();
-		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString ();
+		progressBar.value = player.CurrentProperty.currentProgress;
+		HUDscoreText.text = "Score: " + player.Score.ToString ();
+		HUDincomeText.text = "Income: " + player.Income.ToString ();
+		HUDassetsText.text = "Assets: " + player.Assets.ToString ();
+		HUDcreditText.text = "Credit: " + player.Credit.ToString ();
+		HUDturnText.text = "Turns Left: " + player.NumTurnsLeft.ToString ();
 
 		CheckSubGoal(player, popUpPanel);
 		CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
@@ -140,53 +140,53 @@ public class UIController : MonoBehaviour
 
         void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
-		if ((player.currentProperty.currentProgress >= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == false)
+		if ((player.CurrentProperty.currentProgress >= progressBar.maxValue / 9) && player.CurrentProperty.subgoal1Complete == false)
 		{
 			//Debug.Log("1");			
 			ShowPopUp("Subgoal 1", popUpPanel);
-			player.currentProperty.subgoal1Complete = true;
+			player.CurrentProperty.subgoal1Complete = true;
 			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == false)
+		else if ((player.CurrentProperty.currentProgress >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.subgoal2Complete == false)
 		{
 			ShowPopUp("Subgoal 2", popUpPanel);
-			player.currentProperty.subgoal2Complete = true;
+			player.CurrentProperty.subgoal2Complete = true;
 			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == false)
+		else if ((player.CurrentProperty.currentProgress >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.subgoal3Complete == false)
 		{
 			ShowPopUp("Subgoal 3", popUpPanel);
-			player.currentProperty.subgoal3Complete = true;
+			player.CurrentProperty.subgoal3Complete = true;
 			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == false)
+		else if ((player.CurrentProperty.currentProgress >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.subgoal4Complete == false)
 		{
 			ShowPopUp("Subgoal 4", popUpPanel);
-			player.currentProperty.subgoal4Complete = true;
+			player.CurrentProperty.subgoal4Complete = true;
 			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == false)
+		else if ((player.CurrentProperty.currentProgress >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.subgoal5Complete == false)
 		{
 			ShowPopUp("Subgoal 5", popUpPanel);
-			player.currentProperty.subgoal5Complete = true;
+			player.CurrentProperty.subgoal5Complete = true;
 			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == false)
+		else if ((player.CurrentProperty.currentProgress >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.subgoal6Complete == false)
 		{
 			ShowPopUp("Subgoal 6", popUpPanel);
-			player.currentProperty.subgoal6Complete = true;
+			player.CurrentProperty.subgoal6Complete = true;
 			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == false)
+		else if ((player.CurrentProperty.currentProgress >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.subgoal7Complete == false)
 		{
 			ShowPopUp("Subgoal 7", popUpPanel);
-			player.currentProperty.subgoal7Complete = true;
+			player.CurrentProperty.subgoal7Complete = true;
 			subgoalPopUpActive = true;
 		}
-		else if ((player.currentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == false)
+		else if ((player.CurrentProperty.currentProgress >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.subgoal8Complete == false)
 		{
 			ShowPopUp("Subgoal 8", popUpPanel);
-			player.currentProperty.subgoal8Complete = true;
+			player.CurrentProperty.subgoal8Complete = true;
 			subgoalPopUpActive = true;
 		}
 	}
@@ -211,46 +211,46 @@ public class UIController : MonoBehaviour
 
 	void ProcessNegativeEvent (Player player)
 	{
-		player.currentProperty.currentProgress -= 3;
-		progressBar.value = player.currentProperty.currentProgress;
-		if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
+		player.CurrentProperty.currentProgress -= 3;
+		progressBar.value = player.CurrentProperty.currentProgress;
+		if ((player.CurrentProperty.currentProgress <= progressBar.maxValue / 9) && player.CurrentProperty.subgoal1Complete == true)
 		{
-			player.currentProperty.subgoal1Complete = false;
+			player.CurrentProperty.subgoal1Complete = false;
 		}
-		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == true)
+		else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.subgoal2Complete == true)
 		{
-			player.currentProperty.subgoal2Complete = false;
+			player.CurrentProperty.subgoal2Complete = false;
 		}
-		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == true)
+		else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.subgoal3Complete == true)
 		{
-			player.currentProperty.subgoal3Complete = false;
+			player.CurrentProperty.subgoal3Complete = false;
 		}
-		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == true)
+		else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.subgoal4Complete == true)
 		{
-			player.currentProperty.subgoal4Complete = false;
+			player.CurrentProperty.subgoal4Complete = false;
 		}
-		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == true)
+		else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.subgoal5Complete == true)
 		{
-			player.currentProperty.subgoal5Complete = false;
+			player.CurrentProperty.subgoal5Complete = false;
 		}
-		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == true)
+		else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.subgoal6Complete == true)
 		{
-			player.currentProperty.subgoal6Complete = false;
+			player.CurrentProperty.subgoal6Complete = false;
 		}
-		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == true)
+		else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.subgoal7Complete == true)
 		{
-			player.currentProperty.subgoal7Complete = false;
+			player.CurrentProperty.subgoal7Complete = false;
 		}
-		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == true)
+		else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.subgoal8Complete == true)
 		{
-			player.currentProperty.subgoal8Complete = false;
+			player.CurrentProperty.subgoal8Complete = false;
 		}
 	}
 
 	void ProcessPositiveEvent(Player player)
 	{
-		player.currentProperty.currentProgress += 3;
-		progressBar.value = player.currentProperty.currentProgress;
+		player.CurrentProperty.currentProgress += 3;
+		progressBar.value = player.CurrentProperty.currentProgress;
 	}
 
 	// add param to check if need to be sent to diff panel
@@ -264,7 +264,7 @@ public class UIController : MonoBehaviour
         // still need to pop up subgoal hit after random event ok click if hit subgoal
 	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, Player player)
 	{
-		if (player.playerCardsProperty.Count == 0)  // if player completes loan and has none in queue
+		if (player.PlayerCardsProperty.Count == 0)  // if player completes loan and has none in queue
 		{
 			popUpPanel.SetActive (false);
 			popUpPanelNeedProp.SetActive (true);
@@ -300,45 +300,45 @@ public class UIController : MonoBehaviour
 		{
 			if (randEventGoodOccured)
 			{
-				player.currentProperty.currentProgress += 3;
+				player.CurrentProperty.currentProgress += 3;
 				RollDiceUI(player, popUpPanel, false, false, false);
 				randEventGoodOccured = false;
 			}
 			else if (randEventBadOccured)
 			{
-				player.currentProperty.currentProgress -= 3;
+				player.CurrentProperty.currentProgress -= 3;
 				progressBar.value -= 3;
-				/*if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
+				/*if ((player.CurrentProperty.currentProgress <= progressBar.maxValue / 9) && player.CurrentProperty.subgoal1Complete == true)
 				{
-					player.currentProperty.subgoal1Complete = false;
+					player.CurrentProperty.subgoal1Complete = false;
 				}
-				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == true)
+				else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.subgoal2Complete == true)
 				{
-					player.currentProperty.subgoal2Complete = false;
+					player.CurrentProperty.subgoal2Complete = false;
 				}
-				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == true)
+				else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.subgoal3Complete == true)
 				{
-					player.currentProperty.subgoal3Complete = false;
+					player.CurrentProperty.subgoal3Complete = false;
 				}
-				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == true)
+				else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.subgoal4Complete == true)
 				{
-					player.currentProperty.subgoal4Complete = false;
+					player.CurrentProperty.subgoal4Complete = false;
 				}
-				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == true)
+				else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.subgoal5Complete == true)
 				{
-					player.currentProperty.subgoal5Complete = false;
+					player.CurrentProperty.subgoal5Complete = false;
 				}
-				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == true)
+				else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.subgoal6Complete == true)
 				{
-					player.currentProperty.subgoal6Complete = false;
+					player.CurrentProperty.subgoal6Complete = false;
 				}
-				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == true)
+				else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.subgoal7Complete == true)
 				{
-					player.currentProperty.subgoal7Complete = false;
+					player.CurrentProperty.subgoal7Complete = false;
 				}
-				else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == true)
+				else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.subgoal8Complete == true)
 				{
-					player.currentProperty.subgoal8Complete = false;
+					player.CurrentProperty.subgoal8Complete = false;
 				}
 				randEventBadOccured = false;
 				// turn on pop up
@@ -375,46 +375,46 @@ public class UIController : MonoBehaviour
 				if (badDecrease)
 				{
 					//Debug.Log("in bad");
-					player.currentProperty.currentProgress -= 3;
+					player.CurrentProperty.currentProgress -= 3;
 					progressBar.value -= 3;
-					if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
+					if ((player.CurrentProperty.currentProgress <= progressBar.maxValue / 9) && player.CurrentProperty.subgoal1Complete == true)
 					{
-						player.currentProperty.subgoal1Complete = false;
+						player.CurrentProperty.subgoal1Complete = false;
 					}
-					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == true)
+					else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.subgoal2Complete == true)
 					{
-						player.currentProperty.subgoal2Complete = false;
+						player.CurrentProperty.subgoal2Complete = false;
 					}
-					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == true)
+					else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.subgoal3Complete == true)
 					{
-						player.currentProperty.subgoal3Complete = false;
+						player.CurrentProperty.subgoal3Complete = false;
 					}
-					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == true)
+					else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.subgoal4Complete == true)
 					{
-						player.currentProperty.subgoal4Complete = false;
+						player.CurrentProperty.subgoal4Complete = false;
 					}
-					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == true)
+					else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.subgoal5Complete == true)
 					{
-						player.currentProperty.subgoal5Complete = false;
+						player.CurrentProperty.subgoal5Complete = false;
 					}
-					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == true)
+					else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.subgoal6Complete == true)
 					{
-						player.currentProperty.subgoal6Complete = false;
+						player.CurrentProperty.subgoal6Complete = false;
 					}
-					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == true)
+					else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.subgoal7Complete == true)
 					{
-						player.currentProperty.subgoal7Complete = false;
+						player.CurrentProperty.subgoal7Complete = false;
 					}
-					else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == true)
+					else if ((player.CurrentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.subgoal8Complete == true)
 					{
-						player.currentProperty.subgoal8Complete = false;
+						player.CurrentProperty.subgoal8Complete = false;
 					}
 					badDecrease = false;
 				}
 				if (goodIncrease)
 				{
 					//Debug.Log("in good inc");
-					player.currentProperty.currentProgress += 3;
+					player.CurrentProperty.currentProgress += 3;
 					RollDiceUI(player, popUpPanel, false, false, false);
 					randEventGoodOccured = false;
 					goodIncrease = false;

@@ -49,8 +49,8 @@ public class GameController : MonoBehaviour
 
 	public void DrawOppKnocksCard ()
 	{
-		player.numTurnsLeft--;
-		if (player.numTurnsLeft == 40) // after 10 turns
+		player.NumTurnsLeft--;
+		if (player.NumTurnsLeft == 40) // after 10 turns
 		{
 			isPickingStats = false;
 		}
@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour
 		OppKnocksCard card = cardsOppKnocks[randNum];           // draw card with random number
 		UpdateOppKnocksCardTextAndPlayerStats(card);            // update text and player score
 
-		player.playerCardsOppKnocks.Add (card);					// add card to player deck
+		player.PlayerCardsOppKnocks.Add (card);					// add card to player deck
 		cardsOppKnocks.Remove (card);  						// remove it from overall deck
 
 		if (isPickingStats == false) 
@@ -72,15 +72,15 @@ public class GameController : MonoBehaviour
 	{
 		if (card.category == 1) 
 		{
-			player.income += card.value;
+			player.Income += card.value;
 		} 
 		else if (card.category == 2) 
 		{
-			player.assets += card.value;
+			player.Assets += card.value;
 		} 
 		else 
 		{
-			player.credit += card.value;
+			player.Credit += card.value;
 		}
 		uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player);
 	}
@@ -125,24 +125,24 @@ public class GameController : MonoBehaviour
 
 	public void DrawPropertyCard(string leftRightOrCenter)
 	{
-		player.numTurnsLeft--;
+		player.NumTurnsLeft--;
 
 		if (leftRightOrCenter == "left") 
 		{
-			player.playerCardsProperty.Add (cardLeft);
-			player.currentProperty = cardLeft;
+			player.PlayerCardsProperty.Add (cardLeft);
+			player.CurrentProperty = cardLeft;
 			cardsPropertyHunt.Remove(cardLeft); 
 		} 
 		else if (leftRightOrCenter == "center") 
 		{
-			player.playerCardsProperty.Add (cardCenter);
-			player.currentProperty = cardCenter;
+			player.PlayerCardsProperty.Add (cardCenter);
+			player.CurrentProperty = cardCenter;
 			cardsPropertyHunt.Remove(cardCenter); 
 		} 
 		else if (leftRightOrCenter == "right") 
 		{
-			player.playerCardsProperty.Add (cardRight);
-			player.currentProperty = cardRight;
+			player.PlayerCardsProperty.Add (cardRight);
+			player.CurrentProperty = cardRight;
 			cardsPropertyHunt.Remove(cardRight);
 		}
 	}
@@ -171,15 +171,15 @@ public class GameController : MonoBehaviour
 
 	public void CancelCurrentLoan ()
 	{
-		player.playerCardsProperty.Remove(player.currentProperty);
-		player.currentProperty = player.playerCardsProperty[0];
+		player.PlayerCardsProperty.Remove(player.CurrentProperty);
+		player.CurrentProperty = player.PlayerCardsProperty[0];
 	}
 
         public void RollDie (GameObject PopUpPanel)
 	{
-		player.numTurnsLeft--;
+		player.NumTurnsLeft--;
 		int num = Random.Range (1, 7);
-		player.currentProperty.currentProgress += num;
+		player.CurrentProperty.currentProgress += num;
 
 		int randEventNum = Random.Range (0, 100);
 		bool randEventGood = false;
@@ -197,15 +197,15 @@ public class GameController : MonoBehaviour
 			randEventGood = true;
 		}
 
-		if (player.currentProperty.currentProgress >= player.currentProperty.numToClose)
+		if (player.CurrentProperty.currentProgress >= player.CurrentProperty.numToClose)
 		{
-			player.score += 1000;
+			player.Score += 1000;
 			uiController.RollDiceUI (player, PopUpPanel, true, false, false);
-			player.playerCardsProperty.Remove (player.currentProperty);
-			player.currentProperty = null;
-			if (player.playerCardsProperty.Count >= 1)
+			player.PlayerCardsProperty.Remove (player.CurrentProperty);
+			player.CurrentProperty = null;
+			if (player.PlayerCardsProperty.Count >= 1)
 			{
-				player.currentProperty = player.playerCardsProperty [0];
+				player.CurrentProperty = player.PlayerCardsProperty [0];
 			}
 		}
 		else

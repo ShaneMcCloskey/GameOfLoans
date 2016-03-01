@@ -37,13 +37,13 @@ public class ScrollableList : MonoBehaviour
 			cardHeight = containerRectTransform.rect.height;
 			cardWidth = colRectTransform.rect.width;
 			//adjust the height of the container so that it will just barely fit all its children
-			scrollWidth = cardWidth * (player.playerCardsProperty.Count - 1);
+			scrollWidth = cardWidth * (player.PlayerCardsProperty.Count - 1);
 			fill = scrollWidth / 2;
 			containerRectTransform.offsetMin = new Vector2 (-fill, containerRectTransform.offsetMin.y);
 			containerRectTransform.offsetMax = new Vector2 (fill, containerRectTransform.offsetMax.y);
 		} else
 		{
-			scrollWidth = cardWidth * (player.playerCardsProperty.Count - 1);
+			scrollWidth = cardWidth * (player.PlayerCardsProperty.Count - 1);
 			fill = scrollWidth / 2;
 			containerRectTransform.offsetMin = new Vector2 (-fill, containerRectTransform.offsetMin.y);
 			containerRectTransform.offsetMax = new Vector2 (fill, containerRectTransform.offsetMax.y);
@@ -66,9 +66,9 @@ public class ScrollableList : MonoBehaviour
 
 	void Populate(Player player)
 	{
-		for (int i = 0; i < player.playerCardsProperty.Count - 1; i++)
+		for (int i = 0; i < player.PlayerCardsProperty.Count - 1; i++)
 		{
-			for (int k = 0; k < player.playerCardsProperty.Count - 1; k++)
+			for (int k = 0; k < player.PlayerCardsProperty.Count - 1; k++)
 			{
 				newItem = Instantiate (itemPrefab) as GameObject;
 				itemList.Add (newItem);
@@ -90,10 +90,10 @@ public class ScrollableList : MonoBehaviour
 			rectTransform.offsetMax = new Vector2 (x, y);
 
 			cardText = itemList[i].GetComponentsInChildren<Text> ();
-			string address = player.playerCardsProperty [i].address;
-			int price = player.playerCardsProperty [i].price;
-			int sqFoot = player.playerCardsProperty [i].sqFoot;
-			string diff = player.playerCardsProperty [i].difficulty;
+			string address = player.PlayerCardsProperty [i].address;
+			int price = player.PlayerCardsProperty [i].price;
+			int sqFoot = player.PlayerCardsProperty [i].sqFoot;
+			string diff = player.PlayerCardsProperty [i].difficulty;
 
 			for (int j = 0; j < cardText.Length; j++)
 			{
