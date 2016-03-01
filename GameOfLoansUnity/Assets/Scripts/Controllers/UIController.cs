@@ -43,8 +43,8 @@ public class UIController : MonoBehaviour
 	//private bool firstOkComplete = false;
 	private bool randEventGoodOccured = false;
 	private bool randEventBadOccured = false;
-	private bool badDecrease = false;
-	private bool goodIncrease = false;
+	//private bool badDecreaseOccured = false;
+	//private bool goodIncreaseOccured = false;
 
 	private bool subgoalPopUpActive = false;
 
@@ -130,32 +130,11 @@ public class UIController : MonoBehaviour
 		HUDturnText.text = "Turns Left: " + player.numTurnsLeft.ToString ();
 
 		CheckSubGoal(player, popUpPanel);
+		CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
 
 		if (loanComplete)
 		{
 			ShowPopUp("Loan Complete!", popUpPanel);
-		}
-
-		if (subgoalPopUpActive == false)
-		{
-			if (randEventGood)
-			{
-				randEventGood = true;
-				PopUpRandEvent (true, false, popUpPanel);
-			}
-			if (randEventBad)
-			{
-				randEventBadOccured = true;
-				PopUpRandEvent (false, true, popUpPanel);
-			}
-		}
-		if (randEventBad)
-		{
-			randEventBadOccured = true;
-		}
-		if (randEventGood)
-		{
-			randEventGoodOccured = true;
 		}
         }
 
@@ -212,6 +191,68 @@ public class UIController : MonoBehaviour
 		}
 	}
 
+	void CheckRandomEvent (bool randEventGood, bool randEventBad, GameObject popUpPanel, Player player)
+	{
+		randEventGoodOccured = randEventGood;
+		randEventBadOccured = randEventBad;
+		if (subgoalPopUpActive == false)
+		{
+			if (randEventGood)
+			{
+				ShowPopUp("Positive Random Event", popUpPanel);
+
+			}
+			if (randEventBad)
+			{
+				ShowPopUp("Negative Random Event", popUpPanel);
+			}
+		}
+	}
+
+	void ProcessNegativeEvent (Player player)
+	{
+		player.currentProperty.currentProgress -= 3;
+		progressBar.value = player.currentProperty.currentProgress;
+		if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
+		{
+			player.currentProperty.subgoal1Complete = false;
+		}
+		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 2) && player.currentProperty.subgoal2Complete == true)
+		{
+			player.currentProperty.subgoal2Complete = false;
+		}
+		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 3) && player.currentProperty.subgoal3Complete == true)
+		{
+			player.currentProperty.subgoal3Complete = false;
+		}
+		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 4) && player.currentProperty.subgoal4Complete == true)
+		{
+			player.currentProperty.subgoal4Complete = false;
+		}
+		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 5) && player.currentProperty.subgoal5Complete == true)
+		{
+			player.currentProperty.subgoal5Complete = false;
+		}
+		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 6) && player.currentProperty.subgoal6Complete == true)
+		{
+			player.currentProperty.subgoal6Complete = false;
+		}
+		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 7) && player.currentProperty.subgoal7Complete == true)
+		{
+			player.currentProperty.subgoal7Complete = false;
+		}
+		else if ((player.currentProperty.currentProgress <= (progressBar.maxValue / 9) * 8) && player.currentProperty.subgoal8Complete == true)
+		{
+			player.currentProperty.subgoal8Complete = false;
+		}
+	}
+
+	void ProcessPositiveEvent(Player player)
+	{
+		player.currentProperty.currentProgress += 3;
+		progressBar.value = player.currentProperty.currentProgress;
+	}
+
 	// add param to check if need to be sent to diff panel
 	void ShowPopUp (string Text, GameObject PopUpPanel)
 	{
@@ -220,35 +261,42 @@ public class UIController : MonoBehaviour
 		popUpButtonText.text = "Ok";
 	}
 
-        void PopUpRandEvent(bool randEventGood, bool randEventBad, GameObject popUpPanel)
-        {
-		if (randEventGood)
-		{
-			ShowPopUp("Positive Random Event", popUpPanel);
-		}
-		if (randEventBad)
-		{
-			ShowPopUp("Negative Random Event", popUpPanel);
-		}
-        }
         // still need to pop up subgoal hit after random event ok click if hit subgoal
 	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, Player player)
 	{
-		// fix this and also set last panel to false
-		if (player.playerCardsProperty.Count == 0)
+		if (player.playerCardsProperty.Count == 0)  // if player completes loan and has none in queue
 		{
-			/*if (firstOkComplete)
-			{
-
-				firstOkComplete = false;
-				propHuntPanel.SetActive(true);
-				popUpPanel.SetActive(false);
-			} 
-			firstOkComplete = true;*/
 			popUpPanel.SetActive (false);
 			popUpPanelNeedProp.SetActive (true);
 		}
-		else if (subgoalPopUpActive == false) // normal rand event
+
+		popUpPanel.SetActive (false);
+
+		if (subgoalPopUpActive)
+		{
+			subgoalPopUpActive = false;
+			CheckRandomEvent (randEventGoodOccured, randEventBadOccured, popUpPanel, player);
+		}
+		else if (randEventBadOccured)
+		{
+			ProcessNegativeEvent (player);
+		}
+		else if (randEventGoodOccured)
+		{
+			ProcessPositiveEvent(player);
+			CheckSubGoal(player,popUpPanel);
+		}
+	}
+
+
+
+	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
+	{
+		// call func from ui cont
+	}
+}
+
+/*else if (subgoalPopUpActive == false) // normal rand event
 		{
 			if (randEventGoodOccured)
 			{
@@ -260,7 +308,7 @@ public class UIController : MonoBehaviour
 			{
 				player.currentProperty.currentProgress -= 3;
 				progressBar.value -= 3;
-				if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
+				/*if ((player.currentProperty.currentProgress <= progressBar.maxValue / 9) && player.currentProperty.subgoal1Complete == true)
 				{
 					player.currentProperty.subgoal1Complete = false;
 				}
@@ -375,11 +423,4 @@ public class UIController : MonoBehaviour
 			}
 		}
 
-
-	}
-
-	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
-	{
-		// call func from ui cont
-	}
-}
+*/
