@@ -4,7 +4,12 @@ using System.Collections.Generic;
 
 public class OppKnocksDeck : MonoBehaviour 
 {
-	public List<OppKnocksCard> cards = new List<OppKnocksCard>();
+	private List<OppKnocksCard> cards = new List<OppKnocksCard>();
+
+	public List<OppKnocksCard> Cards
+	{
+		get { return cards; }
+	}
 
 	void Awake()
 	{

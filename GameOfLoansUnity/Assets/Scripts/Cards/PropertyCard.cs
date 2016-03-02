@@ -5,27 +5,26 @@ using System;
 public class PropertyCard : IComparable<PropertyCard> 
 {
 	//public Image pic;
-	public string address;
-	public int price;
-	public int sqFoot;
-	public string difficulty;
-        public int numToClose;
-        public int currentProgress;
-        public bool subgoal1Complete;
-	public bool subgoal2Complete;
-	public bool subgoal3Complete;
-	public bool subgoal4Complete;
-	public bool subgoal5Complete;
-	public bool subgoal6Complete;
-	public bool subgoal7Complete;
-	public bool subgoal8Complete;
+	private string address;
+	private int price;
+	private int sqFoot;
+	private string difficulty;
+        private int numToClose;
+        private int currentProgress;
+        private bool subgoal1Complete;
+	private bool subgoal2Complete;
+	private bool subgoal3Complete;
+	private bool subgoal4Complete;
+	private bool subgoal5Complete;
+	private bool subgoal6Complete;
+	private bool subgoal7Complete;
+	private bool subgoal8Complete;
 
 
 	public PropertyCard (string Address, int Price, int SqFoot, string Difficulty, int NumToClose, int CurrentProgress,
 		             bool Subgoal1Complete, bool Subgoal2Complete, bool Subgoal3Complete, bool Subgoal4Complete,
 		             bool Subgoal5Complete, bool Subgoal6Complete, bool Subgoal7Complete, bool Subgoal8Complete)
 	{
-		//info = newInfo;
 		address = Address;
 		price = Price;
 		sqFoot = SqFoot;
@@ -40,6 +39,90 @@ public class PropertyCard : IComparable<PropertyCard>
 		subgoal6Complete = Subgoal6Complete;
 		subgoal7Complete = Subgoal7Complete;
 		subgoal8Complete = Subgoal8Complete;
+	}
+
+	public string Address
+	{
+		get { return address; }
+		set { address = value; }
+	}
+
+	public int Price
+	{
+		get { return price; }
+		set { price = value; }
+	}
+
+	public int SqFoot
+	{
+		get { return sqFoot; }
+		set { sqFoot = value; }
+	}
+
+	public string Difficulty
+	{
+		get { return difficulty; }
+		set { difficulty = value; }
+	}
+
+	public int NumToClose
+	{
+		get { return numToClose; }
+		set { numToClose = value; }
+	}
+
+	public int CurrentProgress
+	{
+		get { return currentProgress; }
+		set { currentProgress = value; }
+	}
+
+	public bool Subgoal1Complete
+	{
+		get { return subgoal1Complete; }
+		set { subgoal1Complete = value; }
+	}
+
+	public bool Subgoal2Complete
+	{
+		get { return subgoal2Complete; }
+		set { subgoal2Complete = value; }
+	}
+
+	public bool Subgoal3Complete
+	{
+		get { return subgoal3Complete; }
+		set { subgoal3Complete = value; }
+	}
+
+	public bool Subgoal4Complete
+	{
+		get { return subgoal4Complete; }
+		set { subgoal4Complete = value; }
+	}
+
+	public bool Subgoal5Complete
+	{
+		get { return subgoal5Complete; }
+		set { subgoal5Complete = value; }
+	}
+
+	public bool Subgoal6Complete
+	{
+		get { return subgoal6Complete; }
+		set { subgoal6Complete = value; }
+	}
+
+	public bool Subgoal7Complete
+	{
+		get { return subgoal7Complete; }
+		set { subgoal7Complete = value; }
+	}
+
+	public bool Subgoal8Complete
+	{
+		get { return subgoal8Complete; }
+		set { subgoal8Complete = value; }
 	}
 
 	public int CompareTo(PropertyCard other)

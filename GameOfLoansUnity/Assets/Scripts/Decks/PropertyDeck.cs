@@ -4,7 +4,12 @@ using System.Collections.Generic;
 
 public class PropertyDeck : MonoBehaviour 
 {
-	public List<PropertyCard> cards = new List<PropertyCard>();
+	private List<PropertyCard> cards = new List<PropertyCard>();
+
+	public List<PropertyCard> Cards
+	{
+		get { return cards; }
+	}
 
 	void Awake()
 	{

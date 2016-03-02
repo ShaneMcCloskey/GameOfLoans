@@ -90,10 +90,10 @@ public class ScrollableList : MonoBehaviour
 			rectTransform.offsetMax = new Vector2 (x, y);
 
 			cardText = itemList[i].GetComponentsInChildren<Text> ();
-			string address = player.PlayerCardsProperty [i].address;
-			int price = player.PlayerCardsProperty [i].price;
-			int sqFoot = player.PlayerCardsProperty [i].sqFoot;
-			string diff = player.PlayerCardsProperty [i].difficulty;
+			string address = player.PlayerCardsProperty [i].Address;
+			int price = player.PlayerCardsProperty [i].Price;
+			int sqFoot = player.PlayerCardsProperty [i].SqFoot;
+			string diff = player.PlayerCardsProperty [i].Difficulty;
 
 			for (int j = 0; j < cardText.Length; j++)
 			{

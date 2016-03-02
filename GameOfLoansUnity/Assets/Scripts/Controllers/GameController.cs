@@ -19,12 +19,9 @@ public class GameController : MonoBehaviour
 	private PropertyCard cardRight;
 	private bool firstEnterIntoChangeProp = true;
 	private ScrollableList propertyScrollList;
-	//private 
-
-	public EventSystem es;
-
 
         // public vars ---------------------------------------
+	public EventSystem es;
 
         // Game init ------------------------------------
         void Awake()
@@ -33,8 +30,8 @@ public class GameController : MonoBehaviour
 		uiController = gameObject.GetComponent<UIController>();
 		fullOppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
 		fullPropertyDeck = gameObject.GetComponent<PropertyDeck> ();
-		cardsOppKnocks = fullOppKnocksDeck.cards;
-		cardsPropertyHunt = fullPropertyDeck.cards;
+		cardsOppKnocks = fullOppKnocksDeck.Cards;
+		cardsPropertyHunt = fullPropertyDeck.Cards;
 		uiController.AwakeUI();
 		GameObject go = GameObject.FindGameObjectWithTag ("ScrollableProperty");
 		propertyScrollList = (ScrollableList)go.GetComponent (typeof(ScrollableList));
@@ -59,8 +56,8 @@ public class GameController : MonoBehaviour
 		OppKnocksCard card = cardsOppKnocks[randNum];           // draw card with random number
 		UpdateOppKnocksCardTextAndPlayerStats(card);            // update text and player score
 
-		player.PlayerCardsOppKnocks.Add (card);					// add card to player deck
-		cardsOppKnocks.Remove (card);  						// remove it from overall deck
+		player.PlayerCardsOppKnocks.Add (card);		        // add card to player deck
+		cardsOppKnocks.Remove (card);  				// remove it from overall deck
 
 		if (isPickingStats == false) 
 		{
@@ -70,17 +67,17 @@ public class GameController : MonoBehaviour
 
 	void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card)
 	{
-		if (card.category == 1) 
+		if (card.Category == 1) 
 		{
-			player.Income += card.value;
+			player.Income += card.Value;
 		} 
-		else if (card.category == 2) 
+		else if (card.Category == 2) 
 		{
-			player.Assets += card.value;
+			player.Assets += card.Value;
 		} 
 		else 
 		{
-			player.Credit += card.value;
+			player.Credit += card.Value;
 		}
 		uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player);
 	}
@@ -105,17 +102,17 @@ public class GameController : MonoBehaviour
 		cardLeft = cardsPropertyHunt [randLeft];
 		cardCenter = cardsPropertyHunt [randCenter];
 		cardRight = cardsPropertyHunt [randRight];
-		while (cardLeft.difficulty != "Easy")
+		while (cardLeft.Difficulty != "Easy")
 		{
 			randLeft = Random.Range (0, cardsPropertyHunt.Count);
 			cardLeft = cardsPropertyHunt [randLeft];
 		}
-		while (cardCenter.difficulty != "Medium")
+		while (cardCenter.Difficulty != "Medium")
 		{
 			randCenter = Random.Range (0, cardsPropertyHunt.Count);
 			cardCenter = cardsPropertyHunt [randCenter];
 		}
-		while (cardRight.difficulty != "Hard")
+		while (cardRight.Difficulty != "Hard")
 		{
 			randRight = Random.Range (0, cardsPropertyHunt.Count);
 			cardRight = cardsPropertyHunt [randRight];
@@ -179,7 +176,7 @@ public class GameController : MonoBehaviour
 	{
 		player.NumTurnsLeft--;
 		int num = Random.Range (1, 7);
-		player.CurrentProperty.currentProgress += num;
+		player.CurrentProperty.CurrentProgress += num;
 
 		int randEventNum = Random.Range (0, 100);
 		bool randEventGood = false;
@@ -197,7 +194,7 @@ public class GameController : MonoBehaviour
 			randEventGood = true;
 		}
 
-		if (player.CurrentProperty.currentProgress >= player.CurrentProperty.numToClose)
+		if (player.CurrentProperty.CurrentProgress >= player.CurrentProperty.NumToClose)
 		{
 			player.Score += 1000;
 			uiController.RollDiceUI (player, PopUpPanel, true, false, false);
