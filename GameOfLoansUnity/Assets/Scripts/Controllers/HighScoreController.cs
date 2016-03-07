@@ -220,3 +220,186 @@ public class HighScoreController : MonoBehaviour
 	}
 			
 }
+
+
+//
+//using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Runtime;
+//using UnityEngine.UI;
+//using Newtonsoft.Json;
+//using System.Net;
+//using System.IO;
+//
+//
+//
+//public class HighScoreController : MonoBehaviour
+//{
+//	public Player player;
+//	public GameObject HighScoresPage;
+//	public GameObject PlayerInputPage;
+//	public GameObject scoresPanel;
+//	public GameObject highscoresPopUPPanel;
+//	public Text PopUpText;
+//	public InputField NameInput;
+//	public InputField TeamInput;
+//	public InputField LoansInput;
+//	public InputField ScoreInput;
+//	const int RANK_LOC = 0;
+//	const int NAME_LOC = 1;
+//	const int TEAM_LOC = 2;
+//	const int Score_LOC = 3;
+//	const int LOANS_LOC = 4;
+//
+//	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?";
+//	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
+//	const string getnumscoresurl = "http://35.9.22.106/Api/HighScores/GetNumScores";
+//	int pageNumber = 0;
+//	int scoresPerPage = 25;
+//	int maxPageNum = 0;
+//	int minPageNum = 0;
+//	int totalScores = 0;
+//	List<GameScore> data;
+//
+//	Start(){
+//		HighScores (0);
+//	}
+//	//change to start to get high scores page to work
+//	// get HighScores from api
+//	public void HighScores (int pageNum)
+//	{
+//		pageNumber = pageNum;
+//		string geturl = getscoresurl + "start=" + (scoresPerPage * pageNumber).ToString () + "&" + "range=" + scoresPerPage.ToString ();
+//		GetNumScores(getnumscoresurl);
+//		GetScores (geturl);
+//
+//	}
+//	//deserializes json into data and passes list of scores to setUI function
+//	public void SetScores (string serializedText)
+//	{
+//		data = JsonConvert.DeserializeObject<List<GameScore>> (serializedText);
+//		SetUI (data);
+//	}
+//
+//	//sets the HighScore page with the appropriate high scores
+//	public void SetUI (List<GameScore> dataList)
+//	{
+//
+//		for (int i = 0; i < scoresPerPage; i++) {
+//			// if not enough data
+//			if (i >= dataList.Count) {
+//				//set the rank
+//				scoresPanel.transform.GetChild (i).GetChild (RANK_LOC).GetChild (0).GetComponent<Text> ().text = "";
+//				//set the name
+//				scoresPanel.transform.GetChild (i).GetChild (NAME_LOC).GetChild (0).GetComponent<Text> ().text = "";
+//				//set the team name
+//				scoresPanel.transform.GetChild (i).GetChild (TEAM_LOC).GetChild (0).GetComponent<Text> ().text = "";
+//				//set Score
+//				scoresPanel.transform.GetChild (i).GetChild (Score_LOC).GetChild (0).GetComponent<Text> ().text = "";
+//				//set Loans closed
+//				scoresPanel.transform.GetChild (i).GetChild (LOANS_LOC).GetChild (0).GetComponent<Text> ().text = "";
+//			}
+//			//there is enough data
+//			else {
+//				//set the rank
+//				scoresPanel.transform.GetChild (i).GetChild (RANK_LOC).GetChild (0).GetComponent<Text> ().text = (i + (pageNumber*scoresPerPage) + 1).ToString ();
+//				//set the name
+//				scoresPanel.transform.GetChild (i).GetChild (NAME_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].Name;
+//				//set the team name
+//				scoresPanel.transform.GetChild (i).GetChild (TEAM_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].TeamName;
+//				//set Score
+//				scoresPanel.transform.GetChild (i).GetChild (Score_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].Score.ToString ();
+//				//set Loans closed
+//				scoresPanel.transform.GetChild (i).GetChild (LOANS_LOC).GetChild (0).GetComponent<Text> ().text = dataList [i].LoansClosed.ToString ();
+//			}
+//		}
+//	}
+//
+//	public void OnNextClick ()
+//	{
+//		pageNumber += 1;
+//		if (pageNumber >= maxPageNum) {
+//			pageNumber = maxPageNum;
+//		}
+//		HighScores (pageNumber);
+//		SetUI (data);
+//
+//	}
+//	public void OnLastClick()
+//	{
+//		pageNumber = maxPageNum;
+//		HighScores (pageNumber);
+//		SetUI (data);
+//	}
+//	public void OnFirstClick()
+//	{
+//		pageNumber = 0;
+//		HighScores (pageNumber);
+//		SetUI (data);
+//	}
+//
+//	public void OnPrevClick ()
+//	{
+//
+//		pageNumber -= 1;
+//		if (pageNumber <= minPageNum) {
+//
+//			pageNumber = minPageNum;
+//		}
+//		HighScores (pageNumber);
+//		SetUI (data);
+//	}
+//
+//
+//	public void AddScore ()
+//	{
+//		if (NameInput.text != "" && TeamInput.text != "") {
+//
+//			GameScore sendingScore = new GameScore ();
+//			sendingScore.Name = NameInput.text;
+//
+//			sendingScore.TeamName = TeamInput.text;
+//
+//
+//			//change this when integrating into main scene
+//			//			sendingScore.Score = player.score;
+//			//				sendingScore.LoansClosed = player.numPropertiesClosed;
+//			sendingScore.Score= int.Parse(ScoreInput.text);
+//			sendingScore.LoansClosed = int.Parse (LoansInput.text);
+//			sendingScore.Id = null;
+//			AddScoreReturn returnedScore;
+//
+//		}
+//	}
+//
+//	private IEnumerator GetNumScores(string url)
+//	{
+//		WWW www = new WWW (url);
+//		yield return www;
+//		if (www.error == null) {
+//			Debug.Log (www.text);
+//			totalScores = JsonConvert.DeserializeObject<int> (www.text);
+//		}
+//		else{
+//			Debug.Log ("error");
+//			// error
+//		}
+//	}
+//	private IEnumerator GetScores(string url)
+//	{
+//		WWW www = new WWW (url);
+//		yield return www;
+//		if (www.error == null) {
+//			Debug.Log (www.text);
+//			SetScores (www.text);
+//		} 
+//		else {
+//			Debug.Log ("error");
+//			//error
+//		}
+//	}
+//
+//
+//
+//}
