@@ -46,11 +46,11 @@ public class UIController : MonoBehaviour
 
 	public void AwakeUI()
 	{
-		HUDscoreText.text = "Score: 0";
-		HUDincomeText.text = "Income: 0";
-		HUDassetsText.text = "Assets: 0";
-		HUDcreditText.text = "Credit: 0";
-		HUDturnText.text = "Turns Left: 40";
+		HUDscoreText.text = "0";
+		HUDincomeText.text = "0";
+		HUDassetsText.text = "0";
+		HUDcreditText.text = "0";
+		HUDturnText.text = "40";
 	}
 
 	public void EnterOppKnocksScreenUI()
@@ -61,7 +61,7 @@ public class UIController : MonoBehaviour
 
 	public void UpdateTurnsLeft (Player player)
 	{
-		HUDturnText.text = "Turns Left: " + player.NumTurnsLeft;
+		HUDturnText.text = player.NumTurnsLeft.ToString();
 	}
 
 	public void UpdateOppKnocksCardTextAndPlayerStatsUI(OppKnocksCard card, Player player)
@@ -71,17 +71,17 @@ public class UIController : MonoBehaviour
 		if (card.Category == 1) 
 		{
 			textOppKnocksType.text = "Income Card";
-			HUDincomeText.text = "Income: " + player.Income.ToString();
+			HUDincomeText.text = player.Income.ToString();
 		} 
 		else if (card.Category == 2) 
 		{
 			textOppKnocksType.text = "Asset Card";
-			HUDassetsText.text = "Assets: " + player.Assets.ToString();
+			HUDassetsText.text = player.Assets.ToString();
 		} 
 		else 
 		{
 			textOppKnocksType.text = "Credit Card";
-			HUDcreditText.text = "Credit: " + player.Credit.ToString();
+			HUDcreditText.text = player.Credit.ToString();
 		}
 	}
 
@@ -119,11 +119,11 @@ public class UIController : MonoBehaviour
 	{
 		// need to have the panel in here
 		progressBar.value = player.CurrentProperty.CurrentProgress;
-		HUDscoreText.text = "Score: " + player.Score.ToString ();
-		HUDincomeText.text = "Income: " + player.Income.ToString ();
-		HUDassetsText.text = "Assets: " + player.Assets.ToString ();
-		HUDcreditText.text = "Credit: " + player.Credit.ToString ();
-		HUDturnText.text = "Turns Left: " + player.NumTurnsLeft.ToString ();
+		HUDscoreText.text = player.Score.ToString ();
+		HUDincomeText.text =  player.Income.ToString ();
+		HUDassetsText.text = player.Assets.ToString ();
+		HUDcreditText.text = player.Credit.ToString ();
+		HUDturnText.text = player.NumTurnsLeft.ToString ();
 
 		CheckSubGoal(player, popUpPanel);
 		CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
