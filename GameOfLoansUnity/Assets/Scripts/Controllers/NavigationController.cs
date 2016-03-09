@@ -21,6 +21,10 @@ public class NavigationController : MonoBehaviour
 	public GameObject popUpPanelRandEvent;
 	public GameObject GameOverPanel;
 
+	public Button oppKnocksButton;
+	public Button loanInProgressButton;
+	public Button propHuntButton;
+
 	public GameObject changePropertyButton;
 	public GameObject cancelLoanButton;
 
