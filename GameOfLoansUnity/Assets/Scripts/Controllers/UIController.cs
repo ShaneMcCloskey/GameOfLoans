@@ -130,9 +130,12 @@ public class UIController : MonoBehaviour
 
 		if (loanComplete)
 		{
-			ShowPopUp("Loan Complete!", popUpPanel);
+            //ShowPopUp("Test Quiz", popUpPanel);
+            //ShowPopUp("Loan Complete!", popUpPanel);
+            ShowQuiz(popUpPanel);
 		}
         }
+
 
         void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
@@ -256,6 +259,128 @@ public class UIController : MonoBehaviour
 		popUpText.text = Text;
 		popUpButtonText.text = "Ok";
 	}
+
+    //Set quiz question and answers
+    void ShowQuiz(GameObject PopUpPanel)
+    {
+        PopUpPanel.SetActive(true);
+        //set random number 1-22
+        int num = Random.Range(1, 22);
+        if (num == 1)
+        {
+            popUpText.text = "What is the step when the client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)?";
+            popUpButtonText.text = "Initial Contact";
+        }
+        if (num == 2)
+        {
+            popUpText.text = "What is the step when the Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan?";
+            popUpButtonText.text = "Application";
+        }
+        if (num == 3)
+        {
+            popUpText.text = "This step is when the underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
+            popUpButtonText.text = "Loan Set Up Complete";
+        }
+        if (num == 4)
+        {
+            popUpText.text = "At this step the CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
+            popUpButtonText.text = "Folder Received";
+        }
+        if (num == 5)
+        {
+            popUpText.text = "At this step all client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days. ";
+            popUpButtonText.text = "Conditionally Approved";
+        }
+        if (num == 6)
+        {
+            popUpText.text = "When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan. This is called the _______.";
+            popUpButtonText.text = "Final Signoff";
+        }
+        if (num == 7)
+        {
+            popUpText.text = "When ______________ the client agrees to the terms, and the loan goes to the final signoff underwriter for final approval.";
+            popUpButtonText.text = "Closing Signing has been scheduled";
+        }
+        if (num == 8)
+        {
+            popUpText.text = "The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client. This stage is when…";
+            popUpButtonText.text = "Docs out to Settlement Agent";
+        }
+        if (num == 9)
+        {
+            popUpText.text = "In the Conditionally Approved stage, how many days do the CCS follow up with the client for?";
+            popUpButtonText.text = "3-5 days";
+        }
+        if (num == 10)
+        {
+            popUpText.text = "T/F If the client does not agree with the terms, the loan still goes to the final signoff underwriter for final approval?";
+            popUpButtonText.text = "F";
+        }
+        if (num == 11)
+        {
+            popUpText.text = "T/F A client only needs an old W2 to be approved for a loan?";
+            popUpButtonText.text = "F";
+        }
+        if (num == 12)
+        {
+            popUpText.text = "Which team makes sure the underwriter has everything they need to underwrite the loan?";
+            popUpButtonText.text = "The Quality Assurance team";
+        }
+        if (num == 13)
+        {
+            popUpText.text = "The ____ calls to introduce him or herself to the client in the Folder Received step.";
+            popUpButtonText.text = "CCS";
+        }
+        if (num == 14)
+        {
+            popUpText.text = "The initial contact stage is when...";
+            popUpButtonText.text = "The client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)";
+        }
+        if (num == 15)
+        {
+            popUpText.text = "The application stage is when…";
+            popUpButtonText.text = "The Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan";
+        }
+        if (num == 16)
+        {
+            popUpText.text = "The Loan Set Up Complete stage is when…";
+            popUpButtonText.text = "The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
+        }
+        if (num == 17)
+        {
+            popUpText.text = "The Folder Received stage is when…";
+            popUpButtonText.text = "The CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
+        }
+        if (num == 18)
+        {
+            popUpText.text = "The Conditionally Approved stage is when…";
+            popUpButtonText.text = "All client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days.";
+        }
+        if (num == 19)
+        {
+            popUpText.text = "The Final Signoff stage is when…";
+            popUpButtonText.text = "All documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan.";
+        }
+        if (num == 20)
+        {
+            popUpText.text = "The Closing Signing has been scheduled when...";
+            popUpButtonText.text = "the client agrees to the terms, and the loan goes to the final signoff underwriter for final approval";
+        }
+        if (num == 21)
+        {
+            popUpText.text = "The Documents go out to the settlement agent when….";
+            popUpButtonText.text = "The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client.";
+        }
+        if (num == 22)
+        {
+            popUpText.text = "Who is the person that reviews the documents for accuracy and compliance with guidelines?";
+            popUpButtonText.text = "The Underwriter";
+        }
+       
+        //popUpText.text = Text;
+        //popUpButtonText.text = "Ok";
+
+    }
 
         // still need to pop up subgoal hit after random event ok click if hit subgoal
 	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, Player player)
