@@ -172,7 +172,7 @@ public class GameController : MonoBehaviour
 		player.CurrentProperty = player.PlayerCardsProperty[0];
 	}
 
-        public void RollDie (GameObject PopUpPanel)
+        public void RollDie (GameObject PopUpPanel, GameObject PopUpPanelQuiz)
 	{
 		player.NumTurnsLeft--;
 		int num = Random.Range (1, 7);
@@ -181,6 +181,7 @@ public class GameController : MonoBehaviour
 		int randEventNum = Random.Range (0, 100);
 		bool randEventGood = false;
 		bool randEventBad = false;
+        bool quizPassed = false;
 
 		if (randEventNum <= 10)
 		{
@@ -196,28 +197,46 @@ public class GameController : MonoBehaviour
 
 		if (player.CurrentProperty.CurrentProgress >= player.CurrentProperty.NumToClose)
 		{
-			player.Score += 1000;
-			uiController.RollDiceUI (player, PopUpPanel, true, false, false);
-			player.PlayerCardsProperty.Remove (player.CurrentProperty);
-			player.CurrentProperty = null;
-			if (player.PlayerCardsProperty.Count >= 1)
-			{
-				player.CurrentProperty = player.PlayerCardsProperty [0];
-			}
+            //Quiz Time
+
+            if (quizPassed == false)
+            {
+                uiController.RollDiceUI(player, PopUpPanelQuiz, true, false, false, false);
+                quizPassed = true;
+            }
+
+            if (quizPassed == true)
+            {
+                player.Score += 1000;
+                uiController.RollDiceUI(player, PopUpPanel, false, true, false, false);
+                player.PlayerCardsProperty.Remove(player.CurrentProperty);
+                player.CurrentProperty = null;
+                if (player.PlayerCardsProperty.Count >= 1)
+                {
+                    player.CurrentProperty = player.PlayerCardsProperty[0];
+                }
+            }	
 		}
+
 		else
 		{	
-			uiController.RollDiceUI(player,PopUpPanel, false, randEventGood, randEventBad);
+			uiController.RollDiceUI(player,PopUpPanel, false, false, randEventGood, randEventBad);
 		}
 
 
         }
 
-        public void ProcessOkButton (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel)
+    public void ProcessOkButton (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel)
 	{
 		// call ui function...
 		uiController.ProcessOkButtonUI (popUpPanel, popUpPanelNeedProp, propHuntPanel, player);
 	}
+
+    public void ProcessAnswerButton(GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel)
+    {
+        // call ui function...
+        uiController.ProcessAnswerButtonUI(popUpPanel, popUpPanelNeedProp, propHuntPanel, player);
+    }
 
       
 

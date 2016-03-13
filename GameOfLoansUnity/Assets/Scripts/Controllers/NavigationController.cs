@@ -19,6 +19,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject popUpPanel;
 	public GameObject popUpPanelNeedProp;
 	public GameObject popUpPanelRandEvent;
+    public GameObject popUpPanelQuiz;
 	public GameObject GameOverPanel;
 
 	public Button oppKnocksButton;
@@ -130,7 +131,7 @@ public class NavigationController : MonoBehaviour
     	// Loan in Progress Buttons --------------------------------------
     	public void OnButtonRollDice()
     	{
-        	gameControler.RollDie(popUpPanel);
+        	gameControler.RollDie(popUpPanel, popUpPanelQuiz);
     	}
 
     	// PopUp ---------------------------------------------------------
@@ -138,6 +139,12 @@ public class NavigationController : MonoBehaviour
 	{
 		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel);
 	}
+
+        // Quiz Answer Buttons
+         public void OnPopUpAnswer()
+        {
+            gameControler.ProcessAnswerButton(popUpPanelQuiz, popUpPanelNeedProp, propertyHuntPanel);
+        }
 
 	public void OnRandEventPopUpOk ()
 	{
