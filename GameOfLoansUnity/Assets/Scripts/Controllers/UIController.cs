@@ -38,12 +38,18 @@ public class UIController : MonoBehaviour
 	public Text popUpButtonText;
 	public Text popUpRandEventText;
     public Text QuizQuestionText;
+    public Text AnswerAText;
+    public Text AnswerBText;
+    public Text AnswerCText;
+    public Text AnswerDText;
 	// Change propety text elements
 
 	// private vars ----------------------
 	private bool randEventGoodOccured = false;
 	private bool randEventBadOccured = false;
 	private bool subgoalPopUpActive = false;
+    private bool quizFailed = false;
+    private string correctAnswer = "";
 
 	public void AwakeUI()
 	{
@@ -112,11 +118,11 @@ public class UIController : MonoBehaviour
 		currentSqFoot.text = player.CurrentProperty.SqFoot.ToString();
 		currentDiff.text = player.CurrentProperty.Difficulty.ToString();
 
-        	progressBar.maxValue = player.CurrentProperty.NumToClose;
-        	progressBar.value = player.CurrentProperty.CurrentProgress;
+        progressBar.maxValue = player.CurrentProperty.NumToClose;
+        progressBar.value = player.CurrentProperty.CurrentProgress;
 	}
 
-        public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool loanComplete, bool randEventGood, bool randEventBad)
+    public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad)
 	{
 		// need to have the panel in here
 		progressBar.value = player.CurrentProperty.CurrentProgress;
@@ -132,19 +138,11 @@ public class UIController : MonoBehaviour
         if (quiz)
         {
             ShowQuiz(popUpPanel);
-            //loanComplete = true;
         }
-
-		if (loanComplete)
-		{
-            //ShowPopUp("Test Quiz", popUpPanel);
-            ShowPopUp("Loan Complete!", popUpPanel);
-            //ShowQuiz(popUpPanel);
-		}
     }
 
 
-        void CheckSubGoal (Player player, GameObject popUpPanel)
+    void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
 		if ((player.CurrentProperty.CurrentProgress >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false)
 		{
@@ -272,127 +270,242 @@ public class UIController : MonoBehaviour
     {
         PopUpPanel.SetActive(true);
         //set random number 1-22
-        int num = Random.Range(1, 22);
-        if (num == 1)
-        {
-            QuizQuestionText.text = "What is the step when the client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)?";
-            popUpButtonText.text = "Initial Contact";
-        }
-        if (num == 2)
-        {
-            QuizQuestionText.text = "What is the step when the Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan?";
-            popUpButtonText.text = "Application";
-        }
-        if (num == 3)
-        {
-            QuizQuestionText.text = "This step is when the underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
-            popUpButtonText.text = "Loan Set Up Complete";
-        }
-        if (num == 4)
-        {
-            QuizQuestionText.text = "At this step the CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
-            popUpButtonText.text = "Folder Received";
-        }
-        if (num == 5)
-        {
-            QuizQuestionText.text = "At this step all client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days. ";
-            popUpButtonText.text = "Conditionally Approved";
-        }
-        if (num == 6)
-        {
-            QuizQuestionText.text = "When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan. This is called the _______.";
-            popUpButtonText.text = "Final Signoff";
-        }
-        if (num == 7)
-        {
-            QuizQuestionText.text = "When ______________ the client agrees to the terms, and the loan goes to the final signoff underwriter for final approval.";
-            popUpButtonText.text = "Closing Signing has been scheduled";
-        }
-        if (num == 8)
-        {
-            QuizQuestionText.text = "The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client. This stage is when…";
-            popUpButtonText.text = "Docs out to Settlement Agent";
-        }
-        if (num == 9)
-        {
-            QuizQuestionText.text = "In the Conditionally Approved stage, how many days do the CCS follow up with the client for?";
-            popUpButtonText.text = "3-5 days";
-        }
-        if (num == 10)
-        {
-            QuizQuestionText.text = "T/F If the client does not agree with the terms, the loan still goes to the final signoff underwriter for final approval?";
-            popUpButtonText.text = "F";
-        }
-        if (num == 11)
-        {
-            QuizQuestionText.text = "T/F A client only needs an old W2 to be approved for a loan?";
-            popUpButtonText.text = "F";
-        }
-        if (num == 12)
-        {
-            QuizQuestionText.text = "Which team makes sure the underwriter has everything they need to underwrite the loan?";
-            popUpButtonText.text = "The Quality Assurance team";
-        }
-        if (num == 13)
-        {
-            QuizQuestionText.text = "The ____ calls to introduce him or herself to the client in the Folder Received step.";
-            popUpButtonText.text = "CCS";
-        }
-        if (num == 14)
-        {
-            QuizQuestionText.text = "The initial contact stage is when...";
-            popUpButtonText.text = "The client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)";
-        }
-        if (num == 15)
-        {
-            QuizQuestionText.text = "The application stage is when…";
-            popUpButtonText.text = "The Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan";
-        }
-        if (num == 16)
-        {
-            QuizQuestionText.text = "The Loan Set Up Complete stage is when…";
-            popUpButtonText.text = "The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
-        }
-        if (num == 17)
-        {
-            QuizQuestionText.text = "The Folder Received stage is when…";
-            popUpButtonText.text = "The CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
-        }
-        if (num == 18)
-        {
-            QuizQuestionText.text = "The Conditionally Approved stage is when…";
-            popUpButtonText.text = "All client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days.";
-        }
-        if (num == 19)
-        {
-            QuizQuestionText.text = "The Final Signoff stage is when…";
-            popUpButtonText.text = "All documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan.";
-        }
-        if (num == 20)
-        {
-            QuizQuestionText.text = "The Closing Signing has been scheduled when...";
-            popUpButtonText.text = "the client agrees to the terms, and the loan goes to the final signoff underwriter for final approval";
-        }
-        if (num == 21)
-        {
-            QuizQuestionText.text = "The Documents go out to the settlement agent when….";
-            popUpButtonText.text = "The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client.";
-        }
-        if (num == 22)
-        {
-            QuizQuestionText.text = "Who is the person that reviews the documents for accuracy and compliance with guidelines?";
-            popUpButtonText.text = "The Underwriter";
-        }
-       
-        //popUpText.text = Text;
-        //popUpButtonText.text = "Ok";
+        int num = Random.Range(1, 23);
 
+        switch (num)
+        {
+            case 1:
+                QuizQuestionText.text = "What is the step when the client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)?";
+                AnswerAText.text = "A: Initial Contact";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerAText.text;
+                break;
+              
+            case 2:
+                QuizQuestionText.text = "What is the step when the Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan?";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Application"; 
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerBText.text;
+                break;
+            
+            case 3:
+                QuizQuestionText.text = "This step is when the underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Loan Set Up Complete";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerCText.text;
+                break;
+
+            case 4:
+                QuizQuestionText.text = "At this step the CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Folder Received";
+
+                correctAnswer = AnswerDText.text;
+                break;
+
+            case 5:
+                QuizQuestionText.text = "At this step all client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days. ";
+                AnswerAText.text = "A: Conditionally Approved";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerAText.text;
+                break;
+
+            case 6:
+                QuizQuestionText.text = "When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan. This is called the _______.";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Final Signoff";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerBText.text;
+                break;
+
+            case 7:
+                QuizQuestionText.text = "When ______________ the client agrees to the terms, and the loan goes to the final signoff underwriter for final approval.";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Closing Signing has been scheduled";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerCText.text;
+                break;
+            
+            case 8:
+                QuizQuestionText.text = "The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client. This stage is when…";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Docs out to Settlement Agent";
+
+                correctAnswer = AnswerDText.text;
+                break;
+            
+            case 9:
+                QuizQuestionText.text = "In the Conditionally Approved stage, how many days do the CCS follow up with the client for?";
+                AnswerAText.text = "A: 3-5 days";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerAText.text;
+                break;
+
+            case 10:
+                QuizQuestionText.text = "T/F If the client does not agree with the terms, the loan still goes to the final signoff underwriter for final approval?";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: F";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerBText.text;
+                break;
+
+            case 11:
+                QuizQuestionText.text = "T/F A client only needs an old W2 to be approved for a loan?";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: F";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerCText.text;
+                break;
+
+            case 12:
+                QuizQuestionText.text = "Which team makes sure the underwriter has everything they need to underwrite the loan?";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: The Quality Assurance team";
+
+                correctAnswer = AnswerDText.text;
+                break;
+
+            case 13:
+                QuizQuestionText.text = "The ____ calls to introduce him or herself to the client in the Folder Received step.";
+                AnswerAText.text = "A: CCS";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerAText.text;
+                break;
+
+            case 14:
+                QuizQuestionText.text = "The initial contact stage is when...";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: The client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerBText.text;
+                break;
+
+            case 15:
+                QuizQuestionText.text = "The application stage is when…";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: The Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerCText.text;
+                break;
+            
+            case 16:
+                QuizQuestionText.text = "The Loan Set Up Complete stage is when…";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
+
+                correctAnswer = AnswerDText.text;
+                break;
+
+            case 17:
+                QuizQuestionText.text = "The Folder Received stage is when…";
+                AnswerAText.text = "A: The CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerAText.text;
+                break;
+            
+            case 18:
+                QuizQuestionText.text = "The Conditionally Approved stage is when…";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: All client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days.";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerBText.text;
+                break;
+            
+            case 19:
+                QuizQuestionText.text = "The Final Signoff stage is when…";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: All documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan.";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerCText.text;
+                break;
+            
+            case 20:
+                QuizQuestionText.text = "The Closing Signing has been scheduled when...";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: The client agrees to the terms, and the loan goes to the final signoff underwriter for final approval";
+
+                correctAnswer = AnswerDText.text;
+                break;
+            
+            case 21:
+                QuizQuestionText.text = "The Documents go out to the settlement agent when….";
+                AnswerAText.text = "A: The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client.";
+                AnswerBText.text = "B: Blah";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerAText.text;
+                break;
+
+            case 22:
+                QuizQuestionText.text = "Who is the person that reviews the documents for accuracy and compliance with guidelines?";
+                AnswerAText.text = "A: Blah";
+                AnswerBText.text = "B: The Underwriter";
+                AnswerCText.text = "C: Blah";
+                AnswerDText.text = "D: Blah";
+
+                correctAnswer = AnswerBText.text;
+                break;
+        }
     }
 
         // still need to pop up subgoal hit after random event ok click if hit subgoal
-	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, Player player)
+	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, GameObject quizPanel, Player player)
 	{
-		if (player.PlayerCardsProperty.Count == 0)  // if player completes loan and has none in queue
+        if (quizFailed)
+        {
+            popUpPanel.SetActive(false);
+            ShowQuiz(quizPanel);
+        }
+
+		else if (player.PlayerCardsProperty.Count == 0)  // if player completes loan and has none in queue
 		{
 			popUpPanel.SetActive (false);
 			popUpPanelNeedProp.SetActive (true);
@@ -416,11 +529,90 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-    public void ProcessAnswerButtonUI(GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, Player player)
+    // Answer A
+    public void ProcessAnswerAUI(GameObject quizPanel, GameObject popUpPanel, Player player)
     {
-        popUpPanel.SetActive(false);
+        if (AnswerAText.text == correctAnswer)
+        {
+            PassQuiz(quizPanel, popUpPanel, player);
+        }
+
+        else
+        {
+            FailQuiz(quizPanel, popUpPanel, player);
+        }
     }
 
+    // Answer B
+    public void ProcessAnswerBUI(GameObject quizPanel, GameObject popUpPanel, Player player)
+    {
+        if (AnswerBText.text == correctAnswer)
+        {
+            PassQuiz(quizPanel, popUpPanel, player);
+        }
+
+        else
+        {
+            FailQuiz(quizPanel, popUpPanel, player);
+        }
+    }
+
+    // Answer C
+    public void ProcessAnswerCUI(GameObject quizPanel, GameObject popUpPanel, Player player)
+    {
+        if (AnswerCText.text == correctAnswer)
+        {
+            PassQuiz(quizPanel, popUpPanel, player);
+        }
+
+        else
+        {
+            FailQuiz(quizPanel, popUpPanel, player);
+        }
+    }
+
+    // Answer D
+    public void ProcessAnswerDUI(GameObject quizPanel, GameObject popUpPanel, Player player)
+    {
+        if (AnswerDText.text == correctAnswer)
+        {
+            PassQuiz(quizPanel, popUpPanel, player);
+        }
+
+        else
+        {
+            FailQuiz(quizPanel, popUpPanel, player);
+        }
+    }
+
+    public void PassQuiz(GameObject quizPanel, GameObject popUpPanel, Player player)
+    {
+        quizFailed = false;
+        quizPanel.SetActive(false);
+        ShowPopUp("Correct!\n\nLoan Closed!", popUpPanel);
+
+        player.Score += 1000;
+        RollDiceUI(player, popUpPanel, false, false, false);
+        player.PlayerCardsProperty.Remove(player.CurrentProperty);
+        player.CurrentProperty = null;
+        if (player.PlayerCardsProperty.Count >= 1)
+        {
+            player.CurrentProperty = player.PlayerCardsProperty[0];
+
+            // Update UI to display current property card
+            EnterLoanInProgressScreenUI(player);
+        }
+    }
+
+    public void FailQuiz(GameObject quizPanel, GameObject popUpPanel, Player player)
+    {
+        player.NumTurnsLeft--;
+        RollDiceUI(player, popUpPanel, false, false, false);
+
+        quizFailed = true;
+        quizPanel.SetActive(false);
+        ShowPopUp("Incorrect!\n\nThe correct answer is \"" + correctAnswer + "\"", popUpPanel);
+    }
 
 	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
 	{

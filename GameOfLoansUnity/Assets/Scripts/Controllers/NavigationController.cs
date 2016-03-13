@@ -19,7 +19,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject popUpPanel;
 	public GameObject popUpPanelNeedProp;
 	public GameObject popUpPanelRandEvent;
-    public GameObject popUpPanelQuiz;
+    public GameObject quizPanel;
 	public GameObject GameOverPanel;
 
 	public Button oppKnocksButton;
@@ -128,23 +128,39 @@ public class NavigationController : MonoBehaviour
 	{
 	}
 
-    	// Loan in Progress Buttons --------------------------------------
-    	public void OnButtonRollDice()
-    	{
-        	gameControler.RollDie(popUpPanel, popUpPanelQuiz);
-    	}
+    // Loan in Progress Buttons --------------------------------------
+    public void OnButtonRollDice()
+    {
+        gameControler.RollDie(popUpPanel, quizPanel);
+    }
 
     	// PopUp ---------------------------------------------------------
-    	public void OnPopUpOk ()
+    public void OnPopUpOk ()
 	{
-		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel);
+		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel, quizPanel);
 	}
 
         // Quiz Answer Buttons
-         public void OnPopUpAnswer()
+        public void OnAnswerA()
         {
-            gameControler.ProcessAnswerButton(popUpPanelQuiz, popUpPanelNeedProp, propertyHuntPanel);
+            gameControler.ProcessAnswerA(quizPanel, popUpPanel);
         }
+
+        public void OnAnswerB()
+        {
+            gameControler.ProcessAnswerB(quizPanel, popUpPanel);
+        }
+
+        public void OnAnswerC()
+        {
+            gameControler.ProcessAnswerC(quizPanel, popUpPanel);
+        }
+
+        public void OnAnswerD()
+        {
+            gameControler.ProcessAnswerD(quizPanel, popUpPanel);
+        }
+
 
 	public void OnRandEventPopUpOk ()
 	{
