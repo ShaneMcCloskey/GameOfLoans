@@ -35,6 +35,10 @@ public class NavigationController : MonoBehaviour
 	// private vars -------------------------
 	private GameObject currentPanel;
 
+	public CardFlip cf;
+
+
+
 	// Use this for initialization
 	void Awake() 
 	{
@@ -53,6 +57,11 @@ public class NavigationController : MonoBehaviour
 		popUpPanelRandEvent.SetActive(false);
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
+	}
+
+	public void OnCF ()
+	{
+		cf.Hit();
 	}
 
 	// main menu buttons ----------------------------------

@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
         cardsPropertyHunt = fullPropertyDeck.Cards;
         uiController.AwakeUI();
         GameObject go = GameObject.FindGameObjectWithTag("ScrollableProperty");
-        propertyScrollList = (ScrollableList)go.GetComponent(typeof(ScrollableList));
+//        propertyScrollList = (ScrollableList)go.GetComponent(typeof(ScrollableList));
         audio = gameObject.GetComponent<AudioSource>();
 
     }
