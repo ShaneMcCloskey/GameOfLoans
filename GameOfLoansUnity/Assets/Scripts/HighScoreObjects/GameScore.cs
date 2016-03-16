@@ -1,12 +1,20 @@
-﻿using UnityEngine;
-using System.Collections;
-[System.Serializable]
+﻿using System;
+using System.Collections.Generic;
 
-public class GameScore  {
-	public int? Id;
-	public int LoansClosed;
-	public string Name;
-	public string TeamName;
-	public int Score;
+namespace Assets.Scripts.HighScoreObjects
+{
+    [Serializable]
+    public class GameScore  {
+        public int? Id;
+        public string Name;
+        public string TeamName;
+        public int Score;
+        public int LoansClosed;
+    }
 
+    [Serializable]
+    public class GameScoreList
+    {
+        public GameScore[] Data;
+    }
 }
