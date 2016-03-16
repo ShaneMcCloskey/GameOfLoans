@@ -54,10 +54,14 @@ public class UIController : MonoBehaviour
 	public void AwakeUI()
 	{
 		HUDscoreText.text = "0";
+
+		//label.GetComponent<Text> ().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+
 		HUDincomeText.text = "0";
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
+		//HUDturnText.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Game of Thrones") as Font;
 	}
 
 	public void EnterOppKnocksScreenUI()
