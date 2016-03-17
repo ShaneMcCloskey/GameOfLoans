@@ -13,9 +13,10 @@ public class HighScoreController : MonoBehaviour
     public GameObject HighScoresPage;
     public GameObject PlayerInputPage;
     public GameObject scoresPanel;
-    public Text PopUpText;
+	public Text PageNumText;
     public InputField NameInput;
     public InputField TeamInput;
+	public NavigationController NavController;
     const int RANK_LOC = 0;
     const int NAME_LOC = 1;
     const int TEAM_LOC = 2;
@@ -31,7 +32,6 @@ public class HighScoreController : MonoBehaviour
     int minPageNum = 0;
     int totalScores = 0;
     private bool isLoadingScores = true;
-    List<GameScore> data;
 
 
     //change to start to get high scores page to work
@@ -39,7 +39,6 @@ public class HighScoreController : MonoBehaviour
     public void HighScores(int pageNum)
     {
         pageNumber = pageNum;
-        StartCoroutine(WaitRequestGetScoreTotal());
         StartCoroutine(WaitRequestGetScores());
     }
     //deserializes json into data and passes list of scores to setUI function
@@ -88,6 +87,9 @@ public class HighScoreController : MonoBehaviour
                 scoresPanel.transform.GetChild(i).GetChild(LOANS_LOC).GetChild(0).GetComponent<Text>().text = dataList[i].LoansClosed.ToString();
             }
         }
+		//set page number text box with appropriate info
+		PageNumText.text = "Pg " + (pageNumber + 1).ToString () + "  of " + (maxPageNum + 1).ToString () + " (" + (0 + (pageNumber * scoresPerPage) + 1).ToString ()
+			+ "-" + ((dataList.Count - 1) + (pageNumber * scoresPerPage) + 1).ToString ()+" of " + totalScores.ToString() + ")";
     }
 
     public void OnNextClick()
@@ -98,20 +100,17 @@ public class HighScoreController : MonoBehaviour
             pageNumber = maxPageNum;
         }
         HighScores(pageNumber);
-        SetUI(data);
 
     }
     public void OnLastClick()
     {
         pageNumber = maxPageNum;
         HighScores(pageNumber);
-        SetUI(data);
     }
     public void OnFirstClick()
     {
         pageNumber = 0;
         HighScores(pageNumber);
-        SetUI(data);
     }
 
     public void OnPrevClick()
@@ -124,7 +123,6 @@ public class HighScoreController : MonoBehaviour
             pageNumber = minPageNum;
         }
         HighScores(pageNumber);
-        SetUI(data);
     }
 
 
@@ -150,26 +148,30 @@ public class HighScoreController : MonoBehaviour
         }
     }
 		
-    private IEnumerator WaitRequestGetScoreTotal()
-    {
-        using (var www = new WWW(getnumscoresurl))
-        {
-            yield return www;
-            totalScores = Convert.ToInt32(www.text);
-            maxPageNum = totalScores / scoresPerPage;
-        }
-    }
     private IEnumerator WaitRequestGetScores()
     {
         isLoadingScores = true;
-        var geturl = getscoresurl + "start=" + (scoresPerPage * pageNumber).ToString() + "&" + "range=" + scoresPerPage.ToString();
-        using (var www = new WWW(geturl))
-        {
-            yield return www;
-            isLoadingScores = false;
-            SetScores(www.text);
-             
-        }
+		using (var www = new WWW(getnumscoresurl))
+		{
+			yield return www;
+			if (www.error == null) {
+				totalScores = Convert.ToInt32 (www.text);
+				maxPageNum = totalScores / scoresPerPage;
+				var geturl = getscoresurl + "start=" + (scoresPerPage * pageNumber).ToString() + "&" + "range=" + scoresPerPage.ToString();
+				using (var wwwGET = new WWW(geturl))
+				{
+					yield return wwwGET;
+					isLoadingScores = false;
+					SetScores(wwwGET.text);
+
+				}
+			}
+			else{
+				//error
+				Debug.Log("Error");
+			}
+		}
+        
     }
 	private IEnumerator WaitRequestSendScore(GameScore gs){
 		string gsJson = JsonUtility.ToJson (gs);

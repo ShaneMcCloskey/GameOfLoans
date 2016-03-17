@@ -177,6 +177,10 @@ public class NavigationController : MonoBehaviour
 	{
 		popUpPanelRandEvent.SetActive(false);
 	}
+	public void OnHighScoresHomeButtonClick()
+	{
+		this.Awake ();
+	}
 
 	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)
 	{
