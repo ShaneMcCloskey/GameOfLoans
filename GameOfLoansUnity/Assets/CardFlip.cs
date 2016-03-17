@@ -3,36 +3,87 @@ using System.Collections;
 
 public class CardFlip : MonoBehaviour 
 {
-	public int fps = 60;
-	public float rotateDegPerSec = 180f;
+	public int fps;
+	public float rotateDegPerSec;
 	public bool isFaceUp = false;
-
 	const float FLIP_LIMIT_DEG = 180f;
-
 	float waitTime;
-	bool isAnimationProcessing = false;
-	//bool isMoving = false;
-	public bool call = false;
 
 	public GameObject front;
 	public GameObject back;
 	public GameObject x;
 
+	public float downSpeed = 100f;
+	public float offScreenTimerCheck = 1.0f;
+
+	private bool isAnimationProcessing = false;
+	private bool isFlipDone = false;
+
+	private float offScreenTimer;
+	private float startPosX;
+	private float startPosY;
+	private float startPosZ;
+
+	private bool check = false;
+
 	void Start ()
 	{
+		startPosX = transform.position.x;
+		startPosY = transform.position.y;
+		startPosZ = transform.position.z;
+		Init();
+	}
+
+	void Init()
+	{
+		fps = 60;
+		rotateDegPerSec = 180f;
+		isFaceUp = false;
+		isAnimationProcessing = false;
+		isFlipDone = false;
+		offScreenTimer = 0.0f;
+
 		waitTime = 1.0f / fps;
 		x.SetActive(false);
+		check = false;
 	}
 
 	void Update ()
 	{
-		if (transform.rotation.eulerAngles.y >= 90f)
+		if (transform.rotation.eulerAngles.y >= 90f && check == false)
 		{
-			back.SetActive(false);
-			front.SetActive(true);
-			x.SetActive(true);
+			ShowFace();
 		}
-		//Debug.Log(transform.rotation.eulerAngles.y);
+		// move down
+		if (isAnimationProcessing == false && isFlipDone == true)
+		{
+			transform.Translate (new Vector3 (0, -1 * downSpeed * Time.deltaTime, 0));
+			offScreenTimer += Time.deltaTime;
+			if (offScreenTimer >= offScreenTimerCheck)
+			{
+				ResetPos();
+				isFlipDone = false;
+			}
+		}
+		Debug.Log(transform.position.y);
+	}
+
+	void ShowFace()
+	{
+		back.SetActive (false);
+		front.SetActive (true);
+		x.SetActive (true);
+		check = true;
+	}
+
+	void ResetPos()
+	{
+		transform.rotation = new Quaternion(0,0,0,0);
+		back.SetActive(true);
+		x.SetActive(false);
+		front.SetActive(false);
+		transform.position = new Vector3(startPosX, startPosY, startPosZ);
+		Init();
 	}
 
 	public void Hit ()
@@ -65,30 +116,10 @@ public class CardFlip : MonoBehaviour
 			}
 
 
-			yield return new WaitForSeconds(waitTime);
+			yield return new WaitForSeconds (waitTime);
 		}
 		isFaceUp = !isFaceUp;
 		isAnimationProcessing = false;
+		isFlipDone = true;
 	}
-
-	/*IEnumerator move ()
-	{
-		Debug.Log ("called");
-		isMoving = true;
-		bool done = false;
-		while (!done)
-		{
-			float move = 100f * Time.deltaTime;
-			transform.Translate (new Vector3 (move * Time.deltaTime, 0, 0));
-
-			if (transform.position.x >= -5 && transform.position.x <= 5)
-			{
-				transform.Translate (new Vector3 (move * Time.deltaTime, 0, 0));
-				done = true;
-			}
-
-			yield return new WaitForSeconds(waitTime);
-		}
-		isMoving = false;
-	}*/
 }
