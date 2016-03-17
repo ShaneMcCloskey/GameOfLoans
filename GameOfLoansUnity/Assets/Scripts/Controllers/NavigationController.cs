@@ -19,7 +19,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject popUpPanel;
 	public GameObject popUpPanelNeedProp;
 	public GameObject popUpPanelRandEvent;
-    public GameObject quizPanel;
+    	public GameObject quizPanel;
 	public GameObject GameOverPanel;
 
 	public Button oppKnocksButton;
@@ -36,7 +36,7 @@ public class NavigationController : MonoBehaviour
 	private GameObject currentPanel;
 
 	public CardFlip cf;
-
+	public BackgroundScroll backgroundScroll;
 
 
 	// Use this for initialization
@@ -69,6 +69,8 @@ public class NavigationController : MonoBehaviour
 	{
 		ChangePanel (oppKnocksPanel, true, false);
 		gameControler.EnterOppKnocksScreen ();
+		backgroundScroll.scroll = false;
+		backgroundScroll.Change();
 	}
 
 	public void OnButtonHowToPlay()

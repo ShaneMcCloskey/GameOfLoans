@@ -65,7 +65,6 @@ public class CardFlip : MonoBehaviour
 				isFlipDone = false;
 			}
 		}
-		Debug.Log(transform.position.y);
 	}
 
 	void ShowFace()

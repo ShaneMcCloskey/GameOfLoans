@@ -37,27 +37,34 @@ public class UIController : MonoBehaviour
 	public Text popUpText;
 	public Text popUpButtonText;
 	public Text popUpRandEventText;
-    public Text QuizQuestionText;
-    public Text AnswerAText;
-    public Text AnswerBText;
-    public Text AnswerCText;
-    public Text AnswerDText;
+   	public Text QuizQuestionText;
+    	public Text AnswerAText;
+    	public Text AnswerBText;
+   	public Text AnswerCText;
+    	public Text AnswerDText;
 	// Change propety text elements
 
 	// private vars ----------------------
 	private bool randEventGoodOccured = false;
 	private bool randEventBadOccured = false;
 	private bool subgoalPopUpActive = false;
-    private bool quizFailed = false;
-    private string correctAnswer = "";
+   	private bool quizFailed = false;
+    	private string correctAnswer = "";
 
-	public void AwakeUI()
+    	public Font numFont;
+
+	public void AwakeUI ()
 	{
 		HUDscoreText.text = "0";
 		HUDincomeText.text = "0";
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
+
+		for (int i = 0; i < HUDturnText.text.Length; i++)
+		{
+			Debug.Log(i);
+		}
 	}
 
 	public void EnterOppKnocksScreenUI()
