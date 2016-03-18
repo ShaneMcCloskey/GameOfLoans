@@ -28,6 +28,7 @@ public class CardFlip : MonoBehaviour
 
 	void Start ()
 	{
+		Debug.Log(gameObject.name);
 		startPosX = transform.position.x;
 		startPosY = transform.position.y;
 		startPosZ = transform.position.z;

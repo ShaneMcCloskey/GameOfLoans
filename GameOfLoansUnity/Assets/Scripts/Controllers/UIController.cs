@@ -12,8 +12,12 @@ public class UIController : MonoBehaviour
 	public Text HUDcreditText;
 	public Text HUDturnText;
 	// Opp knocks card text elements
-	public Text textOppKnocksType;
-	public Text textOppKnocksDesc;
+	public Text textOppKnocksTypeLeft;
+	public Text textOppKnocksDescLeft;
+	public Text textOppKnocksTypeCenter;
+	public Text textOppKnocksDescCenter;
+	public Text textOppKnocksTypeRight;
+	public Text textOppKnocksDescRight;
 	// Property hunt text element
 	public Text leftAddress;
 	public Text leftPrice;
@@ -53,6 +57,10 @@ public class UIController : MonoBehaviour
 
     	public Font numFont;
 
+	public CardFlip cfLeft;
+	public CardFlip cfCenter;
+	public CardFlip cfRight;
+
 	public void AwakeUI ()
 	{
 		HUDscoreText.text = "0";
@@ -69,8 +77,7 @@ public class UIController : MonoBehaviour
 
 	public void EnterOppKnocksScreenUI()
 	{
-		textOppKnocksDesc.text = "Click to draw card";
-		textOppKnocksType.text = "";
+		//textOppKnocksType.text = "";
 	}
 
 	public void UpdateTurnsLeft (Player player)
@@ -78,26 +85,76 @@ public class UIController : MonoBehaviour
 		HUDturnText.text = player.NumTurnsLeft.ToString();
 	}
 
-	public void UpdateOppKnocksCardTextAndPlayerStatsUI(OppKnocksCard card, Player player)
+	public void UpdateOppKnocksCardTextAndPlayerStatsUI (OppKnocksCard card, Player player, string leftRightOrCenter)
 	{
-		textOppKnocksDesc.text = card.Desc;
-
-		if (card.Category == 1) 
+		if (leftRightOrCenter == "left")
 		{
-			textOppKnocksType.text = "Income Card";
-			HUDincomeText.text = player.Income.ToString();
-		} 
-		else if (card.Category == 2) 
+			cfLeft.Hit();
+			if (card.Category == 1) 
+			{
+				textOppKnocksTypeLeft.text = "Income Card";
+				textOppKnocksDescLeft.text = card.Desc;
+				HUDincomeText.text = player.Income.ToString();
+			} 
+			else if (card.Category == 2) 
+			{
+				textOppKnocksTypeLeft.text = "Asset Card";
+				textOppKnocksDescLeft.text = card.Desc;
+				HUDassetsText.text = player.Assets.ToString();
+			} 
+			else 
+			{
+				textOppKnocksTypeLeft.text = "Credit Card";
+				textOppKnocksDescLeft.text = card.Desc;
+				HUDcreditText.text = player.Credit.ToString();
+			}
+		}
+		else if (leftRightOrCenter == "center")
 		{
-			textOppKnocksType.text = "Asset Card";
-			HUDassetsText.text = player.Assets.ToString();
-		} 
-		else 
+			cfCenter.Hit();
+			if (card.Category == 1) 
+			{
+				textOppKnocksTypeCenter.text = "Income Card";
+				textOppKnocksDescCenter.text = card.Desc;
+				HUDincomeText.text = player.Income.ToString();
+			} 
+			else if (card.Category == 2) 
+			{
+				textOppKnocksTypeCenter.text = "Asset Card";
+				textOppKnocksDescCenter.text = card.Desc;
+				HUDassetsText.text = player.Assets.ToString();
+			} 
+			else 
+			{
+				textOppKnocksTypeCenter.text = "Credit Card";
+				textOppKnocksDescCenter.text = card.Desc;
+				HUDcreditText.text = player.Credit.ToString();
+			}
+		}
+		else if (leftRightOrCenter == "right")
 		{
-			textOppKnocksType.text = "Credit Card";
-			HUDcreditText.text = player.Credit.ToString();
+			cfRight.Hit();
+			if (card.Category == 1) 
+			{
+				textOppKnocksTypeRight.text = "Income Card";
+				textOppKnocksDescRight.text = card.Desc;
+				HUDincomeText.text = player.Income.ToString();
+			} 
+			else if (card.Category == 2) 
+			{
+				textOppKnocksTypeRight.text = "Asset Card";
+				textOppKnocksDescRight.text = card.Desc;
+				HUDassetsText.text = player.Assets.ToString();
+			} 
+			else 
+			{
+				textOppKnocksTypeRight.text = "Credit Card";
+				textOppKnocksDescRight.text = card.Desc;
+				HUDcreditText.text = player.Credit.ToString();
+			}
 		}
 	}
+
 
 	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
 	{

@@ -47,20 +47,20 @@ public class GameController : MonoBehaviour
         uiController.EnterOppKnocksScreenUI();
     }
 
-    public void DrawOppKnocksCard()
+    public void DrawOppKnocksCard(string leftRightOrCenter)
     {
         player.NumTurnsLeft--;
         if (player.NumTurnsLeft == 40) // after 10 turns
         {
             isPickingStats = false;
         }
-        int randNum = Random.Range(0, cardsOppKnocks.Count);   // pick random number
+        int randNum = Random.Range(0, cardsOppKnocks.Count);    // pick random number
 
         OppKnocksCard card = cardsOppKnocks[randNum];           // draw card with random number
-        UpdateOppKnocksCardTextAndPlayerStats(card);            // update text and player score
+        UpdateOppKnocksCardTextAndPlayerStats(card, leftRightOrCenter);            // update text and player score
 
-        player.PlayerCardsOppKnocks.Add(card);              // add card to player deck
-        cardsOppKnocks.Remove(card);                // remove it from overall deck
+        player.PlayerCardsOppKnocks.Add(card);                  // add card to player deck
+        cardsOppKnocks.Remove(card);                	        // remove it from overall deck
 
         if (isPickingStats == false)
         {
@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card)
+    void UpdateOppKnocksCardTextAndPlayerStats(OppKnocksCard card, string leftRightOrCenter)
     {
         if (card.Category == 1)
         {
@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour
         {
             player.Credit += card.Value;
         }
-        uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player);
+        uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player, leftRightOrCenter);
     }
 
     // Property hunt functions ------------------------------------------------

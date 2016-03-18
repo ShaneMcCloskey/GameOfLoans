@@ -35,7 +35,10 @@ public class NavigationController : MonoBehaviour
 	// private vars -------------------------
 	private GameObject currentPanel;
 
-	public CardFlip cf;
+	/*public CardFlip cfLeft;
+	public CardFlip cfCenter;
+	public CardFlip cfRight;*/
+
 	public BackgroundScroll backgroundScroll;
 
 
@@ -57,11 +60,6 @@ public class NavigationController : MonoBehaviour
 		popUpPanelRandEvent.SetActive(false);
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
-	}
-
-	public void OnCF ()
-	{
-		cf.Hit();
 	}
 
 	// main menu buttons ----------------------------------
@@ -121,10 +119,10 @@ public class NavigationController : MonoBehaviour
 		gameControler.CancelCurrentLoan();
 	}
 
-	// Opp knocks buttons ------------------------------------------
-	public void OnButtonDrawOppKnocksCard ()
+	// Opp knocks --------------------------------------------------
+	public void OnDrawOppKnocks (string leftRightOrCenter)
 	{
-		gameControler.DrawOppKnocksCard();
+		gameControler.DrawOppKnocksCard(leftRightOrCenter);
 	}
 
 	// Property hunt buttons ----------------------------------------
