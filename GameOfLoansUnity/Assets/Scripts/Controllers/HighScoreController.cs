@@ -13,7 +13,14 @@ public class HighScoreController : MonoBehaviour
     public GameObject HighScoresPage;
     public GameObject PlayerInputPage;
     public GameObject scoresPanel;
+	public GameObject HighScorePopUP;
+	public Text PopUpText;
 	public Text PageNumText;
+	public Text GameOverIncome;
+	public Text GameOverAssets;
+	public Text GameOverCredit;
+	public Text GameOverLoans;
+	public Text GameOverScore;
     public InputField NameInput;
     public InputField TeamInput;
 	public NavigationController NavController;
@@ -151,6 +158,7 @@ public class HighScoreController : MonoBehaviour
     private IEnumerator WaitRequestGetScores()
     {
         isLoadingScores = true;
+		var error = false;
 		using (var www = new WWW(getnumscoresurl))
 		{
 			yield return www;
@@ -161,17 +169,27 @@ public class HighScoreController : MonoBehaviour
 				using (var wwwGET = new WWW(geturl))
 				{
 					yield return wwwGET;
-					isLoadingScores = false;
-					SetScores(wwwGET.text);
+					if (wwwGET.error == null) {
+						
+						isLoadingScores = false;
+						SetScores (wwwGET.text);
+					} 
+					else 
+					{
+						error = true;
+					}
 
 				}
 			}
 			else{
 				//error
-				Debug.Log("Error");
+				error = true;
 			}
 		}
-        
+		if (error == true) {
+			PopUpText.text = "ERROR: High Scores could not be loaded.";
+			HighScorePopUP.SetActive (true);
+		}
     }
 	private IEnumerator WaitRequestSendScore(GameScore gs){
 		string gsJson = JsonUtility.ToJson (gs);
@@ -184,9 +202,33 @@ public class HighScoreController : MonoBehaviour
 		{
 			
 			yield return www;
-			Debug.Log (www.text);
-			var test = 5;
+			if (www.error == null) {
+				Debug.Log (www.text);
+				//no error
+				AddScoreReturn returnValue = JsonUtility.FromJson<AddScoreReturn>(www.text);
+				NavController.OnButtonLeaderboards ();
+				HighScores (returnValue.rank / scoresPerPage);
+			} 
+			else {
+				PopUpText.text = "ERROR: Score could not be added.";
+				HighScorePopUP.SetActive (true);
+				NavController.Awake ();
+			}
+
 		}
+	}
+	public void SetPlayer(Player finalPlayer)
+	{
+		this.player = finalPlayer;
+		GameOverAssets.text = finalPlayer.Assets.ToString();
+		GameOverLoans.text = finalPlayer.NumPropertiesClosed.ToString ();
+		GameOverIncome.text = finalPlayer.Income.ToString ();
+		GameOverScore.text = finalPlayer.Score.ToString ();
+
+	}
+	public void OnPopUPOk(){
+		HighScorePopUP.SetActive(false);
+		NavController.Awake ();
 	}
 
 }

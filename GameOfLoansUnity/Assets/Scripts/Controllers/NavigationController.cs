@@ -43,7 +43,7 @@ public class NavigationController : MonoBehaviour
 
 
 	// Use this for initialization
-	void Awake() 
+	public void Awake() 
 	{
 		currentPanel = mainMenuPanel;
 		mainMenuPanel.SetActive (true);
@@ -117,6 +117,12 @@ public class NavigationController : MonoBehaviour
 	{
 		ChangePanel(propertyHuntPanel, true, false);
 		gameControler.CancelCurrentLoan();
+	}
+
+	public void GameOver(Player player)
+	{
+		HighScoreController.SetPlayer (player);
+		ChangePanel (GameOverPanel, false, false);
 	}
 
 	// Opp knocks --------------------------------------------------

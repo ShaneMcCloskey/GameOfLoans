@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     private bool firstEnterIntoChangeProp = true;
     private ScrollableList propertyScrollList;
     private AudioSource audio;
+	private NavigationController navController;
 
     // public vars ---------------------------------------
     public EventSystem es;
@@ -30,6 +31,7 @@ public class GameController : MonoBehaviour
     {
         player = gameObject.GetComponent<Player>();
         uiController = gameObject.GetComponent<UIController>();
+		navController = gameObject.GetComponent<NavigationController> ();
         fullOppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
         fullPropertyDeck = gameObject.GetComponent<PropertyDeck>();
         cardsOppKnocks = fullOppKnocksDeck.Cards;
@@ -145,6 +147,7 @@ public class GameController : MonoBehaviour
             player.CurrentProperty = cardRight;
             cardsPropertyHunt.Remove(cardRight);
         }
+		CheckGameOver (player);
     }
 
     // Loan in Progess functions -----------------------------------------------
@@ -209,6 +212,7 @@ public class GameController : MonoBehaviour
         {
             uiController.RollDiceUI(player, PopUpPanel, false, randEventGood, randEventBad);
         }
+		CheckGameOver (player);
     }
 
     public void ProcessOkButton(GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, GameObject quizPanel)
@@ -251,4 +255,10 @@ public class GameController : MonoBehaviour
     public void Test()
     {
     }
+	public void CheckGameOver( Player playerObj)
+	{
+		if (playerObj.NumTurnsLeft == 0) {
+			navController.GameOver (player);
+		}
+	}
 }
