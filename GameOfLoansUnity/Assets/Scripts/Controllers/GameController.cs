@@ -17,8 +17,6 @@ public class GameController : MonoBehaviour
     private PropertyCard cardLeft;
     private PropertyCard cardCenter;
     private PropertyCard cardRight;
-    private bool firstEnterIntoChangeProp = true;
-    private ScrollableList propertyScrollList;
     private AudioSource audio;
 	private NavigationController navController;
 
@@ -158,18 +156,12 @@ public class GameController : MonoBehaviour
 
     public void EnterChangePropertyScreen()
     {
-        // call function on scrollable list
+        uiController.EnterChangePropertyScreenUI(player);
+    }
 
-        if (firstEnterIntoChangeProp == true)
-        {
-            propertyScrollList.PopulateList(player, true);
-            firstEnterIntoChangeProp = false;
-        }
-        else
-        {
-            propertyScrollList.PopulateList(player, false);
-        }
-        // else call function to add to current list
+    public void ChangePropertyTo(int num)
+    {
+        player.CurrentProperty = player.PlayerCardsProperty[num];
     }
 
     public void CancelCurrentLoan()
@@ -221,40 +213,13 @@ public class GameController : MonoBehaviour
         uiController.ProcessOkButtonUI(popUpPanel, popUpPanelNeedProp, propHuntPanel, quizPanel, player);
     }
 
-
-    // Process Button A
-    public void ProcessAnswerA(GameObject quizPanel, GameObject popUpPanel)
+    // Process Quiz Button Answer
+    public void ProcessAnswer(GameObject quizPanel, GameObject popUpPanel, string letter)
     {
         // call ui function...
-        uiController.ProcessAnswerAUI(quizPanel, popUpPanel, player);
+        uiController.ProcessAnswerUI(quizPanel, popUpPanel, player, letter);
     }
 
-    // Process Button B
-    public void ProcessAnswerB(GameObject quizPanel, GameObject popUpPanel)
-    {
-        // call ui function...
-        uiController.ProcessAnswerBUI(quizPanel, popUpPanel, player);
-    }
-
-    // Process Button C
-    public void ProcessAnswerC(GameObject quizPanel, GameObject popUpPanel)
-    {
-        // call ui function...
-        uiController.ProcessAnswerCUI(quizPanel, popUpPanel, player);
-    }
-
-    // Process Button D
-    public void ProcessAnswerD(GameObject quizPanel, GameObject popUpPanel)
-    {
-        // call ui function...
-        uiController.ProcessAnswerDUI(quizPanel, popUpPanel, player);
-    }
-
-
-
-    public void Test()
-    {
-    }
 	public void CheckGameOver( Player playerObj)
 	{
 		if (playerObj.NumTurnsLeft == 0) {

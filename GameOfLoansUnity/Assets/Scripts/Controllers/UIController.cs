@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIController : MonoBehaviour 
 {
 	// public vars ----------------------
+
 	// HUD text elements
 	public Text HUDscoreText;
 	public Text HUDincomeText;
@@ -31,7 +33,7 @@ public class UIController : MonoBehaviour
 	public Text rightPrice;
 	public Text rightSqFoot;
 	public Text rightDiff;
-        // Loan in progress 
+    // Loan in progress 
 	public Text currentAddress;
 	public Text currentPrice;
 	public Text currentSqFoot;
@@ -42,18 +44,38 @@ public class UIController : MonoBehaviour
 	public Text popUpButtonText;
 	public Text popUpRandEventText;
    	public Text QuizQuestionText;
-    	public Text AnswerAText;
-    	public Text AnswerBText;
+    public Text AnswerAText;
+    public Text AnswerBText;
    	public Text AnswerCText;
-    	public Text AnswerDText;
+    public Text AnswerDText;
 	// Change propety text elements
+    public GameObject firstCardDisplay;
+    public GameObject secondCardDisplay;
+    public GameObject thirdCardDisplay;
+
+    public Text firstAddress;
+    public Text firstPrice;
+    public Text firstSqFoot;
+    public Text firstDiff;
+    public Text secondAddress;
+    public Text secondPrice;
+    public Text secondSqFoot;
+    public Text secondDiff;
+    public Text thirdAddress;
+    public Text thirdPrice;
+    public Text thirdSqFoot;
+    public Text thirdDiff;
 
 	// private vars ----------------------
 	private bool randEventGoodOccured = false;
 	private bool randEventBadOccured = false;
 	private bool subgoalPopUpActive = false;
+
+    // Quiz vars -------------------------
    	private bool quizFailed = false;
-    	private string correctAnswer = "";
+    private string correctAnswer = "";
+    private int currentQuizNum = 0;
+    private List<int> completedQuizes = new List<int>();
 
     	public Font numFont;
 
@@ -209,51 +231,50 @@ public class UIController : MonoBehaviour
     void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
 		if ((player.CurrentProperty.CurrentProgress >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false)
-		{
-			//Debug.Log("1");			
-			ShowPopUp("Subgoal 1", popUpPanel);
+		{		
+			ShowPopUp("Step 1: Inital Contact", popUpPanel);
 			player.CurrentProperty.Subgoal1Complete = true;
 			subgoalPopUpActive = true;
 		}
 		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false)
 		{
-			ShowPopUp("Subgoal 2", popUpPanel);
+			ShowPopUp("Step 2: Application Started", popUpPanel);
 			player.CurrentProperty.Subgoal2Complete = true;
 			subgoalPopUpActive = true;
 		}
 		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false)
 		{
-			ShowPopUp("Subgoal 3", popUpPanel);
+			ShowPopUp("Step 3: Loan Set Up Complete", popUpPanel);
 			player.CurrentProperty.Subgoal3Complete = true;
 			subgoalPopUpActive = true;
 		}
 		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false)
 		{
-			ShowPopUp("Subgoal 4", popUpPanel);
+			ShowPopUp("Step 4: Folder Received", popUpPanel);
 			player.CurrentProperty.Subgoal4Complete = true;
 			subgoalPopUpActive = true;
 		}
 		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.Subgoal5Complete == false)
 		{
-			ShowPopUp("Subgoal 5", popUpPanel);
+			ShowPopUp("Step 5: Conditionally Approved", popUpPanel);
 			player.CurrentProperty.Subgoal5Complete = true;
 			subgoalPopUpActive = true;
 		}
 		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.Subgoal6Complete == false)
 		{
-			ShowPopUp("Subgoal 6", popUpPanel);
+			ShowPopUp("Step 6: Final Signoff", popUpPanel);
 			player.CurrentProperty.Subgoal6Complete = true;
 			subgoalPopUpActive = true;
 		}
 		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.Subgoal7Complete == false)
 		{
-			ShowPopUp("Subgoal 7", popUpPanel);
+			ShowPopUp("Step 7: Closing Signing Has Been Scheduled", popUpPanel);
 			player.CurrentProperty.Subgoal7Complete = true;
 			subgoalPopUpActive = true;
 		}
 		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.Subgoal8Complete == false)
 		{
-			ShowPopUp("Subgoal 8", popUpPanel);
+			ShowPopUp("Step 8: Documents Sent Out to Settlement Agent", popUpPanel);
 			player.CurrentProperty.Subgoal8Complete = true;
 			subgoalPopUpActive = true;
 		}
@@ -333,10 +354,26 @@ public class UIController : MonoBehaviour
     void ShowQuiz(GameObject PopUpPanel)
     {
         PopUpPanel.SetActive(true);
-        //set random number 1-22
-        int num = Random.Range(1, 23);
 
-        switch (num)
+        // If player has already completed all available quizes, reset them
+        if (completedQuizes.Count == 22)
+        {
+            completedQuizes.Clear();
+        }
+
+        //set random quiz number 1-22
+        currentQuizNum = Random.Range(1, 23);
+
+        // Make sure player has not already completed current quiz
+        if (completedQuizes.Contains(currentQuizNum))
+        {
+            while (completedQuizes.Contains(currentQuizNum))
+            {
+                currentQuizNum = Random.Range(1, 23);
+            }
+        }
+
+        switch (currentQuizNum)
         {
             case 1:
                 QuizQuestionText.text = "What is the step when the client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)?";
@@ -560,7 +597,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-        // still need to pop up subgoal hit after random event ok click if hit subgoal
+    // still need to pop up subgoal hit after random event ok click if hit subgoal
 	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, GameObject quizPanel, Player player)
 	{
         if (quizFailed)
@@ -593,52 +630,28 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-    // Answer A
-    public void ProcessAnswerAUI(GameObject quizPanel, GameObject popUpPanel, Player player)
+    // Display and process quiz pass or fail
+    public void ProcessAnswerUI(GameObject quizPanel, GameObject popUpPanel, Player player, string letter)
     {
-        if (AnswerAText.text == correctAnswer)
-        {
-            PassQuiz(quizPanel, popUpPanel, player);
-        }
+        string chosenAnswer ="";
 
-        else
+        switch (letter)
         {
-            FailQuiz(quizPanel, popUpPanel, player);
+            case "A":
+                chosenAnswer = AnswerAText.text;
+                break;
+            case "B":
+                chosenAnswer = AnswerBText.text;
+                break;
+            case "C":
+                chosenAnswer = AnswerCText.text;
+                break;
+            case "D":
+                chosenAnswer = AnswerDText.text;
+                break;
         }
-    }
-
-    // Answer B
-    public void ProcessAnswerBUI(GameObject quizPanel, GameObject popUpPanel, Player player)
-    {
-        if (AnswerBText.text == correctAnswer)
-        {
-            PassQuiz(quizPanel, popUpPanel, player);
-        }
-
-        else
-        {
-            FailQuiz(quizPanel, popUpPanel, player);
-        }
-    }
-
-    // Answer C
-    public void ProcessAnswerCUI(GameObject quizPanel, GameObject popUpPanel, Player player)
-    {
-        if (AnswerCText.text == correctAnswer)
-        {
-            PassQuiz(quizPanel, popUpPanel, player);
-        }
-
-        else
-        {
-            FailQuiz(quizPanel, popUpPanel, player);
-        }
-    }
-
-    // Answer D
-    public void ProcessAnswerDUI(GameObject quizPanel, GameObject popUpPanel, Player player)
-    {
-        if (AnswerDText.text == correctAnswer)
+        
+        if (chosenAnswer == correctAnswer)
         {
             PassQuiz(quizPanel, popUpPanel, player);
         }
@@ -651,6 +664,7 @@ public class UIController : MonoBehaviour
 
     public void PassQuiz(GameObject quizPanel, GameObject popUpPanel, Player player)
     {
+        completedQuizes.Add(currentQuizNum);
         quizFailed = false;
         quizPanel.SetActive(false);
         ShowPopUp("Correct!\n\nLoan Closed!", popUpPanel);
@@ -678,8 +692,47 @@ public class UIController : MonoBehaviour
         ShowPopUp("Incorrect!\n\nThe correct answer is \"" + correctAnswer + "\"", popUpPanel);
     }
 
-	public void EnterChangePropertyScreenUI (PropertyCard card1, PropertyCard card2, PropertyCard card3)
+    // Display the cards the player current has, up to 3 prop cards
+	public void EnterChangePropertyScreenUI (Player player)
 	{
-		// call func from ui cont
+        firstCardDisplay.SetActive(false);
+        secondCardDisplay.SetActive(false);
+        thirdCardDisplay.SetActive(false);
+
+        // First Prop card
+
+        if (player.PlayerCardsProperty.Count >= 1)
+        {
+            firstCardDisplay.SetActive(true);
+
+            firstAddress.text = player.PlayerCardsProperty[0].Address;
+            firstPrice.text = player.PlayerCardsProperty[0].Price.ToString();
+            firstSqFoot.text = player.PlayerCardsProperty[0].SqFoot.ToString();
+            firstDiff.text = player.PlayerCardsProperty[0].Difficulty.ToString();
+        }
+
+        // Second Prop card
+
+        if (player.PlayerCardsProperty.Count >= 2)
+        {
+            secondCardDisplay.SetActive(true);
+
+            secondAddress.text = player.PlayerCardsProperty[1].Address;
+            secondPrice.text = player.PlayerCardsProperty[1].Price.ToString();
+            secondSqFoot.text = player.PlayerCardsProperty[1].SqFoot.ToString();
+            secondDiff.text = player.PlayerCardsProperty[1].Difficulty.ToString();
+        }
+        
+        // Third Prop card
+
+        if (player.PlayerCardsProperty.Count >= 3)
+        {
+            thirdCardDisplay.SetActive(true);
+
+            thirdAddress.text = player.PlayerCardsProperty[2].Address;
+            thirdPrice.text = player.PlayerCardsProperty[2].Price.ToString();
+            thirdSqFoot.text = player.PlayerCardsProperty[2].SqFoot.ToString();
+            thirdDiff.text = player.PlayerCardsProperty[2].Difficulty.ToString();
+        }
 	}
 }

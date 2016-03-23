@@ -139,43 +139,30 @@ public class NavigationController : MonoBehaviour
 		gameControler.EnterLoanInProgressScreen();
 	}
 
-	public void ChangeProperty (int num)
-	{
-	}
-
     // Loan in Progress Buttons --------------------------------------
     public void OnButtonRollDice()
     {
         gameControler.RollDie(popUpPanel, quizPanel);
     }
 
-    	// PopUp ---------------------------------------------------------
+    public void OnButtonChangePropertyTo(int num)
+    {
+        gameControler.ChangePropertyTo(num);
+        ChangePanel(loanInProgressPanel, true, true);
+        gameControler.EnterLoanInProgressScreen();
+    }
+
+    // PopUp ---------------------------------------------------------
     public void OnPopUpOk ()
 	{
 		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel, quizPanel);
 	}
 
-        // Quiz Answer Buttons
-        public void OnAnswerA()
-        {
-            gameControler.ProcessAnswerA(quizPanel, popUpPanel);
-        }
-
-        public void OnAnswerB()
-        {
-            gameControler.ProcessAnswerB(quizPanel, popUpPanel);
-        }
-
-        public void OnAnswerC()
-        {
-            gameControler.ProcessAnswerC(quizPanel, popUpPanel);
-        }
-
-        public void OnAnswerD()
-        {
-            gameControler.ProcessAnswerD(quizPanel, popUpPanel);
-        }
-
+    // Quiz Answer Buttons
+    public void OnButtonAnswer(string letter)
+    {
+        gameControler.ProcessAnswer(quizPanel, popUpPanel, letter);
+    }
 
 	public void OnRandEventPopUpOk ()
 	{
