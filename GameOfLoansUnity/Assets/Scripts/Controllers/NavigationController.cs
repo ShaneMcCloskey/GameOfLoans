@@ -27,7 +27,7 @@ public class NavigationController : MonoBehaviour
 	public Button propHuntButton;
 
 	public GameObject changePropertyButton;
-	public GameObject cancelLoanButton;
+	//public GameObject cancelLoanButton;
 
 	public GameController gameControler;
 	public HighScoreController HighScoreController;
@@ -188,12 +188,12 @@ public class NavigationController : MonoBehaviour
 		if (loanInProgresActive)
 		{
 			changePropertyButton.SetActive(true);
-			cancelLoanButton.SetActive(true);
+			//cancelLoanButton.SetActive(true);
 		}
 		else
 		{
 			changePropertyButton.SetActive(false);
-			cancelLoanButton.SetActive(false);
+			//cancelLoanButton.SetActive(false);
 		}
 
 		currentPanel.SetActive (false);

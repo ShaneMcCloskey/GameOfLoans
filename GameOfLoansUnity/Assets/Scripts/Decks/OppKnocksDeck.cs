@@ -14,9 +14,9 @@ public class OppKnocksDeck : MonoBehaviour
 	void Awake()
 	{
 		// 1 = income, 2 = assets, 3 = credit
-		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by $100,000.", 100000, 2));
-		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by $100,000", 100000, 2));
-		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by $100,000", 100000, 2));
+		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by 100,000.", 100000, 2));
+		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by 100,000", 100000, 2));
+		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by 100,000", 100000, 2));
 		//cards.Add(new OppKnocksCard("Card 2", 20, 2));
 		//cards.Add(new OppKnocksCard("Card 3", 30, 2));
 		/*cards.Add(new OppKnocksCard("Card 4", 10, 1));
