@@ -6,9 +6,9 @@ public class Player : MonoBehaviour
 {
 	private int score = 0;
 	private int numTurnsLeft = 50;
-	private float income = 100f;
-	private float assets = 100f;
-	private float credit = 100f;
+	private float income = 0f;
+	private float assets = 0f;
+	private float credit = 0f;
 	private PropertyCard currentProperty;
 	private int numPropertiesClosed = 0;
 	private List<OppKnocksCard> playerCardsOppKnocks = new List<OppKnocksCard>();

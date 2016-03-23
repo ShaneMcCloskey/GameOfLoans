@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     // private vars ---------------------------------------
     private Player player;
     private UIController uiController;
-	private HighScoreController ScoreController;
+    private HighScoreController ScoreController;
     private OppKnocksDeck fullOppKnocksDeck;
     private PropertyDeck fullPropertyDeck;
     private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
@@ -34,10 +34,7 @@ public class GameController : MonoBehaviour
         cardsOppKnocks = fullOppKnocksDeck.Cards;
         cardsPropertyHunt = fullPropertyDeck.Cards;
         uiController.AwakeUI();
-        //GameObject go = GameObject.FindGameObjectWithTag("ScrollableProperty");
-//        propertyScrollList = (ScrollableList)go.GetComponent(typeof(ScrollableList));
         audio = gameObject.GetComponent<AudioSource>();
-
     }
 
     // Opp knocks functions ------------------------------
@@ -53,13 +50,13 @@ public class GameController : MonoBehaviour
         {
             isPickingStats = false;
         }
-        int randNum = Random.Range(0, cardsOppKnocks.Count);    // pick random number
+        int randNum = Random.Range(0, cardsOppKnocks.Count);    
 
-        OppKnocksCard card = cardsOppKnocks[randNum];           // draw card with random number
+        OppKnocksCard card = cardsOppKnocks[randNum];           		   // draw card with random number
         UpdateOppKnocksCardTextAndPlayerStats(card, leftRightOrCenter);            // update text and player score
 
-        player.PlayerCardsOppKnocks.Add(card);                  // add card to player deck
-        cardsOppKnocks.Remove(card);                	        // remove it from overall deck
+        player.PlayerCardsOppKnocks.Add(card);                  		   // add card to player deck
+        cardsOppKnocks.Remove(card);                	      			   // remove it from overall deck
 
         if (isPickingStats == false)
         {

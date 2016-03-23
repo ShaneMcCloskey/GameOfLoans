@@ -94,11 +94,7 @@ public class UIController : MonoBehaviour
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
 
-		for (int i = 0; i < HUDturnText.text.Length; i++)
-		{
-			Debug.Log(i);
-		}
-		GameOverPanel = GameObject.Get
+		//GameOverPanel = GameObject.Get
 	}
 
 	public void EnterOppKnocksScreenUI()

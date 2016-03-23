@@ -15,10 +15,12 @@ public class CardFlip : MonoBehaviour
 
 	public float downSpeed = 100f;
 	public float offScreenTimerCheck = 1.0f;
+	public float holdAfterFlipTimerCheck = 1.0f;
 
 	private bool isAnimationProcessing = false;
 	private bool isFlipDone = false;
 
+	private float holdAfterFlipTimer;
 	private float offScreenTimer;
 	private float startPosX;
 	private float startPosY;
@@ -28,7 +30,7 @@ public class CardFlip : MonoBehaviour
 
 	void Start ()
 	{
-		Debug.Log(gameObject.name);
+		//Debug.Log(gameObject.name);
 		startPosX = transform.position.x;
 		startPosY = transform.position.y;
 		startPosZ = transform.position.z;
@@ -43,6 +45,7 @@ public class CardFlip : MonoBehaviour
 		isAnimationProcessing = false;
 		isFlipDone = false;
 		offScreenTimer = 0.0f;
+		holdAfterFlipTimer = 0.0f;
 
 		waitTime = 1.0f / fps;
 		x.SetActive(false);
@@ -53,17 +56,22 @@ public class CardFlip : MonoBehaviour
 	{
 		if (transform.rotation.eulerAngles.y >= 90f && check == false)
 		{
-			ShowFace();
+			ShowFace ();
 		}
 		// move down
 		if (isAnimationProcessing == false && isFlipDone == true)
 		{
-			transform.Translate (new Vector3 (0, -1 * downSpeed * Time.deltaTime, 0));
-			offScreenTimer += Time.deltaTime;
-			if (offScreenTimer >= offScreenTimerCheck)
+
+			holdAfterFlipTimer += Time.deltaTime;
+			if (holdAfterFlipTimer >= holdAfterFlipTimerCheck)
 			{
-				ResetPos();
-				isFlipDone = false;
+				transform.Translate (new Vector3 (0, -1 * downSpeed * Time.deltaTime, 0));
+				offScreenTimer += Time.deltaTime;
+				if (offScreenTimer >= offScreenTimerCheck)
+				{
+					ResetPos();
+					isFlipDone = false;
+				}	
 			}
 		}
 	}
