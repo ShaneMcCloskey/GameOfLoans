@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     // private vars ---------------------------------------
     private Player player;
     private UIController uiController;
+	private HighScoreController ScoreController;
     private OppKnocksDeck fullOppKnocksDeck;
     private PropertyDeck fullPropertyDeck;
     private List<OppKnocksCard> cardsOppKnocks = new List<OppKnocksCard>();
@@ -18,7 +19,6 @@ public class GameController : MonoBehaviour
     private PropertyCard cardCenter;
     private PropertyCard cardRight;
     private AudioSource audio;
-	private NavigationController navController;
 
     // public vars ---------------------------------------
     public EventSystem es;
@@ -29,7 +29,6 @@ public class GameController : MonoBehaviour
     {
         player = gameObject.GetComponent<Player>();
         uiController = gameObject.GetComponent<UIController>();
-		navController = gameObject.GetComponent<NavigationController> ();
         fullOppKnocksDeck = gameObject.GetComponent<OppKnocksDeck>();
         fullPropertyDeck = gameObject.GetComponent<PropertyDeck>();
         cardsOppKnocks = fullOppKnocksDeck.Cards;
@@ -145,7 +144,7 @@ public class GameController : MonoBehaviour
             player.CurrentProperty = cardRight;
             cardsPropertyHunt.Remove(cardRight);
         }
-		CheckGameOver (player);
+		GameOver ();
     }
 
     // Loan in Progess functions -----------------------------------------------
@@ -204,7 +203,7 @@ public class GameController : MonoBehaviour
         {
             uiController.RollDiceUI(player, PopUpPanel, false, randEventGood, randEventBad);
         }
-		CheckGameOver (player);
+		GameOver ();
     }
 
     public void ProcessOkButton(GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, GameObject quizPanel)
@@ -220,10 +219,9 @@ public class GameController : MonoBehaviour
         uiController.ProcessAnswerUI(quizPanel, popUpPanel, player, letter);
     }
 
-	public void CheckGameOver( Player playerObj)
+	public void GameOver()
 	{
-		if (playerObj.NumTurnsLeft == 0) {
-			navController.GameOver (player);
-		}
+		ScoreController.SetPlayer (player);
+		uiController.GameOver ();
 	}
 }

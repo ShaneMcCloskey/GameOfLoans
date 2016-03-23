@@ -6,6 +6,7 @@ using Assets.Scripts.HighScoreObjects;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
 
 public class HighScoreController : MonoBehaviour
 {
@@ -194,11 +195,11 @@ public class HighScoreController : MonoBehaviour
 	private IEnumerator WaitRequestSendScore(GameScore gs){
 		string gsJson = JsonUtility.ToJson (gs);
 		Debug.Log (gsJson);
-		var encoding = new System.Text.UTF8Encoding();
+		//var encoding = new System.Text.UTF8Encoding();
 		var postHeader = new Dictionary<string, string>();
 		postHeader.Add("Content-Type", "text/json");
-		postHeader.Add("Content-Length", gsJson.Length.ToString());
-		using (var www = new WWW(sendscoresurl, encoding.GetBytes(gsJson), postHeader))
+		//postHeader.Add("Content-Length", gsJson.Length.ToString());
+		using (var www = new WWW(sendscoresurl, Encoding.UTF8.GetBytes(gsJson), postHeader))
 		{
 			
 			yield return www;

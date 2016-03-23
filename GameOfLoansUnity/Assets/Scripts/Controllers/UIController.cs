@@ -66,6 +66,9 @@ public class UIController : MonoBehaviour
     public Text thirdSqFoot;
     public Text thirdDiff;
 
+	// gameover screen--------------------
+	public GameObject GameOverPanel;
+
 	// private vars ----------------------
 	private bool randEventGoodOccured = false;
 	private bool randEventBadOccured = false;
@@ -95,6 +98,7 @@ public class UIController : MonoBehaviour
 		{
 			Debug.Log(i);
 		}
+		GameOverPanel = GameObject.Get
 	}
 
 	public void EnterOppKnocksScreenUI()
@@ -734,5 +738,9 @@ public class UIController : MonoBehaviour
             thirdSqFoot.text = player.PlayerCardsProperty[2].SqFoot.ToString();
             thirdDiff.text = player.PlayerCardsProperty[2].Difficulty.ToString();
         }
+	}
+
+	public void GameOver(){
+		GameOverPanel.SetActive (true);
 	}
 }
