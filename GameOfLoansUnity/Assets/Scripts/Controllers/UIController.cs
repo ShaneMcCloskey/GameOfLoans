@@ -41,6 +41,7 @@ public class UIController : MonoBehaviour
 	public Text currentDiff;
 	public GameObject currentPic;
 	public Slider progressBar;
+	public Text sgText;
 
 	// Pop up elements
 	public Text popUpText;
@@ -82,6 +83,15 @@ public class UIController : MonoBehaviour
 	public CardFlip cfCenter;
 	public CardFlip cfRight;
 
+	private float max = 0f;
+	private Player playerLocal;
+	private GameObject popUpLocal;
+	private Color textColor;
+	private float r;
+	private float g;
+	private float b;
+	private float newAlpha;
+
 	public void AwakeUI ()
 	{
 		HUDscoreText.text = "0";
@@ -89,6 +99,44 @@ public class UIController : MonoBehaviour
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
+	}
+
+	void Update ()
+	{
+		if (progressBar.value <= max)
+		{
+			if (progressBar.value >= max - 1)
+			{
+				progressBar.value += .05f;
+			}
+			else if (progressBar.value >= max - 0.05f)
+			{
+				progressBar.value += .025f;
+			}
+			else
+			{
+				progressBar.value += .1f;
+			}
+		}
+		CheckSubGoal (playerLocal, popUpLocal);
+		if (sgText.text != "")
+		{
+			textColor = sgText.color;
+
+			newAlpha = textColor.a - .01f;
+			r = sgText.color.r;
+			g = sgText.color.g;
+			b = sgText.color.b;
+
+			textColor = new Color (r, g, b, newAlpha);
+
+			sgText.color = textColor;
+		}
+		if (sgText.color.a <= 0f)
+		{
+			sgText.text = "";
+			sgText.color = new Color (r, g, b, 1.0f);
+		}
 	}
 
 	public void UpdateTurnsLeft (Player player)
@@ -173,7 +221,6 @@ public class UIController : MonoBehaviour
 		leftPriceProp.text = cardLeft.Price.ToString();
 		leftDiffProp.text = cardLeft.Difficulty.ToString();
 		leftPicProp.GetComponent<Image>().sprite = cardLeft.Pic;
-		//Debug.Log(cardLeft.Pic.name);
 
 		centerAddressProp.text = cardCenter.Address;
 		centerPriceProp.text = cardCenter.Price.ToString();
@@ -201,15 +248,19 @@ public class UIController : MonoBehaviour
     	public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad)
 	{
 		// need to have the panel in here
-		progressBar.value = player.CurrentProperty.CurrentProgress;
+		max = player.CurrentProperty.CurrentProgress;
+		//progressBar.value = player.CurrentProperty.CurrentProgress;
 		HUDscoreText.text = player.Score.ToString ();
 		HUDincomeText.text =  player.Income.ToString ();
 		HUDassetsText.text = player.Assets.ToString ();
 		HUDcreditText.text = player.Credit.ToString ();
 		HUDturnText.text = player.NumTurnsLeft.ToString ();
 
-		CheckSubGoal(player, popUpPanel);
-		CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
+		playerLocal = player;
+		popUpLocal = popUpPanel;
+
+		//CheckSubGoal(player, popUpPanel);
+		//CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
 
 	        if (quiz)
 	        {
@@ -220,53 +271,47 @@ public class UIController : MonoBehaviour
 
         void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
-		if ((player.CurrentProperty.CurrentProgress >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false)
+		if ((progressBar.value >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false)
 		{		
-			ShowPopUp("Step 1: Inital Contact", popUpPanel);
+			sgText.text = "Subgoal 1 Achieved!";
+			//ShowPopUp("Step 1: Inital Contact", popUpPanel);
 			player.CurrentProperty.Subgoal1Complete = true;
-			subgoalPopUpActive = true;
+			//subgoalPopUpActive = true;
 		}
-		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false)
+		else if ((progressBar.value >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false)
 		{
-			ShowPopUp("Step 2: Application Started", popUpPanel);
+			sgText.text = "Subgoal 2 Achieved!";
 			player.CurrentProperty.Subgoal2Complete = true;
-			subgoalPopUpActive = true;
 		}
-		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false)
+		else if ((progressBar.value >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false)
 		{
-			ShowPopUp("Step 3: Loan Set Up Complete", popUpPanel);
+			sgText.text = "Subgoal 3 Achieved!";
 			player.CurrentProperty.Subgoal3Complete = true;
-			subgoalPopUpActive = true;
 		}
-		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false)
+		else if ((progressBar.value >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false)
 		{
-			ShowPopUp("Step 4: Folder Received", popUpPanel);
+			sgText.text = "Subgoal 4 Achieved!";
 			player.CurrentProperty.Subgoal4Complete = true;
-			subgoalPopUpActive = true;
 		}
-		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.Subgoal5Complete == false)
+		else if ((progressBar.value >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.Subgoal5Complete == false)
 		{
-			ShowPopUp("Step 5: Conditionally Approved", popUpPanel);
+			sgText.text = "Subgoal 5 Achieved!";
 			player.CurrentProperty.Subgoal5Complete = true;
-			subgoalPopUpActive = true;
 		}
-		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.Subgoal6Complete == false)
+		else if ((progressBar.value >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.Subgoal6Complete == false)
 		{
-			ShowPopUp("Step 6: Final Signoff", popUpPanel);
+			sgText.text = "Subgoal 6 Achieved!";
 			player.CurrentProperty.Subgoal6Complete = true;
-			subgoalPopUpActive = true;
 		}
-		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.Subgoal7Complete == false)
+		else if ((progressBar.value >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.Subgoal7Complete == false)
 		{
-			ShowPopUp("Step 7: Closing Signing Has Been Scheduled", popUpPanel);
+			sgText.text = "Subgoal 7 Achieved!";
 			player.CurrentProperty.Subgoal7Complete = true;
-			subgoalPopUpActive = true;
 		}
-		else if ((player.CurrentProperty.CurrentProgress >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.Subgoal8Complete == false)
+		else if ((progressBar.value >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.Subgoal8Complete == false)
 		{
-			ShowPopUp("Step 8: Documents Sent Out to Settlement Agent", popUpPanel);
+			sgText.text = "Subgoal 8 Achieved!";
 			player.CurrentProperty.Subgoal8Complete = true;
-			subgoalPopUpActive = true;
 		}
 	}
 
