@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 public class UIController : MonoBehaviour 
 {
-	// public vars ----------------------
-
+	// public vars ---------------------------
 	// HUD text elements
 	public Text HUDscoreText;
 	public Text HUDincomeText;
@@ -14,29 +13,25 @@ public class UIController : MonoBehaviour
 	public Text HUDcreditText;
 	public Text HUDturnText;
 	// Opp knocks card text elements
-	public Text textOppKnocksTypeLeft;
-	public Text textOppKnocksDescLeft;
-	public Text textOppKnocksTypeCenter;
-	public Text textOppKnocksDescCenter;
-	public Text textOppKnocksTypeRight;
-	public Text textOppKnocksDescRight;
+	public Text leftOppKnocksType;
+	public Text leftOppKnocksDesc;
+	public Text centerOppKnocksType;
+	public Text centerOppKnocksDesc;
+	public Text rightOppKnocksType;
+	public Text rightOppKnocksDesc;
 	// Property hunt text element
 	public Text leftAddress;
 	public Text leftPrice;
-	public Text leftSqFoot;
 	public Text leftDiff;
 	public Text centerAddress;
 	public Text centerPrice;
-	public Text centerSqFoot;
 	public Text centerDiff;
 	public Text rightAddress;
 	public Text rightPrice;
-	public Text rightSqFoot;
 	public Text rightDiff;
-    // Loan in progress 
+        // Loan in progress 
 	public Text currentAddress;
 	public Text currentPrice;
-	public Text currentSqFoot;
 	public Text currentDiff;
 	public Slider progressBar;
 	// Pop up elements
@@ -44,43 +39,38 @@ public class UIController : MonoBehaviour
 	public Text popUpButtonText;
 	public Text popUpRandEventText;
    	public Text QuizQuestionText;
-    public Text AnswerAText;
-    public Text AnswerBText;
+	public Text AnswerAText;
+	public Text AnswerBText;
    	public Text AnswerCText;
-    public Text AnswerDText;
+	public Text AnswerDText;
 	// Change propety text elements
-    public GameObject firstCardDisplay;
-    public GameObject secondCardDisplay;
-    public GameObject thirdCardDisplay;
+	public GameObject firstCardDisplay;
+	public GameObject secondCardDisplay;
+	public GameObject thirdCardDisplay;
 
-    public Text firstAddress;
-    public Text firstPrice;
-    public Text firstSqFoot;
-    public Text firstDiff;
-    public Text secondAddress;
-    public Text secondPrice;
-    public Text secondSqFoot;
-    public Text secondDiff;
-    public Text thirdAddress;
-    public Text thirdPrice;
-    public Text thirdSqFoot;
-    public Text thirdDiff;
-
-	// gameover screen--------------------
-	public GameObject GameOverPanel;
+	public Text firstAddress;
+	public Text firstPrice;
+	//public Text firstSqFoot;
+	public Text firstDiff;
+	public Text secondAddress;
+	public Text secondPrice;
+	//public Text secondSqFoot;
+	public Text secondDiff;
+	public Text thirdAddress;
+	public Text thirdPrice;
+	//public Text thirdSqFoot;
+	public Text thirdDiff;
 
 	// private vars ----------------------
 	private bool randEventGoodOccured = false;
 	private bool randEventBadOccured = false;
 	private bool subgoalPopUpActive = false;
 
-    // Quiz vars -------------------------
-   	private bool quizFailed = false;
-    private string correctAnswer = "";
-    private int currentQuizNum = 0;
-    private List<int> completedQuizes = new List<int>();
-
-    	public Font numFont;
+	// Quiz vars -------------------------
+	private bool quizFailed = false;
+	private string correctAnswer = "";
+	private int currentQuizNum = 0;
+	private List<int> completedQuizes = new List<int>();
 
 	public CardFlip cfLeft;
 	public CardFlip cfCenter;
@@ -93,8 +83,6 @@ public class UIController : MonoBehaviour
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
-
-		//GameOverPanel = GameObject.Get
 	}
 
 	public void EnterOppKnocksScreenUI()
@@ -111,88 +99,85 @@ public class UIController : MonoBehaviour
 	{
 		if (leftRightOrCenter == "left")
 		{
-			cfLeft.Hit();
+			cfLeft.Hit(card);
 			if (card.Category == 1) 
 			{
-				textOppKnocksTypeLeft.text = "Income Card";
-				textOppKnocksDescLeft.text = card.Desc;
+				leftOppKnocksType.text = "Income Card";
+				leftOppKnocksDesc.text = card.Desc;
 				HUDincomeText.text = player.Income.ToString();
 			} 
 			else if (card.Category == 2) 
 			{
-				textOppKnocksTypeLeft.text = "Asset Card";
-				textOppKnocksDescLeft.text = card.Desc;
+				leftOppKnocksType.text = "Asset Card";
+				leftOppKnocksDesc.text = card.Desc;
 				HUDassetsText.text = player.Assets.ToString();
 			} 
 			else 
 			{
-				textOppKnocksTypeLeft.text = "Credit Card";
-				textOppKnocksDescLeft.text = card.Desc;
+				leftOppKnocksType.text = "Credit Card";
+				leftOppKnocksDesc.text = card.Desc;
 				HUDcreditText.text = player.Credit.ToString();
 			}
 		}
 		else if (leftRightOrCenter == "center")
 		{
-			cfCenter.Hit();
+			cfCenter.Hit(card);
 			if (card.Category == 1) 
 			{
-				textOppKnocksTypeCenter.text = "Income Card";
-				textOppKnocksDescCenter.text = card.Desc;
+				centerOppKnocksType.text = "Income Card";
+				centerOppKnocksDesc.text = card.Desc;
 				HUDincomeText.text = player.Income.ToString();
 			} 
 			else if (card.Category == 2) 
 			{
-				textOppKnocksTypeCenter.text = "Asset Card";
-				textOppKnocksDescCenter.text = card.Desc;
+				centerOppKnocksType.text = "Asset Card";
+				centerOppKnocksDesc.text = card.Desc;
 				HUDassetsText.text = player.Assets.ToString();
 			} 
 			else 
 			{
-				textOppKnocksTypeCenter.text = "Credit Card";
-				textOppKnocksDescCenter.text = card.Desc;
+				centerOppKnocksType.text = "Credit Card";
+				centerOppKnocksDesc.text = card.Desc;
 				HUDcreditText.text = player.Credit.ToString();
 			}
 		}
 		else if (leftRightOrCenter == "right")
 		{
-			cfRight.Hit();
+			Debug.Log("in");
+			cfRight.Hit(card);
 			if (card.Category == 1) 
 			{
-				textOppKnocksTypeRight.text = "Income Card";
-				textOppKnocksDescRight.text = card.Desc;
+				rightOppKnocksType.text = "Income Card";
+				rightOppKnocksDesc.text = card.Desc;
 				HUDincomeText.text = player.Income.ToString();
 			} 
 			else if (card.Category == 2) 
 			{
-				textOppKnocksTypeRight.text = "Asset Card";
-				textOppKnocksDescRight.text = card.Desc;
+				rightOppKnocksType.text = "Asset Card";
+				rightOppKnocksDesc.text = card.Desc;
 				HUDassetsText.text = player.Assets.ToString();
 			} 
 			else 
 			{
-				textOppKnocksTypeRight.text = "Credit Card";
-				textOppKnocksDescRight.text = card.Desc;
+				rightOppKnocksType.text = "Credit Card";
+				rightOppKnocksDesc.text = card.Desc;
 				HUDcreditText.text = player.Credit.ToString();
 			}
 		}
 	}
 
-
 	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
 	{
 		leftAddress.text = cardLeft.Address;
 		leftPrice.text = cardLeft.Price.ToString();
-		leftSqFoot.text = cardLeft.SqFoot.ToString();
 		leftDiff.text = cardLeft.Difficulty.ToString();
 
 		centerAddress.text = cardCenter.Address;
 		centerPrice.text = cardCenter.Price.ToString();
-		centerSqFoot.text = cardCenter.SqFoot.ToString();
 		centerDiff.text = cardCenter.Difficulty.ToString();
 
 		rightAddress.text = cardRight.Address;
 		rightPrice.text = cardRight.Price.ToString();
-		rightSqFoot.text = cardRight.SqFoot.ToString();
 		rightDiff.text = cardRight.Difficulty.ToString();
 	}
 
@@ -201,14 +186,13 @@ public class UIController : MonoBehaviour
 	{
 		currentAddress.text = player.CurrentProperty.Address;
 		currentPrice.text = player.CurrentProperty.Price.ToString();
-		currentSqFoot.text = player.CurrentProperty.SqFoot.ToString();
 		currentDiff.text = player.CurrentProperty.Difficulty.ToString();
 
-        progressBar.maxValue = player.CurrentProperty.NumToClose;
-        progressBar.value = player.CurrentProperty.CurrentProgress;
+	        progressBar.maxValue = player.CurrentProperty.NumToClose;
+	        progressBar.value = player.CurrentProperty.CurrentProgress;
 	}
 
-    public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad)
+    	public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad)
 	{
 		// need to have the panel in here
 		progressBar.value = player.CurrentProperty.CurrentProgress;
@@ -221,14 +205,14 @@ public class UIController : MonoBehaviour
 		CheckSubGoal(player, popUpPanel);
 		CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
 
-        if (quiz)
-        {
-            ShowQuiz(popUpPanel);
-        }
-    }
+	        if (quiz)
+	        {
+	            ShowQuiz(popUpPanel);
+	        }
+	}	
 
 
-    void CheckSubGoal (Player player, GameObject popUpPanel)
+        void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
 		if ((player.CurrentProperty.CurrentProgress >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false)
 		{		
@@ -695,48 +679,41 @@ public class UIController : MonoBehaviour
     // Display the cards the player current has, up to 3 prop cards
 	public void EnterChangePropertyScreenUI (Player player)
 	{
-        firstCardDisplay.SetActive(false);
-        secondCardDisplay.SetActive(false);
-        thirdCardDisplay.SetActive(false);
+	        firstCardDisplay.SetActive(false);
+	        secondCardDisplay.SetActive(false);
+	        thirdCardDisplay.SetActive(false);
 
-        // First Prop card
+	        // First Prop card
 
-        if (player.PlayerCardsProperty.Count >= 1)
-        {
-            firstCardDisplay.SetActive(true);
+	        if (player.PlayerCardsProperty.Count >= 1)
+	        {
+	            firstCardDisplay.SetActive(true);
 
-            firstAddress.text = player.PlayerCardsProperty[0].Address;
-            firstPrice.text = player.PlayerCardsProperty[0].Price.ToString();
-            firstSqFoot.text = player.PlayerCardsProperty[0].SqFoot.ToString();
-            firstDiff.text = player.PlayerCardsProperty[0].Difficulty.ToString();
-        }
+	            firstAddress.text = player.PlayerCardsProperty[0].Address;
+	            firstPrice.text = player.PlayerCardsProperty[0].Price.ToString();
+	            firstDiff.text = player.PlayerCardsProperty[0].Difficulty.ToString();
+	        }
 
-        // Second Prop card
+	        // Second Prop card
 
-        if (player.PlayerCardsProperty.Count >= 2)
-        {
-            secondCardDisplay.SetActive(true);
+	        if (player.PlayerCardsProperty.Count >= 2)
+	        {
+	            secondCardDisplay.SetActive(true);
 
-            secondAddress.text = player.PlayerCardsProperty[1].Address;
-            secondPrice.text = player.PlayerCardsProperty[1].Price.ToString();
-            secondSqFoot.text = player.PlayerCardsProperty[1].SqFoot.ToString();
-            secondDiff.text = player.PlayerCardsProperty[1].Difficulty.ToString();
-        }
-        
-        // Third Prop card
+	            secondAddress.text = player.PlayerCardsProperty[1].Address;
+	            secondPrice.text = player.PlayerCardsProperty[1].Price.ToString();
+	            secondDiff.text = player.PlayerCardsProperty[1].Difficulty.ToString();
+	        }
+	        
+	        // Third Prop card
 
-        if (player.PlayerCardsProperty.Count >= 3)
-        {
-            thirdCardDisplay.SetActive(true);
+	        if (player.PlayerCardsProperty.Count >= 3)
+	        {
+	            thirdCardDisplay.SetActive(true);
 
-            thirdAddress.text = player.PlayerCardsProperty[2].Address;
-            thirdPrice.text = player.PlayerCardsProperty[2].Price.ToString();
-            thirdSqFoot.text = player.PlayerCardsProperty[2].SqFoot.ToString();
-            thirdDiff.text = player.PlayerCardsProperty[2].Difficulty.ToString();
-        }
-	}
-
-	public void GameOver(){
-		GameOverPanel.SetActive (true);
+	            thirdAddress.text = player.PlayerCardsProperty[2].Address;
+	            thirdPrice.text = player.PlayerCardsProperty[2].Price.ToString();
+	            thirdDiff.text = player.PlayerCardsProperty[2].Difficulty.ToString();
+	        }
 	}
 }

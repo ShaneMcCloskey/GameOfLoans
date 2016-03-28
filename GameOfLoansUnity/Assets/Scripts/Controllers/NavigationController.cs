@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-//Test Comment shane was here test
+using UnityEngine.SceneManagement;
 
 public class NavigationController : MonoBehaviour 
 {
@@ -27,24 +27,23 @@ public class NavigationController : MonoBehaviour
 	public Button propHuntButton;
 
 	public GameObject changePropertyButton;
+
 	//public GameObject cancelLoanButton;
 
 	public GameController gameControler;
 	public HighScoreController HighScoreController;
+	public BackgroundScroll backgroundScroll;
+
 
 	// private vars -------------------------
 	private GameObject currentPanel;
 
-	/*public CardFlip cfLeft;
-	public CardFlip cfCenter;
-	public CardFlip cfRight;*/
-
-	public BackgroundScroll backgroundScroll;
-
+	private bool isInputEnabled;
 
 	// Use this for initialization
 	public void Awake() 
 	{
+		isInputEnabled = true;
 		currentPanel = mainMenuPanel;
 		mainMenuPanel.SetActive (true);
 		howToPlayPanel.SetActive (false);
@@ -60,6 +59,11 @@ public class NavigationController : MonoBehaviour
 		popUpPanelRandEvent.SetActive(false);
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
+	}
+
+	void ProcessInput ()
+	{
+		
 	}
 
 	// main menu buttons ----------------------------------
@@ -139,30 +143,30 @@ public class NavigationController : MonoBehaviour
 		gameControler.EnterLoanInProgressScreen();
 	}
 
-    // Loan in Progress Buttons --------------------------------------
-    public void OnButtonRollDice()
-    {
-        gameControler.RollDie(popUpPanel, quizPanel);
-    }
+	// Loan in Progress Buttons --------------------------------------
+	public void OnButtonRollDice()
+	{
+		gameControler.RollDie(popUpPanel, quizPanel);
+	}
 
-    public void OnButtonChangePropertyTo(int num)
-    {
-        gameControler.ChangePropertyTo(num);
-        ChangePanel(loanInProgressPanel, true, true);
-        gameControler.EnterLoanInProgressScreen();
-    }
+	public void OnButtonChangePropertyTo(int num)
+	{
+		gameControler.ChangePropertyTo(num);
+		ChangePanel(loanInProgressPanel, true, true);
+		gameControler.EnterLoanInProgressScreen();
+	}
 
-    // PopUp ---------------------------------------------------------
-    public void OnPopUpOk ()
+	// PopUp ---------------------------------------------------------
+	public void OnPopUpOk ()
 	{
 		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel, quizPanel);
 	}
 
-    // Quiz Answer Buttons
-    public void OnButtonAnswer(string letter)
-    {
-        gameControler.ProcessAnswer(quizPanel, popUpPanel, letter);
-    }
+	// Quiz Answer Buttons
+	public void OnButtonAnswer(string letter)
+	{
+		gameControler.ProcessAnswer(quizPanel, popUpPanel, letter);
+	}
 
 	public void OnRandEventPopUpOk ()
 	{
@@ -170,7 +174,7 @@ public class NavigationController : MonoBehaviour
 	}
 	public void OnHighScoresHomeButtonClick()
 	{
-		this.Awake ();
+		SceneManager.LoadScene("MainScene");
 	}
 
 	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CardFlip : MonoBehaviour 
 {
@@ -28,9 +29,12 @@ public class CardFlip : MonoBehaviour
 
 	private bool check = false;
 
+	public Sprite assetsSprite;
+	public Sprite incomeSprite;
+	public Sprite creditSprite;
+
 	void Start ()
 	{
-		//Debug.Log(gameObject.name);
 		startPosX = transform.position.x;
 		startPosY = transform.position.y;
 		startPosZ = transform.position.z;
@@ -94,13 +98,26 @@ public class CardFlip : MonoBehaviour
 		Init();
 	}
 
-	public void Hit ()
+	public void Hit (OppKnocksCard card)
 	{
 		if (isAnimationProcessing)
 		{
 			return;
 		}
-		StartCoroutine(flip());
+		StartCoroutine (flip ());
+
+		if (card.Category == 1)
+		{
+			front.GetComponent<Image> ().sprite = incomeSprite;
+		}
+		else if (card.Category == 2)
+		{
+			front.GetComponent<Image> ().sprite = assetsSprite;
+		}
+		else
+		{
+			front.GetComponent<Image> ().sprite = creditSprite;
+		}
 	}
 
 	IEnumerator flip ()

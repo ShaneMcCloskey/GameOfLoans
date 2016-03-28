@@ -10,10 +10,11 @@ using System.Text;
 
 public class HighScoreController : MonoBehaviour
 {
-    public Player player;
-    public GameObject HighScoresPage;
-    public GameObject PlayerInputPage;
-    public GameObject scoresPanel;
+	private Player player;
+	public GameObject HighScoresPage;
+	public GameObject PlayerInputPage;
+	public GameObject scoresPanel;
+	public GameObject gameOverPanel;
 	public GameObject HighScorePopUP;
 	public Text PopUpText;
 	public Text PageNumText;
@@ -22,24 +23,24 @@ public class HighScoreController : MonoBehaviour
 	public Text GameOverCredit;
 	public Text GameOverLoans;
 	public Text GameOverScore;
-    public InputField NameInput;
-    public InputField TeamInput;
+	public InputField NameInput;
+	public InputField TeamInput;
 	public NavigationController NavController;
-    const int RANK_LOC = 0;
-    const int NAME_LOC = 1;
-    const int TEAM_LOC = 2;
-    const int Score_LOC = 3;
-    const int LOANS_LOC = 4;
+	const int RANK_LOC = 0;
+	const int NAME_LOC = 1;
+	const int TEAM_LOC = 2;
+	const int Score_LOC = 3;
+	const int LOANS_LOC = 4;
 
-    const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?";
-    const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
-    const string getnumscoresurl = "http://35.9.22.106/Api/HighScores/GetNumScores";
-    int pageNumber = 0;
-    int scoresPerPage = 25;
-    int maxPageNum = 0;
-    int minPageNum = 0;
-    int totalScores = 0;
-    private bool isLoadingScores = true;
+	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?";
+	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
+	const string getnumscoresurl = "http://35.9.22.106/Api/HighScores/GetNumScores";
+	int pageNumber = 0;
+	int scoresPerPage = 25;
+	int maxPageNum = 0;
+	int minPageNum = 0;
+	int totalScores = 0;
+	private bool isLoadingScores = true;
 
 
     //change to start to get high scores page to work
@@ -153,6 +154,7 @@ public class HighScoreController : MonoBehaviour
             //change this when integrating into main scene
             //			sendingScore.Score = player.score;
             //				sendingScore.LoansClosed = player.numPropertiesClosed;
+            gameOverPanel.SetActive(false);
         }
     }
 		
@@ -220,18 +222,19 @@ public class HighScoreController : MonoBehaviour
 	}
 	public void SetPlayer(Player finalPlayer)
 	{
-		this.player = finalPlayer;
+		player = finalPlayer;
 		GameOverAssets.text = finalPlayer.Assets.ToString();
 		GameOverLoans.text = finalPlayer.NumPropertiesClosed.ToString ();
 		GameOverIncome.text = finalPlayer.Income.ToString ();
+		GameOverCredit.text = finalPlayer.Credit.ToString();
 		GameOverScore.text = finalPlayer.Score.ToString ();
-
+		gameOverPanel.SetActive(true);
 	}
-	public void OnPopUPOk(){
+	public void OnPopUPOk()
+	{
 		HighScorePopUP.SetActive(false);
 		NavController.Awake ();
 	}
-
 }
 
 

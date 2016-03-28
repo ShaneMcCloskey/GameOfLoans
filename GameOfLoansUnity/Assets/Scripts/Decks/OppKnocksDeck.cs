@@ -17,9 +17,9 @@ public class OppKnocksDeck : MonoBehaviour
 		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by 100,000.", 100000, 2));
 		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by 100,000", 100000, 2));
 		cards.Add(new OppKnocksCard("You bought a brand new home, increase assets by 100,000", 100000, 2));
-		//cards.Add(new OppKnocksCard("Card 2", 20, 2));
-		//cards.Add(new OppKnocksCard("Card 3", 30, 2));
-		/*cards.Add(new OppKnocksCard("Card 4", 10, 1));
+		cards.Add(new OppKnocksCard("Card 2", 20, 2));
+		cards.Add(new OppKnocksCard("Card 3", 30, 2));
+		cards.Add(new OppKnocksCard("Card 4", 10, 1));
 		cards.Add(new OppKnocksCard("Card 5", 20, 2));
 		cards.Add(new OppKnocksCard("Card 6", 30, 3));
 		cards.Add(new OppKnocksCard("Card 7", 10, 1));
@@ -65,6 +65,6 @@ public class OppKnocksDeck : MonoBehaviour
 		cards.Add(new OppKnocksCard("Card 47", 20, 2));
 		cards.Add(new OppKnocksCard("Card 48", 30, 3));
 		cards.Add(new OppKnocksCard("Card 49", 30, 3));
-		cards.Add(new OppKnocksCard("Card 50", 30, 3));*/
+		cards.Add(new OppKnocksCard("Card 50", 30, 3));
 	}
 }
