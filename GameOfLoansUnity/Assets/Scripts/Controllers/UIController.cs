@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
 	public Text HUDassetsText;
 	public Text HUDcreditText;
 	public Text HUDturnText;
+
 	// Opp knocks card text elements
 	public Text leftOppKnocksType;
 	public Text leftOppKnocksDesc;
@@ -19,6 +20,7 @@ public class UIController : MonoBehaviour
 	public Text centerOppKnocksDesc;
 	public Text rightOppKnocksType;
 	public Text rightOppKnocksDesc;
+
 	// Property hunt text element
 	public Text leftAddressProp;
 	public Text leftPriceProp;
@@ -32,11 +34,14 @@ public class UIController : MonoBehaviour
 	public Text rightPriceProp;
 	public Text rightDiffProp;
 	public GameObject rightPicProp;
+
         // Loan in progress 
 	public Text currentAddress;
 	public Text currentPrice;
 	public Text currentDiff;
+	public GameObject currentPic;
 	public Slider progressBar;
+
 	// Pop up elements
 	public Text popUpText;
 	public Text popUpButtonText;
@@ -46,6 +51,7 @@ public class UIController : MonoBehaviour
 	public Text AnswerBText;
    	public Text AnswerCText;
 	public Text AnswerDText;
+
 	// Change propety text elements
 	public GameObject firstCardDisplay;
 	public GameObject secondCardDisplay;
@@ -53,15 +59,12 @@ public class UIController : MonoBehaviour
 
 	public Text firstAddress;
 	public Text firstPrice;
-	//public Text firstSqFoot;
 	public Text firstDiff;
 	public Text secondAddress;
 	public Text secondPrice;
-	//public Text secondSqFoot;
 	public Text secondDiff;
 	public Text thirdAddress;
 	public Text thirdPrice;
-	//public Text thirdSqFoot;
 	public Text thirdDiff;
 
 	// private vars ----------------------
@@ -189,6 +192,7 @@ public class UIController : MonoBehaviour
 		currentAddress.text = player.CurrentProperty.Address;
 		currentPrice.text = player.CurrentProperty.Price.ToString();
 		currentDiff.text = player.CurrentProperty.Difficulty.ToString();
+		currentPic.GetComponent<Image>().sprite = player.CurrentProperty.Pic;
 
 	        progressBar.maxValue = player.CurrentProperty.NumToClose;
 	        progressBar.value = player.CurrentProperty.CurrentProgress;
