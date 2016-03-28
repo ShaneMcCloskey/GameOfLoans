@@ -2,15 +2,16 @@
 using System.Collections;
 using System;
 
+
 public class PropertyCard : IComparable<PropertyCard> 
 {
 	//public Image pic;
 	private string address;
 	private int price;
-	private int sqFoot;
 	private string difficulty;
         private int numToClose;
         private int currentProgress;
+	private Sprite pic;
         private bool subgoal1Complete;
 	private bool subgoal2Complete;
 	private bool subgoal3Complete;
@@ -20,17 +21,16 @@ public class PropertyCard : IComparable<PropertyCard>
 	private bool subgoal7Complete;
 	private bool subgoal8Complete;
 
-
-	public PropertyCard (string Address, int Price, int SqFoot, string Difficulty, int NumToClose, int CurrentProgress,
+	public PropertyCard (string Address, int Price, string Difficulty, int NumToClose, int CurrentProgress, Sprite Pic,
 		             bool Subgoal1Complete, bool Subgoal2Complete, bool Subgoal3Complete, bool Subgoal4Complete,
 		             bool Subgoal5Complete, bool Subgoal6Complete, bool Subgoal7Complete, bool Subgoal8Complete)
 	{
 		address = Address;
 		price = Price;
-		sqFoot = SqFoot;
 		difficulty = Difficulty;
 	        numToClose = NumToClose;
 	        currentProgress = CurrentProgress;
+	        pic = Pic;
 	        subgoal1Complete = Subgoal1Complete;
 		subgoal2Complete = Subgoal2Complete;
 		subgoal3Complete = Subgoal3Complete;
@@ -53,12 +53,6 @@ public class PropertyCard : IComparable<PropertyCard>
 		set { price = value; }
 	}
 
-	public int SqFoot
-	{
-		get { return sqFoot; }
-		set { sqFoot = value; }
-	}
-
 	public string Difficulty
 	{
 		get { return difficulty; }
@@ -75,6 +69,12 @@ public class PropertyCard : IComparable<PropertyCard>
 	{
 		get { return currentProgress; }
 		set { currentProgress = value; }
+	}
+
+	public Sprite Pic
+	{
+		get { return pic; }
+		set { pic = value; }
 	}
 
 	public bool Subgoal1Complete

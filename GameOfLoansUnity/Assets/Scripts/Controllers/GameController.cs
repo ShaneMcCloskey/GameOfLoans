@@ -37,10 +37,6 @@ public class GameController : MonoBehaviour
 	}
 
 	// Opp knocks functions ------------------------------
-	public void EnterOppKnocksScreen()
-	{
-		uiController.EnterOppKnocksScreenUI();
-	}
 
 	public void DrawOppKnocksCard (string leftRightOrCenter)
 	{

@@ -11,13 +11,29 @@ public class PropertyDeck : MonoBehaviour
 		get { return cards; }
 	}
 
+	public Sprite pic1;
+	public Sprite pic2;
+	public Sprite pic3;
+
 	void Awake()
 	{
 		// difficulty, easy = 1, medium = 2, hard = 3
-		cards.Add(new PropertyCard("Address 1", 100, 1000, "Easy", 54, 0, false, false, false, false, false, false, false, false));
-		cards.Add(new PropertyCard("Address 2", 200, 2000, "Medium", 81, 0, false, false, false, false, false, false,false, false));
-		cards.Add(new PropertyCard("Address 3", 300, 3000, "Hard", 108, 0, false, false, false, false, false, false, false, false));
-		cards.Add(new PropertyCard("Address 4", 100, 1000, "Easy", 54, 0, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 1", 100, "Easy", 54, 0, pic1, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 2", 200, "Medium", 81, 0, pic2, false, false, false, false, false, false,false, false));
+		cards.Add(new PropertyCard("Address 3", 300, "Hard", 108, 0, pic3, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 1", 100, "Easy", 54, 0, pic1, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 2", 200, "Medium", 81, 0, pic2, false, false, false, false, false, false,false, false));
+		cards.Add(new PropertyCard("Address 3", 300, "Hard", 108, 0, pic3, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 1", 100, "Easy", 54, 0, pic1, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 2", 200, "Medium", 81, 0, pic2, false, false, false, false, false, false,false, false));
+		cards.Add(new PropertyCard("Address 3", 300, "Hard", 108, 0, pic3, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 1", 100, "Easy", 54, 0, pic1, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 2", 200, "Medium", 81, 0, pic2, false, false, false, false, false, false,false, false));
+		cards.Add(new PropertyCard("Address 3", 300, "Hard", 108, 0, pic3, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 1", 100, "Easy", 54, 0, pic1, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 2", 200, "Medium", 81, 0, pic2, false, false, false, false, false, false,false, false));
+		cards.Add(new PropertyCard("Address 3", 300, "Hard", 108, 0, pic3, false, false, false, false, false, false, false, false));
+		/*cards.Add(new PropertyCard("Address 4", 100, 1000, "Easy", 54, 0, false, false, false, false, false, false, false, false));
 		cards.Add(new PropertyCard("Address 5", 200, 2000, "Medium", 81, 0, false, false, false, false, false, false, false, false));
 		cards.Add(new PropertyCard("Address 6", 300, 3000, "Hard", 108, 0, false, false, false, false, false, false, false, false));
 		cards.Add(new PropertyCard("Address 7", 100, 1000, "Easy", 54, 0, false, false, false, false, false, false,false, false));
@@ -63,6 +79,6 @@ public class PropertyDeck : MonoBehaviour
 		cards.Add(new PropertyCard("Address 47", 200, 2000, "Medium", 81, 0, false, false, false, false, false, false, false, false));
 		cards.Add(new PropertyCard("Address 48", 300, 3000, "Hard", 108, 0, false, false, false, false, false, false, false, false));
 		cards.Add(new PropertyCard("Address 49", 200, 2000, "Medium", 81, 0, false, false, false, false, false, false, false, false));
-		cards.Add(new PropertyCard("Address 50", 300, 3000, "Hard", 108, 0, false, false, false, false, false, false, false, false));
+		cards.Add(new PropertyCard("Address 50", 300, 3000, "Hard", 108, 0, false, false, false, false, false, false, false, false));*/
 	}
 }

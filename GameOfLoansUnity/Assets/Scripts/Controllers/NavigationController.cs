@@ -70,7 +70,7 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonPlay()
 	{
 		ChangePanel (oppKnocksPanel, true, false);
-		gameControler.EnterOppKnocksScreen ();
+		//gameControler.EnterOppKnocksScreen ();
 		backgroundScroll.scroll = false;
 		backgroundScroll.Change();
 	}
@@ -95,7 +95,6 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonOppKnocks()
 	{
 		ChangePanel (oppKnocksPanel, true, false);
-		gameControler.EnterOppKnocksScreen ();
 	}
 
 	public void OnButtonPropertyHunt()

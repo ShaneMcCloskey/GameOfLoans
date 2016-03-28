@@ -92,7 +92,6 @@ public class ScrollableList : MonoBehaviour
 			cardText = itemList[i].GetComponentsInChildren<Text> ();
 			string address = player.PlayerCardsProperty [i].Address;
 			int price = player.PlayerCardsProperty [i].Price;
-			int sqFoot = player.PlayerCardsProperty [i].SqFoot;
 			string diff = player.PlayerCardsProperty [i].Difficulty;
 
 			for (int j = 0; j < cardText.Length; j++)
@@ -104,10 +103,6 @@ public class ScrollableList : MonoBehaviour
 				if (j == 2)
 				{
 					cardText [j].text = price.ToString ();
-				}
-				if (j == 4)
-				{
-					cardText [j].text = sqFoot.ToString ();
 				}
 				if (j == 6)
 				{

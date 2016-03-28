@@ -20,15 +20,18 @@ public class UIController : MonoBehaviour
 	public Text rightOppKnocksType;
 	public Text rightOppKnocksDesc;
 	// Property hunt text element
-	public Text leftAddress;
-	public Text leftPrice;
-	public Text leftDiff;
-	public Text centerAddress;
-	public Text centerPrice;
-	public Text centerDiff;
-	public Text rightAddress;
-	public Text rightPrice;
-	public Text rightDiff;
+	public Text leftAddressProp;
+	public Text leftPriceProp;
+	public Text leftDiffProp;
+	public GameObject leftPicProp;
+	public Text centerAddressProp;
+	public Text centerPriceProp;
+	public Text centerDiffProp;
+	public GameObject centerPicProp;
+	public Text rightAddressProp;
+	public Text rightPriceProp;
+	public Text rightDiffProp;
+	public GameObject rightPicProp;
         // Loan in progress 
 	public Text currentAddress;
 	public Text currentPrice;
@@ -83,11 +86,6 @@ public class UIController : MonoBehaviour
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
-	}
-
-	public void EnterOppKnocksScreenUI()
-	{
-		//textOppKnocksType.text = "";
 	}
 
 	public void UpdateTurnsLeft (Player player)
@@ -168,17 +166,21 @@ public class UIController : MonoBehaviour
 
 	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
 	{
-		leftAddress.text = cardLeft.Address;
-		leftPrice.text = cardLeft.Price.ToString();
-		leftDiff.text = cardLeft.Difficulty.ToString();
+		leftAddressProp.text = cardLeft.Address;
+		leftPriceProp.text = cardLeft.Price.ToString();
+		leftDiffProp.text = cardLeft.Difficulty.ToString();
+		leftPicProp.GetComponent<Image>().sprite = cardLeft.Pic;
+		//Debug.Log(cardLeft.Pic.name);
 
-		centerAddress.text = cardCenter.Address;
-		centerPrice.text = cardCenter.Price.ToString();
-		centerDiff.text = cardCenter.Difficulty.ToString();
+		centerAddressProp.text = cardCenter.Address;
+		centerPriceProp.text = cardCenter.Price.ToString();
+		centerDiffProp.text = cardCenter.Difficulty.ToString();
+		centerPicProp.GetComponent<Image>().sprite = cardCenter.Pic;
 
-		rightAddress.text = cardRight.Address;
-		rightPrice.text = cardRight.Price.ToString();
-		rightDiff.text = cardRight.Difficulty.ToString();
+		rightAddressProp.text = cardRight.Address;
+		rightPriceProp.text = cardRight.Price.ToString();
+		rightDiffProp.text = cardRight.Difficulty.ToString();
+		rightPicProp.GetComponent<Image>().sprite = cardRight.Pic;
 	}
 
 	// Loan in Progess functions -----------------------------------------------
