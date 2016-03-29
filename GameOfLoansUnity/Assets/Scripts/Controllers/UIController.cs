@@ -68,9 +68,7 @@ public class UIController : MonoBehaviour
 	public Text thirdPrice;
 	public Text thirdDiff;
 
-	// private vars ----------------------
-	private bool randEventGoodOccured = false;
-	private bool randEventBadOccured = false;
+	// private vars -----------------------------------------
 
 	// Quiz vars -------------------------
 	private bool quizFailed = false;
@@ -135,7 +133,6 @@ public class UIController : MonoBehaviour
 
 	void DecreaseBar ()
 	{
-		Debug.Log("INNN");
 		if (progressBar.value >= max)
 		{
 			if (progressBar.value <= max + 1)
@@ -154,7 +151,6 @@ public class UIController : MonoBehaviour
 		else
 		{
 			check = true;
-			//needToUpdateBar = false;
 			decrease = false;
 		}
 	}
@@ -163,16 +159,10 @@ public class UIController : MonoBehaviour
 	{
 		if (needToUpdateBar)
 		{
-			Debug.Log ("1");
 			if (playerLocal.CurrentProperty.CurrentProgress <= max)
 			{
 				IncreaseBar ();
 			}
-			/*else if (progressBar.value > playerLocal.CurrentProperty.CurrentProgress && badLocal)
-			{
-				Debug.Log("called");
-				DecreaseBar ();
-			}*/
 		}
 		else
 		{
@@ -269,7 +259,6 @@ public class UIController : MonoBehaviour
 		}
 		else if (leftRightOrCenter == "right")
 		{
-			Debug.Log("in");
 			cfRight.Hit(card);
 			if (card.Category == 1) 
 			{
@@ -339,9 +328,6 @@ public class UIController : MonoBehaviour
 		goodLocal = randEventGood;
 		badLocal = randEventBad;
 
-		//CheckSubGoal(player, popUpPanel);
-		//CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
-
 	        if (quiz)
 	        {
 	            ShowQuiz(popUpPanel);
@@ -354,9 +340,7 @@ public class UIController : MonoBehaviour
 		if ((progressBar.value >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false)
 		{		
 			sgText.text = "Subgoal 1 Achieved!";
-			//ShowPopUp("Step 1: Inital Contact", popUpPanel);
 			player.CurrentProperty.Subgoal1Complete = true;
-			//subgoalPopUpActive = true;
 		}
 		else if ((progressBar.value >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false)
 		{
@@ -397,9 +381,6 @@ public class UIController : MonoBehaviour
 
 	void CheckRandomEvent (bool randEventGood, bool randEventBad, GameObject popUpPanel, Player player)
 	{
-		randEventGoodOccured = randEventGood;
-		randEventBadOccured = randEventBad;
-
 		if (randEventGood)
 		{
 			ShowPopUp("Positive Random Event", popUpPanel);
@@ -414,12 +395,10 @@ public class UIController : MonoBehaviour
 
 	void ProcessNegativeEvent (Player player)
 	{
-		player.CurrentProperty.CurrentProgress -= 1;
+		player.CurrentProperty.CurrentProgress -= 3;
 		max = player.CurrentProperty.CurrentProgress;
-		//needToUpdateBar = true;
 		decrease = true;
 		badLocal = false;
-		//progressBar.value = player.CurrentProperty.CurrentProgress;
 		if ((player.CurrentProperty.CurrentProgress <= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == true)
 		{
 			player.CurrentProperty.Subgoal1Complete = false;
@@ -460,7 +439,6 @@ public class UIController : MonoBehaviour
 		max = player.CurrentProperty.CurrentProgress;
 		needToUpdateBar = true;
 		goodLocal = false;
-		//progressBar.value = player.CurrentProperty.CurrentProgress;
 	}
 
 	// add param to check if need to be sent to diff panel
