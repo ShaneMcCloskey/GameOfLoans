@@ -98,6 +98,8 @@ public class UIController : MonoBehaviour
 
 	private bool check = false;
 
+	private bool decrease = false;
+
 	public void AwakeUI ()
 	{
 		HUDscoreText.text = "0";
@@ -133,7 +135,8 @@ public class UIController : MonoBehaviour
 
 	void DecreaseBar ()
 	{
-		if (progressBar.value >= max && needToUpdateBar == true)
+		Debug.Log("INNN");
+		if (progressBar.value >= max)
 		{
 			if (progressBar.value <= max + 1)
 			{
@@ -151,7 +154,8 @@ public class UIController : MonoBehaviour
 		else
 		{
 			check = true;
-			needToUpdateBar = false;
+			//needToUpdateBar = false;
+			decrease = false;
 		}
 	}
 
@@ -159,22 +163,29 @@ public class UIController : MonoBehaviour
 	{
 		if (needToUpdateBar)
 		{
+			Debug.Log ("1");
 			if (playerLocal.CurrentProperty.CurrentProgress <= max)
 			{
 				IncreaseBar ();
 			}
-			else if (playerLocal.CurrentProperty.CurrentProgress >= max)
+			/*else if (progressBar.value > playerLocal.CurrentProperty.CurrentProgress && badLocal)
 			{
+				Debug.Log("called");
 				DecreaseBar ();
-			}
+			}*/
 		}
 		else
 		{
 			if (check)
 			{
-				CheckRandomEvent(goodLocal, badLocal, popUpLocal, playerLocal);
+				CheckRandomEvent (goodLocal, badLocal, popUpLocal, playerLocal);
 				check = false;
 			}
+		}
+
+		if (decrease)
+		{
+			DecreaseBar();
 		}
 
 		CheckSubGoal (playerLocal, popUpLocal);
@@ -403,8 +414,11 @@ public class UIController : MonoBehaviour
 
 	void ProcessNegativeEvent (Player player)
 	{
-		player.CurrentProperty.CurrentProgress -= 3;
+		player.CurrentProperty.CurrentProgress -= 1;
 		max = player.CurrentProperty.CurrentProgress;
+		//needToUpdateBar = true;
+		decrease = true;
+		badLocal = false;
 		//progressBar.value = player.CurrentProperty.CurrentProgress;
 		if ((player.CurrentProperty.CurrentProgress <= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == true)
 		{
@@ -456,7 +470,6 @@ public class UIController : MonoBehaviour
 		popUpText.text = Text;
 		popUpButtonText.text = "Ok";
 	}
-
 
     	// still need to pop up subgoal hit after random event ok click if hit subgoal
 	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, GameObject quizPanel, Player player)

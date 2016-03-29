@@ -175,13 +175,13 @@ public class GameController : MonoBehaviour
 
 
 		// CHAGNEEEEEE BACK TO 10
-		if (randEventNum <= 0)
+		if (randEventNum <= 50)
 		{
 		    //bad
 		    randEventBad = true;
 
 		}
-		if (randEventNum > 10 && randEventNum <= 100)
+		if (randEventNum > 50 && randEventNum <= 100)
 		{
 		    // good
 		    randEventGood = true;
