@@ -173,13 +173,15 @@ public class GameController : MonoBehaviour
 
 		audioNew.PlayOneShot(diceRoll, .7F);
 
-		if (randEventNum <= 10)
+
+		// CHAGNEEEEEE BACK TO 10
+		if (randEventNum <= 0)
 		{
 		    //bad
 		    randEventBad = true;
 
 		}
-		if (randEventNum > 10 && randEventNum <= 20)
+		if (randEventNum > 10 && randEventNum <= 100)
 		{
 		    // good
 		    randEventGood = true;

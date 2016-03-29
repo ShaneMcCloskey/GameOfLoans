@@ -71,7 +71,6 @@ public class UIController : MonoBehaviour
 	// private vars ----------------------
 	private bool randEventGoodOccured = false;
 	private bool randEventBadOccured = false;
-	private bool subgoalPopUpActive = false;
 
 	// Quiz vars -------------------------
 	private bool quizFailed = false;
@@ -86,11 +85,18 @@ public class UIController : MonoBehaviour
 	private float max = 0f;
 	private Player playerLocal;
 	private GameObject popUpLocal;
+	private bool badLocal;
+	private bool goodLocal;
+
+	private bool needToUpdateBar = false;
+
 	private Color textColor;
 	private float r;
 	private float g;
 	private float b;
 	private float newAlpha;
+
+	private bool check = false;
 
 	public void AwakeUI ()
 	{
@@ -101,9 +107,9 @@ public class UIController : MonoBehaviour
 		HUDturnText.text = "40";
 	}
 
-	void Update ()
+	void IncreaseBar ()
 	{
-		if (progressBar.value <= max)
+		if (progressBar.value <= max && needToUpdateBar == true)
 		{
 			if (progressBar.value >= max - 1)
 			{
@@ -118,7 +124,67 @@ public class UIController : MonoBehaviour
 				progressBar.value += .1f;
 			}
 		}
+		else
+		{	
+			check = true;
+			needToUpdateBar = false;
+		}
+	}
+
+	void DecreaseBar ()
+	{
+		if (progressBar.value >= max && needToUpdateBar == true)
+		{
+			if (progressBar.value <= max + 1)
+			{
+				progressBar.value -= .05f;
+			}
+			else if (progressBar.value <= max + 0.05f)
+			{
+				progressBar.value -= .025f;
+			}
+			else
+			{
+				progressBar.value -= .1f;
+			}
+		}
+		else
+		{
+			check = true;
+			needToUpdateBar = false;
+		}
+	}
+
+	void Update ()
+	{
+		if (needToUpdateBar)
+		{
+			if (playerLocal.CurrentProperty.CurrentProgress <= max)
+			{
+				IncreaseBar ();
+			}
+			else if (playerLocal.CurrentProperty.CurrentProgress >= max)
+			{
+				DecreaseBar ();
+			}
+		}
+		else
+		{
+			if (check)
+			{
+				CheckRandomEvent(goodLocal, badLocal, popUpLocal, playerLocal);
+				check = false;
+			}
+		}
+
 		CheckSubGoal (playerLocal, popUpLocal);
+
+
+		ShowSubgoalText();
+	}
+
+	void ShowSubgoalText ()
+	{
 		if (sgText.text != "")
 		{
 			textColor = sgText.color;
@@ -249,7 +315,8 @@ public class UIController : MonoBehaviour
 	{
 		// need to have the panel in here
 		max = player.CurrentProperty.CurrentProgress;
-		//progressBar.value = player.CurrentProperty.CurrentProgress;
+		needToUpdateBar = true;
+
 		HUDscoreText.text = player.Score.ToString ();
 		HUDincomeText.text =  player.Income.ToString ();
 		HUDassetsText.text = player.Assets.ToString ();
@@ -258,6 +325,8 @@ public class UIController : MonoBehaviour
 
 		playerLocal = player;
 		popUpLocal = popUpPanel;
+		goodLocal = randEventGood;
+		badLocal = randEventBad;
 
 		//CheckSubGoal(player, popUpPanel);
 		//CheckRandomEvent(randEventGood, randEventBad, popUpPanel, player);
@@ -319,24 +388,24 @@ public class UIController : MonoBehaviour
 	{
 		randEventGoodOccured = randEventGood;
 		randEventBadOccured = randEventBad;
-		if (subgoalPopUpActive == false)
-		{
-			if (randEventGood)
-			{
-				ShowPopUp("Positive Random Event", popUpPanel);
 
-			}
-			if (randEventBad)
-			{
-				ShowPopUp("Negative Random Event", popUpPanel);
-			}
+		if (randEventGood)
+		{
+			ShowPopUp("Positive Random Event", popUpPanel);
+
 		}
+		if (randEventBad)
+		{
+			ShowPopUp("Negative Random Event", popUpPanel);
+		}
+
 	}
 
 	void ProcessNegativeEvent (Player player)
 	{
 		player.CurrentProperty.CurrentProgress -= 3;
-		progressBar.value = player.CurrentProperty.CurrentProgress;
+		max = player.CurrentProperty.CurrentProgress;
+		//progressBar.value = player.CurrentProperty.CurrentProgress;
 		if ((player.CurrentProperty.CurrentProgress <= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == true)
 		{
 			player.CurrentProperty.Subgoal1Complete = false;
@@ -374,7 +443,10 @@ public class UIController : MonoBehaviour
 	void ProcessPositiveEvent(Player player)
 	{
 		player.CurrentProperty.CurrentProgress += 3;
-		progressBar.value = player.CurrentProperty.CurrentProgress;
+		max = player.CurrentProperty.CurrentProgress;
+		needToUpdateBar = true;
+		goodLocal = false;
+		//progressBar.value = player.CurrentProperty.CurrentProgress;
 	}
 
 	// add param to check if need to be sent to diff panel
@@ -385,7 +457,35 @@ public class UIController : MonoBehaviour
 		popUpButtonText.text = "Ok";
 	}
 
-    //Set quiz question and answers
+
+    	// still need to pop up subgoal hit after random event ok click if hit subgoal
+	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, GameObject quizPanel, Player player)
+	{
+	        if (quizFailed)
+	        {
+	            popUpPanel.SetActive(false);
+	            ShowQuiz(quizPanel);
+	        }
+
+		else if (player.PlayerCardsProperty.Count == 0)  // if player completes loan and has none in queue
+		{
+			popUpPanel.SetActive (false);
+			popUpPanelNeedProp.SetActive (true);
+		}
+
+		popUpPanel.SetActive (false);
+
+		if (badLocal)
+		{
+			ProcessNegativeEvent (player);
+		}
+		else if (goodLocal)
+		{
+			ProcessPositiveEvent(player);
+		}
+	}
+
+	//Set quiz question and answers
     void ShowQuiz(GameObject PopUpPanel)
     {
         PopUpPanel.SetActive(true);
@@ -631,39 +731,6 @@ public class UIController : MonoBehaviour
                 break;
         }
     }
-
-    // still need to pop up subgoal hit after random event ok click if hit subgoal
-	public void ProcessOkButtonUI (GameObject popUpPanel, GameObject popUpPanelNeedProp, GameObject propHuntPanel, GameObject quizPanel, Player player)
-	{
-        if (quizFailed)
-        {
-            popUpPanel.SetActive(false);
-            ShowQuiz(quizPanel);
-        }
-
-		else if (player.PlayerCardsProperty.Count == 0)  // if player completes loan and has none in queue
-		{
-			popUpPanel.SetActive (false);
-			popUpPanelNeedProp.SetActive (true);
-		}
-
-		popUpPanel.SetActive (false);
-
-		if (subgoalPopUpActive)
-		{
-			subgoalPopUpActive = false;
-			CheckRandomEvent (randEventGoodOccured, randEventBadOccured, popUpPanel, player);
-		}
-		else if (randEventBadOccured)
-		{
-			ProcessNegativeEvent (player);
-		}
-		else if (randEventGoodOccured)
-		{
-			ProcessPositiveEvent(player);
-			CheckSubGoal(player,popUpPanel);
-		}
-	}
 
     // Display and process quiz pass or fail
     public void ProcessAnswerUI(GameObject quizPanel, GameObject popUpPanel, Player player, string letter)
