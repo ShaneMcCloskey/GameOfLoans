@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.HighScoreObjects;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 public class HighScoreController : MonoBehaviour
 {
@@ -145,15 +145,13 @@ public class HighScoreController : MonoBehaviour
 				Id = null,
 				Name = NameInput.text,
 				TeamName = TeamInput.text,
-				Score = Convert.ToInt32(1000500),
-				LoansClosed = Convert.ToInt32(20)
+				Score = player.Score,
+				LoansClosed = player.NumTurnsLeft
 			};
             
 			StartCoroutine (WaitRequestSendScore(sendingScore));
 
-            //change this when integrating into main scene
-            //			sendingScore.Score = player.score;
-            //				sendingScore.LoansClosed = player.numPropertiesClosed;
+        
             gameOverPanel.SetActive(false);
         }
     }
@@ -215,7 +213,6 @@ public class HighScoreController : MonoBehaviour
 			else {
 				PopUpText.text = "ERROR: Score could not be added.";
 				HighScorePopUP.SetActive (true);
-				NavController.Awake ();
 			}
 
 		}
@@ -233,7 +230,8 @@ public class HighScoreController : MonoBehaviour
 	public void OnPopUPOk()
 	{
 		HighScorePopUP.SetActive(false);
-		NavController.Awake ();
+
+		SceneManager.LoadScene ("MainScene");
 	}
 }
 
