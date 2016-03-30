@@ -41,6 +41,7 @@ public class UIController : MonoBehaviour
 	public GameObject rightPicProp;
 
         // Loan in progress 
+        public Text panelTitle;
         public Text currentTitle;
 	public Text currentAddress;
 	public Text currentPrice;

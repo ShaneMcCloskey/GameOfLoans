@@ -12,7 +12,8 @@ public class CardFlip : MonoBehaviour
 
 	public GameObject front;
 	public GameObject back;
-	public GameObject x;
+	public GameObject typeText;
+	public GameObject descText;
 
 	public float downSpeed = 100f;
 	public float offScreenTimerCheck = 1.0f;
@@ -52,7 +53,8 @@ public class CardFlip : MonoBehaviour
 		holdAfterFlipTimer = 0.0f;
 
 		waitTime = 1.0f / fps;
-		x.SetActive(false);
+		typeText.SetActive(false);
+		descText.SetActive(false);
 		check = false;
 	}
 
@@ -84,7 +86,8 @@ public class CardFlip : MonoBehaviour
 	{
 		back.SetActive (false);
 		front.SetActive (true);
-		x.SetActive (true);
+		typeText.SetActive (true);
+		descText.SetActive(true);
 		check = true;
 	}
 
@@ -92,7 +95,8 @@ public class CardFlip : MonoBehaviour
 	{
 		transform.rotation = new Quaternion(0,0,0,0);
 		back.SetActive(true);
-		x.SetActive(false);
+		typeText.SetActive(false);
+		descText.SetActive(false);
 		front.SetActive(false);
 		transform.position = new Vector3(startPosX, startPosY, startPosZ);
 		Init();
