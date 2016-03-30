@@ -5,7 +5,7 @@ using System;
 
 public class PropertyCard : IComparable<PropertyCard> 
 {
-	//public Image pic;
+	private string title;
 	private string address;
 	private int price;
 	private string difficulty;
@@ -21,10 +21,11 @@ public class PropertyCard : IComparable<PropertyCard>
 	private bool subgoal7Complete;
 	private bool subgoal8Complete;
 
-	public PropertyCard (string Address, int Price, string Difficulty, int NumToClose, int CurrentProgress, Sprite Pic,
+	public PropertyCard (string Title, string Address, int Price, string Difficulty, int NumToClose, int CurrentProgress, Sprite Pic,
 		             bool Subgoal1Complete, bool Subgoal2Complete, bool Subgoal3Complete, bool Subgoal4Complete,
 		             bool Subgoal5Complete, bool Subgoal6Complete, bool Subgoal7Complete, bool Subgoal8Complete)
 	{
+		title = Title;
 		address = Address;
 		price = Price;
 		difficulty = Difficulty;
@@ -39,6 +40,12 @@ public class PropertyCard : IComparable<PropertyCard>
 		subgoal6Complete = Subgoal6Complete;
 		subgoal7Complete = Subgoal7Complete;
 		subgoal8Complete = Subgoal8Complete;
+	}
+
+	public string Title
+	{
+		get { return title; }
+		set { title = value; }
 	}
 
 	public string Address

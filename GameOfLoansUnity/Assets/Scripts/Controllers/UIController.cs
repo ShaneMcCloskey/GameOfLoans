@@ -22,20 +22,26 @@ public class UIController : MonoBehaviour
 	public Text rightOppKnocksDesc;
 
 	// Property hunt text element
+	public Text leftTitle;
 	public Text leftAddressProp;
 	public Text leftPriceProp;
 	public Text leftDiffProp;
 	public GameObject leftPicProp;
+
+	public Text centerTitle;
 	public Text centerAddressProp;
 	public Text centerPriceProp;
 	public Text centerDiffProp;
 	public GameObject centerPicProp;
+
+	public Text rightTitle;
 	public Text rightAddressProp;
 	public Text rightPriceProp;
 	public Text rightDiffProp;
 	public GameObject rightPicProp;
 
         // Loan in progress 
+        public Text currentTitle;
 	public Text currentAddress;
 	public Text currentPrice;
 	public Text currentDiff;
@@ -98,13 +104,37 @@ public class UIController : MonoBehaviour
 
 	private bool decrease = false;
 
+	/*private Color red;
+	private Color green;
+	private Color blue;*/
+
+	private string[] posText;
+	private int[] posValue;
+	private int posIncValue;
+
 	public void AwakeUI ()
 	{
+		posText = new string[10];
+		posValue = new int[10];
+		posText[0] = "Documents are sent electronically.\n\n+4 Progress";
+		posValue[0] = 4;
+		posText[1] = "Clear communication with the CSS.\n\n+3 Progress";
+		posValue[1] = 3;
+		posText[2] = "Underwriter receives requested third party item in a timely manner..\n\n+2 Progress";
+		posValue[2] = 2;
+		posText[3] = "Application is accurate.\n\n+6 Progress";
+		posValue[3] = 6;
+		posText[4] = "Conditions are reviewed quickly.\n\n+5 Progress";
+		posValue[4] = 5;
+		/*red = new Color(255,0,16, 255);
+		green = new Color(23,181,17,255);
+		blue = new Color(17,52,181, 255);*/
 		HUDscoreText.text = "0";
 		HUDincomeText.text = "0";
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
+		Debug.Log(posValue[0]);
 	}
 
 	void IncreaseBar ()
@@ -283,16 +313,19 @@ public class UIController : MonoBehaviour
 
 	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
 	{
+		leftTitle.text = cardLeft.Title;
 		leftAddressProp.text = cardLeft.Address;
 		leftPriceProp.text = cardLeft.Price.ToString();
 		leftDiffProp.text = cardLeft.Difficulty.ToString();
 		leftPicProp.GetComponent<Image>().sprite = cardLeft.Pic;
 
+		centerTitle.text = cardCenter.Title;
 		centerAddressProp.text = cardCenter.Address;
 		centerPriceProp.text = cardCenter.Price.ToString();
 		centerDiffProp.text = cardCenter.Difficulty.ToString();
 		centerPicProp.GetComponent<Image>().sprite = cardCenter.Pic;
 
+		rightTitle.text = cardRight.Title;
 		rightAddressProp.text = cardRight.Address;
 		rightPriceProp.text = cardRight.Price.ToString();
 		rightDiffProp.text = cardRight.Difficulty.ToString();
@@ -300,8 +333,11 @@ public class UIController : MonoBehaviour
 	}
 
 	// Loan in Progess functions -----------------------------------------------
-	public void EnterLoanInProgressScreenUI(Player player)
+	public void EnterLoanInProgressScreenUI (Player player)
 	{
+		Debug.Log (player.CurrentProperty.Difficulty);
+
+		currentTitle.text = player.CurrentProperty.Title;
 		currentAddress.text = player.CurrentProperty.Address;
 		currentPrice.text = player.CurrentProperty.Price.ToString();
 		currentDiff.text = player.CurrentProperty.Difficulty.ToString();
@@ -309,6 +345,19 @@ public class UIController : MonoBehaviour
 
 	        progressBar.maxValue = player.CurrentProperty.NumToClose;
 	        progressBar.value = player.CurrentProperty.CurrentProgress;
+
+		if (player.CurrentProperty.Difficulty == "Easy")
+		{
+			currentDiff.color = Color.green;
+		}
+		else if (player.CurrentProperty.Difficulty == "Medium")
+		{
+			currentDiff.color = Color.blue;
+		}
+		else
+		{
+			currentDiff.color = Color.red;
+		}
 	}
 
     	public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad)
@@ -383,7 +432,9 @@ public class UIController : MonoBehaviour
 	{
 		if (randEventGood)
 		{
-			ShowPopUp("Positive Random Event", popUpPanel);
+			int randNum = Random.Range(0,5);
+			posIncValue = posValue[randNum];
+			ShowPopUp(posText[randNum], popUpPanel);
 
 		}
 		if (randEventBad)
@@ -435,7 +486,10 @@ public class UIController : MonoBehaviour
 
 	void ProcessPositiveEvent(Player player)
 	{
-		player.CurrentProperty.CurrentProgress += 3;
+		//int randNum = Random.Range(0,5);
+		//posIncValue = posValue[randNum];
+
+		player.CurrentProperty.CurrentProgress += posIncValue;
 		max = player.CurrentProperty.CurrentProgress;
 		needToUpdateBar = true;
 		goodLocal = false;

@@ -181,7 +181,7 @@ public class GameController : MonoBehaviour
 		    randEventBad = true;
 
 		}
-		if (randEventNum > 10 && randEventNum <= 20)
+		if (randEventNum > 10 && randEventNum <= 100)
 		{
 		    // good
 		    randEventGood = true;
