@@ -111,6 +111,9 @@ public class UIController : MonoBehaviour
 	private string[] posText;
 	private int[] posValue;
 	private int posIncValue;
+	private string[] negText;
+	private int[] negValue;
+	private int negDecValue;
 
 	public void AwakeUI ()
 	{
@@ -126,6 +129,28 @@ public class UIController : MonoBehaviour
 		posValue[3] = 6;
 		posText[4] = "Conditions are reviewed quickly.\n\n+5 Progress";
 		posValue[4] = 5;
+		negText = new string[10];
+		negValue = new int[10];
+		negText[0] = "Client W2 is missing.\n\n-4 Progress";
+		negValue[0] = 4;
+		negText[1] = "Client pay stubs are missing.\n\n-4 Progress";
+		negValue[1] = 4;
+		negText[2] = "Missed call from CCS.\n\n-1 Progress";
+		negValue[2] = 1;
+		negText[3] = "Client documents are inaccurate.\n\n-6 Progress";
+		negValue[3] = 6;
+		negText[4] = "Communication documents are lost in mail transportation. \n\n-5 Progress";
+		negValue[4] = 5;
+		negText[5] = "The underwriter is missing client information.\n\n-3 Progress";
+		negValue[5] = 5;
+		negText[6] = "Lack of client communication with the CSS.\n\n-3 Progress";
+		negValue[6] = 3;
+		negText[7] = "Additional client payoff documents requested.\n\n-2 Progress";
+		negValue[7] = 2;
+		negText[8] = "Additional client homeowners insurance documents requested.\n\n-2 Progress";
+		negValue[8] = 2;
+		negText[9] = "Additional client verification of employment documents requested.\n\n-2 Progress";
+		negValue[9] = 2;
 		/*red = new Color(255,0,16, 255);
 		green = new Color(23,181,17,255);
 		blue = new Color(17,52,181, 255);*/
@@ -430,23 +455,26 @@ public class UIController : MonoBehaviour
 
 	void CheckRandomEvent (bool randEventGood, bool randEventBad, GameObject popUpPanel, Player player)
 	{
+		int randNum;
 		if (randEventGood)
 		{
-			int randNum = Random.Range(0,5);
+			randNum = Random.Range(0,5);
 			posIncValue = posValue[randNum];
 			ShowPopUp(posText[randNum], popUpPanel);
 
 		}
 		if (randEventBad)
 		{
-			ShowPopUp("Negative Random Event", popUpPanel);
+			randNum = Random.Range(0,10);
+			negDecValue = negValue[randNum];
+			ShowPopUp(negText[randNum], popUpPanel);
 		}
 
 	}
 
 	void ProcessNegativeEvent (Player player)
 	{
-		player.CurrentProperty.CurrentProgress -= 3;
+		player.CurrentProperty.CurrentProgress -= negDecValue;
 		max = player.CurrentProperty.CurrentProgress;
 		decrease = true;
 		badLocal = false;
@@ -486,9 +514,6 @@ public class UIController : MonoBehaviour
 
 	void ProcessPositiveEvent(Player player)
 	{
-		//int randNum = Random.Range(0,5);
-		//posIncValue = posValue[randNum];
-
 		player.CurrentProperty.CurrentProgress += posIncValue;
 		max = player.CurrentProperty.CurrentProgress;
 		needToUpdateBar = true;
