@@ -41,7 +41,7 @@ public class UIController : MonoBehaviour
 	public GameObject rightPicProp;
 
         // Loan in progress 
-        public Text panelTitle;
+        public Text subGoalPanelTitle;
         public Text currentTitle;
 	public Text currentAddress;
 	public Text currentPrice;
@@ -115,6 +115,9 @@ public class UIController : MonoBehaviour
 	private string[] negText;
 	private int[] negValue;
 	private int negDecValue;
+
+	// bottompanel private vars---------
+	private string[] subTitles = {"Initial Contact","Application","Loan Set Up Complete", "Folder Received", "Conditionally Approved","Final Sign Off", "Closing Signing Scheduled", "Docs out to Settlement Agent", "Closed"};
 
 	public void AwakeUI ()
 	{
@@ -416,16 +419,20 @@ public class UIController : MonoBehaviour
 		{		
 			sgText.text = "Subgoal 1 Achieved!";
 			player.CurrentProperty.Subgoal1Complete = true;
+			subGoalPanelTitle.text = "Application"; 
 		}
 		else if ((progressBar.value >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false)
 		{
 			sgText.text = "Subgoal 2 Achieved!";
 			player.CurrentProperty.Subgoal2Complete = true;
+			subGoalPanelTitle.text = "Loan Set Up";
+
 		}
 		else if ((progressBar.value >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false)
 		{
 			sgText.text = "Subgoal 3 Achieved!";
 			player.CurrentProperty.Subgoal3Complete = true;
+			subGoalPanelTitle.text = "Folder Received";
 		}
 		else if ((progressBar.value >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false)
 		{
@@ -452,6 +459,7 @@ public class UIController : MonoBehaviour
 			sgText.text = "Subgoal 8 Achieved!";
 			player.CurrentProperty.Subgoal8Complete = true;
 		}
+		ChangeSubgoalPanel (player);
 	}
 
 	void CheckRandomEvent (bool randEventGood, bool randEventBad, GameObject popUpPanel, Player player)
@@ -904,5 +912,42 @@ public class UIController : MonoBehaviour
 	            thirdPrice.text = player.PlayerCardsProperty[2].Price.ToString();
 	            thirdDiff.text = player.PlayerCardsProperty[2].Difficulty.ToString();
 	        }
+	}
+	public void ChangeSubgoalPanel(Player player)
+	{
+		int index = 0;
+		if (player.CurrentProperty.Subgoal1Complete) 
+		{
+			index++;
+		}
+		if (player.CurrentProperty.Subgoal2Complete)
+		{
+			index++;
+		}
+		if (player.CurrentProperty.Subgoal3Complete) 
+		{
+			index++;
+		}
+		if (player.CurrentProperty.Subgoal4Complete) 
+		{
+			index++;
+		}
+		if (player.CurrentProperty.Subgoal5Complete)
+		{
+			index++;
+		}
+		if (player.CurrentProperty.Subgoal6Complete) 
+		{
+			index++;
+		}
+		if (player.CurrentProperty.Subgoal7Complete) 
+		{
+			index++;
+		}
+		if (player.CurrentProperty.Subgoal8Complete) 
+		{
+			index++;
+		}
+		subGoalPanelTitle.text = subTitles[index];
 	}
 }
