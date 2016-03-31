@@ -19,7 +19,7 @@ public class CardFlip : MonoBehaviour
 	public float offScreenTimerCheck = 1.0f;
 	public float holdAfterFlipTimerCheck = 1.0f;
 
-	private bool isAnimationProcessing = false;
+	public bool isAnimationProcessing = false;
 	private bool isFlipDone = false;
 
 	private float holdAfterFlipTimer;

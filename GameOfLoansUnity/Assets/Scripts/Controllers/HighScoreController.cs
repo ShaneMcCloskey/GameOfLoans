@@ -33,7 +33,7 @@ public class HighScoreController : MonoBehaviour
 	const int LOANS_LOC = 4;
 
 	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?";
-	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
+	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScor";
 	const string getnumscoresurl = "http://35.9.22.106/Api/HighScores/GetNumScores";
 	int pageNumber = 0;
 	int scoresPerPage = 25;
@@ -41,6 +41,7 @@ public class HighScoreController : MonoBehaviour
 	int minPageNum = 0;
 	int totalScores = 0;
 	private bool isLoadingScores = true;
+	private bool isScoreError = false;
 
 
     //change to start to get high scores page to work
@@ -137,23 +138,24 @@ public class HighScoreController : MonoBehaviour
 
     public void AddScore()
     {
-        if (NameInput.text != "" && TeamInput.text != "")
-        {
+		if (NameInput.text != "" && TeamInput.text != "") {
 
-			GameScore sendingScore = new GameScore()
-			{
+			GameScore sendingScore = new GameScore () {
 				Id = null,
 				Name = NameInput.text,
 				TeamName = TeamInput.text,
 				Score = player.Score,
-				LoansClosed = player.NumTurnsLeft
+				LoansClosed = player.NumPropertiesClosed
 			};
             
-			StartCoroutine (WaitRequestSendScore(sendingScore));
+			StartCoroutine (WaitRequestSendScore (sendingScore));
 
         
-            gameOverPanel.SetActive(false);
-        }
+		}
+		else {
+			HighScorePopUP.SetActive (true);
+			PopUpText.text = "You must enter both a name and team name to submit a high score.";
+		}
     }
 		
     private IEnumerator WaitRequestGetScores()
@@ -185,6 +187,7 @@ public class HighScoreController : MonoBehaviour
 			else{
 				//error
 				error = true;
+				isScoreError = true;
 			}
 		}
 		if (error == true) {
@@ -213,6 +216,7 @@ public class HighScoreController : MonoBehaviour
 			else {
 				PopUpText.text = "ERROR: Score could not be added.";
 				HighScorePopUP.SetActive (true);
+				isScoreError = true;
 			}
 
 		}
@@ -231,7 +235,10 @@ public class HighScoreController : MonoBehaviour
 	{
 		HighScorePopUP.SetActive(false);
 
-		SceneManager.LoadScene ("MainScene");
+		if (isScoreError) {
+			SceneManager.LoadScene ("MainScene");
+			isScoreError = false;
+		}
 	}
 }
 

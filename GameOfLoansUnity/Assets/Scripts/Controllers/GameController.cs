@@ -40,23 +40,23 @@ public class GameController : MonoBehaviour
 
 	public void DrawOppKnocksCard (string leftRightOrCenter)
 	{
-		player.NumTurnsLeft--;
+		if (player.NumTurnsLeft > 0) {
+			player.NumTurnsLeft--;
 
-		if (player.NumTurnsLeft == 40) // after 10 turns
-		{
-		    isPickingStats = false;
-		}
-		int randNum = Random.Range(0, cardsOppKnocks.Count);    
+			if (player.NumTurnsLeft == 40) { // after 10 turns
+				isPickingStats = false;
+			}
+			int randNum = Random.Range (0, cardsOppKnocks.Count);    
 
-		OppKnocksCard card = cardsOppKnocks[randNum];           		   // draw card with random number
-		UpdateOppKnocksCardTextAndPlayerStats(card, leftRightOrCenter);            // update text and player score
+			OppKnocksCard card = cardsOppKnocks [randNum];           		   // draw card with random number
+			UpdateOppKnocksCardTextAndPlayerStats (card, leftRightOrCenter);            // update text and player score
 
-		player.PlayerCardsOppKnocks.Add(card);                  		   // add card to player deck
-		cardsOppKnocks.Remove(card);                	      			   // remove it from overall deck
+			player.PlayerCardsOppKnocks.Add (card);                  		   // add card to player deck
+			cardsOppKnocks.Remove (card);                	      			   // remove it from overall deck
 
-		if (isPickingStats == false)
-		{
-		    uiController.UpdateTurnsLeft(player);
+			if (isPickingStats == false) {
+				uiController.UpdateTurnsLeft (player);
+			}
 		}
 	}
 
@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
 		    player.Credit += card.Value;
 		}
 		uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player, leftRightOrCenter);
+		CheckGameOver (player);
 	}
 
 	// Property hunt functions ------------------------------------------------
@@ -117,25 +118,22 @@ public class GameController : MonoBehaviour
 
 	public void DrawPropertyCard(string leftRightOrCenter)
 	{
-		player.NumTurnsLeft--;
+		if (player.NumTurnsLeft > 0) {
+			player.NumTurnsLeft--;
 
-		if (leftRightOrCenter == "left")
-		{
-		    player.PlayerCardsProperty.Add(cardLeft);
-		    player.CurrentProperty = cardLeft;
-		    cardsPropertyHunt.Remove(cardLeft);
-		}
-		else if (leftRightOrCenter == "center")
-		{
-		    player.PlayerCardsProperty.Add(cardCenter);
-		    player.CurrentProperty = cardCenter;
-		    cardsPropertyHunt.Remove(cardCenter);
-		}
-		else if (leftRightOrCenter == "right")
-		{
-		    player.PlayerCardsProperty.Add(cardRight);
-		    player.CurrentProperty = cardRight;
-		    cardsPropertyHunt.Remove(cardRight);
+			if (leftRightOrCenter == "left") {
+				player.PlayerCardsProperty.Add (cardLeft);
+				player.CurrentProperty = cardLeft;
+				cardsPropertyHunt.Remove (cardLeft);
+			} else if (leftRightOrCenter == "center") {
+				player.PlayerCardsProperty.Add (cardCenter);
+				player.CurrentProperty = cardCenter;
+				cardsPropertyHunt.Remove (cardCenter);
+			} else if (leftRightOrCenter == "right") {
+				player.PlayerCardsProperty.Add (cardRight);
+				player.CurrentProperty = cardRight;
+				cardsPropertyHunt.Remove (cardRight);
+			}
 		}
 	}
 
@@ -163,39 +161,35 @@ public class GameController : MonoBehaviour
 
 	public void RollDie(GameObject PopUpPanel, GameObject PopUpPanelQuiz)
 	{
-		player.NumTurnsLeft--;
-		int num = Random.Range(1, 7);
-		player.CurrentProperty.CurrentProgress += num;
+		if (player.NumTurnsLeft > 0){
+				player.NumTurnsLeft--;
+			int num = Random.Range (1, 7);
+			player.CurrentProperty.CurrentProgress += num;
 
-		int randEventNum = Random.Range(0, 100);
-		bool randEventGood = false;
-		bool randEventBad = false;
+			int randEventNum = Random.Range (0, 100);
+			bool randEventGood = false;
+			bool randEventBad = false;
 
-		audioNew.PlayOneShot(diceRoll, .7F);
+			audioNew.PlayOneShot (diceRoll, .7F);
 
 
-		// CHAGNEEEEEE BACK TO 10
-		if (randEventNum <= 5)
-		{
-		    //bad
-		    randEventBad = true;
+			// CHAGNEEEEEE BACK TO 10
+			if (randEventNum <= 5) {
+				//bad
+				randEventBad = true;
 
-		}
-		if (randEventNum > 5 && randEventNum <= 10)
-		{
-		    // good
-		    randEventGood = true;
-		}
+			}
+			if (randEventNum > 5 && randEventNum <= 10) {
+				// good
+				randEventGood = true;
+			}
 
-		if (player.CurrentProperty.CurrentProgress >= player.CurrentProperty.NumToClose)
-		{
-		    //Quiz Time
-		    uiController.RollDiceUI(player, PopUpPanelQuiz, true, false, false);
-		}
-
-		else
-		{
-		    uiController.RollDiceUI(player, PopUpPanel, false, randEventGood, randEventBad);
+			if (player.CurrentProperty.CurrentProgress >= player.CurrentProperty.NumToClose) {
+				//Quiz Time
+				uiController.RollDiceUI (player, PopUpPanelQuiz, true, false, false);
+			} else {
+				uiController.RollDiceUI (player, PopUpPanel, false, randEventGood, randEventBad);
+			}
 		}
 	}
 
@@ -210,5 +204,13 @@ public class GameController : MonoBehaviour
 	{
 		// call ui function...
 		uiController.ProcessAnswerUI(quizPanel, popUpPanel, player, letter);
+	}
+
+	public void CheckGameOver(Player player)
+	{
+		if (player.NumTurnsLeft <= 0) 
+		{
+			ScoreController.SetPlayer (player);
+		}
 	}
 }
