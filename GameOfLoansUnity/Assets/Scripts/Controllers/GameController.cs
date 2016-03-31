@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
 		    player.Credit += card.Value;
 		}
 		uiController.UpdateOppKnocksCardTextAndPlayerStatsUI(card, player, leftRightOrCenter);
-		CheckGameOver (player);
+		CheckGameOver ();
 	}
 
 	// Property hunt functions ------------------------------------------------
@@ -189,6 +189,7 @@ public class GameController : MonoBehaviour
 				uiController.RollDiceUI (player, PopUpPanelQuiz, true, false, false);
 			} else {
 				uiController.RollDiceUI (player, PopUpPanel, false, randEventGood, randEventBad);
+				CheckGameOver ();
 			}
 		}
 	}
@@ -206,7 +207,7 @@ public class GameController : MonoBehaviour
 		uiController.ProcessAnswerUI(quizPanel, popUpPanel, player, letter);
 	}
 
-	public void CheckGameOver(Player player)
+	public void CheckGameOver()
 	{
 		if (player.NumTurnsLeft <= 0) 
 		{
