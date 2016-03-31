@@ -41,8 +41,9 @@ public class UIController : MonoBehaviour
 	public GameObject rightPicProp;
 
         // Loan in progress 
-        public Text subGoalPanelTitle;
-        public Text currentTitle;
+    public Text subGoalPanelTitle;
+	public Text subGoalPanelDesc;
+    public Text currentTitle;
 	public Text currentAddress;
 	public Text currentPrice;
 	public Text currentDiff;
@@ -118,7 +119,15 @@ public class UIController : MonoBehaviour
 
 	// bottompanel private vars---------
 	private string[] subTitles = {"Initial Contact","Application","Loan Set Up Complete", "Folder Received", "Conditionally Approved","Final Sign Off", "Closing Signing Scheduled", "Docs out to Settlement Agent", "Closed"};
-
+	private string[] subDesc = {"Client e-signs the application and sends in supporting documents for review (pay stub, W2,etc.",
+		"The Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan.",
+		"The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition(tracking item) for it.",
+		"The CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.",
+		"All client conditions and vendor conditions are being viewed as they're received. The CCS is following up with the client every 3-5 days.",
+		"When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan.",
+		"If the client agrees to the terms, the loan goes to the final signoff underwriter for final approval.",
+		" The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client."
+	};
 	public void AwakeUI ()
 	{
 		posText = new string[10];
@@ -949,5 +958,6 @@ public class UIController : MonoBehaviour
 			index++;
 		}
 		subGoalPanelTitle.text = subTitles[index];
+		subGoalPanelDesc.text = subDesc [index];
 	}
 }
