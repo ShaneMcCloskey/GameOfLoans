@@ -20,6 +20,8 @@ public class UIController : MonoBehaviour
 	public Text centerOppKnocksDesc;
 	public Text rightOppKnocksType;
 	public Text rightOppKnocksDesc;
+    public Text cardsLeftText;
+    public int cardsLeftCount;
 
 	// Property hunt text element
 	public Text leftTitle;
@@ -173,7 +175,9 @@ public class UIController : MonoBehaviour
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
-		Debug.Log(posValue[0]);
+        cardsLeftCount = 10;
+        SetOppCardsLeft();
+        Debug.Log(posValue[0]);
 	}
 
 	void IncreaseBar ()
@@ -282,6 +286,7 @@ public class UIController : MonoBehaviour
 
 	public void UpdateOppKnocksCardTextAndPlayerStatsUI (OppKnocksCard card, Player player, string leftRightOrCenter)
 	{
+        cardsLeftCount = cardsLeftCount - 1;
 		if (leftRightOrCenter == "left")
 		{
 			cfLeft.Hit(card);
@@ -348,7 +353,8 @@ public class UIController : MonoBehaviour
 				HUDcreditText.text = player.Credit.ToString();
 			}
 		}
-	}
+        SetOppCardsLeft();
+    }
 
 	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
 	{
@@ -961,4 +967,20 @@ public class UIController : MonoBehaviour
 		subGoalPanelTitle.text = subTitles[index];
 		subGoalPanelDesc.text = subDesc [index];
 	}
+
+    public void SetOppCardsLeft()
+    {
+        if (cardsLeftCount == 10)
+        {
+            cardsLeftText.text = "Choose " + cardsLeftCount.ToString() + " cards to increase your stats";
+        }
+        else if (cardsLeftCount < 10 && cardsLeftCount > 0)
+        {
+            cardsLeftText.text = "Choose " + cardsLeftCount.ToString() + " more cards to increase your stats";
+        }
+        else
+        {
+            cardsLeftText.text = "";
+        }
+    }
 }
