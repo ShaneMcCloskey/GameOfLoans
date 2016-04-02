@@ -974,9 +974,13 @@ public class UIController : MonoBehaviour
         {
             cardsLeftText.text = "Choose " + cardsLeftCount.ToString() + " cards to increase your stats";
         }
-        else if (cardsLeftCount < 10 && cardsLeftCount > 0)
+        else if (cardsLeftCount < 10 && cardsLeftCount > 1)
         {
             cardsLeftText.text = "Choose " + cardsLeftCount.ToString() + " more cards to increase your stats";
+        }
+        else if (cardsLeftCount == 1)
+        {
+            cardsLeftText.text = "Choose " + cardsLeftCount.ToString() + " more card to increase your stats";
         }
         else
         {

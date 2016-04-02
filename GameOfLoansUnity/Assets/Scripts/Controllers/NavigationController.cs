@@ -21,6 +21,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject popUpPanelRandEvent;
     	public GameObject quizPanel;
 	public GameObject GameOverPanel;
+    public GameObject ConfirmPropertyPanel;
 
 	public Button oppKnocksButton;
 	public Button loanInProgressButton;
@@ -39,6 +40,8 @@ public class NavigationController : MonoBehaviour
 	private GameObject currentPanel;
 
 	private bool isInputEnabled;
+
+    public string leftrightocecnter;
 
 	// Use this for initialization
 	public void Awake() 
@@ -59,6 +62,7 @@ public class NavigationController : MonoBehaviour
 		popUpPanelRandEvent.SetActive(false);
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
+        ConfirmPropertyPanel.SetActive(false);
 	}
 
 	void ProcessInput ()
@@ -137,9 +141,11 @@ public class NavigationController : MonoBehaviour
 	// Property hunt buttons ----------------------------------------
 	public void OnButtonPickPropertyCard(string leftRightOrCenter)
 	{
-		gameControler.DrawPropertyCard (leftRightOrCenter);
-		ChangePanel(loanInProgressPanel, true, true);
-		gameControler.EnterLoanInProgressScreen();
+        ConfirmPropertyPanel.SetActive(true);
+        leftrightocecnter = leftRightOrCenter;
+	//	gameControler.DrawPropertyCard (leftRightOrCenter);
+	//	ChangePanel(loanInProgressPanel, true, true);
+	//	gameControler.EnterLoanInProgressScreen();
 	}
 
 	// Loan in Progress Buttons --------------------------------------
@@ -203,4 +209,15 @@ public class NavigationController : MonoBehaviour
 		panelToShow.SetActive (true);
 		currentPanel = panelToShow;
 	}
+    public void OnButtonYes()
+    {
+        ConfirmPropertyPanel.SetActive(false);
+        gameControler.DrawPropertyCard(leftrightocecnter);
+        ChangePanel(loanInProgressPanel, true, true);
+        gameControler.EnterLoanInProgressScreen();
+    }
+    public void OnButtonNo()
+    {
+        ConfirmPropertyPanel.SetActive(false);
+    }
 }
