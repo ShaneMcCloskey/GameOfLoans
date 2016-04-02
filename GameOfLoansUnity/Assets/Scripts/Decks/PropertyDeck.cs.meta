@@ -1,10 +1,57 @@
 fileFormatVersion: 2
 guid: a62a3cea749454b278b932b6ea916497
-timeCreated: 1453942680
-licenseType: Pro
+timeCreated: 1459595949
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - westGrandRiver28: {instanceID: 0}
+  - westGrandRiver45: {instanceID: 0}
+  - wLafayette615: {instanceID: 0}
+  - wLafayette801: {instanceID: 0}
+  - farmer1000: {instanceID: 0}
+  - woodward1201: {instanceID: 0}
+  - randolph1238: {instanceID: 0}
+  - griswold1250: {instanceID: 0}
+  - griswold1265: {instanceID: 0}
+  - library1274: {instanceID: 0}
+  - broadway1301: {instanceID: 0}
+  - woodward1400: {instanceID: 0}
+  - woodward1412: {instanceID: 0}
+  - woodward1416: {instanceID: 0}
+  - woodward1426: {instanceID: 0}
+  - woodward1449: {instanceID: 0}
+  - woodward1456: {instanceID: 0}
+  - woodward1500: {instanceID: 0}
+  - woodward1505: {instanceID: 0}
+  - woodward1520: {instanceID: 0}
+  - broadway1521: {instanceID: 0}
+  - woodward1550: {instanceID: 0}
+  - allyDetroidCenter: {instanceID: 0}
+  - campusMartiusPark: {instanceID: 0}
+  - cassParkingDeck: {instanceID: 0}
+  - chryslerHouse: {instanceID: 0}
+  - compuwareLobby: {instanceID: 0}
+  - dataCenter: {instanceID: 0}
+  - davidStott: {instanceID: 0}
+  - federalReserve: {instanceID: 0}
+  - greektown: {instanceID: 0}
+  - hartPlaza: {instanceID: 0}
+  - horseshoeCasinoCinci: {instanceID: 0}
+  - horseshoeCasinoClev: {instanceID: 0}
+  - houseOfPureVin: {instanceID: 0}
+  - hudsonCafe: {instanceID: 0}
+  - jazzConvience: {instanceID: 0}
+  - madison: {instanceID: 0}
+  - malcolmsonAdparment: {instanceID: 0}
+  - merchantsRow: {instanceID: 0}
+  - oneWoodwardAve: {instanceID: 0}
+  - qArena: {instanceID: 0}
+  - qube: {instanceID: 0}
+  - redRoseFlorist: {instanceID: 0}
+  - shineAlightBuildings: {instanceID: 0}
+  - theGlobeBuilding: {instanceID: 0}
+  - woodhouseDaySpa: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
