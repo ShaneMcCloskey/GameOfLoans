@@ -117,11 +117,11 @@ public class PropertyDeck : MonoBehaviour
         cards.Add(new PropertyCard("Madison Building", "1555 Broadway Street \nDetroit, MI 48226", (int)(0.91 * bp), "Medium", 70, 0, madison, false, false, false, false, false, false, false, false));
         cards.Add(new PropertyCard("Merchants Row", "1247 Woodward Ave \nDetroit, MI 48226", (int)(2.78 * bp), "Hard", 90, 0, merchantsRow, false, false, false, false, false, false, false, false));
 
-        cards.Add(new PropertyCard("Red Rose Florist", "1425 Woodward Ave \nDetroit, MI 48226", (int)(0.49 * bp), "Easy", 54, 0, redRoseFlorist, false, false, false, false, false, false, false, false));
-        cards.Add(new PropertyCard("Globe Tabacco Building", "407 East Fort Street \nDetroit, Michigan", (int)(0.95 * bp), "Medium", 81, 0, theGlobeBuilding, false, false, false, false, false, false, false, false));
-        cards.Add(new PropertyCard("Quicken Loans Arena", "1 Center Ct \nCleveland, OH 44115", (int)(2.90 * bp), "Hard", 54, 0, qArena, false, false, false, false, false, false, false, false));
+        cards.Add(new PropertyCard("Red Rose Florist", "1425 Woodward Ave \nDetroit, MI 48226", (int)(0.49 * bp), "Easy", 50, 0, redRoseFlorist, false, false, false, false, false, false, false, false));
+        cards.Add(new PropertyCard("Globe Tabacco Building", "407 East Fort Street \nDetroit, Michigan", (int)(0.95 * bp), "Medium", 70, 0, theGlobeBuilding, false, false, false, false, false, false, false, false));
+        cards.Add(new PropertyCard("Quicken Loans Arena", "1 Center Ct \nCleveland, OH 44115", (int)(2.90 * bp), "Hard", 90, 0, qArena, false, false, false, false, false, false, false, false));
 
-        cards.Add(new PropertyCard("One Woodward Avenue", "1 Woodward Avenue \nDetroit, Michigan", (int)(2.96 * bp), "Hard", 54, 0, oneWoodwardAve, false, false, false, false, false, false, false, false));
-        cards.Add(new PropertyCard("The Qube", "611 Woodward Avenue \nDetroit, Michigan", (int)(2.36 * bp), "Hard", 81, 0, qube, false, false, false, false, false, false, false, false));
+        cards.Add(new PropertyCard("One Woodward Avenue", "1 Woodward Avenue \nDetroit, Michigan", (int)(2.96 * bp), "Hard", 90, 0, oneWoodwardAve, false, false, false, false, false, false, false, false));
+        cards.Add(new PropertyCard("The Qube", "611 Woodward Avenue \nDetroit, Michigan", (int)(2.36 * bp), "Hard", 90, 0, qube, false, false, false, false, false, false, false, false));
     }
 }
