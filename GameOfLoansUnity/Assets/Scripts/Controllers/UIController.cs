@@ -980,7 +980,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            cardsLeftText.text = "";
+            cardsLeftText.text = "Draw a card to increase your stats";
         }
     }
 }
