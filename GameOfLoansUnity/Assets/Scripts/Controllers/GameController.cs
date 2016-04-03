@@ -37,14 +37,16 @@ public class GameController : MonoBehaviour
 	}
 
 	// Opp knocks functions ------------------------------
-
-	public void DrawOppKnocksCard (string leftRightOrCenter)
+	public void DrawOppKnocksCard (string leftRightOrCenter, Button oppKnocksButton, Button propHuntButton, Button loanInProgressButton)
 	{
 		if (player.NumTurnsLeft > 0) {
 			player.NumTurnsLeft--;
 
-			if (player.NumTurnsLeft == 40) { // after 10 turns
+			if (player.NumTurnsLeft == 40) 						// after 10 turns
+			{ 
 				isPickingStats = false;
+				propHuntButton.interactable = true;
+				loanInProgressButton.interactable = true;
 			}
 			int randNum = Random.Range (0, cardsOppKnocks.Count);    
 
