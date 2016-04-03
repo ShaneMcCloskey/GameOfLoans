@@ -33,7 +33,7 @@ public class HighScoreController : MonoBehaviour
 	const int LOANS_LOC = 4;
 
 	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?";
-	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScor";
+	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
 	const string getnumscoresurl = "http://35.9.22.106/Api/HighScores/GetNumScores";
 	int pageNumber = 0;
 	int scoresPerPage = 25;

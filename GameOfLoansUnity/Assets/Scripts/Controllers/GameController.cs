@@ -81,8 +81,16 @@ public class GameController : MonoBehaviour
 	}
 
 	// Property hunt functions ------------------------------------------------
-	public void EnterPropertyHuntScreen()
+	public void EnterPropertyHuntScreen (Button loanInProgressButton)
 	{
+		if (player.CurrentProperty != null)
+		{
+			loanInProgressButton.interactable = true;
+		}
+		else
+		{
+			loanInProgressButton.interactable = false;
+		}
 		int randLeft = Random.Range(0, cardsPropertyHunt.Count);
 		int randCenter = Random.Range(0, cardsPropertyHunt.Count);
 		int randRight = Random.Range(0, cardsPropertyHunt.Count);

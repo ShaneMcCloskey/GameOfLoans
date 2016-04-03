@@ -69,15 +69,18 @@ public class UIController : MonoBehaviour
 	public GameObject secondCardDisplay;
 	public GameObject thirdCardDisplay;
 
-	public Text firstAddress;
-	public Text firstPrice;
-	public Text firstDiff;
-	public Text secondAddress;
-	public Text secondPrice;
-	public Text secondDiff;
-	public Text thirdAddress;
-	public Text thirdPrice;
-	public Text thirdDiff;
+	public Text firstPicPropPack;
+	public Text firstAddressPropPack;
+	public Text firstPricePropPack;
+	public Text firstDiffPropPack;
+	public Text secondPicPropPack;
+	public Text secondAddressPropPack;
+	public Text secondPricePropPack;
+	public Text secondDiffPropPack;
+	public Text thirdPicPropPack;
+	public Text thirdAddressPropPack;
+	public Text thirdPricePropPack;
+	public Text thirdDiffPropPack;
 
 	// private vars -----------------------------------------
 
@@ -825,9 +828,9 @@ public class UIController : MonoBehaviour
 		if (player.PlayerCardsProperty.Count >= 1) {
 			firstCardDisplay.SetActive (true);
 
-			firstAddress.text = player.PlayerCardsProperty [0].Address;
-			firstPrice.text = player.PlayerCardsProperty [0].Price.ToString ();
-			firstDiff.text = player.PlayerCardsProperty [0].Difficulty.ToString ();
+			firstAddressPropPack.text = player.PlayerCardsProperty [0].Address;
+			firstPricePropPack.text = player.PlayerCardsProperty [0].Price.ToString ();
+			firstDiffPropPack.text = player.PlayerCardsProperty [0].Difficulty.ToString ();
 		}
 
 		// Second Prop card
@@ -835,9 +838,9 @@ public class UIController : MonoBehaviour
 		if (player.PlayerCardsProperty.Count >= 2) {
 			secondCardDisplay.SetActive (true);
 
-			secondAddress.text = player.PlayerCardsProperty [1].Address;
-			secondPrice.text = player.PlayerCardsProperty [1].Price.ToString ();
-			secondDiff.text = player.PlayerCardsProperty [1].Difficulty.ToString ();
+			secondAddressPropPack.text = player.PlayerCardsProperty [1].Address;
+			secondPricePropPack.text = player.PlayerCardsProperty [1].Price.ToString ();
+			secondDiffPropPack.text = player.PlayerCardsProperty [1].Difficulty.ToString ();
 		}
 	        
 		// Third Prop card
@@ -845,9 +848,9 @@ public class UIController : MonoBehaviour
 		if (player.PlayerCardsProperty.Count >= 3) {
 			thirdCardDisplay.SetActive (true);
 
-			thirdAddress.text = player.PlayerCardsProperty [2].Address;
-			thirdPrice.text = player.PlayerCardsProperty [2].Price.ToString ();
-			thirdDiff.text = player.PlayerCardsProperty [2].Difficulty.ToString ();
+			thirdAddressPropPack.text = player.PlayerCardsProperty [2].Address;
+			thirdPricePropPack.text = player.PlayerCardsProperty [2].Price.ToString ();
+			thirdDiffPropPack.text = player.PlayerCardsProperty [2].Difficulty.ToString ();
 		}
 	}
 

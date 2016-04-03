@@ -105,11 +105,10 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonPropertyHunt ()
 	{
 		oppKnocksButton.interactable = true;
-		loanInProgressButton.interactable = true;
 		propHuntButton.interactable = false;
 		ChangePanel (propertyHuntPanel, true, false);
 		popUpPanelNeedProp.SetActive (false);
-		gameControler.EnterPropertyHuntScreen ();
+		gameControler.EnterPropertyHuntScreen (loanInProgressButton);
 	}
 
 	public void OnButtonLoanInProgress ()
@@ -150,9 +149,6 @@ public class NavigationController : MonoBehaviour
 		gameControler.GetPropertyChoiceName (leftRightOrCenter);
 		ConfirmPropertyPanel.SetActive (true);
 		leftrightocecnter = leftRightOrCenter;
-		//	gameControler.DrawPropertyCard (leftRightOrCenter);
-		//	ChangePanel(loanInProgressPanel, true, true);
-		//	gameControler.EnterLoanInProgressScreen();
 	}
 
 	// Loan in Progress Buttons --------------------------------------
