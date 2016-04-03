@@ -20,8 +20,8 @@ public class UIController : MonoBehaviour
 	public Text centerOppKnocksDesc;
 	public Text rightOppKnocksType;
 	public Text rightOppKnocksDesc;
-    public Text cardsLeftText;
-    public int cardsLeftCount;
+        public Text cardsLeftText;
+        public int cardsLeftCount;
 
 	// Property hunt text element
 	public Text leftTitle;
@@ -43,9 +43,9 @@ public class UIController : MonoBehaviour
 	public GameObject rightPicProp;
 
         // Loan in progress 
-    public Text subGoalPanelTitle;
+        public Text subGoalPanelTitle;
 	public Text subGoalPanelDesc;
-    public Text currentTitle;
+        public Text currentTitle;
 	public Text currentAddress;
 	public Text currentPrice;
 	public Text currentDiff;
@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour
 	public Text AnswerBText;
    	public Text AnswerCText;
 	public Text AnswerDText;
-    public Text confirmPropText;
+        public Text confirmPropText;
 
 	// Change propety text elements
 	public GameObject firstCardDisplay;
@@ -176,9 +176,9 @@ public class UIController : MonoBehaviour
 		HUDassetsText.text = "0";
 		HUDcreditText.text = "0";
 		HUDturnText.text = "40";
-        cardsLeftCount = 10;
-        SetOppCardsLeft();
-        Debug.Log(posValue[0]);
+	        cardsLeftCount = 10;
+	        SetOppCardsLeft();
+	        Debug.Log(posValue[0]);
 	}
 
 	void IncreaseBar ()
@@ -287,7 +287,7 @@ public class UIController : MonoBehaviour
 
 	public void UpdateOppKnocksCardTextAndPlayerStatsUI (OppKnocksCard card, Player player, string leftRightOrCenter)
 	{
-        cardsLeftCount = cardsLeftCount - 1;
+        	cardsLeftCount = cardsLeftCount - 1;
 		if (leftRightOrCenter == "left")
 		{
 			cfLeft.Hit(card);
@@ -354,8 +354,8 @@ public class UIController : MonoBehaviour
 				HUDcreditText.text = player.Credit.ToString();
 			}
 		}
-        SetOppCardsLeft();
-    }
+        	SetOppCardsLeft();
+	}
 
 	public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
 	{
@@ -381,8 +381,6 @@ public class UIController : MonoBehaviour
 	// Loan in Progess functions -----------------------------------------------
 	public void EnterLoanInProgressScreenUI (Player player)
 	{
-		Debug.Log (player.CurrentProperty.Difficulty);
-
 		currentTitle.text = player.CurrentProperty.Title;
 		currentAddress.text = player.CurrentProperty.Address;
 		currentPrice.text = player.CurrentProperty.Price.ToString();
@@ -391,6 +389,8 @@ public class UIController : MonoBehaviour
 
 	        progressBar.maxValue = player.CurrentProperty.NumToClose;
 	        progressBar.value = player.CurrentProperty.CurrentProgress;
+
+	        max = player.CurrentProperty.CurrentProgress;
 
 		if (player.CurrentProperty.Difficulty == "Easy")
 		{
