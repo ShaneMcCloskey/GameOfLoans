@@ -18,7 +18,6 @@ public class NavigationController : MonoBehaviour
 	public GameObject HUDPanel;
 	public GameObject popUpPanel;
 	public GameObject popUpPanelNeedProp;
-	public GameObject popUpPanelRandEvent;
     	public GameObject quizPanel;
 	public GameObject GameOverPanel;
         public GameObject ConfirmPropertyPanel;
@@ -59,7 +58,6 @@ public class NavigationController : MonoBehaviour
 		HUDPanel.SetActive (false);
 		popUpPanel.SetActive(false);
 		popUpPanelNeedProp.SetActive(false);
-		popUpPanelRandEvent.SetActive(false);
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
         	ConfirmPropertyPanel.SetActive(false);
@@ -181,10 +179,6 @@ public class NavigationController : MonoBehaviour
 		gameControler.ProcessAnswer(quizPanel, popUpPanel, letter);
 	}
 
-	public void OnRandEventPopUpOk ()
-	{
-		popUpPanelRandEvent.SetActive(false);
-	}
 	public void OnHighScoresHomeButtonClick()
 	{
 		SceneManager.LoadScene("MainScene");
