@@ -155,10 +155,16 @@ public class GameController : MonoBehaviour
 		player.CurrentProperty = player.PlayerCardsProperty[num];
 	}
 
-	public void CancelCurrentLoan()
+	public void CancelCurrentLoan(GameObject popUpPanel)
 	{
+		uiController.ShowPopUp("Are you sure you want to cancel this loan?", popUpPanel);
+	}
+
+	public void CancelCurrentLoanConfirmation ()
+	{
+		Debug.Log("2");
 		player.PlayerCardsProperty.Remove(player.CurrentProperty);
-		player.CurrentProperty = player.PlayerCardsProperty[0];
+		player.CurrentProperty = null;
 	}
 
 	public void RollDie(GameObject PopUpPanel, GameObject PopUpPanelQuiz)
@@ -217,17 +223,19 @@ public class GameController : MonoBehaviour
 		}
 	}
     
-    public void GetPropertyChoiceName(string leftRightOrCenter)
-    {
-        if(leftRightOrCenter == "left") {
-            uiController.SetConfirmText(cardLeft);
-        } else if (leftRightOrCenter == "center")
-        {
-            uiController.SetConfirmText(cardCenter);
-        }
-        else if (leftRightOrCenter == "right")
-        {
-            uiController.SetConfirmText(cardRight);
-        }
-    }
+	public void GetPropertyChoiceName(string leftRightOrCenter)
+	{
+		if(leftRightOrCenter == "left") 
+		{
+		    uiController.SetConfirmText(cardLeft);
+		} 
+		else if (leftRightOrCenter == "center")
+		{
+		    uiController.SetConfirmText(cardCenter);
+		}
+		else if (leftRightOrCenter == "right")
+		{
+		    uiController.SetConfirmText(cardRight);
+		}
+	}
 }

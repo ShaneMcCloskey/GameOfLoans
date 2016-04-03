@@ -132,6 +132,7 @@ public class UIController : MonoBehaviour
 		" The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client.",
 		"Progress the loan to completion and answer the question correctly to close the loan."
 	};
+
 	public void AwakeUI ()
 	{
 		posText = new string[10];
@@ -547,7 +548,7 @@ public class UIController : MonoBehaviour
 	}
 
 	// add param to check if need to be sent to diff panel
-	void ShowPopUp (string Text, GameObject PopUpPanel)
+	public void ShowPopUp (string Text, GameObject PopUpPanel)
 	{
 		PopUpPanel.SetActive (true);
 		popUpText.text = Text;

@@ -21,6 +21,7 @@ public class NavigationController : MonoBehaviour
     	public GameObject quizPanel;
 	public GameObject GameOverPanel;
         public GameObject ConfirmPropertyPanel;
+        public GameObject confirmCancelLoanPanel;
 
 	public Button oppKnocksButton;
 	public Button loanInProgressButton;
@@ -61,6 +62,7 @@ public class NavigationController : MonoBehaviour
 		currentPropertiesPanel.SetActive(false);
 		changePropertyButton.SetActive(false);
         	ConfirmPropertyPanel.SetActive(false);
+        	confirmCancelLoanPanel.SetActive(false);
 	}
 
 	// main menu buttons ----------------------------------
@@ -127,8 +129,7 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonCancelLoan ()
 	{
-		ChangePanel(propertyHuntPanel, true, false);
-		gameControler.CancelCurrentLoan();
+		gameControler.CancelCurrentLoan(confirmCancelLoanPanel);
 	}
 
 	public void GameOver(Player player)
@@ -225,5 +226,18 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonNo()
 	{
 		ConfirmPropertyPanel.SetActive(false);
+	}
+
+	public void OnButtonYesCanelLoan()
+	{
+		Debug.Log("1");
+		confirmCancelLoanPanel.SetActive(false);
+		ChangePanel(propertyHuntPanel, true, false);
+		gameControler.CancelCurrentLoanConfirmation();
+	}
+
+	public void OnButtonNoCancelLoan ()
+	{
+		confirmCancelLoanPanel.SetActive(false);
 	}
 }
