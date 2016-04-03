@@ -39,14 +39,15 @@ public class GameController : MonoBehaviour
 	// Opp knocks functions ------------------------------
 	public void DrawOppKnocksCard (string leftRightOrCenter, Button oppKnocksButton, Button propHuntButton, Button loanInProgressButton)
 	{
-		if (player.NumTurnsLeft > 0) {
+		if (player.NumTurnsLeft > 0) 
+		{
 			player.NumTurnsLeft--;
 
 			if (player.NumTurnsLeft == 40) 						// after 10 turns
 			{ 
 				isPickingStats = false;
 				propHuntButton.interactable = true;
-				loanInProgressButton.interactable = true;
+				//loanInProgressButton.interactable = true;
 			}
 			int randNum = Random.Range (0, cardsOppKnocks.Count);    
 
@@ -148,9 +149,19 @@ public class GameController : MonoBehaviour
 	}
 
 	// Loan in Progess functions -----------------------------------------------
-	public void EnterLoanInProgressScreen()
+	public void EnterLoanInProgressScreen(Button propertyPackButton)
 	{
 		uiController.EnterLoanInProgressScreenUI(player);
+		Debug.Log(player.PlayerCardsProperty.Count);
+
+		if (player.PlayerCardsProperty.Count >= 2)
+		{
+			propertyPackButton.interactable = true;
+		}
+		else
+		{
+			propertyPackButton.interactable = false;
+		}
 	}
 
 	public void EnterChangePropertyScreen()
@@ -189,8 +200,7 @@ public class GameController : MonoBehaviour
 			audioNew.PlayOneShot (diceRoll, .7F);
 
 
-			// CHAGNEEEEEE BACK TO 10
-			if (randEventNum <= 5) {
+			if (randEventNum <= 50) {
 				//bad
 				randEventBad = true;
 

@@ -26,10 +26,9 @@ public class NavigationController : MonoBehaviour
 	public Button oppKnocksButton;
 	public Button loanInProgressButton;
 	public Button propHuntButton;
+	public Button propertyPackButton;
 
-	public GameObject changePropertyButton;
-
-	//public GameObject cancelLoanButton;
+	public GameObject propPackButton;
 
 	public GameController gameControler;
 	public HighScoreController HighScoreController;
@@ -60,7 +59,6 @@ public class NavigationController : MonoBehaviour
 		popUpPanel.SetActive (false);
 		popUpPanelNeedProp.SetActive (false);
 		currentPropertiesPanel.SetActive (false);
-		changePropertyButton.SetActive (false);
 		ConfirmPropertyPanel.SetActive (false);
 		confirmCancelLoanPanel.SetActive (false);
 	}
@@ -117,7 +115,7 @@ public class NavigationController : MonoBehaviour
 		loanInProgressButton.interactable = false;
 		propHuntButton.interactable = true;
 		ChangePanel (loanInProgressPanel, true, true);
-		gameControler.EnterLoanInProgressScreen ();
+		gameControler.EnterLoanInProgressScreen (propertyPackButton);
 	}
 
 	public void OnButtonChangeProperty ()
@@ -161,7 +159,7 @@ public class NavigationController : MonoBehaviour
 	{
 		gameControler.ChangePropertyTo (num);
 		ChangePanel (loanInProgressPanel, true, true);
-		gameControler.EnterLoanInProgressScreen ();
+		gameControler.EnterLoanInProgressScreen (propertyPackButton);
 	}
 
 	// PopUp ---------------------------------------------------------
@@ -191,11 +189,9 @@ public class NavigationController : MonoBehaviour
 			navPanel.SetActive (false);	
 		}
 		if (loanInProgresActive) {
-			changePropertyButton.SetActive (true);
-			//cancelLoanButton.SetActive(true);
+			propPackButton.SetActive (true);
 		} else {
-			changePropertyButton.SetActive (false);
-			//cancelLoanButton.SetActive(false);
+			propPackButton.SetActive (false);
 		}
 
 		currentPanel.SetActive (false);

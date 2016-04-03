@@ -198,7 +198,6 @@ public class UIController : MonoBehaviour
 		HUDturnText.text = "40";
 		cardsLeftCount = 10;
 		SetOppCardsLeft ();
-		Debug.Log (posValue [0]);
 		audio = GetComponent<AudioSource> ();
 	}
 
