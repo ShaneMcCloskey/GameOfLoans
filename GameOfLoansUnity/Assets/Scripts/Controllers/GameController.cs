@@ -152,7 +152,6 @@ public class GameController : MonoBehaviour
 	public void EnterLoanInProgressScreen(Button propertyPackButton)
 	{
 		uiController.EnterLoanInProgressScreenUI(player);
-		Debug.Log(player.PlayerCardsProperty.Count);
 
 		if (player.PlayerCardsProperty.Count >= 2)
 		{
@@ -181,15 +180,15 @@ public class GameController : MonoBehaviour
 
 	public void CancelCurrentLoanConfirmation ()
 	{
-		Debug.Log("2");
 		player.PlayerCardsProperty.Remove(player.CurrentProperty);
 		player.CurrentProperty = null;
 	}
 
 	public void RollDie(GameObject PopUpPanel, GameObject PopUpPanelQuiz)
 	{
-		if (player.NumTurnsLeft > 0){
-				player.NumTurnsLeft--;
+		if (player.NumTurnsLeft > 0)
+		{
+			player.NumTurnsLeft--;
 			int num = Random.Range (1, 7);
 			player.CurrentProperty.CurrentProgress += num;
 
@@ -200,7 +199,7 @@ public class GameController : MonoBehaviour
 			audioNew.PlayOneShot (diceRoll, .7F);
 
 
-			if (randEventNum <= 50) {
+			if (randEventNum <= 5) {
 				//bad
 				randEventBad = true;
 
@@ -212,9 +211,9 @@ public class GameController : MonoBehaviour
 
 			if (player.CurrentProperty.CurrentProgress >= player.CurrentProperty.NumToClose) {
 				//Quiz Time
-				uiController.RollDiceUI (player, PopUpPanelQuiz, true, false, false);
+				uiController.RollDiceUI (player, PopUpPanelQuiz, true, false, false, num);
 			} else {
-				uiController.RollDiceUI (player, PopUpPanel, false, randEventGood, randEventBad);
+				uiController.RollDiceUI (player, PopUpPanel, false, randEventGood, randEventBad, num);
 				CheckGameOver ();
 			}
 		}

@@ -69,7 +69,7 @@ public class NavigationController : MonoBehaviour
 		ChangePanel (oppKnocksPanel, true, false);
 		//gameControler.EnterOppKnocksScreen ();
 		loanInProgressButton.interactable = false;
-		propHuntButton.interactable = false;
+		//propHuntButton.interactable = false;      // CHANGEEEEEEEEEEE
 		oppKnocksButton.interactable = false;
 		backgroundScroll.scroll = false;
 		backgroundScroll.Change ();

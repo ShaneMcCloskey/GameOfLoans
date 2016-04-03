@@ -53,6 +53,17 @@ public class UIController : MonoBehaviour
 	public Slider progressBar;
 	public Text sgText;
 
+
+	public GameObject diceObject;
+	public GameObject rollDiceButton;
+
+	public Sprite die1;
+	public Sprite die2;
+	public Sprite die3;
+	public Sprite die4;
+	public Sprite die5;
+	public Sprite die6;
+
 	// Pop up elements
 	public Text popUpText;
 	public Text popUpButtonText;
@@ -103,8 +114,10 @@ public class UIController : MonoBehaviour
 	private float max = 0f;
 	private Player playerLocal;
 	private GameObject popUpLocal;
+	private bool quizLocal;
 	private bool badLocal;
 	private bool goodLocal;
+	private int randNumLocal;
 
 	private bool needToUpdateBar = false;
 
@@ -128,6 +141,8 @@ public class UIController : MonoBehaviour
 	private string[] negText;
 	private int[] negValue;
 	private int negDecValue;
+
+	private int diceRollCount = 0;
 
 	// bottompanel private vars---------
 	private string[] subTitles = {
@@ -154,6 +169,7 @@ public class UIController : MonoBehaviour
 
 	public void AwakeUI ()
 	{
+		diceObject.SetActive(false);
 		posText = new string[10];
 		posValue = new int[10];
 		posText [0] = "Documents are sent electronically.\n\n+4 Progress";
@@ -377,10 +393,88 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad)
+	public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad, int randNum)
 	{
-		// need to have the panel in here
-		max = player.CurrentProperty.CurrentProgress;
+
+		// CALL DIE CHANGE FIRST
+		//ShowDiceAnim();
+		InvokeRepeating ("ShowDiceAnim", 0.01f, 0.15f);
+		playerLocal = player;
+		popUpLocal = popUpPanel;
+		quizLocal = quiz;
+		goodLocal = randEventGood;
+		badLocal = randEventBad;
+		randNumLocal = randNum;
+	}
+
+	void ShowDiceAnim ()
+	{
+		rollDiceButton.SetActive(false);
+		diceObject.SetActive (true);
+		diceRollCount++;
+		int ran = Random.Range (1, 7);
+		if (ran == 1)
+		{
+			diceObject.GetComponent<Image> ().sprite = die1;
+		}
+		else if (ran == 2)
+		{
+			diceObject.GetComponent<Image> ().sprite = die2;
+		}
+		else if (ran == 3)
+		{
+			diceObject.GetComponent<Image> ().sprite = die3;
+		}
+		else if (ran == 4)
+		{
+			diceObject.GetComponent<Image> ().sprite = die4;
+		}
+		else if (ran == 5)
+		{
+			diceObject.GetComponent<Image> ().sprite = die5;
+		}
+		else
+		{
+			diceObject.GetComponent<Image>().sprite = die6;
+		}
+		if(diceRollCount >= 6)
+		{
+			CancelInvoke("ShowDiceAnim");
+			UpdateStatsAndProgress(playerLocal, popUpLocal, quizLocal, goodLocal, badLocal, randNumLocal);
+		}
+	}
+
+	void UpdateStatsAndProgress (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad, int randNum)
+	{
+		if (randNum == 1)
+		{
+			diceObject.GetComponent<Image> ().sprite = die1;
+		}
+		else if (randNum == 2)
+		{
+			diceObject.GetComponent<Image> ().sprite = die2;
+		}
+		else if (randNum == 3)
+		{
+			diceObject.GetComponent<Image> ().sprite = die3;
+		}
+		else if (randNum == 4)
+		{
+			diceObject.GetComponent<Image> ().sprite = die4;
+		}
+		else if (randNum == 5)
+		{
+			diceObject.GetComponent<Image> ().sprite = die5;
+		}
+		else
+		{
+			diceObject.GetComponent<Image> ().sprite = die6;
+		}
+		diceRollCount = 0;
+
+		Invoke("Final", 1.25f);
+		
+		/*max = player.CurrentProperty.CurrentProgress;
 		needToUpdateBar = true;
 
 		HUDscoreText.text = player.Score.ToString ();
@@ -389,13 +483,36 @@ public class UIController : MonoBehaviour
 		HUDcreditText.text = player.Credit.ToString ();
 		HUDturnText.text = player.NumTurnsLeft.ToString ();
 
-		playerLocal = player;
-		popUpLocal = popUpPanel;
-		goodLocal = randEventGood;
-		badLocal = randEventBad;
+		diceObject.SetActive(false);
+		rollDiceButton.SetActive(true);
+		diceRollCount = 0;
 
-		if (quiz) {
+		if (quiz) 
+		{
 			ShowQuiz (popUpPanel);
+		}*/
+
+	}
+
+	void Final ()
+	{
+		// need to have the panel in here
+		max = playerLocal.CurrentProperty.CurrentProgress;
+		needToUpdateBar = true;
+
+		HUDscoreText.text = playerLocal.Score.ToString ();
+		HUDincomeText.text = playerLocal.Income.ToString ();
+		HUDassetsText.text = playerLocal.Assets.ToString ();
+		HUDcreditText.text = playerLocal.Credit.ToString ();
+		HUDturnText.text = playerLocal.NumTurnsLeft.ToString ();
+
+		diceObject.SetActive(false);
+		rollDiceButton.SetActive(true);
+		//diceRollCount = 0;
+
+		if (quizLocal) 
+		{
+			ShowQuiz (popUpLocal);
 		}
 	}
 
@@ -792,7 +909,7 @@ public class UIController : MonoBehaviour
 		ShowPopUp ("Correct!\n\nLoan Closed!", popUpPanel);
 
 		player.Score += 1000;
-		RollDiceUI (player, popUpPanel, false, false, false);
+		//RollDiceUI (player, popUpPanel, false, false, false, num);
 		player.PlayerCardsProperty.Remove (player.CurrentProperty);
 		player.CurrentProperty = null;
 		if (player.PlayerCardsProperty.Count >= 1) {
@@ -808,7 +925,7 @@ public class UIController : MonoBehaviour
 		audio.PlayOneShot (failureAudio, .9F);
 
 		player.NumTurnsLeft--;
-		RollDiceUI (player, popUpPanel, false, false, false);
+		//RollDiceUI (player, popUpPanel, false, false, false);
 
 		quizFailed = true;
 		quizPanel.SetActive (false);
