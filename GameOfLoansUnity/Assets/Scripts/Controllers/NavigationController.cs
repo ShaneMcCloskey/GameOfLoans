@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class NavigationController : MonoBehaviour 
+public class NavigationController : MonoBehaviour
 {
 	// public vars -----------------------------
 	public GameObject mainMenuPanel;
@@ -18,10 +18,10 @@ public class NavigationController : MonoBehaviour
 	public GameObject HUDPanel;
 	public GameObject popUpPanel;
 	public GameObject popUpPanelNeedProp;
-    	public GameObject quizPanel;
+	public GameObject quizPanel;
 	public GameObject GameOverPanel;
-        public GameObject ConfirmPropertyPanel;
-        public GameObject confirmCancelLoanPanel;
+	public GameObject ConfirmPropertyPanel;
+	public GameObject confirmCancelLoanPanel;
 
 	public Button oppKnocksButton;
 	public Button loanInProgressButton;
@@ -41,10 +41,10 @@ public class NavigationController : MonoBehaviour
 
 	//private bool isInputEnabled;
 
-        public string leftrightocecnter;
+	public string leftrightocecnter;
 
 	// Use this for initialization
-	public void Awake() 
+	public void Awake ()
 	{
 		//isInputEnabled = true;
 		currentPanel = mainMenuPanel;
@@ -52,21 +52,21 @@ public class NavigationController : MonoBehaviour
 		howToPlayPanel.SetActive (false);
 		leaderboardsPanel.SetActive (false);
 		creditsPanel.SetActive (false);
-		navPanel.SetActive(false);
+		navPanel.SetActive (false);
 		propertyHuntPanel.SetActive (false);
 		loanInProgressPanel.SetActive (false);
 		oppKnocksPanel.SetActive (false);
 		HUDPanel.SetActive (false);
-		popUpPanel.SetActive(false);
-		popUpPanelNeedProp.SetActive(false);
-		currentPropertiesPanel.SetActive(false);
-		changePropertyButton.SetActive(false);
-        	ConfirmPropertyPanel.SetActive(false);
-        	confirmCancelLoanPanel.SetActive(false);
+		popUpPanel.SetActive (false);
+		popUpPanelNeedProp.SetActive (false);
+		currentPropertiesPanel.SetActive (false);
+		changePropertyButton.SetActive (false);
+		ConfirmPropertyPanel.SetActive (false);
+		confirmCancelLoanPanel.SetActive (false);
 	}
 
 	// main menu buttons ----------------------------------
-	public void OnButtonPlay()
+	public void OnButtonPlay ()
 	{
 		ChangePanel (oppKnocksPanel, true, false);
 		//gameControler.EnterOppKnocksScreen ();
@@ -74,27 +74,27 @@ public class NavigationController : MonoBehaviour
 		propHuntButton.interactable = false;
 		oppKnocksButton.interactable = false;
 		backgroundScroll.scroll = false;
-		backgroundScroll.Change();
+		backgroundScroll.Change ();
 	}
 
-	public void OnButtonHowToPlay()
+	public void OnButtonHowToPlay ()
 	{
 		ChangePanel (howToPlayPanel, false, false);
 	}
 
-	public void OnButtonLeaderboards()
+	public void OnButtonLeaderboards ()
 	{
 		ChangePanel (leaderboardsPanel, false, false);
 		HighScoreController.HighScores (0);
 	}
 
-	public void OnButtonCredits()
+	public void OnButtonCredits ()
 	{
 		ChangePanel (creditsPanel, false, false);
 	}
 		
 	// Nav buttons ---------------------------------------------------
-	public void OnButtonOppKnocks()
+	public void OnButtonOppKnocks ()
 	{
 		oppKnocksButton.interactable = false;
 		loanInProgressButton.interactable = true;
@@ -102,37 +102,37 @@ public class NavigationController : MonoBehaviour
 		ChangePanel (oppKnocksPanel, true, false);
 	}
 
-	public void OnButtonPropertyHunt()
+	public void OnButtonPropertyHunt ()
 	{
 		oppKnocksButton.interactable = true;
 		loanInProgressButton.interactable = true;
 		propHuntButton.interactable = false;
 		ChangePanel (propertyHuntPanel, true, false);
-		popUpPanelNeedProp.SetActive(false);
-		gameControler.EnterPropertyHuntScreen();
+		popUpPanelNeedProp.SetActive (false);
+		gameControler.EnterPropertyHuntScreen ();
 	}
 
-	public void OnButtonLoanInProgress()
+	public void OnButtonLoanInProgress ()
 	{
 		oppKnocksButton.interactable = true;
 		loanInProgressButton.interactable = false;
 		propHuntButton.interactable = true;
 		ChangePanel (loanInProgressPanel, true, true);
-		gameControler.EnterLoanInProgressScreen();
+		gameControler.EnterLoanInProgressScreen ();
 	}
 
 	public void OnButtonChangeProperty ()
 	{
-		ChangePanel(currentPropertiesPanel, true, false);
-		gameControler.EnterChangePropertyScreen();
+		ChangePanel (currentPropertiesPanel, true, false);
+		gameControler.EnterChangePropertyScreen ();
 	}
 
 	public void OnButtonCancelLoan ()
 	{
-		gameControler.CancelCurrentLoan(confirmCancelLoanPanel);
+		gameControler.CancelCurrentLoan (confirmCancelLoanPanel);
 	}
 
-	public void GameOver(Player player)
+	public void GameOver (Player player)
 	{
 		HighScoreController.SetPlayer (player);
 		ChangePanel (GameOverPanel, false, false);
@@ -141,70 +141,64 @@ public class NavigationController : MonoBehaviour
 	// Opp knocks --------------------------------------------------
 	public void OnDrawOppKnocks (string leftRightOrCenter)
 	{
-		gameControler.DrawOppKnocksCard(leftRightOrCenter, oppKnocksButton, propHuntButton, loanInProgressButton);
+		gameControler.DrawOppKnocksCard (leftRightOrCenter, oppKnocksButton, propHuntButton, loanInProgressButton);
 	}
 
 	// Property hunt buttons ----------------------------------------
-	public void OnButtonPickPropertyCard(string leftRightOrCenter)
+	public void OnButtonPickPropertyCard (string leftRightOrCenter)
 	{
-	        gameControler.GetPropertyChoiceName(leftRightOrCenter);
-	        ConfirmPropertyPanel.SetActive(true);
-	        leftrightocecnter = leftRightOrCenter;
+		gameControler.GetPropertyChoiceName (leftRightOrCenter);
+		ConfirmPropertyPanel.SetActive (true);
+		leftrightocecnter = leftRightOrCenter;
 		//	gameControler.DrawPropertyCard (leftRightOrCenter);
 		//	ChangePanel(loanInProgressPanel, true, true);
 		//	gameControler.EnterLoanInProgressScreen();
 	}
 
 	// Loan in Progress Buttons --------------------------------------
-	public void OnButtonRollDice()
+	public void OnButtonRollDice ()
 	{
-		gameControler.RollDie(popUpPanel, quizPanel);
+		gameControler.RollDie (popUpPanel, quizPanel);
 	}
 
-	public void OnButtonChangePropertyTo(int num)
+	public void OnButtonChangePropertyTo (int num)
 	{
-		gameControler.ChangePropertyTo(num);
-		ChangePanel(loanInProgressPanel, true, true);
-		gameControler.EnterLoanInProgressScreen();
+		gameControler.ChangePropertyTo (num);
+		ChangePanel (loanInProgressPanel, true, true);
+		gameControler.EnterLoanInProgressScreen ();
 	}
 
 	// PopUp ---------------------------------------------------------
 	public void OnPopUpOk ()
 	{
-		gameControler.ProcessOkButton(popUpPanel, popUpPanelNeedProp, propertyHuntPanel, quizPanel);
+		gameControler.ProcessOkButton (popUpPanel, popUpPanelNeedProp, propertyHuntPanel, quizPanel);
 	}
 
 	// Quiz Answer Buttons
-	public void OnButtonAnswer(string letter)
+	public void OnButtonAnswer (string letter)
 	{
-		gameControler.ProcessAnswer(quizPanel, popUpPanel, letter);
+		gameControler.ProcessAnswer (quizPanel, popUpPanel, letter);
 	}
 
-	public void OnHighScoresHomeButtonClick()
+	public void OnHighScoresHomeButtonClick ()
 	{
-		SceneManager.LoadScene("MainScene");
+		SceneManager.LoadScene ("MainScene");
 	}
 
 	void ChangePanel (GameObject panelToShow, bool showHUD, bool loanInProgresActive)
 	{
-		if (showHUD)
-		{	
+		if (showHUD) {	
 			HUDPanel.SetActive (true);
 			navPanel.SetActive (true);
-		} 
-		else
-		{
+		} else {
 			HUDPanel.SetActive (false);
 			navPanel.SetActive (false);	
 		}
-		if (loanInProgresActive)
-		{
-			changePropertyButton.SetActive(true);
+		if (loanInProgresActive) {
+			changePropertyButton.SetActive (true);
 			//cancelLoanButton.SetActive(true);
-		}
-		else
-		{
-			changePropertyButton.SetActive(false);
+		} else {
+			changePropertyButton.SetActive (false);
 			//cancelLoanButton.SetActive(false);
 		}
 
@@ -213,31 +207,31 @@ public class NavigationController : MonoBehaviour
 		currentPanel = panelToShow;
 	}
 
-	public void OnButtonYes()
+	public void OnButtonYes ()
 	{
-		ConfirmPropertyPanel.SetActive(false);
-		gameControler.DrawPropertyCard(leftrightocecnter);
-		OnButtonLoanInProgress();
+		ConfirmPropertyPanel.SetActive (false);
+		gameControler.DrawPropertyCard (leftrightocecnter);
+		OnButtonLoanInProgress ();
 		/*ChangePanel(loanInProgressPanel, true, true);
 		gameControler.EnterLoanInProgressScreen();*/
 
 	}
 
-	public void OnButtonNo()
+	public void OnButtonNo ()
 	{
-		ConfirmPropertyPanel.SetActive(false);
+		ConfirmPropertyPanel.SetActive (false);
 	}
 
-	public void OnButtonYesCanelLoan()
+	public void OnButtonYesCanelLoan ()
 	{
-		Debug.Log("1");
-		confirmCancelLoanPanel.SetActive(false);
-		ChangePanel(propertyHuntPanel, true, false);
-		gameControler.CancelCurrentLoanConfirmation();
+		Debug.Log ("1");
+		confirmCancelLoanPanel.SetActive (false);
+		ChangePanel (propertyHuntPanel, true, false);
+		gameControler.CancelCurrentLoanConfirmation ();
 	}
 
 	public void OnButtonNoCancelLoan ()
 	{
-		confirmCancelLoanPanel.SetActive(false);
+		confirmCancelLoanPanel.SetActive (false);
 	}
 }
