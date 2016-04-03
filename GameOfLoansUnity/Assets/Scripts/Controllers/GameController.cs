@@ -214,4 +214,18 @@ public class GameController : MonoBehaviour
 			ScoreController.SetPlayer (player);
 		}
 	}
+    
+    public void GetPropertyChoiceName(string leftRightOrCenter)
+    {
+        if(leftRightOrCenter == "left") {
+            uiController.SetConfirmText(cardLeft);
+        } else if (leftRightOrCenter == "center")
+        {
+            uiController.SetConfirmText(cardCenter);
+        }
+        else if (leftRightOrCenter == "right")
+        {
+            uiController.SetConfirmText(cardRight);
+        }
+    }
 }

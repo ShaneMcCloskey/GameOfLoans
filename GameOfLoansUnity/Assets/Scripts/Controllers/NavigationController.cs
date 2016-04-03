@@ -141,6 +141,7 @@ public class NavigationController : MonoBehaviour
 	// Property hunt buttons ----------------------------------------
 	public void OnButtonPickPropertyCard(string leftRightOrCenter)
 	{
+        gameControler.GetPropertyChoiceName(leftRightOrCenter);
         ConfirmPropertyPanel.SetActive(true);
         leftrightocecnter = leftRightOrCenter;
 	//	gameControler.DrawPropertyCard (leftRightOrCenter);

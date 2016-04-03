@@ -62,6 +62,7 @@ public class UIController : MonoBehaviour
 	public Text AnswerBText;
    	public Text AnswerCText;
 	public Text AnswerDText;
+    public Text confirmPropText;
 
 	// Change propety text elements
 	public GameObject firstCardDisplay;
@@ -986,5 +987,9 @@ public class UIController : MonoBehaviour
         {
             cardsLeftText.text = "Draw a card to increase your stats";
         }
+    }
+    public void SetConfirmText(PropertyCard cardChoice)
+    {
+        confirmPropText.text = "Are you sure you want to select the " + cardChoice.Title + " property?";
     }
 }
