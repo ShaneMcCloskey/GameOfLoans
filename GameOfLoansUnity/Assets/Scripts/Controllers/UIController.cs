@@ -298,6 +298,15 @@ public class UIController : MonoBehaviour
 		}
 	}
 
+    public void UpdateHUDUI ()
+    {
+        HUDscoreText.text = playerLocal.Score.ToString();
+        HUDincomeText.text = playerLocal.Income.ToString();
+        HUDassetsText.text = playerLocal.Assets.ToString();
+        HUDcreditText.text = playerLocal.Credit.ToString();
+        HUDturnText.text = playerLocal.NumTurnsLeft.ToString();
+    }
+
 	public void UpdateTurnsLeft (Player player)
 	{
 		HUDturnText.text = player.NumTurnsLeft.ToString ();
@@ -482,11 +491,7 @@ public class UIController : MonoBehaviour
 		max = playerLocal.CurrentProperty.CurrentProgress;
 		needToUpdateBar = true;
 
-		HUDscoreText.text = playerLocal.Score.ToString ();
-		HUDincomeText.text = playerLocal.Income.ToString ();
-		HUDassetsText.text = playerLocal.Assets.ToString ();
-		HUDcreditText.text = playerLocal.Credit.ToString ();
-		HUDturnText.text = playerLocal.NumTurnsLeft.ToString ();
+        UpdateHUDUI();
 
 		diceObject.SetActive(false);
 		rollDiceButton.SetActive(true);
@@ -884,6 +889,8 @@ public class UIController : MonoBehaviour
 		} else {
 			FailQuiz (quizPanel, popUpPanel, player);
 		}
+
+        UpdateHUDUI();
 	}
 
 	public void PassQuiz (GameObject quizPanel, GameObject popUpPanel, Player player)
