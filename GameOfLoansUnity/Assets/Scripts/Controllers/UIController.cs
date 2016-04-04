@@ -368,19 +368,19 @@ public class UIController : MonoBehaviour
 	{
 		leftTitle.text = cardLeft.Title;
 		leftAddressProp.text = cardLeft.Address;
-		leftPriceProp.text = cardLeft.Price.ToString ();
+        leftPriceProp.text = string.Format("{0:C}", cardLeft.Price);
 		leftDiffProp.text = cardLeft.Difficulty.ToString ();
 		leftPicProp.GetComponent<Image> ().sprite = cardLeft.Pic;
 
 		centerTitle.text = cardCenter.Title;
 		centerAddressProp.text = cardCenter.Address;
-		centerPriceProp.text = cardCenter.Price.ToString ();
+        centerPriceProp.text = string.Format("{0:C}", cardCenter.Price);
 		centerDiffProp.text = cardCenter.Difficulty.ToString ();
 		centerPicProp.GetComponent<Image> ().sprite = cardCenter.Pic;
 
 		rightTitle.text = cardRight.Title;
 		rightAddressProp.text = cardRight.Address;
-		rightPriceProp.text = cardRight.Price.ToString ();
+        rightPriceProp.text = string.Format("{0:C}", cardRight.Price);
 		rightDiffProp.text = cardRight.Difficulty.ToString ();
 		rightPicProp.GetComponent<Image> ().sprite = cardRight.Pic;
 	}
@@ -390,7 +390,7 @@ public class UIController : MonoBehaviour
 	{
 		currentTitle.text = player.CurrentProperty.Title;
 		currentAddress.text = player.CurrentProperty.Address;
-		currentPrice.text = player.CurrentProperty.Price.ToString ();
+        currentPrice.text = string.Format("{0:C}", player.CurrentProperty.Price);
 		currentDiff.text = player.CurrentProperty.Difficulty.ToString ();
 		currentPic.GetComponent<Image> ().sprite = player.CurrentProperty.Pic;
 
@@ -944,7 +944,7 @@ public class UIController : MonoBehaviour
 			firstTitlePropPack.text = player.PlayerCardsProperty[0].Title;
 			firstPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[0].Pic;
 			firstAddressPropPack.text = player.PlayerCardsProperty [0].Address;
-			firstPricePropPack.text = player.PlayerCardsProperty [0].Price.ToString ();
+            firstPricePropPack.text = string.Format("{0:C}", player.PlayerCardsProperty[0].Price);
 			firstDiffPropPack.text = player.PlayerCardsProperty [0].Difficulty.ToString ();
 		}
 
@@ -956,7 +956,7 @@ public class UIController : MonoBehaviour
 			secondTitlePropPack.text = player.PlayerCardsProperty[1].Title;
 			secondPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[1].Pic;
 			secondAddressPropPack.text = player.PlayerCardsProperty [1].Address;
-			secondPricePropPack.text = player.PlayerCardsProperty [1].Price.ToString ();
+            secondPricePropPack.text = string.Format("{0:C}", player.PlayerCardsProperty[1].Price);
 			secondDiffPropPack.text = player.PlayerCardsProperty [1].Difficulty.ToString ();
 		}
 	        
@@ -968,7 +968,7 @@ public class UIController : MonoBehaviour
 			thirdTitlePropPack.text = player.PlayerCardsProperty[2].Title;
 			thirdPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[2].Pic;
 			thirdAddressPropPack.text = player.PlayerCardsProperty [2].Address;
-			thirdPricePropPack.text = player.PlayerCardsProperty [2].Price.ToString ();
+            thirdPricePropPack.text = string.Format("{0:C}", player.PlayerCardsProperty[2].Price);
 			thirdDiffPropPack.text = player.PlayerCardsProperty [2].Difficulty.ToString ();
 		}
 	}
