@@ -67,7 +67,6 @@ public class UIController : MonoBehaviour
 	// Pop up elements
 	public Text popUpText;
 	public Text popUpButtonText;
-	public Text popUpRandEventText;
 	public Text QuizQuestionText;
 	public Text AnswerAText;
 	public Text AnswerBText;
@@ -80,15 +79,18 @@ public class UIController : MonoBehaviour
 	public GameObject secondCardDisplay;
 	public GameObject thirdCardDisplay;
 
-	public Text firstPicPropPack;
+	public GameObject firstPicPropPack;
+	public Text firstTitlePropPack;
 	public Text firstAddressPropPack;
 	public Text firstPricePropPack;
 	public Text firstDiffPropPack;
-	public Text secondPicPropPack;
+	public GameObject secondPicPropPack;
+	public Text secondTitlePropPack;
 	public Text secondAddressPropPack;
 	public Text secondPricePropPack;
 	public Text secondDiffPropPack;
-	public Text thirdPicPropPack;
+	public GameObject thirdPicPropPack;
+	public Text thirdTitlePropPack;
 	public Text thirdAddressPropPack;
 	public Text thirdPricePropPack;
 	public Text thirdDiffPropPack;
@@ -96,7 +98,6 @@ public class UIController : MonoBehaviour
 	// private vars -----------------------------------------
 
 	// Audio
-
 	public AudioSource audio;
 	public AudioClip successAudio;
 	public AudioClip failureAudio;
@@ -926,34 +927,39 @@ public class UIController : MonoBehaviour
 		thirdCardDisplay.SetActive (false);
 
 		// First Prop card
-
-		if (player.PlayerCardsProperty.Count >= 1) 
+		if (player.PlayerCardsProperty.Count > 1) 
 		{
 			firstCardDisplay.SetActive (true);
 
-			firstAddressPropPack.text = player.PlayerCardsProperty [0].Address;
-			firstPricePropPack.text = player.PlayerCardsProperty [0].Price.ToString ();
-			firstDiffPropPack.text = player.PlayerCardsProperty [0].Difficulty.ToString ();
+			firstTitlePropPack.text = player.PlayerCardsProperty[1].Title;
+			firstPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[1].Pic;
+			firstAddressPropPack.text = player.PlayerCardsProperty [1].Address;
+			firstPricePropPack.text = player.PlayerCardsProperty [1].Price.ToString ();
+			firstDiffPropPack.text = player.PlayerCardsProperty [1].Difficulty.ToString ();
 		}
 
 		// Second Prop card
-
-		if (player.PlayerCardsProperty.Count >= 2) {
+		if (player.PlayerCardsProperty.Count > 2) 
+		{
 			secondCardDisplay.SetActive (true);
 
-			secondAddressPropPack.text = player.PlayerCardsProperty [1].Address;
-			secondPricePropPack.text = player.PlayerCardsProperty [1].Price.ToString ();
-			secondDiffPropPack.text = player.PlayerCardsProperty [1].Difficulty.ToString ();
+			secondTitlePropPack.text = player.PlayerCardsProperty[2].Title;
+			secondPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[2].Pic;
+			secondAddressPropPack.text = player.PlayerCardsProperty [2].Address;
+			secondPricePropPack.text = player.PlayerCardsProperty [2].Price.ToString ();
+			secondDiffPropPack.text = player.PlayerCardsProperty [2].Difficulty.ToString ();
 		}
 	        
 		// Third Prop card
-
-		if (player.PlayerCardsProperty.Count >= 3) {
+		if (player.PlayerCardsProperty.Count > 3) 
+		{
 			thirdCardDisplay.SetActive (true);
 
-			thirdAddressPropPack.text = player.PlayerCardsProperty [2].Address;
-			thirdPricePropPack.text = player.PlayerCardsProperty [2].Price.ToString ();
-			thirdDiffPropPack.text = player.PlayerCardsProperty [2].Difficulty.ToString ();
+			thirdTitlePropPack.text = player.PlayerCardsProperty[3].Title;
+			thirdPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[3].Pic;
+			thirdAddressPropPack.text = player.PlayerCardsProperty [3].Address;
+			thirdPricePropPack.text = player.PlayerCardsProperty [3].Price.ToString ();
+			thirdDiffPropPack.text = player.PlayerCardsProperty [3].Difficulty.ToString ();
 		}
 	}
 

@@ -134,6 +134,7 @@ public class NavigationController : MonoBehaviour
 		{
 			return;
 		}
+		loanInProgressButton.interactable = true;
 		ChangePanel (currentPropertiesPanel, true, false);
 		gameControler.EnterChangePropertyScreen ();
 	}
