@@ -499,37 +499,41 @@ public class UIController : MonoBehaviour
 
 	void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
-		if (player.CurrentProperty != null)
+		if (player != null)
 		{
-			if ((progressBar.value >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false) {		
-			sgText.text = "Subgoal 1 Achieved!";
-			player.CurrentProperty.Subgoal1Complete = true;
-			subGoalPanelTitle.text = "Application"; 
-			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false) {
-				sgText.text = "Subgoal 2 Achieved!";
-				player.CurrentProperty.Subgoal2Complete = true;
-				subGoalPanelTitle.text = "Loan Set Up";
-			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false) {
-				sgText.text = "Subgoal 3 Achieved!";
-				player.CurrentProperty.Subgoal3Complete = true;
-				subGoalPanelTitle.text = "Folder Received";
-			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false) {
-				sgText.text = "Subgoal 4 Achieved!";
-				player.CurrentProperty.Subgoal4Complete = true;
-			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.Subgoal5Complete == false) {
-				sgText.text = "Subgoal 5 Achieved!";
-				player.CurrentProperty.Subgoal5Complete = true;
-			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.Subgoal6Complete == false) {
-				sgText.text = "Subgoal 6 Achieved!";
-				player.CurrentProperty.Subgoal6Complete = true;
-			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.Subgoal7Complete == false) {
-				sgText.text = "Subgoal 7 Achieved!";
-				player.CurrentProperty.Subgoal7Complete = true;
-			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.Subgoal8Complete == false) {
-				sgText.text = "Subgoal 8 Achieved!";
-				player.CurrentProperty.Subgoal8Complete = true;
+			if (player.CurrentProperty != null)
+			{
+				if ((progressBar.value >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false) 
+				{		
+					sgText.text = "Subgoal 1 Achieved!";
+					player.CurrentProperty.Subgoal1Complete = true;
+					subGoalPanelTitle.text = "Application"; 
+				} else if ((progressBar.value >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false) {
+					sgText.text = "Subgoal 2 Achieved!";
+					player.CurrentProperty.Subgoal2Complete = true;
+					subGoalPanelTitle.text = "Loan Set Up";
+				} else if ((progressBar.value >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false) {
+					sgText.text = "Subgoal 3 Achieved!";
+					player.CurrentProperty.Subgoal3Complete = true;
+					subGoalPanelTitle.text = "Folder Received";
+				} else if ((progressBar.value >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false) {
+					sgText.text = "Subgoal 4 Achieved!";
+					player.CurrentProperty.Subgoal4Complete = true;
+				} else if ((progressBar.value >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.Subgoal5Complete == false) {
+					sgText.text = "Subgoal 5 Achieved!";
+					player.CurrentProperty.Subgoal5Complete = true;
+				} else if ((progressBar.value >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.Subgoal6Complete == false) {
+					sgText.text = "Subgoal 6 Achieved!";
+					player.CurrentProperty.Subgoal6Complete = true;
+				} else if ((progressBar.value >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.Subgoal7Complete == false) {
+					sgText.text = "Subgoal 7 Achieved!";
+					player.CurrentProperty.Subgoal7Complete = true;
+				} else if ((progressBar.value >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.Subgoal8Complete == false) {
+					sgText.text = "Subgoal 8 Achieved!";
+					player.CurrentProperty.Subgoal8Complete = true;
+				}
+				ChangeSubgoalPanel (player);
 			}
-			ChangeSubgoalPanel (player);
 		}
 	}
 

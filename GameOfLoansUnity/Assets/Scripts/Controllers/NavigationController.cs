@@ -34,18 +34,17 @@ public class NavigationController : MonoBehaviour
 	public HighScoreController HighScoreController;
 	public BackgroundScroll backgroundScroll;
 
-
 	// private vars -------------------------
 	private GameObject currentPanel;
 
-	//private bool isInputEnabled;
+	public bool isInputEnabled;
 
 	public string leftrightocecnter;
 
 	// Use this for initialization
 	public void Awake ()
 	{
-		//isInputEnabled = true;
+		isInputEnabled = true;
 		currentPanel = mainMenuPanel;
 		mainMenuPanel.SetActive (true);
 		howToPlayPanel.SetActive (false);
@@ -67,7 +66,6 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonPlay ()
 	{
 		ChangePanel (oppKnocksPanel, true, false);
-		//gameControler.EnterOppKnocksScreen ();
 		loanInProgressButton.interactable = false;
 		propHuntButton.interactable = false;     
 		oppKnocksButton.interactable = false;
@@ -94,6 +92,10 @@ public class NavigationController : MonoBehaviour
 	// Nav buttons ---------------------------------------------------
 	public void OnButtonOppKnocks ()
 	{
+		if (isInputEnabled == false)
+		{
+			return;
+		}
 		oppKnocksButton.interactable = false;
 		loanInProgressButton.interactable = true;
 		propHuntButton.interactable = true;
@@ -102,6 +104,10 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonPropertyHunt ()
 	{
+		if (isInputEnabled == false)
+		{
+			return;
+		}
 		oppKnocksButton.interactable = true;
 		propHuntButton.interactable = false;
 		ChangePanel (propertyHuntPanel, true, false);
@@ -111,6 +117,10 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonLoanInProgress ()
 	{
+		if (isInputEnabled == false)
+		{
+			return;
+		}
 		oppKnocksButton.interactable = true;
 		loanInProgressButton.interactable = false;
 		propHuntButton.interactable = true;
@@ -120,12 +130,20 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonChangeProperty ()
 	{
+		if (isInputEnabled == false)
+		{
+			return;
+		}
 		ChangePanel (currentPropertiesPanel, true, false);
 		gameControler.EnterChangePropertyScreen ();
 	}
 
 	public void OnButtonCancelLoan ()
 	{
+		if (isInputEnabled == false)
+		{
+			return;
+		}
 		gameControler.CancelCurrentLoan (confirmCancelLoanPanel);
 	}
 
@@ -138,7 +156,13 @@ public class NavigationController : MonoBehaviour
 	// Opp knocks --------------------------------------------------
 	public void OnDrawOppKnocks (string leftRightOrCenter)
 	{
+		if (isInputEnabled == false)
+		{
+			return;
+		}
 		gameControler.DrawOppKnocksCard (leftRightOrCenter, oppKnocksButton, propHuntButton, loanInProgressButton);
+		isInputEnabled = false;
+		Invoke("EnableInput", 1.5f);
 	}
 
 	// Property hunt buttons ----------------------------------------
@@ -152,7 +176,13 @@ public class NavigationController : MonoBehaviour
 	// Loan in Progress Buttons --------------------------------------
 	public void OnButtonRollDice ()
 	{
+		if (isInputEnabled == false)
+		{
+			return;
+		}
 		gameControler.RollDie (popUpPanel, quizPanel);
+		isInputEnabled = false;
+		Invoke("EnableInput", 2.0f);
 	}
 
 	public void OnButtonChangePropertyTo (int num)
@@ -225,5 +255,10 @@ public class NavigationController : MonoBehaviour
 	public void OnButtonNoCancelLoan ()
 	{
 		confirmCancelLoanPanel.SetActive (false);
+	}
+
+	void EnableInput()
+	{
+		isInputEnabled = true;	
 	}
 }
