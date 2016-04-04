@@ -99,6 +99,7 @@ public class NavigationController : MonoBehaviour
 		oppKnocksButton.interactable = false;
 		loanInProgressButton.interactable = true;
 		propHuntButton.interactable = true;
+		popUpPanelNeedProp.SetActive (false);
 		ChangePanel (oppKnocksPanel, true, false);
 	}
 
