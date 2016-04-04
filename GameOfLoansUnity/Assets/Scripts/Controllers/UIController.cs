@@ -902,7 +902,10 @@ public class UIController : MonoBehaviour
 		quizPanel.SetActive (false);
 		ShowPopUp ("Correct!\n\nLoan Closed!", popUpPanel);
 
+        // Update Player stats
 		player.Score += 1000;
+        player.NumPropertiesClosed += 1;
+
 		//RollDiceUI (player, popUpPanel, false, false, false, num);
 		player.PlayerCardsProperty.Remove (player.CurrentProperty);
 		player.CurrentProperty = null;
