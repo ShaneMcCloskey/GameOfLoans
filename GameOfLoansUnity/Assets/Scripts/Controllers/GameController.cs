@@ -146,6 +146,7 @@ public class GameController : MonoBehaviour
 				cardsPropertyHunt.Remove (cardRight);
 			}
 		}
+
 	}
 
 	// Loan in Progess functions -----------------------------------------------

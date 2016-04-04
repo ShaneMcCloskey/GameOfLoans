@@ -153,9 +153,9 @@ public class UIController : MonoBehaviour
 		"Docs out to Settlement Agent",
 		"Closed"
 	};
-	private string[] subDesc = {"Client e-signs the application and sends in supporting documents for review (pay stub, W2,etc.",
+	private string[] subDesc = {"Client e-signs the application and sends in supporting documents for review (pay stub, W2,etc.)",
 		"The Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan.",
-		"The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition(tracking item) for it.",
+		"The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.",
 		"The CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.",
 		"All client conditions and vendor conditions are being viewed as they're received. The CCS is following up with the client every 3-5 days.",
 		"When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan.",
@@ -934,39 +934,39 @@ public class UIController : MonoBehaviour
 		thirdCardDisplay.SetActive (false);
 
 		// First Prop card
-		if (player.PlayerCardsProperty.Count > 1) 
+		if (player.PlayerCardsProperty.Count > 0) 
 		{
 			firstCardDisplay.SetActive (true);
 
-			firstTitlePropPack.text = player.PlayerCardsProperty[1].Title;
-			firstPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[1].Pic;
-			firstAddressPropPack.text = player.PlayerCardsProperty [1].Address;
-			firstPricePropPack.text = player.PlayerCardsProperty [1].Price.ToString ();
-			firstDiffPropPack.text = player.PlayerCardsProperty [1].Difficulty.ToString ();
+			firstTitlePropPack.text = player.PlayerCardsProperty[0].Title;
+			firstPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[0].Pic;
+			firstAddressPropPack.text = player.PlayerCardsProperty [0].Address;
+			firstPricePropPack.text = player.PlayerCardsProperty [0].Price.ToString ();
+			firstDiffPropPack.text = player.PlayerCardsProperty [0].Difficulty.ToString ();
 		}
 
 		// Second Prop card
-		if (player.PlayerCardsProperty.Count > 2) 
+		if (player.PlayerCardsProperty.Count > 1) 
 		{
 			secondCardDisplay.SetActive (true);
 
-			secondTitlePropPack.text = player.PlayerCardsProperty[2].Title;
-			secondPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[2].Pic;
-			secondAddressPropPack.text = player.PlayerCardsProperty [2].Address;
-			secondPricePropPack.text = player.PlayerCardsProperty [2].Price.ToString ();
-			secondDiffPropPack.text = player.PlayerCardsProperty [2].Difficulty.ToString ();
+			secondTitlePropPack.text = player.PlayerCardsProperty[1].Title;
+			secondPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[1].Pic;
+			secondAddressPropPack.text = player.PlayerCardsProperty [1].Address;
+			secondPricePropPack.text = player.PlayerCardsProperty [1].Price.ToString ();
+			secondDiffPropPack.text = player.PlayerCardsProperty [1].Difficulty.ToString ();
 		}
 	        
 		// Third Prop card
-		if (player.PlayerCardsProperty.Count > 3) 
+		if (player.PlayerCardsProperty.Count > 2) 
 		{
 			thirdCardDisplay.SetActive (true);
 
-			thirdTitlePropPack.text = player.PlayerCardsProperty[3].Title;
-			thirdPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[3].Pic;
-			thirdAddressPropPack.text = player.PlayerCardsProperty [3].Address;
-			thirdPricePropPack.text = player.PlayerCardsProperty [3].Price.ToString ();
-			thirdDiffPropPack.text = player.PlayerCardsProperty [3].Difficulty.ToString ();
+			thirdTitlePropPack.text = player.PlayerCardsProperty[2].Title;
+			thirdPicPropPack.GetComponent<Image>().sprite = player.PlayerCardsProperty[2].Pic;
+			thirdAddressPropPack.text = player.PlayerCardsProperty [2].Address;
+			thirdPricePropPack.text = player.PlayerCardsProperty [2].Price.ToString ();
+			thirdDiffPropPack.text = player.PlayerCardsProperty [2].Difficulty.ToString ();
 		}
 	}
 

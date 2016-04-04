@@ -186,6 +186,7 @@ public class NavigationController : MonoBehaviour
 		Invoke("EnableInput", 2.0f);
 	}
 
+    // Current Properties buttons ------------------------------------
 	public void OnButtonChangePropertyTo (int num)
 	{
 		gameControler.ChangePropertyTo (num);
