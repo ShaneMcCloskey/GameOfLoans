@@ -131,10 +131,6 @@ public class UIController : MonoBehaviour
 
 	private bool decrease = false;
 
-	/*private Color red;
-	private Color green;
-	private Color blue;*/
-
 	private string[] posText;
 	private int[] posValue;
 	private int posIncValue;
@@ -204,9 +200,6 @@ public class UIController : MonoBehaviour
 		negValue [8] = 2;
 		negText [9] = "Additional client verification of employment documents requested.\n\n-2 Progress";
 		negValue [9] = 2;
-		/*red = new Color(255,0,16, 255);
-		green = new Color(23,181,17,255);
-		blue = new Color(17,52,181, 255);*/
 		HUDscoreText.text = "0";
 		HUDincomeText.text = "0";
 		HUDassetsText.text = "0";
@@ -251,18 +244,30 @@ public class UIController : MonoBehaviour
 
 	void Update ()
 	{
-		if (needToUpdateBar) {
-			if (playerLocal.CurrentProperty.CurrentProgress <= max) {
-				IncreaseBar ();
-			}
-		} else {
-			if (check) {
-				CheckRandomEvent (goodLocal, badLocal, popUpLocal, playerLocal);
-				check = false;
+		if (playerLocal != null)
+		{
+			if (needToUpdateBar)
+			{
+				if (playerLocal.CurrentProperty != null)
+				{
+					if (playerLocal.CurrentProperty.CurrentProgress <= max) 
+					{
+						IncreaseBar ();
+					}
+				}
+			} 
+			else 
+			{
+				if (check) 
+				{
+					CheckRandomEvent (goodLocal, badLocal, popUpLocal, playerLocal);
+					check = false;
+				}
 			}
 		}
 
-		if (decrease) {
+		if (decrease) 
+		{
 			DecreaseBar ();
 		}
 
@@ -395,9 +400,6 @@ public class UIController : MonoBehaviour
 
 	public void RollDiceUI (Player player, GameObject popUpPanel, bool quiz, bool randEventGood, bool randEventBad, int randNum)
 	{
-
-		// CALL DIE CHANGE FIRST
-		//ShowDiceAnim();
 		InvokeRepeating ("ShowDiceAnim", 0.01f, 0.15f);
 		playerLocal = player;
 		popUpLocal = popUpPanel;
@@ -471,32 +473,11 @@ public class UIController : MonoBehaviour
 			diceObject.GetComponent<Image> ().sprite = die6;
 		}
 		diceRollCount = 0;
-
 		Invoke("Final", 1.25f);
-		
-		/*max = player.CurrentProperty.CurrentProgress;
-		needToUpdateBar = true;
-
-		HUDscoreText.text = player.Score.ToString ();
-		HUDincomeText.text = player.Income.ToString ();
-		HUDassetsText.text = player.Assets.ToString ();
-		HUDcreditText.text = player.Credit.ToString ();
-		HUDturnText.text = player.NumTurnsLeft.ToString ();
-
-		diceObject.SetActive(false);
-		rollDiceButton.SetActive(true);
-		diceRollCount = 0;
-
-		if (quiz) 
-		{
-			ShowQuiz (popUpPanel);
-		}*/
-
 	}
 
 	void Final ()
 	{
-		// need to have the panel in here
 		max = playerLocal.CurrentProperty.CurrentProgress;
 		needToUpdateBar = true;
 
@@ -508,7 +489,6 @@ public class UIController : MonoBehaviour
 
 		diceObject.SetActive(false);
 		rollDiceButton.SetActive(true);
-		//diceRollCount = 0;
 
 		if (quizLocal) 
 		{
@@ -519,36 +499,38 @@ public class UIController : MonoBehaviour
 
 	void CheckSubGoal (Player player, GameObject popUpPanel)
 	{
-		if ((progressBar.value >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false) {		
+		if (player.CurrentProperty != null)
+		{
+			if ((progressBar.value >= progressBar.maxValue / 9) && player.CurrentProperty.Subgoal1Complete == false) {		
 			sgText.text = "Subgoal 1 Achieved!";
 			player.CurrentProperty.Subgoal1Complete = true;
 			subGoalPanelTitle.text = "Application"; 
-		} else if ((progressBar.value >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false) {
-			sgText.text = "Subgoal 2 Achieved!";
-			player.CurrentProperty.Subgoal2Complete = true;
-			subGoalPanelTitle.text = "Loan Set Up";
-
-		} else if ((progressBar.value >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false) {
-			sgText.text = "Subgoal 3 Achieved!";
-			player.CurrentProperty.Subgoal3Complete = true;
-			subGoalPanelTitle.text = "Folder Received";
-		} else if ((progressBar.value >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false) {
-			sgText.text = "Subgoal 4 Achieved!";
-			player.CurrentProperty.Subgoal4Complete = true;
-		} else if ((progressBar.value >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.Subgoal5Complete == false) {
-			sgText.text = "Subgoal 5 Achieved!";
-			player.CurrentProperty.Subgoal5Complete = true;
-		} else if ((progressBar.value >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.Subgoal6Complete == false) {
-			sgText.text = "Subgoal 6 Achieved!";
-			player.CurrentProperty.Subgoal6Complete = true;
-		} else if ((progressBar.value >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.Subgoal7Complete == false) {
-			sgText.text = "Subgoal 7 Achieved!";
-			player.CurrentProperty.Subgoal7Complete = true;
-		} else if ((progressBar.value >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.Subgoal8Complete == false) {
-			sgText.text = "Subgoal 8 Achieved!";
-			player.CurrentProperty.Subgoal8Complete = true;
+			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 2) && player.CurrentProperty.Subgoal2Complete == false) {
+				sgText.text = "Subgoal 2 Achieved!";
+				player.CurrentProperty.Subgoal2Complete = true;
+				subGoalPanelTitle.text = "Loan Set Up";
+			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 3) && player.CurrentProperty.Subgoal3Complete == false) {
+				sgText.text = "Subgoal 3 Achieved!";
+				player.CurrentProperty.Subgoal3Complete = true;
+				subGoalPanelTitle.text = "Folder Received";
+			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 4) && player.CurrentProperty.Subgoal4Complete == false) {
+				sgText.text = "Subgoal 4 Achieved!";
+				player.CurrentProperty.Subgoal4Complete = true;
+			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 5) && player.CurrentProperty.Subgoal5Complete == false) {
+				sgText.text = "Subgoal 5 Achieved!";
+				player.CurrentProperty.Subgoal5Complete = true;
+			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 6) && player.CurrentProperty.Subgoal6Complete == false) {
+				sgText.text = "Subgoal 6 Achieved!";
+				player.CurrentProperty.Subgoal6Complete = true;
+			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 7) && player.CurrentProperty.Subgoal7Complete == false) {
+				sgText.text = "Subgoal 7 Achieved!";
+				player.CurrentProperty.Subgoal7Complete = true;
+			} else if ((progressBar.value >= (progressBar.maxValue / 9) * 8) && player.CurrentProperty.Subgoal8Complete == false) {
+				sgText.text = "Subgoal 8 Achieved!";
+				player.CurrentProperty.Subgoal8Complete = true;
+			}
+			ChangeSubgoalPanel (player);
 		}
-		ChangeSubgoalPanel (player);
 	}
 
 	void CheckRandomEvent (bool randEventGood, bool randEventBad, GameObject popUpPanel, Player player)
@@ -941,7 +923,8 @@ public class UIController : MonoBehaviour
 
 		// First Prop card
 
-		if (player.PlayerCardsProperty.Count >= 1) {
+		if (player.PlayerCardsProperty.Count >= 1) 
+		{
 			firstCardDisplay.SetActive (true);
 
 			firstAddressPropPack.text = player.PlayerCardsProperty [0].Address;
@@ -972,33 +955,36 @@ public class UIController : MonoBehaviour
 
 	public void ChangeSubgoalPanel (Player player)
 	{
-		int index = 0;
-		if (player.CurrentProperty.Subgoal1Complete) {
-			index++;
+		if (player != null)
+		{
+			int index = 0;
+			if (player.CurrentProperty.Subgoal1Complete) {
+				index++;
+			}
+			if (player.CurrentProperty.Subgoal2Complete) {
+				index++;
+			}
+			if (player.CurrentProperty.Subgoal3Complete) {
+				index++;
+			}
+			if (player.CurrentProperty.Subgoal4Complete) {
+				index++;
+			}
+			if (player.CurrentProperty.Subgoal5Complete) {
+				index++;
+			}
+			if (player.CurrentProperty.Subgoal6Complete) {
+				index++;
+			}
+			if (player.CurrentProperty.Subgoal7Complete) {
+				index++;
+			}
+			if (player.CurrentProperty.Subgoal8Complete) {
+				index++;
+			}
+			subGoalPanelTitle.text = subTitles [index];
+			subGoalPanelDesc.text = subDesc [index];
 		}
-		if (player.CurrentProperty.Subgoal2Complete) {
-			index++;
-		}
-		if (player.CurrentProperty.Subgoal3Complete) {
-			index++;
-		}
-		if (player.CurrentProperty.Subgoal4Complete) {
-			index++;
-		}
-		if (player.CurrentProperty.Subgoal5Complete) {
-			index++;
-		}
-		if (player.CurrentProperty.Subgoal6Complete) {
-			index++;
-		}
-		if (player.CurrentProperty.Subgoal7Complete) {
-			index++;
-		}
-		if (player.CurrentProperty.Subgoal8Complete) {
-			index++;
-		}
-		subGoalPanelTitle.text = subTitles [index];
-		subGoalPanelDesc.text = subDesc [index];
 	}
 
 	public void SetOppCardsLeft ()
@@ -1010,7 +996,7 @@ public class UIController : MonoBehaviour
 		} else if (cardsLeftCount == 1) {
 			cardsLeftText.text = "Choose " + cardsLeftCount.ToString () + " more card to increase your stats";
 		} else {
-			cardsLeftText.text = "Draw a card to increase your stats";
+			cardsLeftText.text = "Use a turn to draw a card and increase your stats";
 		}
 	}
 
