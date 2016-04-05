@@ -627,45 +627,45 @@ public class UIController : MonoBehaviour
 		PopUpPanel.SetActive (true);
 
 		// If player has already completed all available quizes, reset them
-		if (completedQuizes.Count == 22) {
+		if (completedQuizes.Count == 13) {
 			completedQuizes.Clear ();
 		}
 
-		//set random quiz number 1-22
-		currentQuizNum = Random.Range (1, 23);
+		//set random quiz number 1-13
+		currentQuizNum = Random.Range (1, 14);
 
 		// Make sure player has not already completed current quiz
 		if (completedQuizes.Contains (currentQuizNum)) {
 			while (completedQuizes.Contains (currentQuizNum)) {
-				currentQuizNum = Random.Range (1, 23);
+				currentQuizNum = Random.Range (1, 14);
 			}
 		}
 
 		switch (currentQuizNum) {
 		case 1:
-			QuizQuestionText.text = "What is the step when the client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)?";
+			QuizQuestionText.text = "What is the step when the client e-signs the application and sends in supporting documents for review (pay stubs, W2, etc.)?";
 			AnswerAText.text = "A: Initial Contact";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: Blah";
+			AnswerBText.text = "B: Final Signoff";
+			AnswerCText.text = "C: Conditonally Approved";
+			AnswerDText.text = "D: Loan Set Up Complete";
 
 			correctAnswer = AnswerAText.text;
 			break;
               
 		case 2:
 			QuizQuestionText.text = "What is the step when the Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan?";
-			AnswerAText.text = "A: Blah";
+			AnswerAText.text = "A: Conditionally Approved";
 			AnswerBText.text = "B: Application"; 
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: Blah";
+			AnswerCText.text = "C: Initial Contact";
+			AnswerDText.text = "D: Folder Received";
 
 			correctAnswer = AnswerBText.text;
 			break;
             
 		case 3:
 			QuizQuestionText.text = "This step is when the underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
-			AnswerAText.text = "A: Blah";
-			AnswerBText.text = "B: Blah";
+			AnswerAText.text = "A: Application";
+			AnswerBText.text = "B: Closing Signing Has Been Scheduled";
 			AnswerCText.text = "C: Loan Set Up Complete";
 			AnswerDText.text = "D: Blah";
 
@@ -673,50 +673,50 @@ public class UIController : MonoBehaviour
 			break;
 
 		case 4:
-			QuizQuestionText.text = "At this step the CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
-			AnswerAText.text = "A: Blah";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Blah";
+			QuizQuestionText.text = "At this step the Client Care Specialist calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
+			AnswerAText.text = "A: Conditionally Approved";
+			AnswerBText.text = "B: Loan Set Up Complete";
+			AnswerCText.text = "C: Initial Contact";
 			AnswerDText.text = "D: Folder Received";
 
 			correctAnswer = AnswerDText.text;
 			break;
 
 		case 5:
-			QuizQuestionText.text = "At this step all client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days. ";
+			QuizQuestionText.text = "At this step all client conditions and vendor conditions are being reviewed as they’re received. The Client Care Specialist is following up with the client every 3-5 days. ";
 			AnswerAText.text = "A: Conditionally Approved";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: Blah";
+			AnswerBText.text = "B: Closing Signing Has Been Scheduled";
+			AnswerCText.text = "C: Folder Received";
+			AnswerDText.text = "D: Initial Contact";
 
 			correctAnswer = AnswerAText.text;
 			break;
 
 		case 6:
-			QuizQuestionText.text = "When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan. This is called the _______.";
-			AnswerAText.text = "A: Blah";
+			QuizQuestionText.text = "When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan. This is called _______.";
+			AnswerAText.text = "A: Closing Signing Has Been Scheduled";
 			AnswerBText.text = "B: Final Signoff";
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: Blah";
+			AnswerCText.text = "C: Docs Out To Settlement";
+			AnswerDText.text = "D: Loan Set Up Complete";
 
 			correctAnswer = AnswerBText.text;
 			break;
 
 		case 7:
-			QuizQuestionText.text = "When ______________ the client agrees to the terms, and the loan goes to the final signoff underwriter for final approval.";
-			AnswerAText.text = "A: Blah";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Closing Signing has been scheduled";
-			AnswerDText.text = "D: Blah";
+            QuizQuestionText.text = "When ______________ has been scheduled, the client agrees to the terms, and the loan goes to the final signoff underwriter for final approval.";
+			AnswerAText.text = "A: Final Signoff";
+			AnswerBText.text = "B: Intial Contact";
+			AnswerCText.text = "C: Closing Signing";
+			AnswerDText.text = "D: Docs Out To Settlement";
 
 			correctAnswer = AnswerCText.text;
 			break;
             
 		case 8:
-			QuizQuestionText.text = "The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client. This stage is when…";
-			AnswerAText.text = "A: Blah";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Blah";
+            QuizQuestionText.text = "The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client. This stage is ______";
+			AnswerAText.text = "A: Application";
+			AnswerBText.text = "B: Folder Received";
+			AnswerCText.text = "C: Loan Set Up Complete";
 			AnswerDText.text = "D: Docs out to Settlement Agent";
 
 			correctAnswer = AnswerDText.text;
@@ -725,55 +725,55 @@ public class UIController : MonoBehaviour
 		case 9:
 			QuizQuestionText.text = "In the Conditionally Approved stage, how many days do the CCS follow up with the client for?";
 			AnswerAText.text = "A: 3-5 days";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: Blah";
+			AnswerBText.text = "B: 1-2 days";
+			AnswerCText.text = "C: 0 days";
+			AnswerDText.text = "D: 7-10 days";
 
 			correctAnswer = AnswerAText.text;
 			break;
 
 		case 10:
 			QuizQuestionText.text = "T/F If the client does not agree with the terms, the loan still goes to the final signoff underwriter for final approval?";
-			AnswerAText.text = "A: Blah";
+			AnswerAText.text = "A: T";
 			AnswerBText.text = "B: F";
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: Blah";
+			AnswerCText.text = "-------";
+			AnswerDText.text = "-------";
 
 			correctAnswer = AnswerBText.text;
 			break;
 
 		case 11:
 			QuizQuestionText.text = "T/F A client only needs an old W2 to be approved for a loan?";
-			AnswerAText.text = "A: Blah";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: F";
-			AnswerDText.text = "D: Blah";
+			AnswerAText.text = "A: T";
+			AnswerBText.text = "B: F";
+			AnswerCText.text = "-------";
+			AnswerDText.text = "-------";
 
-			correctAnswer = AnswerCText.text;
+			correctAnswer = AnswerBText.text;
 			break;
 
 		case 12:
 			QuizQuestionText.text = "Which team makes sure the underwriter has everything they need to underwrite the loan?";
-			AnswerAText.text = "A: Blah";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: The Quality Assurance team";
+			AnswerAText.text = "A: The Customer Service Team";
+			AnswerBText.text = "B: The Human Resources Team";
+			AnswerCText.text = "C: The Broker Managment Team";
+			AnswerDText.text = "D: The Quality Assurance Team";
 
 			correctAnswer = AnswerDText.text;
 			break;
 
 		case 13:
 			QuizQuestionText.text = "The ____ calls to introduce him or herself to the client in the Folder Received step.";
-			AnswerAText.text = "A: CCS";
-			AnswerBText.text = "B: Blah";
-			AnswerCText.text = "C: Blah";
-			AnswerDText.text = "D: Blah";
+			AnswerAText.text = "A: Client Care Specialist";
+			AnswerBText.text = "B: Loan Supervisor";
+			AnswerCText.text = "C: Closing Agent";
+			AnswerDText.text = "D: Underwriter";
 
 			correctAnswer = AnswerAText.text;
 			break;
 
 		case 14:
-			QuizQuestionText.text = "The initial contact stage is when...";
+			QuizQuestionText.text = "The _______ stage is when...";
 			AnswerAText.text = "A: Blah";
 			AnswerBText.text = "B: The client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)";
 			AnswerCText.text = "C: Blah";
