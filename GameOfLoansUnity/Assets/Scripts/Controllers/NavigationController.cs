@@ -22,6 +22,7 @@ public class NavigationController : MonoBehaviour
 	public GameObject GameOverPanel;
 	public GameObject ConfirmPropertyPanel;
 	public GameObject confirmCancelLoanPanel;
+	public GameObject confirmHomePanel;
 
 	public Button oppKnocksButton;
 	public Button loanInProgressButton;
@@ -263,5 +264,17 @@ public class NavigationController : MonoBehaviour
 	void EnableInput()
 	{
 		isInputEnabled = true;	
+	}
+	public void ConfirmHomeYes()
+	{
+		SceneManager.LoadScene ("MainScene");
+	}
+	public void ConfirmHomeNo()
+	{
+		confirmHomePanel.SetActive (false);
+	}
+	public void ConfirmHomePopUp()
+	{
+		confirmHomePanel.SetActive (true);
 	}
 }
