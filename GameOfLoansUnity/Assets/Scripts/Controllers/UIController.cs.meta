@@ -1,10 +1,94 @@
 fileFormatVersion: 2
 guid: 0bce016939ba44c3fa4e2fab67b4c731
-timeCreated: 1454793891
-licenseType: Pro
+timeCreated: 1459897929
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - HUDscoreText: {instanceID: 0}
+  - HUDincomeText: {instanceID: 0}
+  - HUDassetsText: {instanceID: 0}
+  - HUDcreditText: {instanceID: 0}
+  - HUDturnText: {instanceID: 0}
+  - leftOppKnocksType: {instanceID: 0}
+  - leftOppKnocksDesc: {instanceID: 0}
+  - centerOppKnocksType: {instanceID: 0}
+  - centerOppKnocksDesc: {instanceID: 0}
+  - rightOppKnocksType: {instanceID: 0}
+  - rightOppKnocksDesc: {instanceID: 0}
+  - cardsLeftText: {instanceID: 0}
+  - leftTitle: {instanceID: 0}
+  - leftAddressProp: {instanceID: 0}
+  - leftPriceProp: {instanceID: 0}
+  - leftDiffProp: {instanceID: 0}
+  - leftPicProp: {instanceID: 0}
+  - centerTitle: {instanceID: 0}
+  - centerAddressProp: {instanceID: 0}
+  - centerPriceProp: {instanceID: 0}
+  - centerDiffProp: {instanceID: 0}
+  - centerPicProp: {instanceID: 0}
+  - rightTitle: {instanceID: 0}
+  - rightAddressProp: {instanceID: 0}
+  - rightPriceProp: {instanceID: 0}
+  - rightDiffProp: {instanceID: 0}
+  - rightPicProp: {instanceID: 0}
+  - subGoalPanelTitle: {instanceID: 0}
+  - subGoalPanelDesc: {instanceID: 0}
+  - currentTitle: {instanceID: 0}
+  - currentAddress: {instanceID: 0}
+  - currentPrice: {instanceID: 0}
+  - currentDiff: {instanceID: 0}
+  - currentPic: {instanceID: 0}
+  - progressBar: {instanceID: 0}
+  - sgText: {instanceID: 0}
+  - diceObject: {instanceID: 0}
+  - rollDiceButton: {instanceID: 0}
+  - die1: {instanceID: 0}
+  - die2: {instanceID: 0}
+  - die3: {instanceID: 0}
+  - die4: {instanceID: 0}
+  - die5: {instanceID: 0}
+  - die6: {instanceID: 0}
+  - popUpText: {instanceID: 0}
+  - popUpButtonText: {instanceID: 0}
+  - QuizQuestionText: {instanceID: 0}
+  - AnswerAText: {instanceID: 0}
+  - AnswerBText: {instanceID: 0}
+  - AnswerCText: {instanceID: 0}
+  - AnswerDText: {instanceID: 0}
+  - confirmPropText: {instanceID: 0}
+  - firstCardDisplay: {instanceID: 0}
+  - secondCardDisplay: {instanceID: 0}
+  - thirdCardDisplay: {instanceID: 0}
+  - firstPicPropPack: {instanceID: 0}
+  - firstTitlePropPack: {instanceID: 0}
+  - firstAddressPropPack: {instanceID: 0}
+  - firstPricePropPack: {instanceID: 0}
+  - firstDiffPropPack: {instanceID: 0}
+  - secondPicPropPack: {instanceID: 0}
+  - secondTitlePropPack: {instanceID: 0}
+  - secondAddressPropPack: {instanceID: 0}
+  - secondPricePropPack: {instanceID: 0}
+  - secondDiffPropPack: {instanceID: 0}
+  - thirdPicPropPack: {instanceID: 0}
+  - thirdTitlePropPack: {instanceID: 0}
+  - thirdAddressPropPack: {instanceID: 0}
+  - thirdPricePropPack: {instanceID: 0}
+  - thirdDiffPropPack: {instanceID: 0}
+  - audio: {instanceID: 0}
+  - successAudio: {instanceID: 0}
+  - failureAudio: {instanceID: 0}
+  - C1: {fileID: 8300000, guid: 72c27a0aa5fb7cd4fa8bb7c51201e3b7, type: 3}
+  - D: {fileID: 8300000, guid: a82607845d7cfa84eaefb59cccd40019, type: 3}
+  - Eb: {fileID: 8300000, guid: f4620c58fce316c448714daf682e0cff, type: 3}
+  - F: {fileID: 8300000, guid: 5306c23f279c4aa41a854072b6af6578, type: 3}
+  - G: {fileID: 8300000, guid: 1e8a4fa032838da4788f08519cdf2368, type: 3}
+  - Ab: {fileID: 8300000, guid: ede592a626174bc4da615c12154ac897, type: 3}
+  - Bb: {fileID: 8300000, guid: f44d3113015a65840b8f02486382246b, type: 3}
+  - C2: {fileID: 8300000, guid: 7260b68dd9e21b64aad411dab9f4e443, type: 3}
+  - cfLeft: {instanceID: 0}
+  - cfCenter: {instanceID: 0}
+  - cfRight: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
