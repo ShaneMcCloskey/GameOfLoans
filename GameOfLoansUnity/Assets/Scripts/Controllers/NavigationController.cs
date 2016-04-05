@@ -126,7 +126,7 @@ public class NavigationController : MonoBehaviour
 		loanInProgressButton.interactable = false;
 		propHuntButton.interactable = true;
 		ChangePanel (loanInProgressPanel, true, true);
-		gameControler.EnterLoanInProgressScreen (propertyPackButton);
+		gameControler.EnterLoanInProgressScreen (propertyPackButton, propHuntButton);
 	}
 
 	public void OnButtonChangeProperty ()
@@ -192,7 +192,7 @@ public class NavigationController : MonoBehaviour
 	{
 		gameControler.ChangePropertyTo (num);
 		ChangePanel (loanInProgressPanel, true, true);
-		gameControler.EnterLoanInProgressScreen (propertyPackButton);
+		gameControler.EnterLoanInProgressScreen (propertyPackButton, propHuntButton);
 	}
 
 	// PopUp ---------------------------------------------------------

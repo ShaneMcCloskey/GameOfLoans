@@ -150,7 +150,7 @@ public class GameController : MonoBehaviour
 	}
 
 	// Loan in Progess functions -----------------------------------------------
-	public void EnterLoanInProgressScreen(Button propertyPackButton)
+	public void EnterLoanInProgressScreen(Button propertyPackButton, Button propHuntButton)
 	{
 		uiController.EnterLoanInProgressScreenUI(player);
 
@@ -162,6 +162,16 @@ public class GameController : MonoBehaviour
 		{
 			propertyPackButton.interactable = false;
 		}
+
+        // If player already has 3 properties
+        if (player.PlayerCardsProperty.Count >= 3)
+        {
+            propHuntButton.interactable = false;
+        }
+        else
+        {
+            propHuntButton.interactable = true;
+        }
 	}
 
 	public void EnterChangePropertyScreen()

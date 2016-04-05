@@ -156,11 +156,11 @@ public class UIController : MonoBehaviour
 	private string[] subDesc = {"Client e-signs the application and sends in supporting documents for review (pay stub, W2,etc.)",
 		"The Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan.",
 		"The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.",
-		"The CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.",
-		"All client conditions and vendor conditions are being viewed as they're received. The CCS is following up with the client every 3-5 days.",
-		"When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan.",
+		"The Client Care Specialist calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.",
+		"All client conditions and vendor conditions are being viewed as they're received. The Client Care Specialist is following up with the client every 3-5 days.",
+		"When all documents are received and cleared and the loan is approved, the Client Care Specialist calls the client to confirm the final terms and structure of the loan.",
 		"If the client agrees to the terms, the loan goes to the final signoff underwriter for final approval.",
-		" The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client.",
+		"The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client.",
 		"Progress the loan to completion and answer the question correctly to close the loan."
 	};
 
@@ -185,7 +185,7 @@ public class UIController : MonoBehaviour
 		negValue [0] = 4;
 		negText [1] = "Client pay stubs are missing.\n\n-4 Progress";
 		negValue [1] = 4;
-		negText [2] = "Missed call from CCS.\n\n-1 Progress";
+		negText [2] = "Missed call from Client Care Specialist.\n\n-1 Progress";
 		negValue [2] = 1;
 		negText [3] = "Client documents are inaccurate.\n\n-6 Progress";
 		negValue [3] = 6;
@@ -693,7 +693,7 @@ public class UIController : MonoBehaviour
 			break;
 
 		case 6:
-			QuizQuestionText.text = "When all documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan. This is called _______.";
+			QuizQuestionText.text = "When all documents are received and cleared and the loan is approved, the Client Care Specialist calls the client to confirm the final terms and structure of the loan. This is called _______.";
 			AnswerAText.text = "A: Closing Signing Has Been Scheduled";
 			AnswerBText.text = "B: Final Signoff";
 			AnswerCText.text = "C: Docs Out To Settlement";
@@ -723,7 +723,7 @@ public class UIController : MonoBehaviour
 			break;
             
 		case 9:
-			QuizQuestionText.text = "In the Conditionally Approved stage, how many days do the CCS follow up with the client for?";
+			QuizQuestionText.text = "In the Conditionally Approved stage, how many days do the Client Care Specialist follow up with the client for?";
 			AnswerAText.text = "A: 3-5 days";
 			AnswerBText.text = "B: 1-2 days";
 			AnswerCText.text = "C: 0 days";
