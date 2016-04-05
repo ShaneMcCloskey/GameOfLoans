@@ -224,7 +224,7 @@ public class HighScoreController : MonoBehaviour
 	public void SetPlayer(Player finalPlayer)
 	{
 		player = finalPlayer;
-		player.Score = player.Score + (int) player.Credit * 10 + (int)player.Income + (int) player.Assets;
+		player.Score = player.Score + (int) player.Credit  + (int)player.Income + (int) player.Assets;
 		GameOverAssets.text = player.Assets.ToString();
 		GameOverLoans.text = player.NumPropertiesClosed.ToString ();
 		GameOverIncome.text = player.Income.ToString ();

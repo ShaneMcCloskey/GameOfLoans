@@ -903,7 +903,7 @@ public class UIController : MonoBehaviour
 		ShowPopUp ("Correct!\n\nLoan Closed!", popUpPanel);
 
         // Update Player stats
-		player.Score += 1000;
+		player.Score += player.CurrentProperty.Price;
         player.NumPropertiesClosed += 1;
 
 		//RollDiceUI (player, popUpPanel, false, false, false, num);
