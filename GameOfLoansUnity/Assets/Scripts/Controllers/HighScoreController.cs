@@ -211,7 +211,7 @@ public class HighScoreController : MonoBehaviour
 				//no error
 				AddScoreReturn returnValue = JsonUtility.FromJson<AddScoreReturn>(www.text);
 				NavController.OnButtonLeaderboards ();
-				HighScores (returnValue.rank / scoresPerPage);
+				HighScores (((returnValue.rank+1) / scoresPerPage));
 			} 
 			else {
 				PopUpText.text = "ERROR: Score could not be added.";
@@ -224,11 +224,12 @@ public class HighScoreController : MonoBehaviour
 	public void SetPlayer(Player finalPlayer)
 	{
 		player = finalPlayer;
-		GameOverAssets.text = finalPlayer.Assets.ToString();
-		GameOverLoans.text = finalPlayer.NumPropertiesClosed.ToString ();
-		GameOverIncome.text = finalPlayer.Income.ToString ();
-		GameOverCredit.text = finalPlayer.Credit.ToString();
-		GameOverScore.text = finalPlayer.Score.ToString ();
+		player.Score = player.Score + (int) player.Credit * 10 + (int)player.Income + (int) player.Assets;
+		GameOverAssets.text = player.Assets.ToString();
+		GameOverLoans.text = player.NumPropertiesClosed.ToString ();
+		GameOverIncome.text = player.Income.ToString ();
+		GameOverCredit.text = player.Credit.ToString();
+		GameOverScore.text = player.Score.ToString ();
 		gameOverPanel.SetActive(true);
 	}
 	public void OnPopUPOk()
