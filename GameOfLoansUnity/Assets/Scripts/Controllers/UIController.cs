@@ -95,6 +95,15 @@ public class UIController : MonoBehaviour
     public Text thirdPricePropPack;
     public Text thirdDiffPropPack;
 
+    public GameObject strikeThrough1;
+    public GameObject strikeThrough2;
+    public GameObject strikeThrough3;
+    public GameObject strikeThrough4;
+    public GameObject strikeThrough5;
+    public GameObject strikeThrough6;
+    public GameObject strikeThrough7;
+    public GameObject strikeThrough8;
+
     // private vars -----------------------------------------
 
     // Audio
@@ -209,6 +218,15 @@ public class UIController : MonoBehaviour
         HUDturnText.text = "40";
         cardsLeftCount = 10;
         SetOppCardsLeft();
+
+        strikeThrough1.SetActive(false);
+        strikeThrough2.SetActive(false);
+	strikeThrough3.SetActive(false);
+        strikeThrough4.SetActive(false);
+	strikeThrough5.SetActive(false);
+        strikeThrough6.SetActive(false);
+	strikeThrough7.SetActive(false);
+        strikeThrough8.SetActive(false);
 
         //audio
         audio = GetComponent<AudioSource>();
@@ -1071,43 +1089,83 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void ChangeSubgoalPanel(Player player)
-    {
-        if (player != null)
-        {
-            int index = 0;
-            if (player.CurrentProperty.Subgoal1Complete)
-            {
-                index++;
-            }
-            if (player.CurrentProperty.Subgoal2Complete)
-            {
-                index++;
-            }
-            if (player.CurrentProperty.Subgoal3Complete)
-            {
-                index++;
-            }
-            if (player.CurrentProperty.Subgoal4Complete)
-            {
-                index++;
-            }
-            if (player.CurrentProperty.Subgoal5Complete)
-            {
-                index++;
-            }
-            if (player.CurrentProperty.Subgoal6Complete)
-            {
-                index++;
-            }
-            if (player.CurrentProperty.Subgoal7Complete)
-            {
-                index++;
-            }
-            if (player.CurrentProperty.Subgoal8Complete)
-            {
-                index++;
-            }
+    public void ChangeSubgoalPanel (Player player)
+	{
+		if (player != null)
+		{
+			int index = 0;
+			if (player.CurrentProperty.Subgoal1Complete)
+			{
+				strikeThrough1.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough1.SetActive (false);
+			}
+			if (player.CurrentProperty.Subgoal2Complete)
+			{
+				strikeThrough2.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough2.SetActive (false); 
+			}
+			if (player.CurrentProperty.Subgoal3Complete)
+			{
+				strikeThrough3.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough3.SetActive (false);
+			}
+			if (player.CurrentProperty.Subgoal4Complete)
+			{
+				strikeThrough4.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough4.SetActive (false);
+			}
+			if (player.CurrentProperty.Subgoal5Complete)
+			{
+				strikeThrough5.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough5.SetActive (false);
+			}
+			if (player.CurrentProperty.Subgoal6Complete)
+			{
+				strikeThrough6.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough6.SetActive (false);
+			}
+			if (player.CurrentProperty.Subgoal7Complete)
+			{
+				strikeThrough7.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough7.SetActive (false);
+			}
+			if (player.CurrentProperty.Subgoal8Complete)
+			{
+				strikeThrough8.SetActive (true);
+				index++;
+			}
+			else
+			{
+				strikeThrough8.SetActive(false);
+			}
             subGoalPanelTitle.text = subTitles[index];
             subGoalPanelDesc.text = subDesc[index];
 
