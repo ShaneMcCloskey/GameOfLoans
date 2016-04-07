@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 	private float maxIncome = 11400f;
 	private float maxAssets = 28525f;
 	private float maxCredit = 880f;
-	private float multiplier= 1f;
+	private float multiplier= 2.2f;
 	private PropertyCard currentProperty;
 	private int numPropertiesClosed = 0;
 	private List<OppKnocksCard> playerCardsOppKnocks = new List<OppKnocksCard>();
