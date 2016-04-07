@@ -212,9 +212,9 @@ public class UIController : MonoBehaviour
         negText[9] = "Additional client verification of employment documents requested.\n\n-2 Progress";
         negValue[9] = 2;
         HUDscoreText.text = "0";
-        HUDincomeText.text = "0";
-        HUDassetsText.text = "0";
-        HUDcreditText.text = "0";
+        HUDincomeText.text = "1000";
+        HUDassetsText.text = "1000";
+        HUDcreditText.text = "600";
         HUDturnText.text = "40";
         cardsLeftCount = 10;
         SetOppCardsLeft();

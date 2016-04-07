@@ -199,7 +199,6 @@ public class HighScoreController : MonoBehaviour
     }
 	private IEnumerator WaitRequestSendScore(GameScore gs){
 		string gsJson = JsonUtility.ToJson (gs);
-		Debug.Log (gsJson);
 		//var encoding = new System.Text.UTF8Encoding();
 		var postHeader = new Dictionary<string, string>();
 		postHeader.Add("Content-Type", "text/json");
@@ -209,7 +208,6 @@ public class HighScoreController : MonoBehaviour
 			
 			yield return www;
 			if (www.error == null) {
-				Debug.Log (www.text);
 				//no error
 				AddScoreReturn returnValue = JsonUtility.FromJson<AddScoreReturn>(www.text);
 				NavController.OnButtonLeaderboards ();

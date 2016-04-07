@@ -204,8 +204,9 @@ public class GameController : MonoBehaviour
 		if (player.NumTurnsLeft > 0)
 		{
 			player.NumTurnsLeft--;
+			player.CalculateMultiplier ();
 			int num = Random.Range (1, 7);
-			player.CurrentProperty.CurrentProgress += num;
+			player.CurrentProperty.CurrentProgress += (int)(num*player.GetMultiplier());
 
 			int randEventNum = Random.Range (0, 100);
 			bool randEventGood = false;
