@@ -16,6 +16,7 @@ public class HighScoreController : MonoBehaviour
 	public GameObject scoresPanel;
 	public GameObject gameOverPanel;
 	public GameObject HighScorePopUP;
+	public Button AddScoreButton;
 	public Text PopUpText;
 	public Text PageNumText;
 	public Text GameOverIncome;
@@ -139,7 +140,7 @@ public class HighScoreController : MonoBehaviour
     public void AddScore()
     {
 		if (NameInput.text != "" && TeamInput.text != "") {
-
+			AddScoreButton.interactable = false;
 			GameScore sendingScore = new GameScore () {
 				Id = null,
 				Name = NameInput.text,
@@ -188,6 +189,7 @@ public class HighScoreController : MonoBehaviour
 				//error
 				error = true;
 				isScoreError = true;
+				AddScoreButton.interactable = true;
 			}
 		}
 		if (error == true) {
