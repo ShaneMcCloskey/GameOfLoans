@@ -31,12 +31,21 @@ public class NavigationController : MonoBehaviour
 
 	public GameObject propPackButton;
 
+	public Button InstructNext;
+	public Button InstructPrev;
+	public GameObject InstructOppPanel;
+	public GameObject InstructPropPanel;
+	public GameObject InstructLoanPanel;
+	private GameObject InstructCurrentPanel;
+
 	public GameController gameControler;
 	public HighScoreController HighScoreController;
 	public BackgroundScroll backgroundScroll;
 
 	// private vars -------------------------
 	private GameObject currentPanel;
+
+	private int currentInstructPanel = 0;
 
 	public bool isInputEnabled;
 
@@ -76,7 +85,12 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonHowToPlay ()
 	{
+		InstructCurrentPanel = InstructOppPanel;
+		InstructPrev.interactable = false;
+		InstructCurrentPanel.SetActive (true);
+		currentInstructPanel = 0;
 		ChangePanel (howToPlayPanel, false, false);
+
 	}
 
 	public void OnButtonLeaderboards ()
@@ -276,5 +290,43 @@ public class NavigationController : MonoBehaviour
 	public void ConfirmHomePopUp()
 	{
 		confirmHomePanel.SetActive (true);
+	}
+	public void InstructionNext()
+	{
+		currentInstructPanel++;
+		if (currentInstructPanel == 2)
+		{
+			InstructNext.interactable = false;
+			InstructLoanPanel.SetActive (true);
+			InstructCurrentPanel.SetActive (false);
+			InstructCurrentPanel = InstructLoanPanel;
+		} 
+		else if (currentInstructPanel == 1)
+		{
+			InstructPrev.interactable = true;
+			InstructPropPanel.SetActive (true);
+			InstructCurrentPanel.SetActive (false);
+			InstructCurrentPanel = InstructPropPanel;
+		}
+		
+	}
+	public void InstructionPrev()
+	{
+		currentInstructPanel--;
+		if (currentInstructPanel == 0)
+		{
+			InstructPrev.interactable = false;
+			InstructOppPanel.SetActive (true);
+			InstructCurrentPanel.SetActive (false);
+			InstructCurrentPanel = InstructOppPanel;
+		} 
+		else if (currentInstructPanel == 1)
+		{
+			InstructNext.interactable = true;
+			InstructPropPanel.SetActive (true);
+			InstructCurrentPanel.SetActive (false);
+			InstructCurrentPanel = InstructPropPanel;
+		}
+		
 	}
 }
