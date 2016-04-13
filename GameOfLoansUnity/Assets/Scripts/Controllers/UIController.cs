@@ -845,8 +845,8 @@ public class UIController : MonoBehaviour
 
             case 10:
                 QuizQuestionText.text = "T/F If the client does not agree with the terms, the loan still goes to the final signoff underwriter for final approval?";
-                AnswerAText.text = "A: T";
-                AnswerBText.text = "B: F";
+                AnswerAText.text = "A: True";
+                AnswerBText.text = "B: False";
                 AnswerCText.text = "-------";
                 AnswerDText.text = "-------";
 
@@ -855,8 +855,8 @@ public class UIController : MonoBehaviour
 
             case 11:
                 QuizQuestionText.text = "T/F A client only needs an old W2 to be approved for a loan?";
-                AnswerAText.text = "A: T";
-                AnswerBText.text = "B: F";
+                AnswerAText.text = "A: True";
+                AnswerBText.text = "B: False";
                 AnswerCText.text = "-------";
                 AnswerDText.text = "-------";
 
