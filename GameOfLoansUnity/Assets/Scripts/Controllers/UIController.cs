@@ -181,7 +181,7 @@ public class UIController : MonoBehaviour
         posValue = new int[10];
         posText[0] = "Documents are sent electronically.\n\n+4 Progress";
         posValue[0] = 4;
-        posText[1] = "Clear communication with the CSS.\n\n+3 Progress";
+        posText[1] = "Clear communication with the CCS.\n\n+3 Progress";
         posValue[1] = 3;
         posText[2] = "Underwriter receives requested third party item in a timely manner..\n\n+2 Progress";
         posValue[2] = 2;
@@ -203,7 +203,7 @@ public class UIController : MonoBehaviour
         negValue[4] = 5;
         negText[5] = "The underwriter is missing client information.\n\n-3 Progress";
         negValue[5] = 5;
-        negText[6] = "Lack of client communication with the CSS.\n\n-3 Progress";
+        negText[6] = "Lack of client communication with the CCS.\n\n-3 Progress";
         negValue[6] = 3;
         negText[7] = "Additional client payoff documents requested.\n\n-2 Progress";
         negValue[7] = 2;
@@ -778,7 +778,7 @@ public class UIController : MonoBehaviour
                 AnswerAText.text = "A: Application";
                 AnswerBText.text = "B: Closing Signing Has Been Scheduled";
                 AnswerCText.text = "C: Loan Set Up Complete";
-                AnswerDText.text = "D: Blah";
+                AnswerDText.text = "D: InitialContact";
 
                 correctAnswer = AnswerCText.text;
                 break;

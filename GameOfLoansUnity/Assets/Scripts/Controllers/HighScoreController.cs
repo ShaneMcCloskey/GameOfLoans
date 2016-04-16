@@ -33,9 +33,9 @@ public class HighScoreController : MonoBehaviour
 	const int Score_LOC = 3;
 	const int LOANS_LOC = 4;
 
-	const string getscoresurl = "http://35.9.22.106/Api/HighScores/GetHighScores?";
-	const string sendscoresurl = "http://35.9.22.106/Api/HighScores/AddScore";
-	const string getnumscoresurl = "http://35.9.22.106/Api/HighScores/GetNumScores";
+	string getscoresurl = "/Api/HighScores/GetHighScores?";
+	string sendscoresurl = "/Api/HighScores/AddScore";
+	string getnumscoresurl = "/Api/HighScores/GetNumScores";
 	int pageNumber = 0;
 	int scoresPerPage = 25;
 	int maxPageNum = 0;
@@ -43,6 +43,15 @@ public class HighScoreController : MonoBehaviour
 	int totalScores = 0;
 	private bool isLoadingScores = true;
 	private bool isScoreError = false;
+
+	//on start initializes the ip address of the server
+	public void Start()
+	{
+		string ip = "http://35.9.22.106";
+		getscoresurl = ip + getscoresurl;
+		sendscoresurl = ip + sendscoresurl;
+		getnumscoresurl = ip + getnumscoresurl;
+	}
 
 
     //change to start to get high scores page to work
@@ -103,6 +112,7 @@ public class HighScoreController : MonoBehaviour
 			+ "-" + ((dataList.Count - 1) + (pageNumber * scoresPerPage) + 1).ToString ()+" of " + totalScores.ToString() + ")";
     }
 
+	//changes high score page to the next page if not at the last page
     public void OnNextClick()
     {
         pageNumber += 1;
@@ -118,12 +128,14 @@ public class HighScoreController : MonoBehaviour
         pageNumber = maxPageNum;
         HighScores(pageNumber);
     }
+
+	//returns the high scores panel to the first page
     public void OnFirstClick()
     {
         pageNumber = 0;
         HighScores(pageNumber);
     }
-
+	//high scores page to the previous page
     public void OnPrevClick()
     {
 
@@ -136,7 +148,7 @@ public class HighScoreController : MonoBehaviour
         HighScores(pageNumber);
     }
 
-
+	//function called when user clicks submit for gameover
     public void AddScore()
     {
 		if (NameInput.text != "" && TeamInput.text != "") {
@@ -148,17 +160,18 @@ public class HighScoreController : MonoBehaviour
 				Score = player.Score,
 				LoansClosed = player.NumPropertiesClosed
 			};
-            
+            		//start api call
 			StartCoroutine (WaitRequestSendScore (sendingScore));
 
         
 		}
 		else {
+			//if the user did not enter both the name and team name an error message opens
 			HighScorePopUP.SetActive (true);
 			PopUpText.text = "You must enter both a name and team name to submit a high score.";
 		}
     }
-		
+		// function to call the api and receive the response for getting the number of total scores in the database and the current page of scores
     private IEnumerator WaitRequestGetScores()
     {
         isLoadingScores = true;
@@ -166,18 +179,26 @@ public class HighScoreController : MonoBehaviour
 		using (var www = new WWW(getnumscoresurl))
 		{
 			yield return www;
+			//if no error
+
 			if (www.error == null) {
+				//receive the total number of scores
 				totalScores = Convert.ToInt32 (www.text);
 				maxPageNum = totalScores / scoresPerPage;
+				//initializes the api call to grab the correct page of 25 scores
 				var geturl = getscoresurl + "start=" + (scoresPerPage * pageNumber).ToString() + "&" + "range=" + scoresPerPage.ToString();
 				using (var wwwGET = new WWW(geturl))
 				{
 					yield return wwwGET;
+
+					//if there is no error
 					if (wwwGET.error == null) {
 						
 						isLoadingScores = false;
+						//call function to parse the json and set the scores on the page
 						SetScores (wwwGET.text);
-					} 
+					}
+					//error getting the list of scores
 					else 
 					{
 						error = true;
@@ -186,17 +207,19 @@ public class HighScoreController : MonoBehaviour
 				}
 			}
 			else{
-				//error
+				//error getting the total number of scores
 				error = true;
 				isScoreError = true;
 				AddScoreButton.interactable = true;
 			}
 		}
+		//if there was any error calling the api for getting scores
 		if (error == true) {
 			PopUpText.text = "ERROR: High Scores could not be loaded.";
 			HighScorePopUP.SetActive (true);
 		}
     }
+	// coroutine for api to send score to database
 	private IEnumerator WaitRequestSendScore(GameScore gs){
 		string gsJson = JsonUtility.ToJson (gs);
 		//var encoding = new System.Text.UTF8Encoding();
@@ -207,12 +230,15 @@ public class HighScoreController : MonoBehaviour
 		{
 			
 			yield return www;
-			if (www.error == null) {
+			if (www.error == null)
+			{
 				//no error
-				AddScoreReturn returnValue = JsonUtility.FromJson<AddScoreReturn>(www.text);
+				AddScoreReturn returnValue = JsonUtility.FromJson<AddScoreReturn> (www.text);
+				//if get a correct response then show the leaderboards on the page on which the user's score is diplayed
 				NavController.OnButtonLeaderboards ();
-				HighScores (((returnValue.rank+1) / scoresPerPage));
+				HighScores (((returnValue.rank) / scoresPerP			age));
 			} 
+			//error sending the score and receiving appropriate response
 			else {
 				PopUpText.text = "ERROR: Score could not be added.";
 				HighScorePopUP.SetActive (true);
@@ -221,6 +247,7 @@ public class HighScoreController : MonoBehaviour
 
 		}
 	}
+	//function called when the game is over to pass the player to the high score controller
 	public void SetPlayer(Player finalPlayer)
 	{
 		player = finalPlayer;

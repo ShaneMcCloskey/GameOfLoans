@@ -264,7 +264,6 @@ public class NavigationController : MonoBehaviour
 
 	public void OnButtonYesCanelLoan ()
 	{
-		Debug.Log ("1");
 		confirmCancelLoanPanel.SetActive (false);
 		ChangePanel (propertyHuntPanel, true, false);
 		gameControler.CancelCurrentLoanConfirmation ();

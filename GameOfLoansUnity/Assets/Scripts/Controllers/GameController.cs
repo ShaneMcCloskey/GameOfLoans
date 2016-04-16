@@ -176,10 +176,6 @@ public class GameController : MonoBehaviour
 
 	public void EnterChangePropertyScreen()
 	{
-		foreach(PropertyCard prop in player.PlayerCardsProperty)
-		{
-			Debug.Log(prop.Title);	
-		}
 		uiController.EnterChangePropertyScreenUI(player);
 	}
 
