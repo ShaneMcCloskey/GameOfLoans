@@ -708,7 +708,14 @@ public class UIController : MonoBehaviour
         if (quizFailed)
         {
             popUpPanel.SetActive(false);
-            ShowQuiz(quizPanel);
+			if (player.NumTurnsLeft <= 0)
+			{
+			// don't show pop up if no turns left on failed quiz
+			} 
+			else
+			{
+				ShowQuiz (quizPanel);
+			}
         }
         else if (player.PlayerCardsProperty.Count == 0)
         {  // if player completes loan and has none in queue

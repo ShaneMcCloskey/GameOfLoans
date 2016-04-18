@@ -236,7 +236,7 @@ public class HighScoreController : MonoBehaviour
 				AddScoreReturn returnValue = JsonUtility.FromJson<AddScoreReturn> (www.text);
 				//if get a correct response then show the leaderboards on the page on which the user's score is diplayed
 				NavController.OnButtonLeaderboards ();
-				HighScores (((returnValue.rank) / scoresPerP			age));
+				HighScores (((returnValue.rank) / scoresPerPage));
 			} 
 			//error sending the score and receiving appropriate response
 			else {
