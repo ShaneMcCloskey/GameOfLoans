@@ -448,6 +448,7 @@ public class UIController : MonoBehaviour
     // Loan in Progess functions -----------------------------------------------
     public void EnterLoanInProgressScreenUI(Player player)
     {
+ 
         currentTitle.text = player.CurrentProperty.Title;
         currentAddress.text = player.CurrentProperty.Address;
         currentPrice.text = string.Format("{0:C}", player.CurrentProperty.Price);
@@ -1006,6 +1007,7 @@ public class UIController : MonoBehaviour
         if (chosenAnswer == correctAnswer)
         {
             PassQuiz(quizPanel, popUpPanel, player);
+
         }
         else
         {

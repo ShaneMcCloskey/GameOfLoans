@@ -267,4 +267,16 @@ public class GameController : MonoBehaviour
 		    uiController.SetConfirmText(cardRight);
 		}
 	}
+
+    public bool CheckForProperties()
+    {
+            if(player.PlayerCardsProperty.Count == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

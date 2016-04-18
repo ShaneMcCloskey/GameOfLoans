@@ -51,6 +51,8 @@ public class NavigationController : MonoBehaviour
 
 	public string leftrightocecnter;
 
+    public bool hasProperty = false;
+
 	// Use this for initialization
 	public void Awake ()
 	{
@@ -112,8 +114,15 @@ public class NavigationController : MonoBehaviour
 			return;
 		}
 		oppKnocksButton.interactable = false;
-		loanInProgressButton.interactable = true;
-		propHuntButton.interactable = true;
+        if (gameControler.CheckForProperties() == true)
+        {
+            loanInProgressButton.interactable = true;   //This is the problem
+        }
+        else
+        {
+            loanInProgressButton.interactable = false;
+        }
+            propHuntButton.interactable = true;
 		popUpPanelNeedProp.SetActive (false);
 		ChangePanel (oppKnocksPanel, true, false);
 	}
@@ -137,6 +146,7 @@ public class NavigationController : MonoBehaviour
 		{
 			return;
 		}
+        hasProperty = true;
 		oppKnocksButton.interactable = true;
 		loanInProgressButton.interactable = false;
 		propHuntButton.interactable = true;
