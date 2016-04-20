@@ -45,7 +45,7 @@ public class CardFlip : MonoBehaviour
 	void Init()
 	{
 		fps = 60;
-		rotateDegPerSec = 180f;
+		rotateDegPerSec = 360f;
 		isFaceUp = false;
 		isAnimationProcessing = false;
 		isFlipDone = false;

@@ -52,6 +52,7 @@ public class UIController : MonoBehaviour
     public GameObject currentPic;
     public Slider progressBar;
     public Text sgText;
+    public Text scoreMultiplierText;
 
 
     public GameObject diceObject;
@@ -221,11 +222,11 @@ public class UIController : MonoBehaviour
 
         strikeThrough1.SetActive(false);
         strikeThrough2.SetActive(false);
-	strikeThrough3.SetActive(false);
+        strikeThrough3.SetActive(false);
         strikeThrough4.SetActive(false);
-	strikeThrough5.SetActive(false);
+        strikeThrough5.SetActive(false);
         strikeThrough6.SetActive(false);
-	strikeThrough7.SetActive(false);
+        strikeThrough7.SetActive(false);
         strikeThrough8.SetActive(false);
 
         //audio
@@ -422,6 +423,10 @@ public class UIController : MonoBehaviour
             }
         }
         SetOppCardsLeft();
+
+        //Get the multiplier that has been added on top of the base, e.g. .2, add 1 to make it look good.
+        //e.g. 1.2x multiplier
+        scoreMultiplierText.text = (player.GetMultiplier() - player.GetBaseMultiplier() + 1).ToString("F1") + "x";
     }
 
     public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)
@@ -448,7 +453,7 @@ public class UIController : MonoBehaviour
     // Loan in Progess functions -----------------------------------------------
     public void EnterLoanInProgressScreenUI(Player player)
     {
- 
+
         currentTitle.text = player.CurrentProperty.Title;
         currentAddress.text = player.CurrentProperty.Address;
         currentPrice.text = string.Format("{0:C}", player.CurrentProperty.Price);
@@ -491,29 +496,26 @@ public class UIController : MonoBehaviour
         diceObject.SetActive(true);
         diceRollCount++;
         int ran = Random.Range(1, 7);
-        if (ran == 1)
+        switch (ran)
         {
-            diceObject.GetComponent<Image>().sprite = die1;
-        }
-        else if (ran == 2)
-        {
-            diceObject.GetComponent<Image>().sprite = die2;
-        }
-        else if (ran == 3)
-        {
-            diceObject.GetComponent<Image>().sprite = die3;
-        }
-        else if (ran == 4)
-        {
-            diceObject.GetComponent<Image>().sprite = die4;
-        }
-        else if (ran == 5)
-        {
-            diceObject.GetComponent<Image>().sprite = die5;
-        }
-        else
-        {
-            diceObject.GetComponent<Image>().sprite = die6;
+            case 1:
+                diceObject.GetComponent<Image>().sprite = die1;
+                break;
+            case 2:
+                diceObject.GetComponent<Image>().sprite = die2;
+                break;
+            case 3:
+                diceObject.GetComponent<Image>().sprite = die3;
+                break;
+            case 4:
+                diceObject.GetComponent<Image>().sprite = die4;
+                break;
+            case 5:
+                diceObject.GetComponent<Image>().sprite = die5;
+                break;
+            default:
+                diceObject.GetComponent<Image>().sprite = die6;
+                break;
         }
         if (diceRollCount >= 6)
         {
@@ -709,14 +711,14 @@ public class UIController : MonoBehaviour
         if (quizFailed)
         {
             popUpPanel.SetActive(false);
-			if (player.NumTurnsLeft <= 0)
-			{
-			// don't show pop up if no turns left on failed quiz
-			} 
-			else
-			{
-				ShowQuiz (quizPanel);
-			}
+            if (player.NumTurnsLeft <= 0)
+            {
+                // don't show pop up if no turns left on failed quiz
+            }
+            else
+            {
+                ShowQuiz(quizPanel);
+            }
         }
         else if (player.PlayerCardsProperty.Count == 0)
         {  // if player completes loan and has none in queue
@@ -1098,83 +1100,83 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void ChangeSubgoalPanel (Player player)
-	{
-		if (player != null)
-		{
-			int index = 0;
-			if (player.CurrentProperty.Subgoal1Complete)
-			{
-				strikeThrough1.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough1.SetActive (false);
-			}
-			if (player.CurrentProperty.Subgoal2Complete)
-			{
-				strikeThrough2.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough2.SetActive (false); 
-			}
-			if (player.CurrentProperty.Subgoal3Complete)
-			{
-				strikeThrough3.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough3.SetActive (false);
-			}
-			if (player.CurrentProperty.Subgoal4Complete)
-			{
-				strikeThrough4.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough4.SetActive (false);
-			}
-			if (player.CurrentProperty.Subgoal5Complete)
-			{
-				strikeThrough5.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough5.SetActive (false);
-			}
-			if (player.CurrentProperty.Subgoal6Complete)
-			{
-				strikeThrough6.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough6.SetActive (false);
-			}
-			if (player.CurrentProperty.Subgoal7Complete)
-			{
-				strikeThrough7.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough7.SetActive (false);
-			}
-			if (player.CurrentProperty.Subgoal8Complete)
-			{
-				strikeThrough8.SetActive (true);
-				index++;
-			}
-			else
-			{
-				strikeThrough8.SetActive(false);
-			}
+    public void ChangeSubgoalPanel(Player player)
+    {
+        if (player != null)
+        {
+            int index = 0;
+            if (player.CurrentProperty.Subgoal1Complete)
+            {
+                strikeThrough1.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough1.SetActive(false);
+            }
+            if (player.CurrentProperty.Subgoal2Complete)
+            {
+                strikeThrough2.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough2.SetActive(false);
+            }
+            if (player.CurrentProperty.Subgoal3Complete)
+            {
+                strikeThrough3.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough3.SetActive(false);
+            }
+            if (player.CurrentProperty.Subgoal4Complete)
+            {
+                strikeThrough4.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough4.SetActive(false);
+            }
+            if (player.CurrentProperty.Subgoal5Complete)
+            {
+                strikeThrough5.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough5.SetActive(false);
+            }
+            if (player.CurrentProperty.Subgoal6Complete)
+            {
+                strikeThrough6.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough6.SetActive(false);
+            }
+            if (player.CurrentProperty.Subgoal7Complete)
+            {
+                strikeThrough7.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough7.SetActive(false);
+            }
+            if (player.CurrentProperty.Subgoal8Complete)
+            {
+                strikeThrough8.SetActive(true);
+                index++;
+            }
+            else
+            {
+                strikeThrough8.SetActive(false);
+            }
             subGoalPanelTitle.text = subTitles[index];
             subGoalPanelDesc.text = subDesc[index];
 

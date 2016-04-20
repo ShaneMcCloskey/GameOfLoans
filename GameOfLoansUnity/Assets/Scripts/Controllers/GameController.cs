@@ -200,7 +200,6 @@ public class GameController : MonoBehaviour
 		if (player.NumTurnsLeft > 0)
 		{
 			player.NumTurnsLeft--;
-			player.CalculateMultiplier ();
 			int num = Random.Range (1, 7);
 			player.CurrentProperty.CurrentProgress += (int)(num*player.GetMultiplier());
 

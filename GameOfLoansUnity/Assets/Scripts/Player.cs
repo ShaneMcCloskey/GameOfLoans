@@ -10,9 +10,9 @@ public class Player : MonoBehaviour
 	private float assets = 1000f;
 	private float credit = 600f;
 	private float maxIncome = 11400f;
-	private float maxAssets = 28525f;
+	private float maxAssets = 35000f;
 	private float maxCredit = 880f;
-	private float multiplier= 2.2f;
+    private float baseMultiplier = 3f;
 	private PropertyCard currentProperty;
 	private int numPropertiesClosed = 0;
 	private List<OppKnocksCard> playerCardsOppKnocks = new List<OppKnocksCard>();
@@ -72,12 +72,13 @@ public class Player : MonoBehaviour
 		set { playerCardsProperty = value; }
 	}
 
-	public void CalculateMultiplier(){
-		//calculate the multiplier of the roll
-		multiplier = 2.2f + (income / maxIncome + credit / maxCredit + assets / maxAssets) / 3;
-	}
 	public float GetMultiplier()
 	{
-		return multiplier;
-	}
+		return baseMultiplier + (1.5f * (income / maxIncome + credit / maxCredit + assets / maxAssets) / 3);
+    }
+
+    public float GetBaseMultiplier()
+    {
+        return baseMultiplier;
+    }
 }
