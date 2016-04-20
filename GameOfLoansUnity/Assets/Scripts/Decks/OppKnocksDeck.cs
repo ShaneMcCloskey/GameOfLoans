@@ -44,7 +44,7 @@ public class OppKnocksDeck : MonoBehaviour
 		cards.Add(new OppKnocksCard("It’s your birthday! Don’t worry, Grandma didn’t forget.\n\n+400 Assets", 400, 2));
 		cards.Add(new OppKnocksCard("Those old baseball cards were worth a lot.\n\n+800 Assets", 800, 2));
 		cards.Add(new OppKnocksCard("Cleaning out your car you find a surprise.\n\n+200 Assets", 200, 2));
-		cards.Add(new OppKnocksCard("What’s that in your pocket?Oh, it’s money.\n\n+500 Assets", 500, 2));
+		cards.Add(new OppKnocksCard("What’s that in your pocket? Oh, it’s money.\n\n+500 Assets", 500, 2));
 		cards.Add(new OppKnocksCard("You sell the farm.\n\n+6000 Assets", 6000, 2));
 		cards.Add(new OppKnocksCard("What’s that in your shoe? More hidden money.\n\n+200 Assets", 200, 2));
 		cards.Add(new OppKnocksCard("You sell your car to live a carbon free lifestyle.\n\n+5000 Assets", 5000, 2));

@@ -18,6 +18,8 @@ public class CardFlip : MonoBehaviour
 	public float downSpeed = 100f;
 	public float offScreenTimerCheck = 1.0f;
 	public float holdAfterFlipTimerCheck = 1.0f;
+    public float cardHold;
+    public float readSpeed = 33.0f;
 
 	public bool isAnimationProcessing = false;
 	private bool isFlipDone = false;
@@ -51,7 +53,7 @@ public class CardFlip : MonoBehaviour
 		isFlipDone = false;
 		offScreenTimer = 0.0f;
 		holdAfterFlipTimer = 0.0f;
-
+        
 		waitTime = 1.0f / fps;
 		typeText.SetActive(false);
 		descText.SetActive(false);
@@ -67,13 +69,15 @@ public class CardFlip : MonoBehaviour
 		// move down
 		if (isAnimationProcessing == false && isFlipDone == true)
 		{
-
-			holdAfterFlipTimer += Time.deltaTime;
+            
+            holdAfterFlipTimer += Time.deltaTime;
+            Debug.Log(holdAfterFlipTimer);
 			if (holdAfterFlipTimer >= holdAfterFlipTimerCheck)
 			{
+                
 				transform.Translate (new Vector3 (0, -1 * downSpeed * Time.deltaTime, 0));
 				offScreenTimer += Time.deltaTime;
-				if (offScreenTimer >= offScreenTimerCheck)
+				if (offScreenTimer >= offScreenTimerCheck -0.90f) //-0.90f Makes card appear faster
 				{
 					ResetPos();
 					isFlipDone = false;
@@ -146,9 +150,22 @@ public class CardFlip : MonoBehaviour
 
 
 			yield return new WaitForSeconds (waitTime);
+
 		}
-		isFaceUp = !isFaceUp;
+        /* 
+        *cardHold is the time that the Opp Knocks card is displayed on the screen.
+        *It is dynamically based off of the length of the description.
+        *The current setting is the player can read 33 characters / second.
+        *This value is the readSpeed
+        *This makes shorter description cards stay on the screen for less time then longer descriptions
+        */
+        cardHold = descText.GetComponent<Text>().text.Length / readSpeed;
+        holdAfterFlipTimer -= cardHold;
+        holdAfterFlipTimerCheck = 0.0f; //override
+     
+        isFaceUp = !isFaceUp;
 		isAnimationProcessing = false;
 		isFlipDone = true;
-	}
+        
+    }
 }
