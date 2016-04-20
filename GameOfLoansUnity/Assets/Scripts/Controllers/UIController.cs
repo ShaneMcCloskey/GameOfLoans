@@ -895,29 +895,29 @@ public class UIController : MonoBehaviour
 
             case 14:
                 QuizQuestionText.text = "The _______ stage is when...";
-                AnswerAText.text = "A: Blah";
+                AnswerAText.text = "A: -----";
                 AnswerBText.text = "B: The client e-signs the application and sends in supporting documents for review(pay stubs, W2, etc.)";
-                AnswerCText.text = "C: Blah";
-                AnswerDText.text = "D: Blah";
+                AnswerCText.text = "C: -----";
+                AnswerDText.text = "D: -----";
 
                 correctAnswer = AnswerBText.text;
                 break;
 
             case 15:
                 QuizQuestionText.text = "The application stage is when…";
-                AnswerAText.text = "A: Blah";
-                AnswerBText.text = "B: Blah";
+                AnswerAText.text = "A: -----";
+                AnswerBText.text = "B: -----";
                 AnswerCText.text = "C: The Quality Assurance team makes sure the underwriter has everything they need to underwrite the loan";
-                AnswerDText.text = "D: Blah";
+                AnswerDText.text = "D: -----";
 
                 correctAnswer = AnswerCText.text;
                 break;
 
             case 16:
                 QuizQuestionText.text = "The Loan Set Up Complete stage is when…";
-                AnswerAText.text = "A: Blah";
-                AnswerBText.text = "B: Blah";
-                AnswerCText.text = "C: Blah";
+                AnswerAText.text = "A: -----";
+                AnswerBText.text = "B: -----";
+                AnswerCText.text = "C: -----";
                 AnswerDText.text = "D: The underwriter reviews the documents for accuracy and compliance with guidelines. If anything else is needed, the underwriter adds a condition (tracking item) for it.";
 
                 correctAnswer = AnswerDText.text;
@@ -926,38 +926,38 @@ public class UIController : MonoBehaviour
             case 17:
                 QuizQuestionText.text = "The Folder Received stage is when…";
                 AnswerAText.text = "A: The CCS calls to introduce him or herself to the client, review the info on the loan, and request the client conditions.";
-                AnswerBText.text = "B: Blah";
-                AnswerCText.text = "C: Blah";
-                AnswerDText.text = "D: Blah";
+                AnswerBText.text = "B: -----";
+                AnswerCText.text = "C: -----";
+                AnswerDText.text = "D: -----";
 
                 correctAnswer = AnswerAText.text;
                 break;
 
             case 18:
                 QuizQuestionText.text = "The Conditionally Approved stage is when…";
-                AnswerAText.text = "A: Blah";
+                AnswerAText.text = "A: -----";
                 AnswerBText.text = "B: All client conditions and vendor conditions are being reviewed as they’re received. The CCS is following up with the client every 3-5 days.";
-                AnswerCText.text = "C: Blah";
-                AnswerDText.text = "D: Blah";
+                AnswerCText.text = "C: -----";
+                AnswerDText.text = "D: -----";
 
                 correctAnswer = AnswerBText.text;
                 break;
 
             case 19:
                 QuizQuestionText.text = "The Final Signoff stage is when…";
-                AnswerAText.text = "A: Blah";
-                AnswerBText.text = "B: Blah";
+                AnswerAText.text = "A: -----";
+                AnswerBText.text = "B: -----";
                 AnswerCText.text = "C: All documents are received and cleared and the loan is approved, the CCS calls the client to confirm the final terms and structure of the loan.";
-                AnswerDText.text = "D: Blah";
+                AnswerDText.text = "D: -----";
 
                 correctAnswer = AnswerCText.text;
                 break;
 
             case 20:
                 QuizQuestionText.text = "The Closing Signing has been scheduled when...";
-                AnswerAText.text = "A: Blah";
-                AnswerBText.text = "B: Blah";
-                AnswerCText.text = "C: Blah";
+                AnswerAText.text = "A: -----";
+                AnswerBText.text = "B: -----";
+                AnswerCText.text = "C: -----";
                 AnswerDText.text = "D: The client agrees to the terms, and the loan goes to the final signoff underwriter for final approval";
 
                 correctAnswer = AnswerDText.text;
@@ -966,19 +966,19 @@ public class UIController : MonoBehaviour
             case 21:
                 QuizQuestionText.text = "The Documents go out to the settlement agent when….";
                 AnswerAText.text = "A: The Closing Team reviews the final numbers with the client and schedules the closing. Closing documents are printed and sent to the Closing Agent and client.";
-                AnswerBText.text = "B: Blah";
-                AnswerCText.text = "C: Blah";
-                AnswerDText.text = "D: Blah";
+                AnswerBText.text = "B: -----";
+                AnswerCText.text = "C: -----";
+                AnswerDText.text = "D: -----";
 
                 correctAnswer = AnswerAText.text;
                 break;
 
             case 22:
                 QuizQuestionText.text = "Who is the person that reviews the documents for accuracy and compliance with guidelines?";
-                AnswerAText.text = "A: Blah";
+                AnswerAText.text = "A: -----";
                 AnswerBText.text = "B: The Underwriter";
-                AnswerCText.text = "C: Blah";
-                AnswerDText.text = "D: Blah";
+                AnswerCText.text = "C: -----";
+                AnswerDText.text = "D: -----";
 
                 correctAnswer = AnswerBText.text;
                 break;
