@@ -788,7 +788,7 @@ public class UIController : MonoBehaviour
                 AnswerAText.text = "A: Application";
                 AnswerBText.text = "B: Closing Signing Has Been Scheduled";
                 AnswerCText.text = "C: Loan Set Up Complete";
-                AnswerDText.text = "D: InitialContact";
+                AnswerDText.text = "D: Initial Contact";
 
                 correctAnswer = AnswerCText.text;
                 break;
