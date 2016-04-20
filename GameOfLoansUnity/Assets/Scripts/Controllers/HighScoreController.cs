@@ -37,7 +37,7 @@ public class HighScoreController : MonoBehaviour
 	string sendscoresurl = "/Api/HighScores/AddScore";
 	string getnumscoresurl = "/Api/HighScores/GetNumScores";
 	int pageNumber = 0;
-	int scoresPerPage = 25;
+	int scoresPerPage = 20;
 	int maxPageNum = 0;
 	int minPageNum = 0;
 	int totalScores = 0;
