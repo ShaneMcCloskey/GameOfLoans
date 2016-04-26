@@ -8,10 +8,11 @@ public class Player : MonoBehaviour
 	private int numTurnsLeft = 50;
 	private float income = 1000f;
 	private float assets = 1000f;
-	private float credit = 600f;
-	private float maxIncome = 11400f;
-	private float maxAssets = 35000f;
-	private float maxCredit = 880f;
+	private float credit = 450f;
+    private float startingCredit = 450f;
+	private float maxIncome = 10000f;
+	private float maxAssets = 45000f;
+	private float maxCredit = 800f;
     private float baseMultiplier = 3f;
 	private PropertyCard currentProperty;
 	private int numPropertiesClosed = 0;
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour
 
 	public float GetMultiplier()
 	{
-		return baseMultiplier + (1.5f * (income / maxIncome + credit / maxCredit + assets / maxAssets) / 3);
+		return baseMultiplier + (2f * (income / maxIncome + ((credit - startingCredit) / (maxCredit - startingCredit)) + assets / maxAssets) / 3);
     }
 
     public float GetBaseMultiplier()

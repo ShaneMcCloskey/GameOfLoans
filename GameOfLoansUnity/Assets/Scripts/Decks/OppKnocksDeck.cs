@@ -66,7 +66,7 @@ public class OppKnocksDeck : MonoBehaviour
 		cards.Add(new OppKnocksCard("You found an old check in your house.\n\n+1000 Assets", 1000, 2));
 
 		// Credit cards
-		cards.Add(new OppKnocksCard("Your credit card payments are consistently made on time thanks to your new auto-pay app.\n\n+40 Credit", 40, 3));
+		cards.Add(new OppKnocksCard("Your credit card payments are consistently made on time thanks to your new auto-pay app.\n\n+50 Credit", 50, 3));
 		cards.Add(new OppKnocksCard("Smarter spending has allowed you to utilize your available credit even less.\n\n+30 Credit", 30, 3));
 		cards.Add(new OppKnocksCard("As the age of your credit history increases, so does your credit.\n\n+30 Credit", 30, 3));
 		cards.Add(new OppKnocksCard("Your credit card company increases your credit limit, increasing your capacity.\n\n+40 Credit", 40, 3));
@@ -82,9 +82,9 @@ public class OppKnocksDeck : MonoBehaviour
 		cards.Add(new OppKnocksCard("Your credit card company increases your credit limit, increasing your capacity.\n\n+20 Credit", 20, 3));
 		cards.Add(new OppKnocksCard("You finally make progress on paying off those student loans.\n\n+10 Credit", 10, 3));
 		cards.Add(new OppKnocksCard("You decided to not max out those credit cards you applied for during your first semester in college.\n\n+20 Credit", 20, 3));
-		cards.Add(new OppKnocksCard("Your mother convinces you to slow down on opening new accounts.\n\n+10 Credit", 10, 3));
+		cards.Add(new OppKnocksCard("Your mother convinces you to slow down on opening new accounts.\n\n+20 Credit", 20, 3));
 		cards.Add(new OppKnocksCard("You spend your paycheck on paying down your credit cards.\n\n+15 Credit", 15, 3));
-		cards.Add(new OppKnocksCard("You make a payment towards your car loan.\n\n+10 Credit", 10, 3));
-		cards.Add(new OppKnocksCard("You make a payment towards your mortgage. \n\n+10 Credit", 10, 3));
+		cards.Add(new OppKnocksCard("You make a payment towards your car loan.\n\n+20 Credit", 20, 3));
+		cards.Add(new OppKnocksCard("You make a payment towards your mortgage. \n\n+20 Credit", 20, 3));
 	}
 }

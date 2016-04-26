@@ -53,6 +53,7 @@ public class UIController : MonoBehaviour
     public Slider progressBar;
     public Text sgText;
     public Text scoreMultiplierText;
+    public Text scoreMultiplierTextOpp;
 
 
     public GameObject diceObject;
@@ -215,7 +216,7 @@ public class UIController : MonoBehaviour
         HUDscoreText.text = "0";
         HUDincomeText.text = "1000";
         HUDassetsText.text = "1000";
-        HUDcreditText.text = "600";
+        HUDcreditText.text = "450";
         HUDturnText.text = "40";
         cardsLeftCount = 10;
         SetOppCardsLeft();
@@ -427,6 +428,7 @@ public class UIController : MonoBehaviour
         //Get the multiplier that has been added on top of the base, e.g. .2, add 1 to make it look good.
         //e.g. 1.2x multiplier
         scoreMultiplierText.text = (player.GetMultiplier() - player.GetBaseMultiplier() + 1).ToString("F1") + "x";
+        scoreMultiplierTextOpp.text = (player.GetMultiplier() - player.GetBaseMultiplier() + 1).ToString("F1") + "x";
     }
 
     public void EnterPropertyHuntScreeUI(PropertyCard cardLeft, PropertyCard cardCenter, PropertyCard cardRight)

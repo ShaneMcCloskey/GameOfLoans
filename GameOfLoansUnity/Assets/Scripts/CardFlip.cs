@@ -75,9 +75,9 @@ public class CardFlip : MonoBehaviour
 			if (holdAfterFlipTimer >= holdAfterFlipTimerCheck)
 			{
                 
-				transform.Translate (new Vector3 (0, -1 * downSpeed * Time.deltaTime, 0));
+				transform.Translate (new Vector3 (0, -2 * downSpeed * Time.deltaTime, 0));
 				offScreenTimer += Time.deltaTime;
-				if (offScreenTimer >= offScreenTimerCheck -0.90f) //-0.90f Makes card appear faster
+				if (offScreenTimer >= offScreenTimerCheck -0.95f) //-0.90f Makes card appear faster
 				{
 					ResetPos();
 					isFlipDone = false;
